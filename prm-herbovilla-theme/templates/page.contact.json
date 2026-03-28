@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-page",
+      "settings": {
+        "title": "Get in Touch",
+        "subtitle": "Have questions about our products or need assistance? We're here to help!",
+        "hours": "Monday - Saturday: 9:00 AM - 6:00 PM",
+        "show_map": false
+      }
+    }
+  },
+  "order": ["main"]
+}

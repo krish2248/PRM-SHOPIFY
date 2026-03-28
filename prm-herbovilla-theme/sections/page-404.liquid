@@ -1,0 +1,167 @@
+{%- style -%}
+  .error-404 {
+    padding: 100px 0;
+    text-align: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .error-404__content {
+    max-width: 500px;
+  }
+  .error-404__number {
+    font-family: var(--font-heading);
+    font-size: 8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: 20px;
+    opacity: 0.2;
+  }
+  .error-404__title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-text);
+    margin-bottom: 15px;
+  }
+  .error-404__text {
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+  }
+  .error-404__actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .error-404__btn {
+    padding: 14px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .error-404__btn--primary {
+    background: var(--color-primary);
+    color: #fff;
+  }
+  .error-404__btn--primary:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45, 106, 79, 0.3);
+  }
+  .error-404__btn--secondary {
+    background: #fff;
+    color: var(--color-text);
+    border: 2px solid #e5e5e5;
+  }
+  .error-404__btn--secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  .error-404__search {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid #eee;
+  }
+  .error-404__search p {
+    color: var(--color-text-light);
+    margin-bottom: 15px;
+  }
+  .error-404__search-form {
+    display: flex;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .error-404__search-input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1px solid #e5e5e5;
+    border-radius: 30px;
+    font-size: 1rem;
+  }
+  .error-404__search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+  .error-404__search-btn {
+    padding: 14px 25px;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .error-404__search-btn:hover {
+    background: var(--color-primary-dark);
+  }
+  @media (max-width: 576px) {
+    .error-404__number {
+      font-size: 5rem;
+    }
+    .error-404__title {
+      font-size: 1.5rem;
+    }
+    .error-404__search-form {
+      flex-direction: column;
+    }
+    .error-404__search-btn {
+      width: 100%;
+    }
+  }
+{%- endstyle -%}
+
+<section class="error-404" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="error-404__content">
+      <div class="error-404__number">404</div>
+      <h1 class="error-404__title">{{ section.settings.title | default: 'Page Not Found' }}</h1>
+      <p class="error-404__text">{{ section.settings.text | default: 'Oops! The page you\'re looking for seems to have wandered off into the herbal garden. Let\'s get you back on track.' }}</p>
+      
+      <div class="error-404__actions">
+        <a href="/" class="error-404__btn error-404__btn--primary">Back to Home</a>
+        <a href="/collections/all" class="error-404__btn error-404__btn--secondary">Shop Products</a>
+      </div>
+      
+      <div class="error-404__search">
+        <p>Or try searching for what you need:</p>
+        <form action="{{ routes.search_url }}" method="get" class="error-404__search-form">
+          <input type="text" name="q" placeholder="Search products..." class="error-404__search-input" aria-label="Search">
+          <button type="submit" class="error-404__search-btn">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404 Page",
+  "tag": "section",
+  "class": "section-404",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Page Not Found"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Oops! The page you're looking for seems to have wandered off into the herbal garden. Let's get you back on track."
+    }
+  ],
+  "presets": [
+    {
+      "name": "404 Page"
+    }
+  ]
+}
+{% endschema %}

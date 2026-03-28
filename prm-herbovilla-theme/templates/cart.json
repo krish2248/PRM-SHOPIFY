@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "cart-template",
+      "settings": {
+        "show_note": true,
+        "show_shipping_bar": true
+      }
+    }
+  },
+  "order": ["main"]
+}

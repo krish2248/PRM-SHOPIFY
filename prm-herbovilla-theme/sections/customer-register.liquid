@@ -1,0 +1,181 @@
+{%- style -%}
+  .customer-section {
+    padding: 60px 0;
+    min-height: 60vh;
+  }
+  .customer-container {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .customer-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .customer-title {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-text);
+    margin-bottom: 10px;
+  }
+  .customer-subtitle {
+    color: var(--color-text-light);
+  }
+  .customer-form {
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 2px 30px rgba(0,0,0,0.05);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+  .customer-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+  .customer-submit:hover {
+    background: var(--color-primary-dark);
+  }
+  .customer-links {
+    text-align: center;
+    margin-top: 25px;
+  }
+  .customer-links a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .customer-links a:hover {
+    text-decoration: underline;
+  }
+  .form-errors {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+  }
+  @media (max-width: 576px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+<section class="customer-section">
+  <div class="container">
+    <div class="customer-container">
+      <div class="customer-header">
+        <h1 class="customer-title">{{ 'customer.register.title' | t }}</h1>
+        <p class="customer-subtitle">Create an account to track orders and save favorites.</p>
+      </div>
+      
+      {%- form 'create_customer', class: 'customer-form' -%}
+        {%- if form.errors -%}
+          <div class="form-errors">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="customer-first-name">{{ 'customer.register.first_name' | t }}</label>
+            <input
+              type="text"
+              id="customer-first-name"
+              name="customer[first_name]"
+              autocomplete="given-name"
+              required
+              placeholder="First name"
+            >
+          </div>
+          <div class="form-group">
+            <label for="customer-last-name">{{ 'customer.register.last_name' | t }}</label>
+            <input
+              type="text"
+              id="customer-last-name"
+              name="customer[last_name]"
+              autocomplete="family-name"
+              required
+              placeholder="Last name"
+            >
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="customer-email">{{ 'customer.register.email' | t }}</label>
+          <input
+            type="email"
+            id="customer-email"
+            name="customer[email]"
+            autocomplete="email"
+            required
+            placeholder="your@email.com"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="customer-password">{{ 'customer.register.password' | t }}</label>
+          <input
+            type="password"
+            id="customer-password"
+            name="customer[password]"
+            autocomplete="new-password"
+            required
+            placeholder="••••••••"
+          >
+        </div>
+        
+        <button type="submit" class="customer-submit">
+          {{ 'customer.register.submit' | t }}
+        </button>
+        
+        <div class="customer-links">
+          <span style="color: var(--color-text-light);">Already have an account?</span>
+          <a href="{{ routes.account_login_url }}">{{ 'customer.login.sign_in' | t }}</a>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Register",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,487 @@
+{%- style -%}
+  .expert-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, {{ section.settings.bg_color }} 0%, {{ section.settings.bg_color_secondary }} 100%);
+  }
+  .expert-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .expert-label {
+    display: inline-block;
+    background: rgba(45, 106, 79, 0.1);
+    color: var(--color-primary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+  }
+  .expert-main-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-text);
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+  .expert-main-desc {
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .experts-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .expert-card {
+    flex: 0 0 auto;
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    position: relative;
+  }
+  .expert-card:first-child {
+    margin-left: 0;
+    margin-right: auto;
+  }
+  .expert-card:last-child {
+    margin-right: 0;
+    margin-left: auto;
+  }
+  .expert-divider {
+    display: none;
+  }
+  .expert-image-wrapper {
+    position: relative;
+    margin-bottom: 30px;
+  }
+  .expert-image {
+    width: 280px;
+    height: 340px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(45, 106, 79, 0.15);
+    object-fit: cover;
+  }
+  .expert-placeholder {
+    width: 280px;
+    height: 340px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 60px rgba(45, 106, 79, 0.15);
+  }
+  .expert-badge {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(45, 106, 79, 0.3);
+  }
+  .expert-badge-number {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .expert-badge-text {
+    font-size: 0.75rem;
+    margin-top: 3px;
+  }
+  .expert-info {
+    text-align: center;
+    max-width: 400px;
+  }
+  .expert-name {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 5px;
+  }
+  .expert-title {
+    color: var(--color-primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .expert-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+  .credential-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .credential-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--color-primary);
+  }
+  .credential-text {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .expert-quote {
+    background: #fff;
+    padding: 20px 25px;
+    border-radius: 12px;
+    border-left: 3px solid var(--color-primary);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  }
+  .expert-quote-text {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin: 0;
+  }
+  @media (max-width: 1024px) {
+    .experts-container {
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .expert-card {
+      width: 100%;
+      max-width: 400px;
+    }
+    .expert-card:first-child,
+    .expert-card:last-child {
+      margin: 0 auto;
+    }
+    .expert-divider {
+      display: none;
+    }
+  }
+  @media (max-width: 576px) {
+    .expert-section {
+      padding: 60px 0;
+    }
+    .expert-main-title {
+      font-size: 1.75rem;
+    }
+    .expert-card {
+      padding: 20px;
+    }
+    .expert-image,
+    .expert-placeholder {
+      width: 220px;
+      height: 280px;
+    }
+    .expert-credentials {
+      flex-direction: column;
+    }
+  }
+{%- endstyle -%}
+
+<section class="expert-section" data-section-id="{{ section.id }}">
+  <div class="container">
+    <header class="expert-header">
+      {%- if section.settings.label != blank -%}
+        <span class="expert-label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      <h2 class="expert-main-title">{{ section.settings.title }}</h2>
+      <p class="expert-main-desc">{{ section.settings.description }}</p>
+    </header>
+    
+    <div class="experts-container">
+      <!-- Expert 1 -->
+      <div class="expert-card">
+        <div class="expert-image-wrapper">
+          {%- if section.settings.expert1_image != blank -%}
+            <img
+              src="{{ section.settings.expert1_image | image_url: width: 600 }}"
+              alt="{{ section.settings.expert1_name | escape }}"
+              class="expert-image"
+              loading="lazy"
+            >
+          {%- else -%}
+            <div class="expert-placeholder">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="1">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+          {%- endif -%}
+          <div class="expert-badge">
+            <div class="expert-badge-number">{{ section.settings.expert1_experience }}</div>
+            <div class="expert-badge-text">Years Exp.</div>
+          </div>
+        </div>
+        <div class="expert-info">
+          <h3 class="expert-name">{{ section.settings.expert1_name }}</h3>
+          <p class="expert-title">{{ section.settings.expert1_title }}</p>
+          <div class="expert-credentials">
+            {%- if section.settings.expert1_cred1 != blank -%}
+              <div class="credential-item">
+                <svg class="credential-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="credential-text">{{ section.settings.expert1_cred1 }}</span>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.expert1_cred2 != blank -%}
+              <div class="credential-item">
+                <svg class="credential-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="credential-text">{{ section.settings.expert1_cred2 }}</span>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.expert1_cred3 != blank -%}
+              <div class="credential-item">
+                <svg class="credential-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="credential-text">{{ section.settings.expert1_cred3 }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+          {%- if section.settings.expert1_quote != blank -%}
+            <blockquote class="expert-quote">
+              <p class="expert-quote-text">"{{ section.settings.expert1_quote }}"</p>
+            </blockquote>
+          {%- endif -%}
+        </div>
+      </div>
+      
+      <!-- Expert 2 -->
+      <div class="expert-card">
+        <div class="expert-image-wrapper">
+          {%- if section.settings.expert2_image != blank -%}
+            <img
+              src="{{ section.settings.expert2_image | image_url: width: 600 }}"
+              alt="{{ section.settings.expert2_name | escape }}"
+              class="expert-image"
+              loading="lazy"
+            >
+          {%- else -%}
+            <div class="expert-placeholder">
+              <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#2D6A4F" stroke-width="1">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+          {%- endif -%}
+          <div class="expert-badge">
+            <div class="expert-badge-number">{{ section.settings.expert2_experience }}</div>
+            <div class="expert-badge-text">Years Exp.</div>
+          </div>
+        </div>
+        <div class="expert-info">
+          <h3 class="expert-name">{{ section.settings.expert2_name }}</h3>
+          <p class="expert-title">{{ section.settings.expert2_title }}</p>
+          <div class="expert-credentials">
+            {%- if section.settings.expert2_cred1 != blank -%}
+              <div class="credential-item">
+                <svg class="credential-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="credential-text">{{ section.settings.expert2_cred1 }}</span>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.expert2_cred2 != blank -%}
+              <div class="credential-item">
+                <svg class="credential-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="credential-text">{{ section.settings.expert2_cred2 }}</span>
+              </div>
+            {%- endif -%}
+            {%- if section.settings.expert2_cred3 != blank -%}
+              <div class="credential-item">
+                <svg class="credential-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="credential-text">{{ section.settings.expert2_cred3 }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+          {%- if section.settings.expert2_quote != blank -%}
+            <blockquote class="expert-quote">
+              <p class="expert-quote-text">"{{ section.settings.expert2_quote }}"</p>
+            </blockquote>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Expert Section",
+  "tag": "section",
+  "class": "section-expert",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f8fdf8"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_secondary",
+      "label": "Background gradient end",
+      "default": "#fff"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Meet Our Experts"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Formulated by Ayurvedic Experts"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Our formulations are crafted by experienced Ayurvedic practitioners who combine ancient wisdom with modern research."
+    },
+    {
+      "type": "header",
+      "content": "Expert 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "expert1_image",
+      "label": "Expert 1 Image"
+    },
+    {
+      "type": "text",
+      "id": "expert1_name",
+      "label": "Name",
+      "default": "Dr. Rajesh Sharma"
+    },
+    {
+      "type": "text",
+      "id": "expert1_title",
+      "label": "Title",
+      "default": "Chief Ayurvedic Formulator"
+    },
+    {
+      "type": "text",
+      "id": "expert1_experience",
+      "label": "Years Experience",
+      "default": "25+"
+    },
+    {
+      "type": "text",
+      "id": "expert1_cred1",
+      "label": "Credential 1",
+      "default": "BAMS, MD (Ayurveda)"
+    },
+    {
+      "type": "text",
+      "id": "expert1_cred2",
+      "label": "Credential 2",
+      "default": "25+ Years Experience"
+    },
+    {
+      "type": "text",
+      "id": "expert1_cred3",
+      "label": "Credential 3",
+      "default": "GMP Certified Expert"
+    },
+    {
+      "type": "textarea",
+      "id": "expert1_quote",
+      "label": "Quote",
+      "default": "True wellness comes from nature. Our mission is to bring the healing power of Ayurveda to every home."
+    },
+    {
+      "type": "header",
+      "content": "Expert 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "expert2_image",
+      "label": "Expert 2 Image"
+    },
+    {
+      "type": "text",
+      "id": "expert2_name",
+      "label": "Name",
+      "default": "Dr. Priya Patel"
+    },
+    {
+      "type": "text",
+      "id": "expert2_title",
+      "label": "Title",
+      "default": "Head of Research & Quality"
+    },
+    {
+      "type": "text",
+      "id": "expert2_experience",
+      "label": "Years Experience",
+      "default": "18+"
+    },
+    {
+      "type": "text",
+      "id": "expert2_cred1",
+      "label": "Credential 1",
+      "default": "PhD Pharmacognosy"
+    },
+    {
+      "type": "text",
+      "id": "expert2_cred2",
+      "label": "Credential 2",
+      "default": "ISO Quality Lead"
+    },
+    {
+      "type": "text",
+      "id": "expert2_cred3",
+      "label": "Credential 3",
+      "default": "AYUSH Approved"
+    },
+    {
+      "type": "textarea",
+      "id": "expert2_quote",
+      "label": "Quote",
+      "default": "Every product undergoes rigorous testing to ensure the highest standards of purity and effectiveness."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Expert Section"
+    }
+  ]
+}
+{% endschema %}

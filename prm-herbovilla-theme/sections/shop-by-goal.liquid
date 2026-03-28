@@ -1,0 +1,121 @@
+{%- comment -%}
+  Shop by Goal / Collections Grid Section
+{%- endcomment -%}
+
+<section class="section {% if section.settings.alt_background %}section--alt{% endif %}">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.label != blank -%}
+        <span class="section-header__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="section-header__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+    
+    <div class="collections-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'collection' -%}
+          {%- assign collection = block.settings.collection -%}
+          {%- if collection != blank -%}
+            {%- render 'collection-card', collection: collection -%}
+          {%- else -%}
+            <div class="collection-card" {{ block.shopify_attributes }}>
+              <div class="collection-card__image">
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+              <div class="collection-card__overlay"></div>
+              <div class="collection-card__content">
+                <h3 class="collection-card__title">{{ block.settings.title | default: 'Collection Name' }}</h3>
+                <p class="collection-card__count">0 products</p>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    
+    {%- if section.settings.button_text != blank -%}
+      <div class="text-center mt-2xl">
+        <a href="{{ section.settings.button_link | default: routes.collections_url }}" class="btn btn--secondary">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop by Goal",
+  "tag": "section",
+  "class": "shop-by-goal-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "alt_background",
+      "label": "Use Alternative Background",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Shop by Health Goal"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Find Your Wellness Solution"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Browse our curated collections to find the perfect Ayurvedic solution for your health needs."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "View All Collections"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom Title (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by Goal",
+      "blocks": [
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" }
+      ]
+    }
+  ]
+}
+{% endschema %}

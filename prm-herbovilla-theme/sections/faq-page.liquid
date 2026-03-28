@@ -1,0 +1,526 @@
+{%- comment -%}
+  FAQ Page Template
+  Displays frequently asked questions in accordion format
+{%- endcomment -%}
+
+<div class="faq-page">
+  {%- comment -%} Hero Section {%- endcomment -%}
+  <section class="faq-hero">
+    <div class="container">
+      <div class="faq-hero__content">
+        <h1 class="faq-hero__title">{{ section.settings.title | default: 'Frequently Asked Questions' }}</h1>
+        <p class="faq-hero__text">{{ section.settings.subtitle | default: 'Find answers to common questions about our products, shipping, and more.' }}</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} FAQ Categories {%- endcomment -%}
+  <section class="faq-content section">
+    <div class="container">
+      <div class="faq-layout">
+        {%- comment -%} Sidebar Navigation {%- endcomment -%}
+        <aside class="faq-sidebar">
+          <nav class="faq-nav">
+            <h3 class="faq-nav__title">Categories</h3>
+            <ul class="faq-nav__list">
+              {%- assign categories = section.blocks | where: "type", "category" -%}
+              {%- for category in categories -%}
+                <li>
+                  <a href="#faq-{{ category.id }}" class="faq-nav__link">
+                    {{ category.settings.category_title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+          
+          <div class="faq-contact">
+            <h4 class="faq-contact__title">Still have questions?</h4>
+            <p class="faq-contact__text">Can't find what you're looking for? Our team is here to help.</p>
+            <a href="{{ section.settings.contact_url | default: '/pages/contact' }}" class="btn btn--primary btn--small">
+              Contact Us
+            </a>
+          </div>
+        </aside>
+
+        {%- comment -%} FAQ Accordions {%- endcomment -%}
+        <div class="faq-main">
+          {%- assign current_category = nil -%}
+          
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'category' -%}
+              {%- if current_category != nil -%}
+                </div></div>
+              {%- endif -%}
+              
+              <div class="faq-category" id="faq-{{ block.id }}" {{ block.shopify_attributes }}>
+                <h2 class="faq-category__title">{{ block.settings.category_title }}</h2>
+                <div class="faq-accordion">
+              
+              {%- assign current_category = block.id -%}
+            
+            {%- elsif block.type == 'question' -%}
+              <div class="faq-item" {{ block.shopify_attributes }}>
+                <button class="faq-item__question" aria-expanded="false">
+                  <span>{{ block.settings.question }}</span>
+                  <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M5 12h14"/>
+                  </svg>
+                </button>
+                <div class="faq-item__answer">
+                  <div class="faq-item__answer-inner rte">
+                    {{ block.settings.answer }}
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+          
+          {%- if current_category != nil -%}
+            </div></div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  /* Hero */
+  .faq-hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #1e4d3a 100%);
+    color: var(--color-white);
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .faq-hero__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+  }
+
+  .faq-hero__text {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Layout */
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .faq-layout {
+      grid-template-columns: 280px 1fr;
+    }
+  }
+
+  /* Sidebar */
+  .faq-sidebar {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+
+  @media (max-width: 1023px) {
+    .faq-sidebar {
+      position: static;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .faq-sidebar {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .faq-nav {
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+
+  @media (max-width: 1023px) {
+    .faq-nav {
+      margin-bottom: 0;
+    }
+  }
+
+  .faq-nav__title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-nav__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .faq-nav__link {
+    display: block;
+    padding: 0.625rem 0;
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    transition: color 0.2s ease;
+  }
+
+  .faq-nav__link:hover {
+    color: var(--color-primary);
+  }
+
+  .faq-contact {
+    background: var(--color-background-alt);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+
+  .faq-contact__title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-contact__text {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Categories */
+  .faq-category {
+    margin-bottom: 3rem;
+  }
+
+  .faq-category:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-category__title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--color-primary);
+  }
+
+  /* Accordion Items */
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-item {
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .faq-item__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text);
+    transition: background-color 0.2s ease;
+  }
+
+  .faq-item__question:hover {
+    background: var(--color-background);
+  }
+
+  .faq-item__question span {
+    flex: 1;
+  }
+
+  .faq-item__icon {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .faq-item.is-open .faq-item__icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-item__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .faq-item.is-open .faq-item__answer {
+    max-height: 1000px;
+  }
+
+  .faq-item__answer-inner {
+    padding: 0 1.5rem 1.5rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+  }
+
+  .faq-item__answer-inner p:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-item__answer-inner ul,
+  .faq-item__answer-inner ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .faq-item__answer-inner li {
+    margin-bottom: 0.5rem;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item__question');
+    
+    faqItems.forEach(function(button) {
+      button.addEventListener('click', function() {
+        const item = this.closest('.faq-item');
+        const isOpen = item.classList.contains('is-open');
+        
+        // Close all items in same category
+        const category = item.closest('.faq-category');
+        if (category) {
+          category.querySelectorAll('.faq-item.is-open').forEach(function(openItem) {
+            if (openItem !== item) {
+              openItem.classList.remove('is-open');
+              openItem.querySelector('.faq-item__question').setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+        
+        // Toggle current item
+        item.classList.toggle('is-open');
+        this.setAttribute('aria-expanded', !isOpen);
+      });
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.faq-nav__link').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        if (target) {
+          const headerOffset = 140;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Page",
+  "tag": "section",
+  "class": "section-faq",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Page Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Find answers to common questions about our products, shipping, and more."
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "Contact Page URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "FAQ Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_title",
+          "label": "Category Title",
+          "default": "General Questions"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "FAQ Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is Ayurveda?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Ayurveda is an ancient Indian system of medicine that has been practiced for over 5,000 years. It focuses on maintaining balance in the body through natural remedies, diet, and lifestyle practices.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Page",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "Products & Ingredients"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Are your products 100% natural?",
+            "answer": "<p>Yes, all PRM HerboVilla products are made from 100% natural ingredients. We use authentic Ayurvedic herbs sourced from trusted suppliers and never add artificial colors, flavors, or preservatives.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Are your products safe to use?",
+            "answer": "<p>All our products are manufactured in a GMP-certified facility and undergo rigorous quality testing. However, we recommend consulting with a healthcare professional before starting any new supplement, especially if you are pregnant, nursing, or taking medications.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Do your products have any side effects?",
+            "answer": "<p>Our products are formulated using traditional Ayurvedic principles and are generally well-tolerated. Some individuals may experience mild digestive changes when starting a new herbal supplement. If you experience any adverse effects, discontinue use and consult a healthcare provider.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How long does it take to see results?",
+            "answer": "<p>Ayurvedic remedies work holistically and may take time to show results. Most customers report noticeable benefits within 2-4 weeks of consistent use. For chronic conditions, it may take 2-3 months to experience full benefits.</p>"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "Orders & Shipping"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What are your shipping charges?",
+            "answer": "<p>We offer FREE shipping on all orders above ₹400. For orders below ₹400, a flat shipping fee of ₹50 applies. We ship across India via trusted courier partners.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>Standard delivery takes 5-7 business days depending on your location. Metro cities usually receive orders within 3-5 business days. You will receive a tracking number once your order ships.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>Currently, we only ship within India. We are working on expanding our shipping to international destinations. Please check back soon or contact us for updates.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Can I track my order?",
+            "answer": "<p>Yes! Once your order is shipped, you will receive an email and SMS with tracking details. You can also track your order by logging into your account on our website.</p>"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "Returns & Refunds"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We accept returns within 7 days of delivery for unopened products in original packaging. For damaged or defective products, please contact us within 48 hours of delivery with photos.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How do I request a refund?",
+            "answer": "<p>To request a refund, please email us at contact@prmpharmaceuticals.com with your order number and reason for return. Our team will guide you through the process. Refunds are processed within 7-10 business days after we receive the returned product.</p>"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "category_title": "Payment & Security"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What payment methods do you accept?",
+            "answer": "<p>We accept all major payment methods including:</p><ul><li>Credit/Debit Cards (Visa, Mastercard, RuPay)</li><li>UPI (Google Pay, PhonePe, Paytm)</li><li>Net Banking</li><li>Cash on Delivery (COD)</li></ul>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Is my payment information secure?",
+            "answer": "<p>Absolutely. We use industry-standard SSL encryption to protect your payment information. We never store your complete card details on our servers. All transactions are processed through secure payment gateways.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

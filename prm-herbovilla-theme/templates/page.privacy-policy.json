@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "privacy-policy": {
+      "type": "privacy-policy",
+      "settings": {
+        "last_updated": "January 2024"
+      }
+    }
+  },
+  "order": ["privacy-policy"]
+}

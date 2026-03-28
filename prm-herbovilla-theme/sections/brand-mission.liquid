@@ -1,0 +1,497 @@
+{%- style -%}
+  .brand-mission {
+    padding: 100px 0;
+    background: {{ section.settings.bg_color }};
+    position: relative;
+    overflow: hidden;
+  }
+  .brand-mission::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232D6A4F' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+  .mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .mission-content {
+    max-width: 550px;
+  }
+  .mission-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .mission-label svg {
+    width: 20px;
+    height: 20px;
+  }
+  .mission-title {
+    font-family: var(--font-heading);
+    font-size: 2.75rem;
+    color: var(--color-text);
+    margin-bottom: 25px;
+    line-height: 1.2;
+  }
+  .mission-title span {
+    color: var(--color-primary);
+  }
+  .mission-text {
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+  .mission-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 35px;
+  }
+  .value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .value-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(45, 106, 79, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .value-icon svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+  }
+  .value-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+  .value-content p {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
+  }
+  .mission-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .mission-cta:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(45, 106, 79, 0.3);
+  }
+  .mission-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .mission-image-item {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: none;
+    position: relative;
+    background: transparent;
+  }
+  .mission-image-item:first-child {
+    margin-top: 40px;
+  }
+  .mission-image-item:last-child {
+    margin-top: -40px;
+  }
+  .mission-image-item img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+  }
+  .mission-placeholder-box {
+    width: 100%;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+    border-radius: 20px;
+    margin: 0;
+  }
+  .mission-placeholder-box.green {
+    background: #c8e6c9 !important;
+  }
+  .mission-placeholder-box.yellow {
+    background: #c8e6c9 !important;
+  }
+  .mission-placeholder-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  .mission-placeholder-icon svg {
+    width: 30px;
+    height: 30px;
+    color: #2D6A4F;
+  }
+  .mission-placeholder-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+  .mission-placeholder-text {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.5;
+  }
+  .mission-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(45, 106, 79, 0.1);
+  }
+  .stat-item {
+    text-align: center;
+  }
+  .stat-number {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-top: 5px;
+  }
+  @media (max-width: 968px) {
+    .mission-grid {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+    .mission-title {
+      font-size: 2.25rem;
+    }
+    .mission-images {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+  @media (max-width: 576px) {
+    .brand-mission {
+      padding: 60px 0;
+    }
+    .mission-title {
+      font-size: 1.75rem;
+    }
+    .mission-values {
+      grid-template-columns: 1fr;
+    }
+    .mission-stats {
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .mission-image-item:first-child,
+    .mission-image-item:last-child {
+      margin-top: 0;
+    }
+  }
+{%- endstyle -%}
+
+<section class="brand-mission" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="mission-grid">
+      <div class="mission-content">
+        <div class="mission-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
+          </svg>
+          {{ section.settings.label }}
+        </div>
+        <h2 class="mission-title">{{ section.settings.title }}</h2>
+        <p class="mission-text">{{ section.settings.description }}</p>
+        
+        <div class="mission-values">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'value' -%}
+              <div class="value-item" {{ block.shopify_attributes }}>
+                <div class="value-icon">
+                  {%- case block.settings.icon -%}
+                    {%- when 'leaf' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+                    {%- when 'heart' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                    {%- when 'shield' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    {%- when 'star' -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    {%- else -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  {%- endcase -%}
+                </div>
+                <div class="value-content">
+                  <h4>{{ block.settings.title }}</h4>
+                  <p>{{ block.settings.text }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        
+        {%- if section.settings.cta_text != blank -%}
+          <a href="{{ section.settings.cta_link }}" class="mission-cta">
+            {{ section.settings.cta_text }}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
+      
+      <div class="mission-images">
+        {%- if section.settings.image_1 != blank -%}
+          <div class="mission-image-item">
+            <img src="{{ section.settings.image_1 | image_url: width: 600 }}" alt="Our Mission" loading="lazy" width="280" height="280">
+          </div>
+        {%- else -%}
+          <div class="mission-image-item">
+            <div class="mission-placeholder-box green">
+              <div class="mission-placeholder-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <polyline points="9 12 11 14 15 10"></polyline>
+                </svg>
+              </div>
+              <h4 class="mission-placeholder-title">{{ section.settings.box1_title | default: 'Quality Assured' }}</h4>
+              <p class="mission-placeholder-text">{{ section.settings.box1_text | default: 'Every batch tested for purity, potency & safety before reaching you' }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+        
+        {%- if section.settings.image_2 != blank -%}
+          <div class="mission-image-item">
+            <img src="{{ section.settings.image_2 | image_url: width: 600 }}" alt="Our Values" loading="lazy" width="280" height="280">
+          </div>
+        {%- else -%}
+          <div class="mission-image-item">
+            <div class="mission-placeholder-box yellow">
+              <div class="mission-placeholder-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                  <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                </svg>
+              </div>
+              <h4 class="mission-placeholder-title">{{ section.settings.box2_title | default: 'Sustainably Sourced' }}</h4>
+              <p class="mission-placeholder-text">{{ section.settings.box2_text | default: 'Herbs ethically harvested from organic farms across India' }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+    
+    {%- if section.settings.show_stats -%}
+      <div class="mission-stats">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'stat' -%}
+            <div class="stat-item" {{ block.shopify_attributes }}>
+              <div class="stat-number">{{ block.settings.number }}</div>
+              <div class="stat-label">{{ block.settings.label }}</div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Mission",
+  "tag": "section",
+  "class": "section-brand-mission",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FDF8F0"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section label",
+      "default": "Our Mission"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title",
+      "default": "Bringing <span>Ancient Wisdom</span> to Modern Wellness"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "At PRM HerboVilla, we believe that true health comes from nature. Our mission is to make authentic Ayurvedic remedies accessible to everyone, while maintaining the highest standards of quality and purity."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1 (optional)"
+    },
+    {
+      "type": "text",
+      "id": "box1_title",
+      "label": "Box 1 Title (if no image)",
+      "default": "Quality Assured"
+    },
+    {
+      "type": "textarea",
+      "id": "box1_text",
+      "label": "Box 1 Text (if no image)",
+      "default": "Every batch tested for purity, potency & safety before reaching you"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2 (optional)"
+    },
+    {
+      "type": "text",
+      "id": "box2_title",
+      "label": "Box 2 Title (if no image)",
+      "default": "Sustainably Sourced"
+    },
+    {
+      "type": "textarea",
+      "id": "box2_text",
+      "label": "Box 2 Text (if no image)",
+      "default": "Herbs ethically harvested from organic farms across India"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Learn Our Story"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show statistics",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "star", "label": "Star" },
+            { "value": "check", "label": "Checkmark" }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "100% Natural"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Pure herbal ingredients"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "50+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Products"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Mission",
+      "blocks": [
+        { "type": "value", "settings": { "icon": "leaf", "title": "100% Natural", "text": "Pure herbal ingredients" } },
+        { "type": "value", "settings": { "icon": "shield", "title": "GMP Certified", "text": "Quality assured manufacturing" } },
+        { "type": "value", "settings": { "icon": "heart", "title": "Cruelty Free", "text": "Never tested on animals" } },
+        { "type": "value", "settings": { "icon": "star", "title": "Ayush Approved", "text": "Government certified" } },
+        { "type": "stat", "settings": { "number": "44+", "label": "Products" } },
+        { "type": "stat", "settings": { "number": "10K+", "label": "Happy Customers" } },
+        { "type": "stat", "settings": { "number": "25+", "label": "Years Experience" } },
+        { "type": "stat", "settings": { "number": "100%", "label": "Natural" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

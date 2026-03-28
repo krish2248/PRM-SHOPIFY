@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "search-template",
+      "settings": {
+        "results_per_page": 16
+      }
+    }
+  },
+  "order": ["main"]
+}

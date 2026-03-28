@@ -1,0 +1,342 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "PRM HerboVilla",
+    "theme_version": "1.0.0",
+    "theme_author": "PRM HerboVilla",
+    "theme_documentation_url": "https://www.prmpharmaceuticals.com/",
+    "theme_support_url": "mailto:contact@prmpharmaceuticals.com"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Primary Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color",
+        "default": "#2D6A4F",
+        "info": "Main brand color (herbal green)"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_light",
+        "label": "Primary Light",
+        "default": "#40916C"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_dark",
+        "label": "Primary Dark",
+        "default": "#1B4332"
+      },
+      {
+        "type": "header",
+        "content": "Accent Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color",
+        "default": "#8B5E3C",
+        "info": "Earthy brown accent"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_light",
+        "label": "Accent Light",
+        "default": "#A67C5B"
+      },
+      {
+        "type": "header",
+        "content": "Background Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background",
+        "default": "#FDF8F0",
+        "info": "Cream/off-white background"
+      },
+      {
+        "type": "color",
+        "id": "color_background_alt",
+        "label": "Background Alt",
+        "default": "#F5EDE0"
+      },
+      {
+        "type": "header",
+        "content": "Text Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color",
+        "default": "#1A1A1A"
+      },
+      {
+        "type": "color",
+        "id": "color_text_light",
+        "label": "Text Light",
+        "default": "#6B6B6B"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border Color",
+        "default": "#E0D5C7"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Fonts"
+      },
+      {
+        "type": "text",
+        "id": "type_header_font_url",
+        "label": "Heading Font URL",
+        "default": "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap",
+        "info": "Google Fonts URL for headings"
+      },
+      {
+        "type": "text",
+        "id": "type_body_font_url",
+        "label": "Body Font URL",
+        "default": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+        "info": "Google Fonts URL for body text"
+      }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo Width",
+        "min": 50,
+        "max": 300,
+        "step": 10,
+        "default": 150,
+        "unit": "px"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL",
+        "default": "https://www.facebook.com/prmandco/"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL",
+        "default": "https://www.instagram.com/prm_pharmaceuticals"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin",
+        "label": "LinkedIn URL",
+        "default": "https://www.linkedin.com/company/prm-&-company/"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "Twitter URL"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      }
+    ]
+  },
+  {
+    "name": "Contact Information",
+    "settings": [
+      {
+        "type": "text",
+        "id": "contact_phone",
+        "label": "Phone Number",
+        "default": "+91-9227928075"
+      },
+      {
+        "type": "text",
+        "id": "contact_email",
+        "label": "Email Address",
+        "default": "contact@prmpharmaceuticals.com"
+      },
+      {
+        "type": "textarea",
+        "id": "contact_address",
+        "label": "Address",
+        "default": "Plot No.343, 1-A, Chitra Gujarat Industrial Development Corporation, Bhavnagar, Gujarat 364004"
+      },
+      {
+        "type": "text",
+        "id": "contact_website",
+        "label": "Website URL",
+        "default": "https://www.prmpharmaceuticals.com/"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_drawer_enabled",
+        "label": "Enable Cart Drawer",
+        "default": true,
+        "info": "Show cart drawer instead of redirecting to cart page"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enabled",
+        "label": "Enable Cart Notes",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Free Shipping",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "free_shipping_enabled",
+        "label": "Enable Free Shipping Bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_threshold",
+        "label": "Free Shipping Threshold",
+        "default": "400",
+        "info": "Amount in INR for free shipping"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_message",
+        "label": "Free Shipping Message",
+        "default": "Free shipping on orders above ₹400!"
+      }
+    ]
+  },
+  {
+    "name": "Currency",
+    "settings": [
+      {
+        "type": "text",
+        "id": "currency_symbol",
+        "label": "Currency Symbol",
+        "default": "₹"
+      },
+      {
+        "type": "text",
+        "id": "currency_format",
+        "label": "Currency Format",
+        "default": "₹{{amount}}",
+        "info": "Use {{amount}} for the price value"
+      }
+    ]
+  },
+  {
+    "name": "Product",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "product_show_vendor",
+        "label": "Show Vendor",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_sku",
+        "label": "Show SKU",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_quantity",
+        "label": "Show Quantity Selector",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_enable_zoom",
+        "label": "Enable Image Zoom",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Collection",
+    "settings": [
+      {
+        "type": "range",
+        "id": "collection_products_per_page",
+        "label": "Products per Page",
+        "min": 8,
+        "max": 48,
+        "step": 4,
+        "default": 16
+      },
+      {
+        "type": "select",
+        "id": "collection_default_sort",
+        "label": "Default Sort",
+        "options": [
+          { "value": "manual", "label": "Featured" },
+          { "value": "best-selling", "label": "Best Selling" },
+          { "value": "title-ascending", "label": "Alphabetically, A-Z" },
+          { "value": "title-descending", "label": "Alphabetically, Z-A" },
+          { "value": "price-ascending", "label": "Price, Low to High" },
+          { "value": "price-descending", "label": "Price, High to Low" },
+          { "value": "created-ascending", "label": "Date, Old to New" },
+          { "value": "created-descending", "label": "Date, New to Old" }
+        ],
+        "default": "manual"
+      }
+    ]
+  },
+  {
+    "name": "Checkout",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "checkout_logo",
+        "label": "Checkout Logo"
+      }
+    ]
+  }
+]

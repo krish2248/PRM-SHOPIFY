@@ -1,0 +1,204 @@
+{%- comment -%}
+  Terms of Service Page Template
+{%- endcomment -%}
+
+<div class="policy-page">
+  <section class="policy-hero">
+    <div class="container">
+      <h1 class="policy-hero__title">{{ page.title | default: 'Terms of Service' }}</h1>
+      <p class="policy-hero__subtitle">Last updated: {{ section.settings.last_updated | default: 'January 2024' }}</p>
+    </div>
+  </section>
+
+  <section class="policy-content section">
+    <div class="container">
+      <div class="policy-grid">
+        <aside class="policy-sidebar">
+          <nav class="policy-nav">
+            <h3>Contents</h3>
+            <ul>
+              <li><a href="#acceptance">Acceptance of Terms</a></li>
+              <li><a href="#products">Products & Services</a></li>
+              <li><a href="#orders">Orders & Payment</a></li>
+              <li><a href="#shipping">Shipping & Delivery</a></li>
+              <li><a href="#returns">Returns & Refunds</a></li>
+              <li><a href="#accounts">User Accounts</a></li>
+              <li><a href="#intellectual">Intellectual Property</a></li>
+              <li><a href="#limitation">Limitation of Liability</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <div class="policy-main">
+          <div class="policy-intro">
+            <p>Welcome to PRM HerboVilla. These Terms of Service ("Terms") govern your use of our website and purchase of products. By accessing our website or placing an order, you agree to be bound by these Terms.</p>
+          </div>
+
+          <div class="policy-section" id="acceptance">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By using this website, you confirm that you:</p>
+            <ul>
+              <li>Are at least 18 years of age</li>
+              <li>Have the legal capacity to enter into binding contracts</li>
+              <li>Will use this website only for lawful purposes</li>
+              <li>Agree to comply with all applicable laws and regulations</li>
+            </ul>
+            <p>If you do not agree with these Terms, please do not use our website or services.</p>
+          </div>
+
+          <div class="policy-section" id="products">
+            <h2>2. Products & Services</h2>
+            
+            <h3>Product Information</h3>
+            <p>We make every effort to display products accurately. However:</p>
+            <ul>
+              <li>Colors may vary slightly due to monitor settings</li>
+              <li>Product packaging may differ from images shown</li>
+              <li>We reserve the right to modify product formulations</li>
+            </ul>
+
+            <h3>Medical Disclaimer</h3>
+            <div class="policy-info-box policy-info-box--warning">
+              <p>Our products are Ayurvedic supplements and are not intended to diagnose, treat, cure, or prevent any disease. The information provided is for educational purposes only. Please consult a healthcare professional before starting any new supplement, especially if you are pregnant, nursing, or taking medications.</p>
+            </div>
+
+            <h3>Product Availability</h3>
+            <p>All products are subject to availability. We reserve the right to limit quantities or discontinue products without notice.</p>
+          </div>
+
+          <div class="policy-section" id="orders">
+            <h2>3. Orders & Payment</h2>
+            
+            <h3>Order Acceptance</h3>
+            <p>An order is confirmed only after:</p>
+            <ul>
+              <li>You receive an order confirmation email</li>
+              <li>Payment has been successfully processed</li>
+              <li>Products are available for shipment</li>
+            </ul>
+            <p>We reserve the right to refuse or cancel any order for reasons including suspected fraud, pricing errors, or product unavailability.</p>
+
+            <h3>Pricing</h3>
+            <ul>
+              <li>All prices are listed in Indian Rupees (₹)</li>
+              <li>Prices include applicable taxes unless stated otherwise</li>
+              <li>We reserve the right to change prices without notice</li>
+              <li>Promotional prices are valid for limited periods only</li>
+            </ul>
+
+            <h3>Payment Methods</h3>
+            <p>We accept various payment methods including credit/debit cards, UPI, net banking, and Cash on Delivery. All online payments are processed through secure payment gateways.</p>
+          </div>
+
+          <div class="policy-section" id="shipping">
+            <h2>4. Shipping & Delivery</h2>
+            <ul>
+              <li>We ship across India to serviceable pin codes</li>
+              <li>Free shipping on orders above ₹400</li>
+              <li>Delivery times are estimates and not guaranteed</li>
+              <li>Risk of loss transfers to you upon delivery</li>
+            </ul>
+            <p>For detailed shipping information, please refer to our <a href="/pages/shipping-policy">Shipping Policy</a>.</p>
+          </div>
+
+          <div class="policy-section" id="returns">
+            <h2>5. Returns & Refunds</h2>
+            
+            <h3>Return Policy</h3>
+            <ul>
+              <li>Returns accepted within 7 days of delivery</li>
+              <li>Products must be unopened and in original packaging</li>
+              <li>Damaged or defective products can be reported within 48 hours</li>
+            </ul>
+
+            <h3>Refund Process</h3>
+            <ul>
+              <li>Refunds are processed within 7-10 business days after receiving returned items</li>
+              <li>Refunds will be credited to the original payment method</li>
+              <li>Shipping charges are non-refundable unless the return is due to our error</li>
+            </ul>
+
+            <p>For detailed information, please refer to our <a href="/pages/refund-policy">Refund Policy</a>.</p>
+          </div>
+
+          <div class="policy-section" id="accounts">
+            <h2>6. User Accounts</h2>
+            <p>When creating an account, you agree to:</p>
+            <ul>
+              <li>Provide accurate and complete information</li>
+              <li>Maintain the security of your account credentials</li>
+              <li>Notify us immediately of any unauthorized access</li>
+              <li>Accept responsibility for all activities under your account</li>
+            </ul>
+            <p>We reserve the right to suspend or terminate accounts that violate these Terms.</p>
+          </div>
+
+          <div class="policy-section" id="intellectual">
+            <h2>7. Intellectual Property</h2>
+            <p>All content on this website, including but not limited to:</p>
+            <ul>
+              <li>Text, graphics, logos, and images</li>
+              <li>Product descriptions and formulations</li>
+              <li>Website design and layout</li>
+              <li>Software and code</li>
+            </ul>
+            <p>is the property of PRM HerboVilla or its licensors and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works without our written permission.</p>
+          </div>
+
+          <div class="policy-section" id="limitation">
+            <h2>8. Limitation of Liability</h2>
+            <p>To the fullest extent permitted by law:</p>
+            <ul>
+              <li>We are not liable for any indirect, incidental, or consequential damages</li>
+              <li>Our total liability shall not exceed the amount you paid for the product</li>
+              <li>We are not responsible for delays or failures due to circumstances beyond our control</li>
+            </ul>
+          </div>
+
+          <div class="policy-section">
+            <h2>9. Governing Law</h2>
+            <p>These Terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts in Bhavnagar, Gujarat.</p>
+          </div>
+
+          <div class="policy-section">
+            <h2>10. Changes to Terms</h2>
+            <p>We may update these Terms at any time. Continued use of our website after changes constitutes acceptance of the new Terms.</p>
+          </div>
+
+          <div class="policy-section">
+            <h2>11. Contact Information</h2>
+            <p>For questions about these Terms, please contact us:</p>
+            <div class="policy-contact">
+              <p><strong>PRM HerboVilla</strong></p>
+              <p>Plot No.343, 1-A, Chitra Gujarat Industrial Development Corporation</p>
+              <p>Bhavnagar, Gujarat 364004</p>
+              <p><strong>Email:</strong> contact@prmpharmaceuticals.com</p>
+              <p><strong>Phone:</strong> +91-9227928075</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Terms of Service",
+  "tag": "section",
+  "class": "section-terms",
+  "settings": [
+    {
+      "type": "text",
+      "id": "last_updated",
+      "label": "Last Updated Date",
+      "default": "January 2024"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Terms of Service"
+    }
+  ]
+}
+{% endschema %}

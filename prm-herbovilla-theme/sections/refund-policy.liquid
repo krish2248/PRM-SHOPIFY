@@ -1,0 +1,245 @@
+{%- comment -%}
+  Refund Policy Page Template
+{%- endcomment -%}
+
+<div class="policy-page">
+  <section class="policy-hero">
+    <div class="container">
+      <h1 class="policy-hero__title">{{ page.title | default: 'Refund Policy' }}</h1>
+      <p class="policy-hero__subtitle">{{ section.settings.subtitle | default: 'Our commitment to your satisfaction' }}</p>
+    </div>
+  </section>
+
+  <section class="policy-content section">
+    <div class="container">
+      <div class="policy-grid">
+        <aside class="policy-sidebar">
+          <nav class="policy-nav">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#returns">Returns</a></li>
+              <li><a href="#refunds">Refunds</a></li>
+              <li><a href="#exchanges">Exchanges</a></li>
+              <li><a href="#damaged">Damaged Products</a></li>
+              <li><a href="#process">How to Return</a></li>
+            </ul>
+          </nav>
+          
+          <div class="faq-contact">
+            <h4>Need Help?</h4>
+            <p>Contact our support team for assistance with returns.</p>
+            <a href="/pages/contact" class="btn btn--primary btn--small">Contact Us</a>
+          </div>
+        </aside>
+
+        <div class="policy-main">
+          <div class="policy-highlight">
+            <div class="policy-highlight__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 12l2 2 4-4"/>
+                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+              </svg>
+            </div>
+            <div class="policy-highlight__content">
+              <h3>7-Day Return Window</h3>
+              <p>Hassle-free returns within 7 days of delivery</p>
+            </div>
+          </div>
+
+          <div class="policy-section" id="returns">
+            <h2>Return Policy</h2>
+            <p>We want you to be completely satisfied with your purchase. If you're not happy with your order, you may return eligible products within 7 days of delivery.</p>
+            
+            <h3>Eligible for Return</h3>
+            <ul>
+              <li>Products in original, unopened packaging</li>
+              <li>Products with all tags and seals intact</li>
+              <li>Products that are unused and in resalable condition</li>
+              <li>Items returned within 7 days of delivery</li>
+            </ul>
+
+            <h3>Not Eligible for Return</h3>
+            <ul>
+              <li>Opened or used products (for hygiene reasons)</li>
+              <li>Products with broken seals or tampered packaging</li>
+              <li>Items returned after 7 days of delivery</li>
+              <li>Products marked as "Final Sale" or "Non-Returnable"</li>
+              <li>Free gifts or promotional items</li>
+            </ul>
+          </div>
+
+          <div class="policy-section" id="refunds">
+            <h2>Refund Process</h2>
+            
+            <h3>Refund Timeline</h3>
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th>Stage</th>
+                  <th>Timeline</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Return request approval</td>
+                  <td>1-2 business days</td>
+                </tr>
+                <tr>
+                  <td>Product pickup/drop-off</td>
+                  <td>3-5 business days</td>
+                </tr>
+                <tr>
+                  <td>Quality check at warehouse</td>
+                  <td>2-3 business days</td>
+                </tr>
+                <tr>
+                  <td>Refund processing</td>
+                  <td>5-7 business days</td>
+                </tr>
+                <tr>
+                  <td><strong>Total estimated time</strong></td>
+                  <td><strong>10-15 business days</strong></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Refund Methods</h3>
+            <ul>
+              <li><strong>Online Payments:</strong> Refund to original payment method (card, UPI, net banking)</li>
+              <li><strong>Cash on Delivery:</strong> Refund via bank transfer (NEFT/IMPS)</li>
+              <li><strong>Store Credit:</strong> Available as an alternative (valid for 1 year)</li>
+            </ul>
+
+            <div class="policy-info-box">
+              <h4>Please Note</h4>
+              <ul>
+                <li>Original shipping charges are non-refundable</li>
+                <li>Return shipping costs may be deducted from refund (if return is not due to our error)</li>
+                <li>Refunds for prepaid orders will be credited within 5-7 business days after approval</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="policy-section" id="exchanges">
+            <h2>Exchanges</h2>
+            <p>We currently do not offer direct product exchanges. If you wish to exchange a product:</p>
+            <ol>
+              <li>Return the original product following our return process</li>
+              <li>Place a new order for the desired product</li>
+              <li>Receive refund for the returned item</li>
+            </ol>
+            <p>This ensures faster processing and availability of your preferred product.</p>
+          </div>
+
+          <div class="policy-section" id="damaged">
+            <h2>Damaged or Defective Products</h2>
+            <p>If you receive a damaged or defective product, we apologize for the inconvenience. Please follow these steps:</p>
+            
+            <div class="policy-steps">
+              <li>
+                <span class="step-number">1</span>
+                <div>
+                  <h4>Report Within 48 Hours</h4>
+                  <p>Contact us within 48 hours of delivery with photos of the damaged product and packaging</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">2</span>
+                <div>
+                  <h4>Provide Details</h4>
+                  <p>Include your order number, product name, and description of the damage</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">3</span>
+                <div>
+                  <h4>Receive Resolution</h4>
+                  <p>We'll arrange for pickup and send a replacement or process a full refund</p>
+                </div>
+              </li>
+            </div>
+
+            <div class="policy-info-box policy-info-box--warning">
+              <h4>Important</h4>
+              <p>Please do not accept delivery if the outer packaging appears damaged. Request the delivery partner to return the package.</p>
+            </div>
+          </div>
+
+          <div class="policy-section" id="process">
+            <h2>How to Initiate a Return</h2>
+            
+            <div class="policy-steps">
+              <li>
+                <span class="step-number">1</span>
+                <div>
+                  <h4>Contact Us</h4>
+                  <p>Email contact@prmpharmaceuticals.com with your order number and reason for return</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">2</span>
+                <div>
+                  <h4>Receive Confirmation</h4>
+                  <p>Our team will review your request and send return instructions within 1-2 business days</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">3</span>
+                <div>
+                  <h4>Pack the Product</h4>
+                  <p>Pack the product securely in its original packaging with all accessories</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">4</span>
+                <div>
+                  <h4>Ship or Schedule Pickup</h4>
+                  <p>Drop off at the nearest courier or schedule a pickup (as instructed)</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-number">5</span>
+                <div>
+                  <h4>Receive Refund</h4>
+                  <p>Once we receive and verify the product, your refund will be processed</p>
+                </div>
+              </li>
+            </div>
+          </div>
+
+          <div class="policy-section">
+            <h2>Contact Information</h2>
+            <p>For return and refund queries, please contact:</p>
+            <div class="policy-contact">
+              <p><strong>Email:</strong> contact@prmpharmaceuticals.com</p>
+              <p><strong>Phone:</strong> +91-9227928075</p>
+              <p><strong>Hours:</strong> Monday - Saturday, 10:00 AM - 6:00 PM IST</p>
+              <p><strong>Address:</strong> Plot No.343, 1-A, Chitra GIDC, Bhavnagar, Gujarat 364004</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Refund Policy",
+  "tag": "section",
+  "class": "section-refund-policy",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Page Subtitle",
+      "default": "Our commitment to your satisfaction"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Refund Policy"
+    }
+  ]
+}
+{% endschema %}

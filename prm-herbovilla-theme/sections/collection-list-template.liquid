@@ -1,0 +1,156 @@
+{%- style -%}
+  .collection-list-template {
+    padding: 40px 0 80px;
+  }
+  .collection-list-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .collection-list-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-text);
+    margin-bottom: 15px;
+  }
+  .collection-list-description {
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .collections-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .collection-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: #f8f8f8;
+  }
+  .collection-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .collection-card:hover .collection-card__image {
+    transform: scale(1.05);
+  }
+  .collection-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+    color: #fff;
+  }
+  .collection-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .collection-card__count {
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+  .collection-card__link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+  @media (max-width: 992px) {
+    .collections-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 576px) {
+    .collection-list-title {
+      font-size: 2rem;
+    }
+    .collections-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .collection-card {
+      aspect-ratio: 16/9;
+    }
+  }
+{%- endstyle -%}
+
+<section class="collection-list-template" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="collection-list-header">
+      <h1 class="collection-list-title">{{ section.settings.title | default: 'Our Collections' }}</h1>
+      {%- if section.settings.description != blank -%}
+        <p class="collection-list-description">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+    
+    <div class="collections-grid">
+      {%- for collection in collections -%}
+        {%- unless collection.handle == 'all' -%}
+          <div class="collection-card">
+            {%- if collection.image -%}
+              <img
+                src="{{ collection.image | image_url: width: 800 }}"
+                alt="{{ collection.title }}"
+                class="collection-card__image"
+                width="400"
+                height="400"
+                loading="lazy"
+              >
+            {%- elsif collection.products.first.featured_image -%}
+              <img
+                src="{{ collection.products.first.featured_image | image_url: width: 800 }}"
+                alt="{{ collection.title }}"
+                class="collection-card__image"
+                width="400"
+                height="400"
+                loading="lazy"
+              >
+            {%- else -%}
+              {{ 'collection-1' | placeholder_svg_tag: 'collection-card__image placeholder-svg' }}
+            {%- endif -%}
+            <div class="collection-card__overlay">
+              <h2 class="collection-card__title">{{ collection.title }}</h2>
+              <span class="collection-card__count">{{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}</span>
+            </div>
+            <a href="{{ collection.url }}" class="collection-card__link" aria-label="{{ collection.title }}"></a>
+          </div>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections List",
+  "tag": "section",
+  "class": "section-collection-list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Collections"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Browse our curated collections of Ayurvedic products"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections List"
+    }
+  ]
+}
+{% endschema %}

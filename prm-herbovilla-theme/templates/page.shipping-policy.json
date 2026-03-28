@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "shipping-policy": {
+      "type": "shipping-policy",
+      "settings": {
+        "subtitle": "Everything you need to know about our shipping and delivery"
+      }
+    }
+  },
+  "order": ["shipping-policy"]
+}

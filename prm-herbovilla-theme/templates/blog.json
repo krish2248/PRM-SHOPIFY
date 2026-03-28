@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "blog-template",
+      "settings": {
+        "description": "Discover Ayurvedic wellness tips, health articles, and natural living guides from our experts.",
+        "articles_per_page": 9,
+        "show_tags": true
+      }
+    }
+  },
+  "order": ["main"]
+}

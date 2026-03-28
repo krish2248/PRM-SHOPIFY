@@ -1,0 +1,610 @@
+{%- comment -%}
+  Hero Section - Two Column Layout
+{%- endcomment -%}
+
+{%- style -%}
+  .hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero__background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero__background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(253, 248, 240, 0.95) 0%, rgba(253, 248, 240, 0.8) 50%, rgba(253, 248, 240, 0.6) 100%);
+    z-index: 1;
+  }
+  .hero .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .hero__label {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(45, 106, 79, 0.1);
+    border: 1px solid rgba(45, 106, 79, 0.2);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .hero__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+    line-height: 1.15;
+    color: var(--color-text);
+    margin-bottom: 25px;
+  }
+  .hero__text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--color-text-light);
+    margin-bottom: 35px;
+    max-width: 540px;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+  .hero__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+  }
+  .hero__feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+  .hero__feature-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--color-primary);
+    background: rgba(45, 106, 79, 0.1);
+    border-radius: 50%;
+    padding: 4px;
+  }
+  /* Right Side - Product Showcase */
+  .hero__right {
+    position: relative;
+  }
+  .hero__product-showcase {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero__product-main {
+    position: relative;
+    z-index: 2;
+  }
+  .hero__product-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    filter: drop-shadow(0 30px 60px rgba(45, 106, 79, 0.2));
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  .hero__floating-badge {
+    position: absolute;
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    animation: floatBadge 4s ease-in-out infinite;
+  }
+  .hero__floating-badge--1 {
+    top: 10%;
+    right: -10%;
+    animation-delay: 0s;
+  }
+  .hero__floating-badge--2 {
+    bottom: 20%;
+    left: -5%;
+    animation-delay: 1s;
+  }
+  .hero__floating-badge--3 {
+    bottom: 5%;
+    right: 5%;
+    animation-delay: 2s;
+  }
+  @keyframes floatBadge {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  .hero__badge-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(45, 106, 79, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .hero__badge-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--color-primary);
+  }
+  .hero__badge-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .hero__badge-subtext {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+  }
+  /* Stats Row */
+  .hero__stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(45, 106, 79, 0.15);
+  }
+  .hero__stat {
+    text-align: center;
+  }
+  .hero__stat-number {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+  .hero__stat-label {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    margin-top: 5px;
+  }
+  /* No product image fallback */
+  .hero__features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  .hero__feature-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hero__feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  }
+  .hero__feature-card-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(45, 106, 79, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  .hero__feature-card-icon svg {
+    width: 26px;
+    height: 26px;
+    color: var(--color-primary);
+  }
+  .hero__feature-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+  .hero__feature-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+  /* Responsive */
+  @media (max-width: 992px) {
+    .hero {
+      min-height: auto;
+      padding: 80px 0 60px;
+    }
+    .hero__grid {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+    .hero__right {
+      order: -1;
+    }
+    .hero__product-image {
+      max-width: 280px;
+    }
+    .hero__floating-badge {
+      display: none;
+    }
+    .hero__stats {
+      justify-content: center;
+    }
+  }
+  @media (max-width: 576px) {
+    .hero__title {
+      font-size: 2rem;
+    }
+    .hero__actions {
+      flex-direction: column;
+    }
+    .hero__actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .hero__features {
+      flex-direction: column;
+      gap: 15px;
+    }
+    .hero__stats {
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+    .hero__features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+<section class="hero section">
+  {%- if section.settings.image != blank -%}
+    <div class="hero__background">
+      <img 
+        src="{{ section.settings.image | image_url: width: 1920 }}"
+        srcset="{{ section.settings.image | image_url: width: 800 }} 800w,
+                {{ section.settings.image | image_url: width: 1200 }} 1200w,
+                {{ section.settings.image | image_url: width: 1600 }} 1600w,
+                {{ section.settings.image | image_url: width: 1920 }} 1920w"
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+  {%- endif -%}
+  
+  <div class="hero__overlay"></div>
+  
+  <div class="container">
+    <div class="hero__grid">
+      <!-- Left Side - Content -->
+      <div class="hero__content" data-animate>
+        {%- if section.settings.label != blank -%}
+          <span class="hero__label">{{ section.settings.label }}</span>
+        {%- endif -%}
+        
+        <h1 class="hero__title">
+          {{ section.settings.title | newline_to_br }}
+        </h1>
+        
+        {%- if section.settings.text != blank -%}
+          <p class="hero__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+        
+        <div class="hero__actions">
+          {%- if section.settings.button_text != blank -%}
+            <a href="{{ section.settings.button_link }}" class="btn btn--primary btn--lg">
+              {{ section.settings.button_text }}
+            </a>
+          {%- endif -%}
+          
+          {%- if section.settings.button_text_2 != blank -%}
+            <a href="{{ section.settings.button_link_2 }}" class="btn btn--secondary btn--lg">
+              {{ section.settings.button_text_2 }}
+            </a>
+          {%- endif -%}
+        </div>
+        
+        {%- if section.settings.show_features -%}
+          <div class="hero__features">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'feature' -%}
+                <div class="hero__feature" {{ block.shopify_attributes }}>
+                  <svg class="hero__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>{{ block.settings.text }}</span>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+        
+        {%- if section.settings.show_stats -%}
+          <div class="hero__stats">
+            <div class="hero__stat">
+              <div class="hero__stat-number">{{ section.settings.stat_1_number | default: '50+' }}</div>
+              <div class="hero__stat-label">{{ section.settings.stat_1_label | default: 'Products' }}</div>
+            </div>
+            <div class="hero__stat">
+              <div class="hero__stat-number">{{ section.settings.stat_2_number | default: '10K+' }}</div>
+              <div class="hero__stat-label">{{ section.settings.stat_2_label | default: 'Happy Customers' }}</div>
+            </div>
+            <div class="hero__stat">
+              <div class="hero__stat-number">{{ section.settings.stat_3_number | default: '25+' }}</div>
+              <div class="hero__stat-label">{{ section.settings.stat_3_label | default: 'Years Experience' }}</div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+      
+      <!-- Right Side - Product Showcase or Feature Cards -->
+      <div class="hero__right" data-animate>
+        {%- if section.settings.product_image != blank -%}
+          <div class="hero__product-showcase">
+            <div class="hero__product-main">
+              <img 
+                src="{{ section.settings.product_image | image_url: width: 800 }}"
+                alt="{{ section.settings.product_image.alt | default: 'Featured Product' }}"
+                class="hero__product-image"
+                loading="eager"
+              >
+            </div>
+            
+            <!-- Floating Badges -->
+            <div class="hero__floating-badge hero__floating-badge--1">
+              <div class="hero__badge-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div class="hero__badge-text">100% Natural</div>
+              <div class="hero__badge-subtext">No Chemicals</div>
+            </div>
+            
+            <div class="hero__floating-badge hero__floating-badge--2">
+              <div class="hero__badge-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <div class="hero__badge-text">GMP Certified</div>
+              <div class="hero__badge-subtext">Quality Assured</div>
+            </div>
+            
+            <div class="hero__floating-badge hero__floating-badge--3">
+              <div class="hero__badge-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                </svg>
+              </div>
+              <div class="hero__badge-text">Ayurvedic</div>
+              <div class="hero__badge-subtext">Ancient Wisdom</div>
+            </div>
+          </div>
+        {%- else -%}
+          <!-- Feature Cards when no product image -->
+          <div class="hero__features-grid">
+            <div class="hero__feature-card">
+              <div class="hero__feature-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                </svg>
+              </div>
+              <h3>Pure Herbal</h3>
+              <p>All natural ingredients sourced from the Himalayas</p>
+            </div>
+            <div class="hero__feature-card">
+              <div class="hero__feature-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <h3>Clinically Tested</h3>
+              <p>Formulas backed by scientific research</p>
+            </div>
+            <div class="hero__feature-card">
+              <div class="hero__feature-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <h3>No Side Effects</h3>
+              <p>Safe for long-term wellness support</p>
+            </div>
+            <div class="hero__feature-card">
+              <div class="hero__feature-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              </div>
+              <h3>Expert Formulated</h3>
+              <p>Created by Ayurvedic practitioners</p>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "class": "hero-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product Image (Right Side)",
+      "info": "Featured product image for the right side of hero. If empty, feature cards will show."
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Trusted Ayurvedic Solutions"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title",
+      "default": "Ancient Ayurvedic Wisdom,\nModern Wellness Solutions"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Discover our range of 100% natural, chemical-free Ayurvedic products crafted with ancient wisdom for modern health challenges."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Primary Button Text",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_text_2",
+      "label": "Secondary Button Text",
+      "default": "Learn About Us"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_features",
+      "label": "Show Features",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Statistics"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stats",
+      "label": "Show Statistics",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stat_1_number",
+      "label": "Stat 1 Number",
+      "default": "50+"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_label",
+      "label": "Stat 1 Label",
+      "default": "Products"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_number",
+      "label": "Stat 2 Number",
+      "default": "10K+"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_label",
+      "label": "Stat 2 Label",
+      "default": "Happy Customers"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_number",
+      "label": "Stat 3 Number",
+      "default": "25+"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_label",
+      "label": "Stat 3 Label",
+      "default": "Years Experience"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature Text",
+          "default": "100% Natural"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "text": "100% Natural"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "GMP Certified"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Free Shipping ₹400+"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

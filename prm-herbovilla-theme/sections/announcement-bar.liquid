@@ -1,0 +1,53 @@
+{%- comment -%}
+  Announcement Bar Section
+{%- endcomment -%}
+
+{%- if section.settings.show_announcement -%}
+<div class="announcement-bar" role="region" aria-label="{{ 'sections.announcement.new_announcement' | t }}">
+  <div class="container">
+    <p class="announcement-bar__message">
+      {{ section.settings.text }}
+      {%- if section.settings.link != blank and section.settings.link_text != blank -%}
+        <a href="{{ section.settings.link }}">{{ section.settings.link_text }}</a>
+      {%- endif -%}
+    </p>
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "tag": "section",
+  "class": "announcement-bar-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show Announcement",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement Text",
+      "default": "Free Shipping on Orders Above ₹400 | 100% Ayurvedic | Chemical-Free"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,52 @@
+{%- comment -%}
+  Star Rating Snippet
+  
+  Parameters:
+  - rating: Number (required, e.g., 4.5)
+  - max: Number (optional, default: 5)
+  - size: String (optional, 'sm', 'md', 'lg')
+{%- endcomment -%}
+
+{%- liquid
+  assign max = max | default: 5
+  assign size = size | default: 'md'
+  assign rating = rating | default: 0 | times: 1.0
+  assign full_stars = rating | floor
+  assign has_half = false
+  assign decimal = rating | modulo: 1
+  if decimal >= 0.25 and decimal < 0.75
+    assign has_half = true
+  elsif decimal >= 0.75
+    assign full_stars = full_stars | plus: 1
+  endif
+  assign empty_stars = max | minus: full_stars
+  if has_half
+    assign empty_stars = empty_stars | minus: 1
+  endif
+-%}
+
+<div class="star-rating star-rating--{{ size }}" aria-label="{{ rating }} out of {{ max }} stars">
+  {%- for i in (1..full_stars) -%}
+    <svg viewBox="0 0 24 24" fill="currentColor" class="star-rating__star star-rating__star--filled">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    </svg>
+  {%- endfor -%}
+  
+  {%- if has_half -%}
+    <svg viewBox="0 0 24 24" class="star-rating__star star-rating__star--half">
+      <defs>
+        <linearGradient id="half-fill-{{ rating | times: 10 | floor }}">
+          <stop offset="50%" stop-color="currentColor"/>
+          <stop offset="50%" stop-color="transparent"/>
+        </linearGradient>
+      </defs>
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="url(#half-fill-{{ rating | times: 10 | floor }})" stroke="currentColor" stroke-width="1"></polygon>
+    </svg>
+  {%- endif -%}
+  
+  {%- for i in (1..empty_stars) -%}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="star-rating__star star-rating__star--empty">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    </svg>
+  {%- endfor -%}
+</div>

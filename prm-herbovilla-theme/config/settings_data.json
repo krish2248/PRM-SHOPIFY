@@ -1,0 +1,76 @@
+{
+  "current": {
+    "color_primary": "#2D6A4F",
+    "color_primary_dark": "#1B4332",
+    "color_secondary": "#8B5E3C",
+    "color_background": "#FDF8F0",
+    "color_text": "#1a1a1a",
+    "color_text_light": "#666666",
+    "font_heading": "Playfair Display",
+    "font_body": "Inter",
+    "contact_email": "contact@prmpharmaceuticals.com",
+    "contact_phone": "+91-9227928075",
+    "contact_address": "Plot No.343, 1-A, Chitra Gujarat Industrial Development Corporation, Bhavnagar, Gujarat 364004",
+    "social_facebook": "https://facebook.com/prmherbovilla",
+    "social_instagram": "https://instagram.com/prmherbovilla",
+    "social_linkedin": "https://linkedin.com/company/prm-pharmaceuticals",
+    "social_twitter": "",
+    "social_youtube": "",
+    "cart_type": "drawer",
+    "cart_notes_enable": true,
+    "free_shipping_threshold": 400,
+    "currency_code": "INR",
+    "currency_symbol": "₹",
+    "product_show_vendor": true,
+    "product_show_rating": true,
+    "product_image_ratio": "square",
+    "collection_products_per_page": 16,
+    "collection_show_filter": true,
+    "collection_show_sort": true,
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "description": "PRM HerboVilla brings you authentic Ayurvedic products crafted with pure natural ingredients. Experience the ancient wisdom of herbal wellness."
+        },
+        "blocks": {
+          "cert-1": {
+            "type": "certification",
+            "settings": {
+              "text": "GMP Certified"
+            }
+          },
+          "cert-2": {
+            "type": "certification",
+            "settings": {
+              "text": "ISO 9001:2015"
+            }
+          },
+          "cert-3": {
+            "type": "certification",
+            "settings": {
+              "text": "AYUSH Approved"
+            }
+          }
+        },
+        "block_order": ["cert-1", "cert-2", "cert-3"]
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "color_primary": "#2D6A4F",
+      "color_primary_dark": "#1B4332",
+      "color_secondary": "#8B5E3C",
+      "color_background": "#FDF8F0",
+      "color_text": "#1a1a1a",
+      "color_text_light": "#666666",
+      "font_heading": "Playfair Display",
+      "font_body": "Inter"
+    }
+  }
+}

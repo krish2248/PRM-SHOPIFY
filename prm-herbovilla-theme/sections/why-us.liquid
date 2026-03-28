@@ -1,0 +1,176 @@
+{%- comment -%}
+  Why Us Section
+{%- endcomment -%}
+
+<section class="section {% if section.settings.alt_background %}section--alt{% endif %}">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.label != blank -%}
+        <span class="section-header__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="section-header__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+    
+    <div class="why-us__grid">
+      {%- for block in section.blocks -%}
+        <div class="why-us-card" {{ block.shopify_attributes }}>
+          <div class="why-us-card__icon">
+            {%- case block.settings.icon -%}
+              {%- when 'leaf' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                  <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                </svg>
+              {%- when 'shield' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  <path d="m9 12 2 2 4-4"></path>
+                </svg>
+              {%- when 'flask' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 2v7.31"></path>
+                  <path d="M14 9.3V1.99"></path>
+                  <path d="M8.5 2h7"></path>
+                  <path d="M14 9.3a6.5 6.5 0 1 1-4 0"></path>
+                  <path d="M5.58 16.5h12.85"></path>
+                </svg>
+              {%- when 'award' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="6"></circle>
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                </svg>
+              {%- when 'heart' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                </svg>
+              {%- when 'truck' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10 17h4V5H2v12h3"></path>
+                  <path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1"></path>
+                  <circle cx="7.5" cy="17.5" r="2.5"></circle>
+                  <circle cx="17.5" cy="17.5" r="2.5"></circle>
+                </svg>
+              {%- else -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            {%- endcase -%}
+          </div>
+          <h3 class="why-us-card__title">{{ block.settings.title }}</h3>
+          <p class="why-us-card__text">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Why Us",
+  "tag": "section",
+  "class": "why-us-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "alt_background",
+      "label": "Use Alternative Background",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The PRM HerboVilla Difference"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "We combine ancient Ayurvedic wisdom with modern quality standards to bring you the best natural wellness solutions."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "leaf", "label": "Leaf (Natural)" },
+            { "value": "shield", "label": "Shield (Certified)" },
+            { "value": "flask", "label": "Flask (No Chemicals)" },
+            { "value": "award", "label": "Award (Heritage)" },
+            { "value": "heart", "label": "Heart (Care)" },
+            { "value": "truck", "label": "Truck (Shipping)" },
+            { "value": "check", "label": "Check (Default)" }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "100% Natural"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "All our products are made from pure, natural Ayurvedic ingredients with no artificial additives."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Us",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "leaf",
+            "title": "100% Natural",
+            "text": "All our products are made from pure, natural Ayurvedic ingredients with no artificial additives."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "GMP Certified",
+            "text": "Manufactured in GMP-certified facilities ensuring the highest quality and safety standards."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "flask",
+            "title": "No Chemicals",
+            "text": "Free from harmful chemicals, preservatives, and synthetic ingredients."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "award",
+            "title": "Ayurvedic Heritage",
+            "text": "Formulated based on ancient Ayurvedic texts and traditional wisdom passed down through generations."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

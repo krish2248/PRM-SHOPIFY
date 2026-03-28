@@ -1,0 +1,484 @@
+{% comment %}
+  Collection List Section - Shows grid of collections on homepage
+{% endcomment %}
+
+<section class="collection-list section-padding" id="collections">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <div class="section-header text-center">
+        {% if section.settings.subtitle != blank %}
+          <span class="section-subtitle">{{ section.settings.subtitle }}</span>
+        {% endif %}
+        <h2 class="section-title">{{ section.settings.title }}</h2>
+        {% if section.settings.description != blank %}
+          <p class="section-description">{{ section.settings.description }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="collection-grid collection-grid--{{ section.settings.columns }}">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'collection' %}
+            {% assign collection = collections[block.settings.collection] %}
+            <div class="collection-card" {{ block.shopify_attributes }}>
+              <a href="{{ collection.url | default: '#' }}" class="collection-card__link">
+                <div class="collection-card__image-wrapper">
+                  {% if block.settings.custom_image != blank %}
+                    <img 
+                      src="{{ block.settings.custom_image | image_url: width: 600 }}"
+                      alt="{{ block.settings.title | default: collection.title }}"
+                      class="collection-card__image"
+                      loading="lazy"
+                      width="600"
+                      height="400"
+                    >
+                  {% elsif collection.image %}
+                    <img 
+                      src="{{ collection.image | image_url: width: 600 }}"
+                      alt="{{ collection.title }}"
+                      class="collection-card__image"
+                      loading="lazy"
+                      width="600"
+                      height="400"
+                    >
+                  {% elsif collection.products.first.featured_image %}
+                    <img 
+                      src="{{ collection.products.first.featured_image | image_url: width: 600 }}"
+                      alt="{{ collection.title }}"
+                      class="collection-card__image"
+                      loading="lazy"
+                      width="600"
+                      height="400"
+                    >
+                  {% else %}
+                    <div class="collection-card__placeholder">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/>
+                        <line x1="7" y1="7" x2="7.01" y2="7"/>
+                      </svg>
+                    </div>
+                  {% endif %}
+                  <div class="collection-card__overlay"></div>
+                </div>
+                <div class="collection-card__content">
+                  <h3 class="collection-card__title">
+                    {{ block.settings.title | default: collection.title | default: 'Collection' }}
+                  </h3>
+                  {% if block.settings.show_product_count and collection %}
+                    <span class="collection-card__count">{{ collection.products_count }} {{ collection.products_count | pluralize: 'Product', 'Products' }}</span>
+                  {% endif %}
+                  {% if block.settings.description != blank %}
+                    <p class="collection-card__description">{{ block.settings.description }}</p>
+                  {% endif %}
+                  <span class="collection-card__cta">
+                    {{ block.settings.button_text | default: 'Shop Now' }}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_view_all %}
+      <div class="collection-list__footer text-center">
+        <a href="{{ section.settings.view_all_link | default: routes.collections_url }}" class="btn btn--secondary">
+          {{ section.settings.view_all_text | default: 'View All Collections' }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  .collection-list {
+    padding: 80px 0;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .collection-list .section-header {
+    margin-bottom: 50px;
+  }
+
+  .collection-list .section-subtitle {
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .collection-list .section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 4vw, 42px);
+    color: var(--color-text);
+    margin: 0 0 15px;
+  }
+
+  .collection-list .section-description {
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--color-text-light);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .collection-grid {
+    display: grid;
+    gap: 25px;
+  }
+
+  .collection-grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .collection-grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .collection-grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .collection-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .collection-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(45, 106, 79, 0.15);
+  }
+
+  .collection-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .collection-card__image-wrapper {
+    position: relative;
+    padding-top: 75%;
+    overflow: hidden;
+  }
+
+  .collection-card__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .collection-card:hover .collection-card__image {
+    transform: scale(1.08);
+  }
+
+  .collection-card__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-background) 100%);
+  }
+
+  .collection-card__placeholder svg {
+    width: 48px;
+    height: 48px;
+    color: var(--color-primary);
+    opacity: 0.5;
+  }
+
+  .collection-card__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  .collection-card:hover .collection-card__overlay {
+    opacity: 1;
+  }
+
+  .collection-card__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px;
+    color: #fff;
+    z-index: 2;
+  }
+
+  .collection-card__title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 5px;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+  }
+
+  .collection-card:hover .collection-card__title {
+    transform: translateY(-5px);
+  }
+
+  .collection-card__count {
+    display: block;
+    font-size: 13px;
+    opacity: 0.85;
+    margin-bottom: 8px;
+  }
+
+  .collection-card__description {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 0 10px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .collection-card:hover .collection-card__description {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+
+  .collection-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+  }
+
+  .collection-card:hover .collection-card__cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .collection-card__cta svg {
+    transition: transform 0.3s ease;
+  }
+
+  .collection-card:hover .collection-card__cta svg {
+    transform: translateX(4px);
+  }
+
+  .collection-list__footer {
+    margin-top: 50px;
+  }
+
+  /* Responsive */
+  @media (max-width: 992px) {
+    .collection-grid--4 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .collection-list {
+      padding: 60px 0;
+    }
+
+    .collection-grid--3,
+    .collection-grid--4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .collection-card__title {
+      font-size: 18px;
+    }
+
+    .collection-card__content {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .collection-grid--2,
+    .collection-grid--3,
+    .collection-grid--4 {
+      grid-template-columns: 1fr;
+    }
+
+    .collection-card__image-wrapper {
+      padding-top: 65%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Collection List",
+  "tag": "section",
+  "class": "section-collection-list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Shop By Category"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Collections"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Explore our range of authentic Ayurvedic products crafted for your holistic wellness"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show View All Button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View All Button Text",
+      "default": "View All Collections"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View All Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom Title",
+          "info": "Leave blank to use collection title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Custom Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image",
+          "info": "Override the collection image"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_count",
+          "label": "Show Product Count",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection List",
+      "blocks": [
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Digestive Care",
+            "description": "Natural solutions for gut health"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Respiratory Health",
+            "description": "Breathe easy with herbal remedies"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Skin Care",
+            "description": "Herbal beauty for radiant skin"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Hair Care",
+            "description": "Natural hair wellness solutions"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Women's Wellness",
+            "description": "Ayurvedic care for women"
+          }
+        },
+        {
+          "type": "collection",
+          "settings": {
+            "title": "Immunity Boosters",
+            "description": "Strengthen your natural defenses"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

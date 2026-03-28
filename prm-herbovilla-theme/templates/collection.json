@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "collection-template",
+      "settings": {
+        "products_per_page": 16,
+        "default_view": "grid",
+        "show_collection_image": true,
+        "show_collection_description": true
+      }
+    }
+  },
+  "order": ["main"]
+}

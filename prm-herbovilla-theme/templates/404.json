@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-404",
+      "settings": {
+        "title": "Page Not Found",
+        "text": "Oops! The page you're looking for seems to have wandered off into the herbal garden. Let's get you back on track."
+      }
+    }
+  },
+  "order": ["main"]
+}

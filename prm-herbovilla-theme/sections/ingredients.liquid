@@ -1,0 +1,358 @@
+{%- comment -%}
+  Ingredients Transparency Section - Enhanced with more herbs and hover tooltips
+{%- endcomment -%}
+
+{%- style -%}
+  .ingredients-section-wrapper {
+    padding: 80px 0;
+    background: {{ section.settings.bg_color | default: '#FDF8F0' }};
+  }
+  .ingredients__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+  }
+  .ingredient-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+    position: relative;
+    cursor: pointer;
+  }
+  .ingredient-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(45, 106, 79, 0.12);
+  }
+  .ingredient-card__image {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    overflow: hidden;
+  }
+  .ingredient-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .ingredient-card__image svg {
+    width: 45px;
+    height: 45px;
+    color: #fff;
+  }
+  .ingredient-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+  .ingredient-card__text {
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+  .ingredient-card__tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--color-primary);
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    min-width: 250px;
+    max-width: 300px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(45, 106, 79, 0.3);
+  }
+  .ingredient-card__tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: var(--color-primary);
+  }
+  .ingredient-card:hover .ingredient-card__tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  @media (max-width: 1024px) {
+    .ingredients__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .ingredients__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .ingredient-card__tooltip {
+      display: none;
+    }
+  }
+  @media (max-width: 480px) {
+    .ingredients-section-wrapper {
+      padding: 60px 0;
+    }
+    .ingredient-card {
+      padding: 25px 15px;
+    }
+    .ingredient-card__image {
+      width: 70px;
+      height: 70px;
+    }
+    .ingredient-card__image svg {
+      width: 35px;
+      height: 35px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="ingredients-section-wrapper" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.label != blank -%}
+        <span class="section-header__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="section-header__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+    
+    <div class="ingredients__grid">
+      {%- for block in section.blocks -%}
+        <div class="ingredient-card" {{ block.shopify_attributes }}>
+          <div class="ingredient-card__image">
+            {%- if block.settings.image != blank -%}
+              <img 
+                src="{{ block.settings.image | image_url: width: 200 }}"
+                alt="{{ block.settings.title | escape }}"
+                width="90"
+                height="90"
+                loading="lazy"
+              >
+            {%- else -%}
+              {%- case block.settings.herb_icon -%}
+                {%- when 'ashwagandha' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.82-.13 2.68-.37"></path>
+                    <path d="M12 6v6l4 2"></path>
+                    <circle cx="18" cy="18" r="3"></circle>
+                    <path d="M18 14v1"></path>
+                    <path d="M18 21v1"></path>
+                  </svg>
+                {%- when 'tulsi' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22V8"></path>
+                    <path d="M5 12c0-4 3-7 7-7s7 3 7 7"></path>
+                    <path d="M9 22c0-2 1.5-3 3-3s3 1 3 3"></path>
+                    <circle cx="12" cy="5" r="2"></circle>
+                  </svg>
+                {%- when 'amla' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="8"></circle>
+                    <path d="M12 4c0 2.5-2 4-2 6s2 3.5 2 6"></path>
+                    <path d="M12 4c0 2.5 2 4 2 6s-2 3.5-2 6"></path>
+                  </svg>
+                {%- when 'giloy' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M8 2c0 4 4 6 4 10s-4 6-4 10"></path>
+                    <path d="M16 2c0 4-4 6-4 10s4 6 4 10"></path>
+                  </svg>
+                {%- when 'brahmi' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="8" r="5"></circle>
+                    <path d="M12 13v9"></path>
+                    <path d="M8 17h8"></path>
+                  </svg>
+                {%- when 'shatavari' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22V12"></path>
+                    <path d="M5 8l7-6 7 6"></path>
+                    <path d="M7 12l5 4 5-4"></path>
+                  </svg>
+                {%- when 'turmeric' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="6" y="4" width="12" height="16" rx="3"></rect>
+                    <path d="M6 8h12"></path>
+                    <path d="M6 12h12"></path>
+                    <path d="M6 16h12"></path>
+                  </svg>
+                {%- when 'neem' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22V2"></path>
+                    <path d="M5 6c3 0 5 2 7 2s4-2 7-2"></path>
+                    <path d="M5 12c3 0 5 2 7 2s4-2 7-2"></path>
+                    <path d="M5 18c3 0 5 2 7 2s4-2 7-2"></path>
+                  </svg>
+                {%- when 'triphala' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <circle cx="7" cy="16" r="4"></circle>
+                    <circle cx="17" cy="16" r="4"></circle>
+                  </svg>
+                {%- when 'ginger' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M4 12c0-4 4-8 8-8"></path>
+                    <path d="M12 4c2 2 4 4 8 4"></path>
+                    <path d="M20 8c-2 6-6 10-8 14"></path>
+                    <path d="M12 22c-4-2-8-8-8-10"></path>
+                  </svg>
+                {%- when 'aloe' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 22V10"></path>
+                    <path d="M7 22l5-12 5 12"></path>
+                    <path d="M4 18l8-8 8 8"></path>
+                    <path d="M2 14l10-10 10 10"></path>
+                  </svg>
+                {%- when 'moringa' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2v20"></path>
+                    <path d="M8 6l4 4 4-4"></path>
+                    <path d="M6 11l6 5 6-5"></path>
+                    <path d="M4 17l8 4 8-4"></path>
+                  </svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                  </svg>
+                {%- endcase -%}
+            {%- endif -%}
+          </div>
+          
+          <h3 class="ingredient-card__title">{{ block.settings.title }}</h3>
+          <p class="ingredient-card__text">{{ block.settings.text }}</p>
+          
+          {%- if block.settings.benefits != blank -%}
+            <div class="ingredient-card__tooltip">
+              <strong>Benefits:</strong><br>
+              {{ block.settings.benefits }}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ingredients",
+  "tag": "section",
+  "class": "ingredients-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FDF8F0"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Pure Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Powered by Nature's Finest"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "We source only the purest, highest-quality herbs from trusted organic farms across India"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (optional)"
+        },
+        {
+          "type": "select",
+          "id": "herb_icon",
+          "label": "Herb Icon (if no image)",
+          "options": [
+            { "value": "ashwagandha", "label": "Ashwagandha" },
+            { "value": "tulsi", "label": "Tulsi (Holy Basil)" },
+            { "value": "amla", "label": "Amla (Indian Gooseberry)" },
+            { "value": "giloy", "label": "Giloy (Guduchi)" },
+            { "value": "brahmi", "label": "Brahmi" },
+            { "value": "shatavari", "label": "Shatavari" },
+            { "value": "turmeric", "label": "Turmeric (Haldi)" },
+            { "value": "neem", "label": "Neem" },
+            { "value": "triphala", "label": "Triphala" },
+            { "value": "ginger", "label": "Ginger (Adrak)" },
+            { "value": "aloe", "label": "Aloe Vera" },
+            { "value": "moringa", "label": "Moringa" },
+            { "value": "leaf", "label": "Generic Leaf" }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Ashwagandha"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Short Description",
+          "default": "Reduces stress & boosts immunity"
+        },
+        {
+          "type": "textarea",
+          "id": "benefits",
+          "label": "Detailed Benefits (shown on hover)",
+          "default": "Reduces cortisol levels, improves sleep quality, enhances muscle strength, boosts brain function, and supports immune health."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredients",
+      "blocks": [
+        { "type": "ingredient", "settings": { "herb_icon": "ashwagandha", "title": "Ashwagandha", "text": "Reduces stress & boosts immunity", "benefits": "Reduces cortisol levels, improves sleep quality, enhances muscle strength, boosts brain function, and supports immune health." } },
+        { "type": "ingredient", "settings": { "herb_icon": "tulsi", "title": "Tulsi", "text": "Natural adaptogen & antioxidant", "benefits": "Supports respiratory health, reduces inflammation, fights infections, balances blood sugar, and promotes mental clarity." } },
+        { "type": "ingredient", "settings": { "herb_icon": "amla", "title": "Amla", "text": "Rich in Vitamin C & rejuvenating", "benefits": "Contains 20x more Vitamin C than oranges, promotes hair growth, improves skin health, and supports digestive function." } },
+        { "type": "ingredient", "settings": { "herb_icon": "giloy", "title": "Giloy", "text": "Immunity booster & detoxifier", "benefits": "Builds immunity against infections, purifies blood, treats chronic fever, improves digestion, and reduces stress & anxiety." } },
+        { "type": "ingredient", "settings": { "herb_icon": "brahmi", "title": "Brahmi", "text": "Enhances memory & focus", "benefits": "Improves memory retention, reduces anxiety, enhances concentration, supports learning ability, and promotes mental wellness." } },
+        { "type": "ingredient", "settings": { "herb_icon": "shatavari", "title": "Shatavari", "text": "Women's wellness & vitality", "benefits": "Supports hormonal balance, enhances fertility, promotes lactation, reduces menopausal symptoms, and boosts overall vitality." } },
+        { "type": "ingredient", "settings": { "herb_icon": "turmeric", "title": "Turmeric", "text": "Anti-inflammatory & healing", "benefits": "Powerful anti-inflammatory, boosts antioxidant capacity, improves brain function, reduces heart disease risk, and supports joint health." } },
+        { "type": "ingredient", "settings": { "herb_icon": "neem", "title": "Neem", "text": "Blood purifier & skin health", "benefits": "Purifies blood, treats skin disorders, supports dental health, boosts immune system, and has antibacterial properties." } },
+        { "type": "ingredient", "settings": { "herb_icon": "triphala", "title": "Triphala", "text": "Digestive health & detox", "benefits": "Improves digestion, relieves constipation, detoxifies the body, supports weight management, and promotes oral health." } },
+        { "type": "ingredient", "settings": { "herb_icon": "ginger", "title": "Ginger", "text": "Digestive aid & anti-nausea", "benefits": "Relieves nausea, reduces muscle pain, lowers blood sugar, improves digestion, and fights respiratory infections." } },
+        { "type": "ingredient", "settings": { "herb_icon": "aloe", "title": "Aloe Vera", "text": "Skin healing & digestion", "benefits": "Heals burns and wounds, moisturizes skin, aids digestion, reduces dental plaque, and helps lower blood sugar levels." } },
+        { "type": "ingredient", "settings": { "herb_icon": "moringa", "title": "Moringa", "text": "Superfood with 90+ nutrients", "benefits": "Rich in vitamins and minerals, protects liver health, fights inflammation, lowers cholesterol, and provides sustained energy." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

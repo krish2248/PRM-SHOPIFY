@@ -1,0 +1,346 @@
+{%- style -%}
+  .newsletter-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, {{ section.settings.bg_color_start }} 0%, {{ section.settings.bg_color_end }} 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .newsletter-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .newsletter-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .newsletter-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .newsletter-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+  }
+  .newsletter-icon svg {
+    width: 32px;
+    height: 32px;
+    color: #fff;
+  }
+  .newsletter-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+  .newsletter-subtitle {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.1rem;
+    margin-bottom: 35px;
+    line-height: 1.6;
+  }
+  .newsletter-form {
+    display: flex;
+    gap: 12px;
+    max-width: 520px;
+    margin: 0 auto 20px;
+  }
+  .newsletter-input {
+    flex: 1;
+    padding: 16px 24px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 30px;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  .newsletter-input::placeholder {
+    color: rgba(255,255,255,0.7);
+  }
+  .newsletter-input:focus {
+    outline: none;
+    border-color: #fff;
+    background: rgba(255,255,255,0.15);
+  }
+  .newsletter-button {
+    padding: 16px 35px;
+    background: #fff;
+    color: var(--color-primary);
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  .newsletter-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  .newsletter-disclaimer {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+  }
+  .newsletter-disclaimer a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  .newsletter-benefits {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+  }
+  .benefit-item svg {
+    width: 18px;
+    height: 18px;
+    color: #fff;
+  }
+  .newsletter-success {
+    background: rgba(255,255,255,0.15);
+    padding: 20px 30px;
+    border-radius: 15px;
+    color: #fff;
+    display: none;
+  }
+  .newsletter-success.show {
+    display: block;
+  }
+  .newsletter-success h4 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+  @media (max-width: 768px) {
+    .newsletter-section {
+      padding: 60px 0;
+    }
+    .newsletter-title {
+      font-size: 2rem;
+    }
+    .newsletter-form {
+      flex-direction: column;
+    }
+    .newsletter-button {
+      width: 100%;
+    }
+    .newsletter-benefits {
+      gap: 15px;
+    }
+  }
+  @media (max-width: 480px) {
+    .newsletter-title {
+      font-size: 1.5rem;
+    }
+    .newsletter-benefits {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+{%- endstyle -%}
+
+<section class="newsletter-section" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="newsletter-wrapper">
+      {%- if section.settings.show_icon -%}
+        <div class="newsletter-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
+      {%- endif -%}
+      
+      <h2 class="newsletter-title">{{ section.settings.title }}</h2>
+      <p class="newsletter-subtitle">{{ section.settings.subtitle }}</p>
+      
+      {%- form 'customer', class: 'newsletter-form', id: 'newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <input
+          type="email"
+          name="contact[email]"
+          class="newsletter-input"
+          placeholder="{{ section.settings.placeholder }}"
+          required
+          autocomplete="email"
+          aria-label="{{ 'newsletter.label' | t }}"
+        >
+        <button type="submit" class="newsletter-button">
+          {{ section.settings.button_text }}
+        </button>
+      {%- endform -%}
+      
+      {%- if section.settings.disclaimer != blank -%}
+        <p class="newsletter-disclaimer">{{ section.settings.disclaimer }}</p>
+      {%- endif -%}
+      
+      <div class="newsletter-success" id="newsletter-success">
+        <h4>{{ section.settings.success_title }}</h4>
+        <p>{{ section.settings.success_message }}</p>
+      </div>
+      
+      {%- if section.settings.show_benefits -%}
+        <div class="newsletter-benefits">
+          {%- for block in section.blocks -%}
+            <div class="benefit-item" {{ block.shopify_attributes }}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>{{ block.settings.text }}</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('newsletter-form');
+    const success = document.getElementById('newsletter-success');
+    
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        // Let Shopify handle the form submission
+        // Show success message after submission
+        setTimeout(function() {
+          if (success) {
+            form.style.display = 'none';
+            success.classList.add('show');
+          }
+        }, 100);
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "section-newsletter",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color_start",
+      "label": "Background gradient start",
+      "default": "#2D6A4F"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_end",
+      "label": "Background gradient end",
+      "default": "#1B4332"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show icon",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Join the Wellness Family"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Subscribe for exclusive offers, Ayurvedic health tips, and be the first to know about new product launches."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer text",
+      "default": "By subscribing, you agree to our <a href=\"/policies/privacy-policy\">Privacy Policy</a>. Unsubscribe anytime."
+    },
+    {
+      "type": "text",
+      "id": "success_title",
+      "label": "Success title",
+      "default": "Welcome to the family!"
+    },
+    {
+      "type": "textarea",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for subscribing. Check your inbox for a special welcome offer!"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_benefits",
+      "label": "Show benefits",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Exclusive discounts"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "Exclusive discounts" } },
+        { "type": "benefit", "settings": { "text": "Health tips & recipes" } },
+        { "type": "benefit", "settings": { "text": "Early access to new products" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

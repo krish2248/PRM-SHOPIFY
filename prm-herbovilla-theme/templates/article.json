@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "article-template",
+      "settings": {
+        "show_author": true,
+        "author_bio": "Health and wellness writer at PRM HerboVilla, passionate about sharing Ayurvedic knowledge and natural living tips.",
+        "show_share": true
+      }
+    }
+  },
+  "order": ["main"]
+}

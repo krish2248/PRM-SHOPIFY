@@ -1,0 +1,163 @@
+{%- comment -%}
+  Header Section
+{%- endcomment -%}
+
+<header class="header" data-header>
+  <div class="container">
+    <div class="header__inner">
+      {%- comment -%} Mobile Menu Toggle {%- endcomment -%}
+      <button type="button" class="header__menu-toggle" aria-label="{{ 'sections.header.menu' | t }}" data-menu-toggle>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      
+      {%- comment -%} Logo {%- endcomment -%}
+      <div class="header__logo">
+        <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+          {%- if settings.logo != blank -%}
+            <img 
+              src="{{ settings.logo | image_url: width: settings.logo_width | times: 2 }}" 
+              alt="{{ shop.name }}"
+              width="{{ settings.logo_width }}"
+              height="auto"
+              loading="eager"
+            >
+          {%- else -%}
+            <span class="header__logo-text font-heading text-xl font-bold">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+      
+      {%- comment -%} Navigation - Hardcoded links {%- endcomment -%}
+      <nav class="header__nav" aria-label="Main navigation">
+        <ul class="header__nav-list">
+          <li class="header__nav-item">
+            <a href="/" class="header__nav-link {% if request.path == '/' %}header__nav-link--active{% endif %}">Home</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/collections/all" class="header__nav-link {% if request.path == '/collections/all' %}header__nav-link--active{% endif %}">All Products</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/collections/child-care" class="header__nav-link {% if request.path contains '/collections/child-care' %}header__nav-link--active{% endif %}">Child-Care</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/collections/skin-care" class="header__nav-link {% if request.path contains '/collections/skin-care' %}header__nav-link--active{% endif %}">Skin-Care</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/collections/supplements" class="header__nav-link {% if request.path contains '/collections/supplements' %}header__nav-link--active{% endif %}">Supplements</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/pages/about-us" class="header__nav-link {% if request.path contains '/pages/about' %}header__nav-link--active{% endif %}">About Us</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/blogs/news" class="header__nav-link {% if request.path contains '/blogs' %}header__nav-link--active{% endif %}">Blog</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/pages/contact" class="header__nav-link {% if request.path contains '/pages/contact' %}header__nav-link--active{% endif %}">Contact</a>
+          </li>
+          <li class="header__nav-item">
+            <a href="/cart" class="header__nav-link {% if request.path == '/cart' %}header__nav-link--active{% endif %}">Cart</a>
+          </li>
+        </ul>
+      </nav>
+      
+      {%- comment -%} Header Actions {%- endcomment -%}
+      <div class="header__actions">
+        {%- comment -%} Search {%- endcomment -%}
+        <a href="{{ routes.search_url }}" class="header__action-btn" aria-label="Search">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </a>
+        
+        {%- comment -%} Account {%- endcomment -%}
+        <a href="{{ routes.account_url | default: routes.account_login_url }}" class="header__action-btn" aria-label="Account">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+        
+        {%- comment -%} Cart {%- endcomment -%}
+        <button type="button" class="header__action-btn" aria-label="Cart" data-cart-toggle>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="header__cart-count" {% if cart.item_count == 0 %}style="display:none"{% endif %}>
+            {{ cart.item_count }}
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} Mobile Menu {%- endcomment -%}
+<div class="mobile-menu" id="mobile-menu">
+  <div class="mobile-menu__header">
+    <div class="header__logo">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" height="40">
+      {%- else -%}
+        <span class="font-heading text-lg font-bold">{{ shop.name }}</span>
+      {%- endif -%}
+    </div>
+    <button type="button" class="mobile-menu__close" aria-label="{{ 'accessibility.close' | t }}">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  <nav class="mobile-menu__nav">
+    <a href="/" class="mobile-menu__link">Home</a>
+    <a href="/collections/all" class="mobile-menu__link">All Products</a>
+    <a href="/collections/child-care" class="mobile-menu__link">Child-Care</a>
+    <a href="/collections/skin-care" class="mobile-menu__link">Skin-Care</a>
+    <a href="/collections/supplements" class="mobile-menu__link">Supplements</a>
+    <a href="/pages/about-us" class="mobile-menu__link">About Us</a>
+    <a href="/blogs/news" class="mobile-menu__link">Blog</a>
+    <a href="/pages/contact" class="mobile-menu__link">Contact</a>
+    <a href="{{ routes.account_url | default: routes.account_login_url }}" class="mobile-menu__link">My Account</a>
+    <a href="/cart" class="mobile-menu__link">Cart ({{ cart.item_count }})</a>
+  </nav>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "section",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show Search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show Account",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

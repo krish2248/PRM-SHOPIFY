@@ -1,0 +1,78 @@
+{
+  "sections": {
+    "about": {
+      "type": "about-page",
+      "blocks": {
+        "value-1": {
+          "type": "value",
+          "settings": {
+            "icon": "leaf",
+            "title": "100% Natural",
+            "text": "Every ingredient is sourced from nature, ensuring purity and authenticity in every product."
+          }
+        },
+        "value-2": {
+          "type": "value",
+          "settings": {
+            "icon": "shield",
+            "title": "Quality Assured",
+            "text": "Rigorous testing and GMP compliance guarantee safety and efficacy in all our products."
+          }
+        },
+        "value-3": {
+          "type": "value",
+          "settings": {
+            "icon": "heart",
+            "title": "Customer First",
+            "text": "Your wellness is our priority. We're committed to your satisfaction and health journey."
+          }
+        },
+        "value-4": {
+          "type": "value",
+          "settings": {
+            "icon": "award",
+            "title": "Traditional Wisdom",
+            "text": "Formulations based on ancient Ayurvedic texts, validated by modern science."
+          }
+        },
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "text": "GMP Certified Manufacturing Facility"
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "text": "ISO Quality Management Standards"
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "text": "AYUSH Ministry Licensed"
+          }
+        },
+        "feature-4": {
+          "type": "feature",
+          "settings": {
+            "text": "100% Quality Tested Raw Materials"
+          }
+        },
+        "feature-5": {
+          "type": "feature",
+          "settings": {
+            "text": "State-of-the-Art Laboratory Testing"
+          }
+        }
+      },
+      "block_order": ["value-1", "value-2", "value-3", "value-4", "feature-1", "feature-2", "feature-3", "feature-4", "feature-5"],
+      "settings": {
+        "hero_label": "Our Story",
+        "hero_title": "Rooted in Tradition, Driven by Wellness",
+        "hero_text": "Since our founding, PRM HerboVilla has been committed to bringing authentic Ayurvedic wellness solutions to modern families."
+      }
+    }
+  },
+  "order": ["about"]
+}

@@ -1,0 +1,395 @@
+{%- style -%}
+  .contact-template {
+    padding: 40px 0 80px;
+  }
+  .contact-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .contact-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-text);
+    margin-bottom: 15px;
+  }
+  .contact-subtitle {
+    color: var(--color-text-light);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: flex-start;
+  }
+  .contact-info {
+    background: #f8fdf8;
+    border-radius: 20px;
+    padding: 40px;
+  }
+  .contact-info h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: var(--color-text);
+  }
+  .contact-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  .contact-item:last-child {
+    margin-bottom: 0;
+  }
+  .contact-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--color-primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-icon svg {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+  }
+  .contact-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 5px;
+  }
+  .contact-item p,
+  .contact-item a {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-decoration: none;
+  }
+  .contact-item a:hover {
+    color: var(--color-primary);
+  }
+  .contact-social {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(45, 106, 79, 0.1);
+  }
+  .contact-social h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .contact-social-links {
+    display: flex;
+    gap: 12px;
+  }
+  .contact-social-links a {
+    width: 45px;
+    height: 45px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .contact-social-links a:hover {
+    background: var(--color-primary);
+    color: #fff;
+    transform: translateY(-3px);
+  }
+  .contact-social-links svg {
+    width: 20px;
+    height: 20px;
+  }
+  .contact-form-wrapper {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 2px 30px rgba(0,0,0,0.05);
+  }
+  .contact-form-wrapper h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: var(--color-text);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+  .form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  .contact-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .contact-submit:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45, 106, 79, 0.3);
+  }
+  .contact-map {
+    margin-top: 60px;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 400px;
+  }
+  .contact-map iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  @media (max-width: 992px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 576px) {
+    .contact-title {
+      font-size: 2rem;
+    }
+    .contact-info,
+    .contact-form-wrapper {
+      padding: 30px;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+<section class="contact-template" data-section-id="{{ section.id }}">
+  <div class="container">
+    <header class="contact-header">
+      <h1 class="contact-title">{{ section.settings.title | default: 'Get in Touch' }}</h1>
+      <p class="contact-subtitle">{{ section.settings.subtitle | default: 'Have questions about our products or need assistance? We\'re here to help!' }}</p>
+    </header>
+    
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <div>
+            <h4>Our Location</h4>
+            <p>{{ settings.contact_address | default: 'Plot No.343, 1-A, Chitra Gujarat Industrial Development Corporation, Bhavnagar, Gujarat 364004' }}</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+          </div>
+          <div>
+            <h4>Phone Number</h4>
+            <a href="tel:{{ settings.contact_phone | default: '+91-9227928075' | replace: ' ', '' }}">{{ settings.contact_phone | default: '+91-9227928075' }}</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h4>Email Address</h4>
+            <a href="mailto:{{ settings.contact_email | default: 'contact@prmpharmaceuticals.com' }}">{{ settings.contact_email | default: 'contact@prmpharmaceuticals.com' }}</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div>
+            <h4>Business Hours</h4>
+            <p>{{ section.settings.hours | default: 'Monday - Saturday: 9:00 AM - 6:00 PM' }}</p>
+          </div>
+        </div>
+        
+        <div class="contact-social">
+          <h4>Follow Us</h4>
+          <div class="contact-social-links">
+            {%- if settings.social_facebook != blank -%}
+              <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+            {%- endif -%}
+            {%- if settings.social_instagram != blank -%}
+              <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+            {%- endif -%}
+            {%- if settings.social_linkedin != blank -%}
+              <a href="{{ settings.social_linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form-wrapper">
+        <h3>Send us a Message</h3>
+        
+        {%- form 'contact', class: 'contact-form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="form-success" style="background: #dcfce7; color: #166534; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+              <strong>Thank you!</strong> Your message has been sent successfully. We'll get back to you soon.
+            </div>
+          {%- endif -%}
+          
+          {%- if form.errors -%}
+            <div class="form-errors" style="background: #fee2e2; color: #dc2626; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-name">Name *</label>
+              <input type="text" id="contact-name" name="contact[name]" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email *</label>
+              <input type="email" id="contact-email" name="contact[email]" required placeholder="your@email.com">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="contact-phone">Phone Number</label>
+            <input type="tel" id="contact-phone" name="contact[phone]" placeholder="+91-XXXXXXXXXX">
+          </div>
+          
+          <div class="form-group">
+            <label for="contact-subject">Subject</label>
+            <select id="contact-subject" name="contact[subject]">
+              <option value="">Select a topic</option>
+              <option value="Product Inquiry">Product Inquiry</option>
+              <option value="Order Status">Order Status</option>
+              <option value="Returns & Refunds">Returns & Refunds</option>
+              <option value="Wholesale Inquiry">Wholesale Inquiry</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="contact-message">Message *</label>
+            <textarea id="contact-message" name="contact[body]" required placeholder="How can we help you?"></textarea>
+          </div>
+          
+          <button type="submit" class="contact-submit">Send Message</button>
+        {%- endform -%}
+      </div>
+    </div>
+    
+    {%- if section.settings.show_map and section.settings.map_embed != blank -%}
+      <div class="contact-map">
+        {{ section.settings.map_embed }}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Page",
+  "tag": "section",
+  "class": "section-contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Get in Touch"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Have questions about our products or need assistance? We're here to help!"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Business hours",
+      "default": "Monday - Saturday: 9:00 AM - 6:00 PM"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_map",
+      "label": "Show map",
+      "default": false
+    },
+    {
+      "type": "html",
+      "id": "map_embed",
+      "label": "Map embed code"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Page"
+    }
+  ]
+}
+{% endschema %}

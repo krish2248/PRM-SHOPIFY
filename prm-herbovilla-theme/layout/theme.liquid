@@ -1,0 +1,140 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction | default: 'ltr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0">
+  <meta name="theme-color" content="{{ settings.color_primary | default: '#2D6A4F' }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {%- render 'meta-tags' -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.type_header_font_url != blank -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  {%- else -%}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  {%- endif -%}
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    window.shopUrl = '{{ request.origin }}';
+    window.routes = {
+      cart_url: '{{ routes.cart_url }}',
+      cart_add_url: '{{ routes.cart_add_url }}',
+      cart_change_url: '{{ routes.cart_change_url }}',
+      cart_update_url: '{{ routes.cart_update_url }}',
+      search_url: '{{ routes.search_url }}',
+      predictive_search_url: '{{ routes.predictive_search_url }}'
+    };
+    window.cartStrings = {
+      error: '{{ 'sections.cart.cart_error' | t }}',
+      quantityError: '{{ 'sections.cart.cart_quantity_error' | t: quantity: '[quantity]' }}'
+    };
+  </script>
+
+  {{ content_for_header }}
+
+  <style>
+    :root {
+      --color-primary: {{ settings.color_primary | default: '#2D6A4F' }};
+      --color-primary-light: {{ settings.color_primary_light | default: '#40916C' }};
+      --color-primary-dark: {{ settings.color_primary_dark | default: '#1B4332' }};
+      --color-accent: {{ settings.color_accent | default: '#8B5E3C' }};
+      --color-accent-light: {{ settings.color_accent_light | default: '#A67C5B' }};
+      --color-background: {{ settings.color_background | default: '#FDF8F0' }};
+      --color-background-alt: {{ settings.color_background_alt | default: '#F5EDE0' }};
+      --color-text: {{ settings.color_text | default: '#1A1A1A' }};
+      --color-text-light: {{ settings.color_text_light | default: '#6B6B6B' }};
+      --color-border: {{ settings.color_border | default: '#E0D5C7' }};
+      --color-white: #FFFFFF;
+      --color-black: #000000;
+      --color-success: #2D6A4F;
+      --color-error: #C1292E;
+      --color-warning: #E8A838;
+      --color-star: #E8A838;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.875rem;
+      --font-size-base: 1rem;
+      --font-size-md: 1.125rem;
+      --font-size-lg: 1.25rem;
+      --font-size-xl: 1.5rem;
+      --font-size-2xl: 2rem;
+      --font-size-3xl: 2.5rem;
+      --font-size-4xl: 3rem;
+      --font-size-5xl: 3.5rem;
+      --spacing-xs: 0.25rem;
+      --spacing-sm: 0.5rem;
+      --spacing-md: 1rem;
+      --spacing-lg: 1.5rem;
+      --spacing-xl: 2rem;
+      --spacing-2xl: 3rem;
+      --spacing-3xl: 4rem;
+      --spacing-4xl: 6rem;
+      --spacing-5xl: 8rem;
+      --border-radius-sm: 4px;
+      --border-radius-md: 8px;
+      --border-radius-lg: 12px;
+      --border-radius-xl: 16px;
+      --border-radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.1);
+      --shadow-xl: 0 20px 50px rgba(0,0,0,0.12);
+      --transition-fast: 150ms ease;
+      --transition-base: 300ms ease;
+      --transition-slow: 500ms ease;
+      --container-max: 1280px;
+      --container-narrow: 960px;
+      --header-height: 72px;
+      --announcement-height: 40px;
+    }
+  </style>
+</head>
+
+<body class="template-{{ template.name | handle }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix | handle }}{% endif %}">
+  <a class="skip-to-content" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+
+  {%- section 'announcement-bar' -%}
+  {%- section 'header' -%}
+
+  <main id="MainContent" class="main-content" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {%- section 'footer' -%}
+
+  {%- render 'cart-drawer' -%}
+
+  <div class="overlay" data-overlay></div>
+
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+  {%- if request.design_mode -%}
+    <script src="{{ 'theme-editor.js' | asset_url }}" defer></script>
+  {%- endif -%}
+</body>
+</html>

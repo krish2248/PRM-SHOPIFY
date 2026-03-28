@@ -1,0 +1,123 @@
+{
+  "sections": {
+    "faq": {
+      "type": "faq-page",
+      "blocks": {
+        "cat-products": {
+          "type": "category",
+          "settings": {
+            "category_title": "Products & Ingredients"
+          }
+        },
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Are your products 100% natural?",
+            "answer": "<p>Yes, all PRM HerboVilla products are made from 100% natural ingredients. We use authentic Ayurvedic herbs sourced from trusted suppliers and never add artificial colors, flavors, or preservatives.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Are your products safe to use?",
+            "answer": "<p>All our products are manufactured in a GMP-certified facility and undergo rigorous quality testing. However, we recommend consulting with a healthcare professional before starting any new supplement, especially if you are pregnant, nursing, or taking medications.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Do your products have any side effects?",
+            "answer": "<p>Our products are formulated using traditional Ayurvedic principles and are generally well-tolerated. Some individuals may experience mild digestive changes when starting a new herbal supplement. If you experience any adverse effects, discontinue use and consult a healthcare provider.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "How long does it take to see results?",
+            "answer": "<p>Ayurvedic remedies work holistically and may take time to show results. Most customers report noticeable benefits within 2-4 weeks of consistent use. For chronic conditions, it may take 2-3 months to experience full benefits.</p>"
+          }
+        },
+        "cat-shipping": {
+          "type": "category",
+          "settings": {
+            "category_title": "Orders & Shipping"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "What are your shipping charges?",
+            "answer": "<p>We offer FREE shipping on all orders above ₹400. For orders below ₹400, a flat shipping fee of ₹50 applies. We ship across India via trusted courier partners.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>Standard delivery takes 5-7 business days depending on your location. Metro cities usually receive orders within 3-5 business days. You will receive a tracking number once your order ships.</p>"
+          }
+        },
+        "q7": {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>Currently, we only ship within India. We are working on expanding our shipping to international destinations. Please check back soon or contact us for updates.</p>"
+          }
+        },
+        "q8": {
+          "type": "question",
+          "settings": {
+            "question": "Can I track my order?",
+            "answer": "<p>Yes! Once your order is shipped, you will receive an email and SMS with tracking details. You can also track your order by logging into your account on our website.</p>"
+          }
+        },
+        "cat-returns": {
+          "type": "category",
+          "settings": {
+            "category_title": "Returns & Refunds"
+          }
+        },
+        "q9": {
+          "type": "question",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We accept returns within 7 days of delivery for unopened products in original packaging. For damaged or defective products, please contact us within 48 hours of delivery with photos.</p>"
+          }
+        },
+        "q10": {
+          "type": "question",
+          "settings": {
+            "question": "How do I request a refund?",
+            "answer": "<p>To request a refund, please email us at contact@prmpharmaceuticals.com with your order number and reason for return. Our team will guide you through the process. Refunds are processed within 7-10 business days after we receive the returned product.</p>"
+          }
+        },
+        "cat-payment": {
+          "type": "category",
+          "settings": {
+            "category_title": "Payment & Security"
+          }
+        },
+        "q11": {
+          "type": "question",
+          "settings": {
+            "question": "What payment methods do you accept?",
+            "answer": "<p>We accept all major payment methods including:</p><ul><li>Credit/Debit Cards (Visa, Mastercard, RuPay)</li><li>UPI (Google Pay, PhonePe, Paytm)</li><li>Net Banking</li><li>Cash on Delivery (COD)</li></ul>"
+          }
+        },
+        "q12": {
+          "type": "question",
+          "settings": {
+            "question": "Is my payment information secure?",
+            "answer": "<p>Absolutely. We use industry-standard SSL encryption to protect your payment information. We never store your complete card details on our servers. All transactions are processed through secure payment gateways.</p>"
+          }
+        }
+      },
+      "block_order": ["cat-products", "q1", "q2", "q3", "q4", "cat-shipping", "q5", "q6", "q7", "q8", "cat-returns", "q9", "q10", "cat-payment", "q11", "q12"],
+      "settings": {
+        "title": "Frequently Asked Questions",
+        "subtitle": "Find answers to common questions about our products, shipping, and more."
+      }
+    }
+  },
+  "order": ["faq"]
+}

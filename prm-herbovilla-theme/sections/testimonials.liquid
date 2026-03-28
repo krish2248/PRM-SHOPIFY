@@ -1,0 +1,232 @@
+{%- comment -%}
+  Testimonials Section
+{%- endcomment -%}
+
+<section class="section testimonials {% if section.settings.alt_background %}section--alt{% endif %}">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.label != blank -%}
+        <span class="section-header__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="section-header__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+    
+    <div class="testimonials__carousel" data-carousel>
+      <div class="testimonials__track" data-carousel-track>
+        {%- for block in section.blocks -%}
+          <div class="testimonial-card" {{ block.shopify_attributes }}>
+            <div class="testimonial-card__rating">
+              {%- for i in (1..5) -%}
+                {%- if i <= block.settings.rating -%}
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            
+            <p class="testimonial-card__text">"{{ block.settings.text }}"</p>
+            
+            <div class="testimonial-card__author">
+              {%- if block.settings.image != blank -%}
+                <div class="testimonial-card__avatar">
+                  <img 
+                    src="{{ block.settings.image | image_url: width: 96 }}"
+                    alt="{{ block.settings.name | escape }}"
+                    width="48"
+                    height="48"
+                    loading="lazy"
+                  >
+                </div>
+              {%- else -%}
+                <div class="testimonial-card__avatar">
+                  {{ block.settings.name | slice: 0 }}
+                </div>
+              {%- endif -%}
+              
+              <div>
+                <div class="testimonial-card__name">{{ block.settings.name }}</div>
+                {%- if block.settings.location != blank -%}
+                  <div class="testimonial-card__location">{{ block.settings.location }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+      
+      <div class="products-carousel__nav">
+        <button type="button" class="products-carousel__btn" data-carousel-prev aria-label="Previous">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button type="button" class="products-carousel__btn" data-carousel-next aria-label="Next">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "testimonials-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "alt_background",
+      "label": "Use Alternative Background",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Customer Stories"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Real experiences from real people who have transformed their health with our Ayurvedic products."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Testimonial Text",
+          "default": "I've been using PRM HerboVilla products for 6 months now and the results have been amazing. My immunity has improved significantly and I feel more energetic throughout the day."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Customer Photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Priya Sharma"
+        },
+        {
+          "type": "text",
+          "id": "location",
+          "label": "Location",
+          "default": "Mumbai, Maharashtra"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "I've been using their immunity boosters for 6 months now and the results are amazing. My energy levels have improved significantly!",
+            "name": "Priya Sharma",
+            "location": "Mumbai"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Finally found authentic Ayurvedic products that actually work. The hair oil has completely transformed my hair health.",
+            "name": "Rahul Patel",
+            "location": "Ahmedabad"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "The quality is exceptional and you can feel the difference. Their customer service is also very responsive.",
+            "name": "Sneha Reddy",
+            "location": "Bangalore"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "As a yoga instructor, I recommend PRM HerboVilla products to all my students. Pure, authentic, and effective!",
+            "name": "Amit Kumar",
+            "location": "Delhi"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "My whole family uses their digestive health products. No more acidity issues! Highly recommended for everyone.",
+            "name": "Kavita Desai",
+            "location": "Pune"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "The Chyawanprash is the best I've ever had. You can taste the quality of herbs. My kids love it too!",
+            "name": "Vikram Singh",
+            "location": "Jaipur"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "I suffered from joint pain for years. Their herbal pain relief oil gave me relief within weeks. Thank you PRM!",
+            "name": "Lakshmi Nair",
+            "location": "Chennai"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Switched from chemical skincare to their herbal products. My skin has never been clearer. 100% natural works!",
+            "name": "Neha Gupta",
+            "location": "Kolkata"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

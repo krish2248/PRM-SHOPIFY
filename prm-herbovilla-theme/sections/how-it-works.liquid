@@ -1,0 +1,300 @@
+{%- comment -%}
+  How It Works / Process Section
+{%- endcomment -%}
+
+{%- style -%}
+  .how-it-works {
+    padding: 80px 0;
+    background: linear-gradient(180deg, #fff 0%, #f8fdf8 100%);
+  }
+  .how-it-works__header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+  }
+  .how-it-works__label {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(45, 106, 79, 0.1);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+  .how-it-works__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: var(--color-text);
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+  .how-it-works__text {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    line-height: 1.7;
+  }
+  .how-it-works__steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    position: relative;
+  }
+  .how-it-works__steps::before {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 15%;
+    right: 15%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, rgba(45, 106, 79, 0.2) 100%);
+    z-index: 0;
+  }
+  .how-it-works__step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .how-it-works__step-number {
+    width: 80px;
+    height: 80px;
+    background: #fff;
+    border: 3px solid var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    box-shadow: 0 10px 30px rgba(45, 106, 79, 0.15);
+    transition: all 0.3s ease;
+  }
+  .how-it-works__step:hover .how-it-works__step-number {
+    background: var(--color-primary);
+    color: #fff;
+    transform: scale(1.1);
+  }
+  .how-it-works__step-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(45, 106, 79, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .how-it-works__step-icon svg {
+    width: 26px;
+    height: 26px;
+    color: var(--color-primary);
+  }
+  .how-it-works__step-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--color-text);
+    margin-bottom: 12px;
+  }
+  .how-it-works__step-text {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+  @media (max-width: 992px) {
+    .how-it-works__steps {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+    .how-it-works__steps::before {
+      display: none;
+    }
+  }
+  @media (max-width: 576px) {
+    .how-it-works {
+      padding: 60px 0;
+    }
+    .how-it-works__steps {
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
+    .how-it-works__step-number {
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+    }
+  }
+{%- endstyle -%}
+
+<section class="how-it-works section" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="how-it-works__header" data-animate>
+      {%- if section.settings.label != blank -%}
+        <span class="how-it-works__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      
+      <h2 class="how-it-works__title">{{ section.settings.title }}</h2>
+      
+      {%- if section.settings.text != blank -%}
+        <p class="how-it-works__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+    
+    <div class="how-it-works__steps">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'step' -%}
+          <div class="how-it-works__step" {{ block.shopify_attributes }} data-animate>
+            <div class="how-it-works__step-number">{{ forloop.index }}</div>
+            <div class="how-it-works__step-icon">
+              {%- case block.settings.icon -%}
+                {%- when 'search' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                {%- when 'cart' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                  </svg>
+                {%- when 'truck' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+                    <path d="M16 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7"></path>
+                    <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                    <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                  </svg>
+                {%- when 'heart' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                {%- when 'leaf' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+                  </svg>
+                {%- when 'check' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+              {%- endcase -%}
+            </div>
+            <h3 class="how-it-works__step-title">{{ block.settings.title }}</h3>
+            <p class="how-it-works__step-text">{{ block.settings.text }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How It Works",
+  "tag": "section",
+  "class": "section-how-it-works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Simple Process"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Your Journey to Wellness"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Getting started with Ayurvedic wellness has never been easier. Follow these simple steps."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "search", "label": "Search" },
+            { "value": "cart", "label": "Cart" },
+            { "value": "truck", "label": "Delivery" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "check", "label": "Check" }
+          ],
+          "default": "search"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Find Your Solution"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Browse our range of authentic Ayurvedic products"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "icon": "search",
+            "title": "Browse Products",
+            "text": "Explore our wide range of authentic Ayurvedic solutions for your health needs"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "cart",
+            "title": "Place Your Order",
+            "text": "Add products to cart and checkout securely with multiple payment options"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast Delivery",
+            "text": "We deliver across India within 5-7 days. Free shipping above Rs.400"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "heart",
+            "title": "Feel the Difference",
+            "text": "Experience the natural healing power of Ayurveda in your daily wellness routine"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

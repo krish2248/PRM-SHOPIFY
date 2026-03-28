@@ -1,0 +1,149 @@
+{%- comment -%}
+  Featured Products Section
+{%- endcomment -%}
+
+<section class="section {% if section.settings.alt_background %}section--alt{% endif %}">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.label != blank -%}
+        <span class="section-header__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="section-header__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+    
+    <div class="products-carousel" data-carousel>
+      <div class="products-carousel__track" data-carousel-track>
+        {%- liquid
+          if section.settings.collection != blank
+            assign products = section.settings.collection.products
+          else
+            assign products = collections['all'].products
+          endif
+        -%}
+        
+        {%- for product in products limit: section.settings.products_count -%}
+          <div class="products-carousel__item">
+            {%- render 'product-card', product: product, show_vendor: section.settings.show_vendor, show_rating: section.settings.show_rating -%}
+          </div>
+        {%- else -%}
+          {%- for i in (1..4) -%}
+            <div class="products-carousel__item">
+              <div class="product-card">
+                <div class="product-card__image">
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+                <div class="product-card__content">
+                  <p class="product-card__vendor">PRM HerboVilla</p>
+                  <h3 class="product-card__title">Sample Product {{ i }}</h3>
+                  <div class="product-card__price">
+                    <span class="product-card__price-current">₹299</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+      
+      <div class="products-carousel__nav">
+        <button type="button" class="products-carousel__btn" data-carousel-prev aria-label="Previous">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button type="button" class="products-carousel__btn" data-carousel-next aria-label="Next">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    {%- if section.settings.button_text != blank -%}
+      <div class="text-center mt-2xl">
+        <a href="{{ section.settings.button_link | default: section.settings.collection.url | default: routes.all_products_collection_url }}" class="btn btn--secondary">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "tag": "section",
+  "class": "featured-products-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "alt_background",
+      "label": "Use Alternative Background",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Bestsellers"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Most Loved Products"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Discover the Ayurvedic products trusted by thousands of customers for their health and wellness journey."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "label": "Number of Products",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show Vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show Rating",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "View All Products"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

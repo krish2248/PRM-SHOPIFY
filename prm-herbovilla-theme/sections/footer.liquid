@@ -1,0 +1,510 @@
+{%- style -%}
+  .footer {
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    padding-top: 80px;
+  }
+  .footer a {
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .footer a:hover {
+    color: {{ section.settings.link_hover_color }};
+  }
+  .footer-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 50px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-brand {
+    max-width: 320px;
+  }
+  .footer-logo {
+    max-width: 180px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  .footer-logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .footer-description {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    opacity: 0.8;
+    margin-bottom: 25px;
+  }
+  .footer-certifications {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .certification-badge {
+    background: rgba(255,255,255,0.1);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  .footer-column h4 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 25px;
+    position: relative;
+  }
+  .footer-column h4::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--color-primary);
+  }
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-links li {
+    margin-bottom: 12px;
+  }
+  .footer-links a {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-links a:hover {
+    opacity: 1;
+  }
+  .footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .footer-contact-icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.8;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .footer-contact-text {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    line-height: 1.5;
+  }
+  .footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+  }
+  .footer-social a {
+    width: 42px;
+    height: 42px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  .footer-social a:hover {
+    background: var(--color-primary);
+    transform: translateY(-3px);
+  }
+  .footer-social svg {
+    width: 18px;
+    height: 18px;
+  }
+  .footer-bottom {
+    padding: 30px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-copyright {
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+  .footer-payments {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .footer-payments span {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+  .payment-icons {
+    display: flex;
+    gap: 8px;
+  }
+  .payment-icon {
+    background: rgba(255,255,255,0.1);
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .footer-legal {
+    display: flex;
+    gap: 25px;
+  }
+  .footer-legal a {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+  .footer-legal a:hover {
+    opacity: 1;
+  }
+  @media (max-width: 992px) {
+    .footer-main {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-brand {
+      grid-column: span 2;
+      max-width: 100%;
+    }
+  }
+  @media (max-width: 576px) {
+    .footer {
+      padding-top: 60px;
+    }
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
+    .footer-brand {
+      grid-column: span 1;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+    .footer-legal {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+  }
+{%- endstyle -%}
+
+<footer class="footer" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="footer-main">
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        {%- if section.settings.logo != blank -%}
+          <img src="{{ section.settings.logo | image_url: width: 360 }}" alt="{{ shop.name }}" class="footer-logo" width="180" height="auto" loading="lazy">
+        {%- elsif settings.logo != blank -%}
+          <img src="{{ settings.logo | image_url: width: 360 }}" alt="{{ shop.name }}" class="footer-logo" width="180" height="auto" loading="lazy">
+        {%- else -%}
+          <div class="footer-logo-text">{{ shop.name }}</div>
+        {%- endif -%}
+        <p class="footer-description">{{ section.settings.description }}</p>
+        {%- if section.settings.show_certifications -%}
+          <div class="footer-certifications">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'certification' -%}
+                <span class="certification-badge" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+      
+      <!-- Quick Links -->
+      <div class="footer-column">
+        <h4>{{ section.settings.col1_title }}</h4>
+        <ul class="footer-links">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'link_col1' -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      
+      <!-- Customer Service -->
+      <div class="footer-column">
+        <h4>{{ section.settings.col2_title }}</h4>
+        <ul class="footer-links">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'link_col2' -%}
+              <li {{ block.shopify_attributes }}>
+                <a href="{{ block.settings.link }}">{{ block.settings.text }}</a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      
+      <!-- Contact Info -->
+      <div class="footer-column">
+        <h4>{{ section.settings.col3_title }}</h4>
+        
+        {%- if settings.contact_address != blank -%}
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span class="footer-contact-text">{{ settings.contact_address }}</span>
+          </div>
+        {%- endif -%}
+        
+        {%- if settings.contact_phone != blank -%}
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <a href="tel:{{ settings.contact_phone | replace: ' ', '' }}" class="footer-contact-text">{{ settings.contact_phone }}</a>
+          </div>
+        {%- endif -%}
+        
+        {%- if settings.contact_email != blank -%}
+          <div class="footer-contact-item">
+            <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <a href="mailto:{{ settings.contact_email }}" class="footer-contact-text">{{ settings.contact_email }}</a>
+          </div>
+        {%- endif -%}
+        
+        <div class="footer-social">
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_twitter != blank -%}
+            <a href="{{ settings.social_twitter }}" target="_blank" rel="noopener" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_youtube != blank -%}
+            <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#1B4332"></polygon></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_linkedin != blank -%}
+            <a href="{{ settings.social_linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text }}
+      </div>
+      
+      {%- if section.settings.show_payments -%}
+        <div class="footer-payments">
+          <span>We Accept:</span>
+          <div class="payment-icons">
+            <span class="payment-icon">UPI</span>
+            <span class="payment-icon">Visa</span>
+            <span class="payment-icon">MC</span>
+            <span class="payment-icon">COD</span>
+          </div>
+        </div>
+      {%- endif -%}
+      
+      <div class="footer-legal">
+        <a href="{{ section.settings.privacy_link | default: '/policies/privacy-policy' }}">Privacy Policy</a>
+        <a href="{{ section.settings.terms_link | default: '/policies/terms-of-service' }}">Terms of Service</a>
+        <a href="{{ section.settings.refund_link | default: '/policies/refund-policy' }}">Refund Policy</a>
+        <a href="{{ section.settings.shipping_link | default: '/policies/shipping-policy' }}">Shipping Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "section",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#1B4332"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#74c69d"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Footer logo (optional)"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Brand description",
+      "default": "PRM HerboVilla brings you authentic Ayurvedic products crafted with pure natural ingredients. Experience the ancient wisdom of herbal wellness."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_certifications",
+      "label": "Show certifications",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "col1_title",
+      "label": "Column 1 title",
+      "default": "Quick Links"
+    },
+    {
+      "type": "text",
+      "id": "col2_title",
+      "label": "Column 2 title",
+      "default": "Customer Service"
+    },
+    {
+      "type": "text",
+      "id": "col3_title",
+      "label": "Column 3 title",
+      "default": "Contact Us"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "All rights reserved."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payments",
+      "label": "Show payment methods",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "privacy_link",
+      "label": "Privacy policy link"
+    },
+    {
+      "type": "url",
+      "id": "terms_link",
+      "label": "Terms of service link"
+    },
+    {
+      "type": "url",
+      "id": "refund_link",
+      "label": "Refund policy link"
+    },
+    {
+      "type": "url",
+      "id": "shipping_link",
+      "label": "Shipping policy link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "certification",
+      "name": "Certification",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "GMP Certified"
+        }
+      ]
+    },
+    {
+      "type": "link_col1",
+      "name": "Quick Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Shop All"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "link_col2",
+      "name": "Customer Service Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Contact Us"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "certification", "settings": { "text": "GMP Certified" } },
+        { "type": "certification", "settings": { "text": "ISO 9001:2015" } },
+        { "type": "certification", "settings": { "text": "AYUSH Approved" } },
+        { "type": "link_col1", "settings": { "text": "Shop All", "link": "/collections/all" } },
+        { "type": "link_col1", "settings": { "text": "Best Sellers", "link": "/collections/best-sellers" } },
+        { "type": "link_col1", "settings": { "text": "New Arrivals", "link": "/collections/new-arrivals" } },
+        { "type": "link_col1", "settings": { "text": "About Us", "link": "/pages/about" } },
+        { "type": "link_col1", "settings": { "text": "Blog", "link": "/blogs/news" } },
+        { "type": "link_col2", "settings": { "text": "Contact Us", "link": "/pages/contact" } },
+        { "type": "link_col2", "settings": { "text": "Track Order", "link": "/pages/track-order" } },
+        { "type": "link_col2", "settings": { "text": "FAQs", "link": "/pages/faq" } },
+        { "type": "link_col2", "settings": { "text": "Returns & Refunds", "link": "/policies/refund-policy" } },
+        { "type": "link_col2", "settings": { "text": "Shipping Info", "link": "/policies/shipping-policy" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "terms-of-service": {
+      "type": "terms-of-service",
+      "settings": {
+        "last_updated": "January 2024"
+      }
+    }
+  },
+  "order": ["terms-of-service"]
+}

@@ -1,0 +1,378 @@
+{%- comment -%}
+  Certifications & Trust Section
+{%- endcomment -%}
+
+{%- style -%}
+  .certifications {
+    padding: 80px 0;
+    background: var(--color-primary);
+    position: relative;
+    overflow: hidden;
+  }
+  .certifications::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+  }
+  .certifications::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 50%;
+  }
+  .certifications .container {
+    position: relative;
+    z-index: 1;
+  }
+  .certifications__header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px;
+  }
+  .certifications__label {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+  }
+  .certifications__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: #fff;
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+  .certifications__text {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+  }
+  .certifications__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
+  }
+  .certifications__item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  .certifications__item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+  .certifications__icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .certifications__icon svg {
+    width: 35px;
+    height: 35px;
+    color: #fff;
+  }
+  .certifications__icon img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+  .certifications__item-title {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .certifications__item-text {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+  }
+  .certifications__bottom {
+    margin-top: 50px;
+    text-align: center;
+  }
+  .certifications__trust-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+  }
+  .certifications__trust-text svg {
+    width: 24px;
+    height: 24px;
+    color: #fff;
+  }
+  @media (max-width: 1200px) {
+    .certifications__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 768px) {
+    .certifications {
+      padding: 60px 0;
+    }
+    .certifications__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .certifications__item {
+      padding: 25px 15px;
+    }
+    .certifications__icon {
+      width: 55px;
+      height: 55px;
+    }
+    .certifications__icon svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+  @media (max-width: 480px) {
+    .certifications__grid {
+      grid-template-columns: 1fr;
+    }
+    .certifications__item {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      gap: 20px;
+      padding: 20px;
+    }
+    .certifications__icon {
+      margin: 0;
+      flex-shrink: 0;
+    }
+  }
+{%- endstyle -%}
+
+<section class="certifications section" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="certifications__header" data-animate>
+      {%- if section.settings.label != blank -%}
+        <span class="certifications__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      
+      <h2 class="certifications__title">{{ section.settings.title }}</h2>
+      
+      {%- if section.settings.text != blank -%}
+        <p class="certifications__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+    
+    <div class="certifications__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'certification' -%}
+          <div class="certifications__item" {{ block.shopify_attributes }} data-animate>
+            <div class="certifications__icon">
+              {%- if block.settings.image != blank -%}
+                <img src="{{ block.settings.image | image_url: width: 80 }}" alt="{{ block.settings.title }}">
+              {%- else -%}
+                {%- case block.settings.icon -%}
+                  {%- when 'gmp' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                      <path d="M2 17l10 5 10-5"></path>
+                      <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                  {%- when 'ayush' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                      <polyline points="9 12 11 14 15 10"></polyline>
+                    </svg>
+                  {%- when 'iso' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M12 6v6l4 2"></path>
+                    </svg>
+                  {%- when 'fssai' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                  {%- when 'natural' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    </svg>
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 15l-2-2m0 0l-2 2m2-2v6m0 0H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v6"></path>
+                      <path d="M16 12l-2 2-2-2m4 0v6"></path>
+                    </svg>
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+            <div>
+              <h3 class="certifications__item-title">{{ block.settings.title }}</h3>
+              <p class="certifications__item-text">{{ block.settings.text }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    
+    {%- if section.settings.show_trust_line -%}
+      <div class="certifications__bottom" data-animate>
+        <div class="certifications__trust-text">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>{{ section.settings.trust_text }}</span>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Certifications",
+  "tag": "section",
+  "class": "section-certifications",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Quality Assured"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Certified for Excellence"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Our products meet the highest standards of quality, purity, and safety in the industry."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_line",
+      "label": "Show trust line",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Trust line text",
+      "default": "Trusted by over 10,000+ customers across India"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "certification",
+      "name": "Certification",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Certification Logo",
+          "info": "Upload a logo, or leave blank to use an icon"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon (if no image)",
+          "options": [
+            { "value": "gmp", "label": "GMP" },
+            { "value": "ayush", "label": "AYUSH" },
+            { "value": "iso", "label": "ISO" },
+            { "value": "fssai", "label": "FSSAI" },
+            { "value": "natural", "label": "Natural/Organic" }
+          ],
+          "default": "gmp"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "GMP Certified"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Good Manufacturing Practice certified facility"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Certifications",
+      "blocks": [
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "gmp",
+            "title": "GMP Certified",
+            "text": "Manufactured in GMP certified facilities"
+          }
+        },
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "ayush",
+            "title": "AYUSH Approved",
+            "text": "Government of India certified Ayurvedic"
+          }
+        },
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "iso",
+            "title": "ISO 9001:2015",
+            "text": "International quality standards"
+          }
+        },
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "fssai",
+            "title": "FSSAI Licensed",
+            "text": "Food safety certified products"
+          }
+        },
+        {
+          "type": "certification",
+          "settings": {
+            "icon": "natural",
+            "title": "100% Natural",
+            "text": "Pure herbal ingredients only"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

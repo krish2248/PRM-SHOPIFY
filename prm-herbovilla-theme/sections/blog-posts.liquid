@@ -1,0 +1,567 @@
+{%- comment -%}
+  Blog Posts Section - Homepage blog with curated wellness articles
+{%- endcomment -%}
+
+{%- style -%}
+.blog-posts-section .blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.blog-posts-section .blog-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.blog-posts-section .blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+.blog-posts-section .blog-card__image {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+.blog-posts-section .blog-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.blog-posts-section .blog-card:hover .blog-card__image img {
+  transform: scale(1.05);
+}
+.blog-posts-section .blog-card__content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.blog-posts-section .blog-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+}
+.blog-posts-section .blog-card__category {
+  background: rgba(45, 106, 79, 0.1);
+  color: var(--color-primary);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.blog-posts-section .blog-card__read-time {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+.blog-posts-section .blog-card__read-time svg {
+  width: 13px;
+  height: 13px;
+}
+.blog-posts-section .blog-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.blog-posts-section .blog-card__title a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.blog-posts-section .blog-card__title a:hover {
+  color: var(--color-primary);
+}
+.blog-posts-section .blog-card__excerpt {
+  color: var(--color-text-light);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.blog-posts-section .blog-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  margin-top: auto;
+}
+.blog-posts-section .blog-card__link svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+.blog-posts-section .blog-card__link:hover svg {
+  transform: translateX(5px);
+}
+.blog-posts-section .blog-card__external {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  margin-top: 8px;
+  opacity: 0.7;
+}
+.blog-posts-section .blog-card__external svg {
+  width: 11px;
+  height: 11px;
+}
+@media (max-width: 992px) {
+  .blog-posts-section .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 576px) {
+  .blog-posts-section .blog-grid {
+    grid-template-columns: 1fr;
+  }
+}
+{%- endstyle -%}
+
+<section class="section {% if section.settings.alt_background %}section--alt{% endif %}">
+  <div class="container">
+    <div class="section-header">
+      {%- if section.settings.label != blank -%}
+        <span class="section-header__label">{{ section.settings.label }}</span>
+      {%- endif -%}
+      <h2 class="section-header__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="section-header__text">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+    
+    <div class="blog-grid">
+      {%- liquid
+        if section.settings.blog != blank
+          assign articles = section.settings.blog.articles
+        endif
+      -%}
+      
+      {%- for article in articles limit: section.settings.articles_count -%}
+        <article class="blog-card">
+          {%- if article.image -%}
+            <div class="blog-card__image">
+              <a href="{{ article.url }}">
+                <img 
+                  src="{{ article.image | image_url: width: 600 }}"
+                  alt="{{ article.image.alt | default: article.title | escape }}"
+                  loading="lazy"
+                  width="600"
+                  height="375"
+                >
+              </a>
+            </div>
+          {%- endif -%}
+          
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">{{ article.tags.first | default: 'Ayurveda' }}</span>
+              <span>{{ article.published_at | date: '%b %d, %Y' }}</span>
+            </div>
+            
+            <h3 class="blog-card__title">
+              <a href="{{ article.url }}">{{ article.title }}</a>
+            </h3>
+            
+            {%- if article.excerpt != blank -%}
+              <p class="blog-card__excerpt">{{ article.excerpt | strip_html | truncate: 120 }}</p>
+            {%- endif -%}
+            
+            <a href="{{ article.url }}" class="blog-card__link">
+              Read More
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </article>
+      {%- else -%}
+        {%- comment -%} Curated external articles about Ayurveda, herbal wellness & chemical-free living {%- endcomment -%}
+
+        <!-- Article 1: Toxic Chemicals in Medicines -->
+        <article class="blog-card">
+          <div class="blog-card__image">
+            <a href="https://www.healthline.com/nutrition/toxic-chemicals-in-food" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&h=400&fit=crop" alt="Toxic chemicals in everyday products" loading="lazy">
+            </a>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Chemical Safety</span>
+              <span class="blog-card__read-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                8 min read
+              </span>
+            </div>
+            <h3 class="blog-card__title">
+              <a href="https://www.healthline.com/nutrition/toxic-chemicals-in-food" target="_blank" rel="noopener noreferrer">Hidden Toxic Chemicals in Your Everyday Products & Medicines</a>
+            </h3>
+            <p class="blog-card__excerpt">Many conventional medicines and personal care products contain harmful chemicals like parabens, sulfates, and synthetic fragrances. Learn what to watch out for and how to choose safer alternatives.</p>
+            <a href="https://www.healthline.com/nutrition/toxic-chemicals-in-food" target="_blank" rel="noopener noreferrer" class="blog-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <span class="blog-card__external">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <!-- Article 2: Ashwagandha Benefits -->
+        <article class="blog-card">
+          <div class="blog-card__image">
+            <a href="https://www.healthline.com/nutrition/ashwagandha" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&h=400&fit=crop" alt="Ashwagandha herbal remedy" loading="lazy">
+            </a>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Herbal Remedies</span>
+              <span class="blog-card__read-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                10 min read
+              </span>
+            </div>
+            <h3 class="blog-card__title">
+              <a href="https://www.healthline.com/nutrition/ashwagandha" target="_blank" rel="noopener noreferrer">Ashwagandha: 12 Proven Health Benefits of This Ancient Herb</a>
+            </h3>
+            <p class="blog-card__excerpt">Ashwagandha is one of the most powerful herbs in Ayurveda. Research shows it can reduce stress, boost brain function, lower blood sugar, and help fight anxiety and depression.</p>
+            <a href="https://www.healthline.com/nutrition/ashwagandha" target="_blank" rel="noopener noreferrer" class="blog-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <span class="blog-card__external">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <!-- Article 3: Why Ayurveda Over Modern Medicine -->
+        <article class="blog-card">
+          <div class="blog-card__image">
+            <a href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/ayurveda" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=400&fit=crop" alt="Ayurvedic healing herbs and spices" loading="lazy">
+            </a>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Ayurveda</span>
+              <span class="blog-card__read-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                6 min read
+              </span>
+            </div>
+            <h3 class="blog-card__title">
+              <a href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/ayurveda" target="_blank" rel="noopener noreferrer">Ayurveda: What It Is, Benefits & How This Ancient System Heals</a>
+            </h3>
+            <p class="blog-card__excerpt">Johns Hopkins explains Ayurveda - the 5,000-year-old natural healing system from India that focuses on balance between body, mind, and spirit using diet, herbs, and lifestyle changes.</p>
+            <a href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/ayurveda" target="_blank" rel="noopener noreferrer" class="blog-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <span class="blog-card__external">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Johns Hopkins Medicine
+            </span>
+          </div>
+        </article>
+
+        <!-- Article 4: Harmful Side Effects of Chemical-Based Skincare -->
+        <article class="blog-card">
+          <div class="blog-card__image">
+            <a href="https://www.healthline.com/health/beauty-skin-care/toxic-ingredients-in-skin-care" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=400&fit=crop" alt="Chemical vs natural skincare" loading="lazy">
+            </a>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Skin Care</span>
+              <span class="blog-card__read-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                7 min read
+              </span>
+            </div>
+            <h3 class="blog-card__title">
+              <a href="https://www.healthline.com/health/beauty-skin-care/toxic-ingredients-in-skin-care" target="_blank" rel="noopener noreferrer">Dangerous Chemicals Hiding in Your Skincare Products</a>
+            </h3>
+            <p class="blog-card__excerpt">From parabens to phthalates, your daily skincare routine may expose you to harmful toxins. Discover which ingredients to avoid and why natural Ayurvedic alternatives are safer for your skin.</p>
+            <a href="https://www.healthline.com/health/beauty-skin-care/toxic-ingredients-in-skin-care" target="_blank" rel="noopener noreferrer" class="blog-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <span class="blog-card__external">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <!-- Article 5: Turmeric / Haldi Benefits -->
+        <article class="blog-card">
+          <div class="blog-card__image">
+            <a href="https://www.healthline.com/nutrition/top-10-evidence-based-health-benefits-of-turmeric" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=600&h=400&fit=crop" alt="Turmeric golden spice" loading="lazy">
+            </a>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Superfoods</span>
+              <span class="blog-card__read-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                9 min read
+              </span>
+            </div>
+            <h3 class="blog-card__title">
+              <a href="https://www.healthline.com/nutrition/top-10-evidence-based-health-benefits-of-turmeric" target="_blank" rel="noopener noreferrer">Turmeric (Haldi): 10 Proven Health Benefits Backed by Science</a>
+            </h3>
+            <p class="blog-card__excerpt">Turmeric contains curcumin, a substance with powerful anti-inflammatory and antioxidant properties. Science confirms what Ayurveda knew for 4,000 years about this golden spice.</p>
+            <a href="https://www.healthline.com/nutrition/top-10-evidence-based-health-benefits-of-turmeric" target="_blank" rel="noopener noreferrer" class="blog-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <span class="blog-card__external">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <!-- Article 6: Child Health - Natural Remedies for Kids -->
+        <article class="blog-card">
+          <div class="blog-card__image">
+            <a href="https://www.healthline.com/health/parenting/natural-remedies-for-children" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=400&fit=crop" alt="Natural remedies for children" loading="lazy">
+            </a>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Child Care</span>
+              <span class="blog-card__read-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                7 min read
+              </span>
+            </div>
+            <h3 class="blog-card__title">
+              <a href="https://www.healthline.com/health/parenting/natural-remedies-for-children" target="_blank" rel="noopener noreferrer">Safe Natural Remedies for Common Childhood Ailments</a>
+            </h3>
+            <p class="blog-card__excerpt">From coughs to tummy aches, discover gentle, time-tested herbal remedies that are safe for children. Learn why many parents are choosing natural alternatives over chemical-laden medicines.</p>
+            <a href="https://www.healthline.com/health/parenting/natural-remedies-for-children" target="_blank" rel="noopener noreferrer" class="blog-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <span class="blog-card__external">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <!-- Article 7: Ayurvedic Immunity Boosters -->
+        <article class="blog-card">
+          <div class="blog-card__image">
+            <a href="https://www.healthline.com/nutrition/how-to-boost-immune-health" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=400&fit=crop" alt="Immunity boosting herbs and foods" loading="lazy">
+            </a>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Immunity</span>
+              <span class="blog-card__read-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                8 min read
+              </span>
+            </div>
+            <h3 class="blog-card__title">
+              <a href="https://www.healthline.com/nutrition/how-to-boost-immune-health" target="_blank" rel="noopener noreferrer">Boost Your Immunity Naturally: Ayurvedic Herbs & Diet Tips</a>
+            </h3>
+            <p class="blog-card__excerpt">Strengthen your body's natural defenses with proven immunity-boosting herbs like Tulsi, Giloy, and Amla. These ancient Ayurvedic remedies are more relevant than ever in modern times.</p>
+            <a href="https://www.healthline.com/nutrition/how-to-boost-immune-health" target="_blank" rel="noopener noreferrer" class="blog-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <span class="blog-card__external">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <!-- Article 8: Digestive Health with Ayurveda -->
+        <article class="blog-card">
+          <div class="blog-card__image">
+            <a href="https://www.healthline.com/nutrition/triphala" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop" alt="Digestive health and Ayurveda" loading="lazy">
+            </a>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Digestion</span>
+              <span class="blog-card__read-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                6 min read
+              </span>
+            </div>
+            <h3 class="blog-card__title">
+              <a href="https://www.healthline.com/nutrition/triphala" target="_blank" rel="noopener noreferrer">Triphala: The Ayurvedic Superfruit for Gut Health & Detox</a>
+            </h3>
+            <p class="blog-card__excerpt">Triphala is one of Ayurveda's most potent remedies - a blend of three fruits that cleanses the digestive tract, supports healthy metabolism, and gently detoxifies the entire body.</p>
+            <a href="https://www.healthline.com/nutrition/triphala" target="_blank" rel="noopener noreferrer" class="blog-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <span class="blog-card__external">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <!-- Article 9: Why Choose Herbal Over Chemical -->
+        <article class="blog-card">
+          <div class="blog-card__image">
+            <a href="https://www.who.int/news-room/fact-sheets/detail/traditional-complementary-and-integrative-medicine" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop" alt="Traditional herbal medicine" loading="lazy">
+            </a>
+          </div>
+          <div class="blog-card__content">
+            <div class="blog-card__meta">
+              <span class="blog-card__category">Research</span>
+              <span class="blog-card__read-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                5 min read
+              </span>
+            </div>
+            <h3 class="blog-card__title">
+              <a href="https://www.who.int/news-room/fact-sheets/detail/traditional-complementary-and-integrative-medicine" target="_blank" rel="noopener noreferrer">WHO on Traditional Medicine: Why the World Is Going Back to Herbs</a>
+            </h3>
+            <p class="blog-card__excerpt">The World Health Organization recognizes traditional medicine systems like Ayurveda. Learn why 80% of the world's population relies on herbal remedies and how ancient wisdom is shaping modern healthcare.</p>
+            <a href="https://www.who.int/news-room/fact-sheets/detail/traditional-complementary-and-integrative-medicine" target="_blank" rel="noopener noreferrer" class="blog-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <span class="blog-card__external">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              World Health Organization
+            </span>
+          </div>
+        </article>
+
+      {%- endfor -%}
+    </div>
+    
+    {%- if section.settings.button_text != blank -%}
+      <div class="text-center mt-2xl">
+        <a href="{{ section.settings.blog.url | default: '/blogs/news' }}" class="btn btn--secondary">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog Posts",
+  "tag": "section",
+  "class": "blog-posts-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "alt_background",
+      "label": "Use Alternative Background",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Ayurveda Insights"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Wellness Insights"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Expert tips and knowledge for your Ayurvedic journey"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "range",
+      "id": "articles_count",
+      "label": "Number of Articles",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 9
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "View All Articles"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog Posts"
+    }
+  ]
+}
+{% endschema %}

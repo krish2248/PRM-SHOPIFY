@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "refund-policy": {
+      "type": "refund-policy",
+      "settings": {
+        "subtitle": "Our commitment to your satisfaction"
+      }
+    }
+  },
+  "order": ["refund-policy"]
+}

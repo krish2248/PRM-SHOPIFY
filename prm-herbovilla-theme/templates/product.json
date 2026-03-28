@@ -1,0 +1,97 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-template",
+      "blocks": {
+        "highlight-1": {
+          "type": "highlight",
+          "settings": {
+            "text": "100% Natural Ingredients"
+          }
+        },
+        "highlight-2": {
+          "type": "highlight",
+          "settings": {
+            "text": "No Side Effects"
+          }
+        },
+        "highlight-3": {
+          "type": "highlight",
+          "settings": {
+            "text": "Clinically Tested"
+          }
+        },
+        "highlight-4": {
+          "type": "highlight",
+          "settings": {
+            "text": "GMP Certified Manufacturing"
+          }
+        },
+        "ingredient-1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Ashwagandha",
+            "benefit": "Reduces stress and boosts immunity"
+          }
+        },
+        "ingredient-2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Tulsi",
+            "benefit": "Natural antioxidant and adaptogen"
+          }
+        },
+        "ingredient-3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Amla",
+            "benefit": "Rich in Vitamin C for rejuvenation"
+          }
+        },
+        "ingredient-4": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Giloy",
+            "benefit": "Enhances immunity naturally"
+          }
+        },
+        "step-1": {
+          "type": "usage_step",
+          "settings": {
+            "text": "Take 1-2 tablets twice daily after meals"
+          }
+        },
+        "step-2": {
+          "type": "usage_step",
+          "settings": {
+            "text": "Swallow with lukewarm water or milk"
+          }
+        },
+        "step-3": {
+          "type": "usage_step",
+          "settings": {
+            "text": "Continue for at least 3 months for best results"
+          }
+        }
+      },
+      "block_order": [
+        "highlight-1",
+        "highlight-2",
+        "highlight-3",
+        "highlight-4",
+        "ingredient-1",
+        "ingredient-2",
+        "ingredient-3",
+        "ingredient-4",
+        "step-1",
+        "step-2",
+        "step-3"
+      ],
+      "settings": {
+        "show_highlights": true,
+        "show_buy_now": true
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,916 @@
+{%- style -%}
+  .product-template {
+    padding: 40px 0 80px;
+  }
+  .product-breadcrumbs {
+    margin-bottom: 30px;
+  }
+  .product-breadcrumbs a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .product-breadcrumbs a:hover {
+    color: var(--color-primary);
+  }
+  .product-breadcrumbs span {
+    color: var(--color-text-light);
+    margin: 0 8px;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: flex-start;
+  }
+  .product-gallery {
+    position: sticky;
+    top: 120px;
+  }
+  .product-main-image {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #f8f8f8;
+    margin-bottom: 15px;
+  }
+  .product-main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .product-thumbnails {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  .product-thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    flex-shrink: 0;
+    transition: border-color 0.3s ease;
+  }
+  .product-thumbnail.active,
+  .product-thumbnail:hover {
+    border-color: var(--color-primary);
+  }
+  .product-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .product-badges {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+  }
+  .product-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .product-badge--sale {
+    background: #fee2e2;
+    color: #dc2626;
+  }
+  .product-badge--new {
+    background: #dbeafe;
+    color: #2563eb;
+  }
+  .product-badge--bestseller {
+    background: #fef3c7;
+    color: #d97706;
+  }
+  .product-vendor {
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .product-title {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    color: var(--color-text);
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .product-rating-count {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+  }
+  .product-price-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  .product-price {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+  .product-compare-price {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    text-decoration: line-through;
+  }
+  .product-save-badge {
+    background: #dcfce7;
+    color: #16a34a;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .product-description-short {
+    color: var(--color-text-light);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+  }
+  .product-highlights {
+    background: #f8fdf8;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+  }
+  .product-highlights h4 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 12px;
+  }
+  .product-highlights ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .product-highlights li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+  }
+  .product-highlights li svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+  .product-form {
+    margin-bottom: 25px;
+  }
+  .product-variants {
+    margin-bottom: 20px;
+  }
+  .variant-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .variant-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .variant-option {
+    padding: 10px 20px;
+    border: 2px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fff;
+  }
+  .variant-option:hover {
+    border-color: var(--color-primary);
+  }
+  .variant-option.selected {
+    border-color: var(--color-primary);
+    background: rgba(45, 106, 79, 0.05);
+  }
+  .variant-option[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .product-quantity-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 2px solid #e5e5e5;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .quantity-btn {
+    width: 45px;
+    height: 50px;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: var(--color-text);
+    transition: background 0.3s ease;
+  }
+  .quantity-btn:hover {
+    background: #f5f5f5;
+  }
+  .quantity-input {
+    width: 60px;
+    height: 50px;
+    border: none;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .product-add-btn {
+    flex: 1;
+    padding: 16px 30px;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .product-add-btn:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(45, 106, 79, 0.3);
+  }
+  .product-add-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  .product-add-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .product-buy-now {
+    width: 100%;
+    padding: 16px 30px;
+    background: #fff;
+    color: var(--color-text);
+    border: 2px solid var(--color-text);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+  }
+  .product-buy-now:hover {
+    background: var(--color-text);
+    color: #fff;
+  }
+  .product-download-btn {
+    width: 100%;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #8B5E3C 0%, #6B4423 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .product-download-btn:hover {
+    background: linear-gradient(135deg, #6B4423 0%, #4A2F18 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(139, 94, 60, 0.3);
+    color: #fff;
+  }
+  .product-download-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .product-download-btn .download-icon {
+    animation: bounce-down 2s infinite;
+  }
+  @keyframes bounce-down {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(3px);
+    }
+    60% {
+      transform: translateY(2px);
+    }
+  }
+  .product-trust-badges {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 25px;
+  }
+  .trust-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+  .trust-badge svg {
+    width: 28px;
+    height: 28px;
+    color: var(--color-primary);
+  }
+  .trust-badge span {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    line-height: 1.3;
+  }
+  .product-tabs {
+    margin-top: 60px;
+  }
+  .tabs-nav {
+    display: flex;
+    border-bottom: 2px solid #eee;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  .tab-btn {
+    padding: 15px 0;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+  .tab-btn.active {
+    color: var(--color-primary);
+  }
+  .tab-btn.active::after {
+    transform: scaleX(1);
+  }
+  .tab-content {
+    display: none;
+  }
+  .tab-content.active {
+    display: block;
+  }
+  .tab-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  .tab-content p,
+  .tab-content li {
+    color: var(--color-text-light);
+    line-height: 1.8;
+  }
+  .ingredients-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  .ingredient-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #f8f8f8;
+    border-radius: 10px;
+  }
+  .ingredient-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(45, 106, 79, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ingredient-icon svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+  }
+  .usage-steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+  }
+  .usage-steps li {
+    counter-increment: step;
+    padding: 20px 20px 20px 70px;
+    position: relative;
+    margin-bottom: 15px;
+    background: #f8f8f8;
+    border-radius: 10px;
+  }
+  .usage-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 35px;
+    height: 35px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+  @media (max-width: 992px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .product-gallery {
+      position: relative;
+      top: 0;
+    }
+  }
+  @media (max-width: 576px) {
+    .product-template {
+      padding: 20px 0 60px;
+    }
+    .product-title {
+      font-size: 1.75rem;
+    }
+    .product-trust-badges {
+      grid-template-columns: 1fr;
+    }
+    .ingredients-list {
+      grid-template-columns: 1fr;
+    }
+    .tabs-nav {
+      gap: 15px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+  }
+{%- endstyle -%}
+
+<section class="product-template" data-section-id="{{ section.id }}">
+  <div class="container">
+    <!-- Breadcrumbs -->
+    <nav class="product-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      {%- if product.collections.size > 0 -%}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+        <span>/</span>
+      {%- endif -%}
+      <span>{{ product.title }}</span>
+    </nav>
+    
+    <div class="product-grid">
+      <!-- Gallery -->
+      <div class="product-gallery">
+        <div class="product-main-image" id="product-main-image">
+          {%- if product.featured_image -%}
+            <img
+              src="{{ product.featured_image | image_url: width: 1200 }}"
+              alt="{{ product.featured_image.alt | default: product.title }}"
+              id="main-product-image"
+              width="600"
+              height="600"
+            >
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+        {%- if product.images.size > 1 -%}
+          <div class="product-thumbnails">
+            {%- for image in product.images -%}
+              <button
+                type="button"
+                class="product-thumbnail {% if forloop.first %}active{% endif %}"
+                data-image-url="{{ image | image_url: width: 1200 }}"
+                data-index="{{ forloop.index0 }}"
+              >
+                <img
+                  src="{{ image | image_url: width: 200 }}"
+                  alt="{{ image.alt | default: product.title }}"
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                >
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+      
+      <!-- Product Info -->
+      <div class="product-info">
+        <!-- Badges -->
+        <div class="product-badges">
+          {%- if product.compare_at_price > product.price -%}
+            <span class="product-badge product-badge--sale">Sale</span>
+          {%- endif -%}
+          {%- if product.tags contains 'new' -%}
+            <span class="product-badge product-badge--new">New</span>
+          {%- endif -%}
+          {%- if product.tags contains 'bestseller' -%}
+            <span class="product-badge product-badge--bestseller">Bestseller</span>
+          {%- endif -%}
+        </div>
+        
+        {%- if product.vendor != blank -%}
+          <p class="product-vendor">{{ product.vendor }}</p>
+        {%- endif -%}
+        
+        <h1 class="product-title">{{ product.title }}</h1>
+        
+        <!-- Rating -->
+        <div class="product-rating">
+          {%- render 'star-rating', rating: 4.5 -%}
+          <span class="product-rating-count">({{ product.metafields.reviews.rating_count | default: '24' }} reviews)</span>
+        </div>
+        
+        <!-- Price -->
+        <div class="product-price-wrapper">
+          <span class="product-price">{{ product.price | money }}</span>
+          {%- if product.compare_at_price > product.price -%}
+            <span class="product-compare-price">{{ product.compare_at_price | money }}</span>
+            {%- assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+            <span class="product-save-badge">Save {{ savings }}%</span>
+          {%- endif -%}
+        </div>
+        
+        <!-- Short Description -->
+        {%- if product.description != blank -%}
+          <div class="product-description-short">
+            {{ product.description | strip_html | truncate: 200 }}
+          </div>
+        {%- endif -%}
+        
+        <!-- Highlights -->
+        {%- if section.settings.show_highlights -%}
+          <div class="product-highlights">
+            <h4>Key Benefits</h4>
+            <ul>
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'highlight' -%}
+                  <li {{ block.shopify_attributes }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    {{ block.settings.text }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+        
+        <!-- Product Form -->
+        {%- form 'product', product, class: 'product-form', id: 'product-form', data-product-form: '' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          
+          <!-- Variants -->
+          {%- unless product.has_only_default_variant -%}
+            <div class="product-variants">
+              {%- for option in product.options_with_values -%}
+                <div class="variant-group">
+                  <label class="variant-label">{{ option.name }}: <strong id="selected-{{ option.name | handleize }}">{{ option.selected_value }}</strong></label>
+                  <div class="variant-options">
+                    {%- for value in option.values -%}
+                      <button
+                        type="button"
+                        class="variant-option {% if option.selected_value == value %}selected{% endif %}"
+                        data-option-name="{{ option.name }}"
+                        data-option-value="{{ value }}"
+                      >
+                        {{ value }}
+                      </button>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+          
+          <!-- Quantity & Add to Cart -->
+          <div class="product-quantity-row">
+            <div class="quantity-selector">
+              <button type="button" class="quantity-btn" data-action="decrease">−</button>
+              <input type="number" name="quantity" value="1" min="1" class="quantity-input" aria-label="Quantity">
+              <button type="button" class="quantity-btn" data-action="increase">+</button>
+            </div>
+            <button
+              type="submit"
+              class="product-add-btn"
+              {% unless product.available %}disabled{% endunless %}
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+              {%- if product.available -%}
+                Add to Cart
+              {%- else -%}
+                Sold Out
+              {%- endif -%}
+            </button>
+          </div>
+          
+          {%- endform -%}
+        
+        <!-- Buy Now -->
+        {%- if section.settings.show_buy_now and product.available -%}
+          <form action="/cart" method="post" class="buy-now-form">
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" name="checkout" class="product-buy-now">
+              Buy Now
+            </button>
+          </form>
+        {%- endif -%}
+        
+        <!-- Product PDF/PPT Download Button -->
+        {%- assign download_url = product.metafields.custom.product_presentation_url | default: section.settings.default_download_url -%}
+        {%- if download_url != blank or section.settings.show_download_placeholder -%}
+          {%- if download_url != blank -%}
+            <a href="{{ download_url }}" class="product-download-btn" target="_blank" rel="noopener" download>
+              <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              {{ section.settings.download_button_text | default: 'Download Product Presentation' }}
+            </a>
+          {%- else -%}
+            <button type="button" class="product-download-btn" disabled style="opacity: 0.6; cursor: not-allowed;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Presentation Coming Soon
+            </button>
+          {%- endif -%}
+        {%- endif -%}
+        
+        <!-- Trust Badges -->
+        <div class="product-trust-badges">
+          <div class="trust-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+              <path d="M16 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7"></path>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+            <span>Free Shipping<br>Above ₹400</span>
+          </div>
+          <div class="trust-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+            <span>100% Authentic<br>Products</span>
+          </div>
+          <div class="trust-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Secure<br>Checkout</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Product Tabs -->
+    <div class="product-tabs">
+      <div class="tabs-nav">
+        <button type="button" class="tab-btn active" data-tab="description">Description</button>
+        <button type="button" class="tab-btn" data-tab="ingredients">Ingredients</button>
+        <button type="button" class="tab-btn" data-tab="usage">How to Use</button>
+        <button type="button" class="tab-btn" data-tab="shipping">Shipping</button>
+      </div>
+      
+      <div class="tab-content active" id="tab-description">
+        <div class="rte">
+          {{ product.description }}
+        </div>
+      </div>
+      
+      <div class="tab-content" id="tab-ingredients">
+        <h3>Natural Ingredients</h3>
+        <div class="ingredients-list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'ingredient' -%}
+              <div class="ingredient-item" {{ block.shopify_attributes }}>
+                <div class="ingredient-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <strong>{{ block.settings.name }}</strong>
+                  <p style="font-size: 0.85rem; margin-top: 4px;">{{ block.settings.benefit }}</p>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      
+      <div class="tab-content" id="tab-usage">
+        <h3>How to Use</h3>
+        <ol class="usage-steps">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'usage_step' -%}
+              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ol>
+      </div>
+      
+      <div class="tab-content" id="tab-shipping">
+        <h3>Shipping & Returns</h3>
+        <p><strong>Free Shipping:</strong> On all orders above ₹400</p>
+        <p><strong>Delivery Time:</strong> 5-7 business days across India</p>
+        <p><strong>Returns:</strong> Easy 7-day return policy for unopened products</p>
+        <p><strong>COD:</strong> Cash on Delivery available</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="application/json" id="product-json">
+  {{ product | json }}
+</script>
+
+{% schema %}
+{
+  "name": "Product Template",
+  "tag": "section",
+  "class": "section-product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_highlights",
+      "label": "Show highlights",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy_now",
+      "label": "Show Buy Now button",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share",
+      "label": "Show share buttons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Product Presentation Download"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_download_placeholder",
+      "label": "Show download button placeholder",
+      "info": "Shows a disabled button when no PDF/PPT is available",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "download_button_text",
+      "label": "Download button text",
+      "default": "Download Product Presentation"
+    },
+    {
+      "type": "url",
+      "id": "default_download_url",
+      "label": "Default presentation URL",
+      "info": "Fallback URL if product metafield is not set. Use product metafield 'custom.product_presentation_url' for per-product files."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "highlight",
+      "name": "Highlight",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "100% Natural Ingredients"
+        }
+      ]
+    },
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Ingredient name",
+          "default": "Ashwagandha"
+        },
+        {
+          "type": "text",
+          "id": "benefit",
+          "label": "Benefit",
+          "default": "Reduces stress and anxiety"
+        }
+      ]
+    },
+    {
+      "type": "usage_step",
+      "name": "Usage Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Step text",
+          "default": "Take 1-2 tablets twice daily"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Template",
+      "blocks": [
+        { "type": "highlight", "settings": { "text": "100% Natural Ingredients" } },
+        { "type": "highlight", "settings": { "text": "No Side Effects" } },
+        { "type": "highlight", "settings": { "text": "Clinically Tested" } },
+        { "type": "highlight", "settings": { "text": "GMP Certified" } },
+        { "type": "ingredient", "settings": { "name": "Ashwagandha", "benefit": "Reduces stress and boosts immunity" } },
+        { "type": "ingredient", "settings": { "name": "Tulsi", "benefit": "Natural antioxidant and adaptogen" } },
+        { "type": "ingredient", "settings": { "name": "Amla", "benefit": "Rich in Vitamin C" } },
+        { "type": "ingredient", "settings": { "name": "Giloy", "benefit": "Enhances immunity" } },
+        { "type": "usage_step", "settings": { "text": "Take 1-2 tablets twice daily after meals" } },
+        { "type": "usage_step", "settings": { "text": "Swallow with lukewarm water or milk" } },
+        { "type": "usage_step", "settings": { "text": "Continue for at least 3 months for best results" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

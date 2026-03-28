@@ -1,0 +1,97 @@
+{%- comment -%}
+  Cart Drawer Snippet
+{%- endcomment -%}
+
+<div class="cart-drawer" id="cart-drawer" aria-hidden="true">
+  <div class="cart-drawer__header">
+    <h2 class="cart-drawer__title">Your Cart ({{ cart.item_count }})</h2>
+    <button type="button" class="cart-drawer__close" aria-label="{{ 'accessibility.close' | t }}">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="cart-drawer__items">
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-drawer__empty">
+        <p>{{ 'cart.general.empty' | t }}</p>
+        <a href="/collections/all" class="btn btn--primary mt-lg">{{ 'cart.general.continue_browsing' | t }}</a>
+      </div>
+    {%- else -%}
+      {%- for item in cart.items -%}
+        <div class="cart-drawer__item" data-key="{{ item.key }}">
+          <div class="cart-drawer__item-image">
+            {%- if item.image -%}
+              <img 
+                src="{{ item.image | image_url: width: 160 }}" 
+                alt="{{ item.title | escape }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+          <div class="cart-drawer__item-details">
+            <h4 class="cart-drawer__item-title">{{ item.product.title }}</h4>
+            {%- if item.variant.title != 'Default Title' -%}
+              <p class="cart-drawer__item-variant">{{ item.variant.title }}</p>
+            {%- endif -%}
+            <p class="cart-drawer__item-price">{{ item.final_line_price | money }}</p>
+            <div class="cart-drawer__item-actions">
+              <div class="quantity-selector quantity-selector--sm">
+                <button type="button" class="quantity-selector__btn" data-action="decrease" data-key="{{ item.key }}">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+                <input type="number" class="quantity-selector__input" value="{{ item.quantity }}" min="1" data-key="{{ item.key }}">
+                <button type="button" class="quantity-selector__btn" data-action="increase" data-key="{{ item.key }}">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+              <button type="button" class="cart-drawer__item-remove" data-action="remove" data-key="{{ item.key }}">
+                {{ 'cart.general.remove' | t }}
+              </button>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+  
+  {%- if cart.item_count > 0 -%}
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__subtotal">
+        <span>{{ 'cart.general.subtotal' | t }}</span>
+        <span class="cart-drawer__subtotal-amount">{{ cart.total_price | money }}</span>
+      </div>
+      
+      {%- if settings.free_shipping_enabled -%}
+        {%- assign free_shipping_threshold = settings.free_shipping_threshold | times: 100 -%}
+        {%- if cart.total_price < free_shipping_threshold -%}
+          {%- assign remaining = free_shipping_threshold | minus: cart.total_price -%}
+          <p class="cart-drawer__shipping-note">
+            Add {{ remaining | money }} more for free shipping!
+          </p>
+        {%- else -%}
+          <p class="cart-drawer__shipping-note">
+            You qualify for free shipping!
+          </p>
+        {%- endif -%}
+      {%- endif -%}
+      
+      <form action="/cart" method="post">
+        <button type="submit" name="checkout" class="btn btn--primary btn--full cart-drawer__checkout">
+          Checkout
+        </button>
+      </form>
+      
+      <p class="text-center text-sm text-light mt-md">
+        {{ 'cart.general.taxes_and_shipping_at_checkout' | t }}
+      </p>
+    </div>
+  {%- endif -%}
+</div>

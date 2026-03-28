@@ -1,0 +1,14 @@
+Handle,Title,Body (HTML),Sort Order,Template Suffix,Published,Image Src,Image Alt Text
+digestive-care,Digestive Care,"<p>Natural Ayurvedic solutions for digestive health. Our herbal formulations help maintain healthy digestion, relieve discomfort, and support gut wellness.</p>",best-selling,,TRUE,,Digestive Care Collection
+respiratory-health,Respiratory & Cough Care,"<p>Breathe easy with our traditional Ayurvedic remedies for respiratory health. Effective relief for cough, cold, and congestion using pure herbal ingredients.</p>",best-selling,,TRUE,,Respiratory Health Collection
+skin-care,Skin Care,"<p>Nurture your skin naturally with our Ayurvedic skin care range. Pure herbal formulations for healthy, glowing skin without harsh chemicals.</p>",best-selling,,TRUE,,Skin Care Collection
+hair-care,Hair Care,"<p>Revitalize your hair with traditional Ayurvedic hair care. Natural oils and treatments for strong, healthy, lustrous hair.</p>",best-selling,,TRUE,,Hair Care Collection
+pain-relief,Pain & Joint Care,"<p>Find natural relief from pain and joint discomfort with our Ayurvedic formulations. Time-tested herbal remedies for mobility and comfort.</p>",best-selling,,TRUE,,Pain Relief Collection
+womens-health,Women's Wellness,"<p>Specialized Ayurvedic care for women's health needs. Natural solutions to support hormonal balance, energy, and overall wellness.</p>",best-selling,,TRUE,,Women's Wellness Collection
+mens-health,Men's Wellness,"<p>Ayurvedic formulations designed for men's health and vitality. Natural support for strength, energy, and overall well-being.</p>",best-selling,,TRUE,,Men's Wellness Collection
+child-care,Child Care,"<p>Gentle Ayurvedic care for children. Safe, natural formulations specially designed for your little ones' health and wellness.</p>",best-selling,,TRUE,,Child Care Collection
+immunity-boosters,Immunity Boosters,"<p>Strengthen your body's natural defenses with our Ayurvedic immunity boosters. Pure herbal formulations to support year-round wellness.</p>",best-selling,,TRUE,,Immunity Boosters Collection
+oral-care,Oral Care,"<p>Traditional Ayurvedic oral care for healthy teeth and gums. Natural ingredients for fresh breath and complete oral hygiene.</p>",best-selling,,TRUE,,Oral Care Collection
+piles-care,Piles Care,"<p>Effective Ayurvedic relief for piles and hemorrhoids. Natural formulations for comfort and healing.</p>",best-selling,,TRUE,,Piles Care Collection
+soaps,Herbal Soaps,"<p>Pure Ayurvedic soaps made with natural herbs and oils. Gentle cleansing that nourishes and protects your skin.</p>",best-selling,,TRUE,,Herbal Soaps Collection
+bestsellers,Bestsellers,"<p>Our most loved Ayurvedic products, trusted by thousands of customers. Discover why these are our top sellers.</p>",best-selling,,TRUE,,Bestsellers Collection

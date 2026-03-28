@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "collection-list-template",
+      "settings": {
+        "title": "Our Collections",
+        "description": "Browse our curated collections of authentic Ayurvedic products"
+      }
+    }
+  },
+  "order": ["main"]
+}
