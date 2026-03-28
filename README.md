@@ -42,7 +42,6 @@ This repository contains the complete Shopify store setup: custom theme, 500+ pr
 | **Background** | ![#FDF8F0](https://via.placeholder.com/15/FDF8F0/FDF8F0.png) `#FDF8F0` Cream/Off-white |
 | **Header Font** | Playfair Display |
 | **Body Font** | Inter |
-| **Logo** | ![PRM Logo](Prm%20Logo.jpg) |
 
 ---
 
