@@ -319,17 +319,6 @@
       {%- endif -%}
     </div>
     
-    {%- if collection.image -%}
-      <img
-        src="{{ collection.image | image_url: width: 1600 }}"
-        alt="{{ collection.title }}"
-        class="collection-image"
-        width="1200"
-        height="300"
-        loading="eager"
-      >
-    {%- endif -%}
-    
     {% paginate collection.products by section.settings.products_per_page %}
     {%- if collection.products.size > 0 -%}
       <!-- Toolbar -->
