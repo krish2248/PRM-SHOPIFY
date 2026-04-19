@@ -942,12 +942,31 @@ p:last-child {
 }
 
 @media (max-width: 768px) {
+  .social-proof {
+    padding: var(--spacing-lg) 0;
+  }
   .social-proof__grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
   }
-  
+  .social-proof__item {
+    padding: var(--spacing-sm);
+  }
   .social-proof__number {
     font-size: var(--font-size-2xl);
+  }
+  .social-proof__label {
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.04em;
+  }
+}
+
+@media (max-width: 360px) {
+  .social-proof__grid {
+    gap: var(--spacing-sm);
+  }
+  .social-proof__number {
+    font-size: var(--font-size-xl);
   }
 }
 
