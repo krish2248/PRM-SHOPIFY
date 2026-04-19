@@ -237,24 +237,21 @@
   @media (max-width: 992px) {
     .hero {
       min-height: auto;
-      padding: 80px 0 60px;
+      padding: 56px 0 48px;
     }
     .hero__grid {
       grid-template-columns: 1fr;
-      gap: 50px;
+      gap: 40px;
     }
-    .hero__right {
-      order: -1;
-    }
-    .hero__product-image {
-      max-width: 280px;
-    }
-    .hero__floating-badge {
-      display: none;
-    }
-    .hero__stats {
-      justify-content: center;
-    }
+    /* Mobile: Ancient Wisdom content first, feature cards / product after */
+    .hero__content { order: 1; text-align: center; }
+    .hero__right   { order: 2; }
+    .hero__text    { margin-left: auto; margin-right: auto; }
+    .hero__actions,
+    .hero__features { justify-content: center; }
+    .hero__product-image { max-width: 280px; }
+    .hero__floating-badge { display: none; }
+    .hero__stats { justify-content: center; }
   }
   @media (max-width: 576px) {
     .hero__title {
