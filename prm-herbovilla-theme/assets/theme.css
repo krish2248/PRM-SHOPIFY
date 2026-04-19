@@ -1728,9 +1728,28 @@ p:last-child {
   font-weight: 500;
 }
 
+@media (max-width: 768px) {
+  .newsletter__title {
+    font-size: var(--font-size-xl);
+  }
+  .newsletter__text {
+    font-size: var(--font-size-base);
+    padding: 0 var(--spacing-sm);
+  }
+}
+
 @media (max-width: 480px) {
   .newsletter__form {
     flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  .newsletter__input,
+  .newsletter__form .btn {
+    width: 100%;
+    min-height: 48px;
+  }
+  .newsletter__discount {
+    font-size: var(--font-size-xs);
   }
 }
 
