@@ -1,0 +1,20 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdf5ea"/>
+      <stop offset="100%" stop-color="#faecd8"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" rx="14" fill="url(#bg)"/>
+  <rect x="0" y="0" width="300" height="5" rx="3" fill="#f8c878"/>
+  <rect x="0" y="195" width="300" height="5" rx="3" fill="#fad898"/>
+  <circle cx="150" cy="82" r="40" fill="#fce8b8" stroke="#e8c070" stroke-width="1.5"/>
+  <circle cx="150" cy="68" r="12" fill="#f0c060"/>
+  <path d="M128 108 Q128 88 150 88 Q172 88 172 108" fill="#f0c060" stroke="#e0a848" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="138" y1="76" x2="126" y2="84" stroke="#e0a848" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="162" y1="76" x2="174" y2="84" stroke="#e0a848" stroke-width="1.5" stroke-linecap="round"/>
+  <text x="150" y="144" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="700" fill="#9a6010" letter-spacing="1">GENERAL WELLNESS</text>
+  <text x="150" y="162" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#c8921a" letter-spacing="2">DAILY HEALTH</text>
+  <rect x="110" y="172" width="80" height="12" rx="6" fill="#fce8c0"/>
+  <text x="150" y="182" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="8" font-weight="600" fill="#9a6010" letter-spacing="1">WELLNESS</text>
+</svg>

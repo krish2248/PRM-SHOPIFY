@@ -1,0 +1,21 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eaf0f8"/>
+      <stop offset="100%" stop-color="#d8e8f4"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" rx="14" fill="url(#bg)"/>
+  <rect x="0" y="0" width="300" height="5" rx="3" fill="#7898d8"/>
+  <rect x="0" y="195" width="300" height="5" rx="3" fill="#98b8e8"/>
+  <circle cx="150" cy="64" r="18" fill="#b8ccf0" stroke="#7898d0" stroke-width="1.5"/>
+  <path d="M122 120 L122 98 Q122 80 150 80 Q178 80 178 98 L178 120" fill="#b8ccf0" stroke="#7898d0" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="122" y1="100" x2="108" y2="100" stroke="#98b0e0" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="178" y1="100" x2="192" y2="100" stroke="#98b0e0" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="108" y1="100" x2="108" y2="120" stroke="#98b0e0" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="192" y1="100" x2="192" y2="120" stroke="#98b0e0" stroke-width="1.8" stroke-linecap="round"/>
+  <text x="150" y="144" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="15" font-weight="700" fill="#2a3e80" letter-spacing="1">MEN'S HEALTH</text>
+  <text x="150" y="162" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#5068a8" letter-spacing="2">VITALITY &amp; STRENGTH</text>
+  <rect x="113" y="172" width="74" height="12" rx="6" fill="#d0dcf4"/>
+  <text x="150" y="182" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="8" font-weight="600" fill="#2a3e80" letter-spacing="1">FOR HIM</text>
+</svg>

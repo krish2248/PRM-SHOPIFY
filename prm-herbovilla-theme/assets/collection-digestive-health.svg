@@ -1,0 +1,21 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdfbea"/>
+      <stop offset="100%" stop-color="#f8f4d0"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" rx="14" fill="url(#bg)"/>
+  <rect x="0" y="0" width="300" height="5" rx="3" fill="#e8d870"/>
+  <rect x="0" y="195" width="300" height="5" rx="3" fill="#f0e890"/>
+  <ellipse cx="150" cy="84" rx="30" ry="36" fill="#f4f0b0" stroke="#d0c850" stroke-width="1.5"/>
+  <ellipse cx="150" cy="84" rx="20" ry="26" fill="#e8e080" stroke="#c0b840" stroke-width="1"/>
+  <path d="M140 50 Q144 38 150 34 Q156 38 160 50" fill="none" stroke="#b0a030" stroke-width="2" stroke-linecap="round"/>
+  <path d="M132 72 Q142 68 152 72" fill="none" stroke="#b0a030" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M132 84 Q142 80 152 84" fill="none" stroke="#b0a030" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M132 96 Q142 92 152 96" fill="none" stroke="#c0b040" stroke-width="1.2" stroke-linecap="round"/>
+  <text x="150" y="140" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="700" fill="#706010" letter-spacing="1">DIGESTIVE HEALTH</text>
+  <text x="150" y="158" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#a09020" letter-spacing="2">GUT &amp; DIGESTION</text>
+  <rect x="110" y="168" width="80" height="12" rx="6" fill="#f0eab0"/>
+  <text x="150" y="178" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="8" font-weight="600" fill="#706010" letter-spacing="1">GUT CARE</text>
+</svg>
