@@ -1030,70 +1030,65 @@ p:last-child {
 }
 
 /* ============================================
-   SHOP BY GOAL / COLLECTIONS GRID
+   SHOP BY GOAL / COLLECTIONS GRID (icon cards)
    ============================================ */
+.shop-by-goal-section {
+  padding: var(--spacing-2xl) 0;
+}
+
 .collections-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
 .collection-card {
   position: relative;
-  aspect-ratio: 1;
+  background-color: var(--card-color, var(--color-primary));
   border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  background-color: var(--color-background-alt);
-}
-
-.collection-card__image {
-  position: absolute;
-  inset: 0;
-}
-
-.collection-card__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--transition-slow);
-}
-
-.collection-card:hover .collection-card__image img {
-  transform: scale(1.08);
-}
-
-.collection-card__overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
-  transition: background var(--transition-base);
-}
-
-.collection-card:hover .collection-card__overlay {
-  background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, 0.8) 100%);
-}
-
-.collection-card__content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: var(--spacing-lg);
+  padding: 22px 16px 18px;
+  text-align: center;
   color: var(--color-white);
-  z-index: 2;
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.collection-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.collection-card__icon-wrap {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+}
+
+.collection-card__icon-wrap svg {
+  width: 32px;
+  height: 32px;
+  display: block;
 }
 
 .collection-card__title {
   font-family: var(--font-heading);
-  font-size: var(--font-size-lg);
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: var(--spacing-xs);
   color: var(--color-white);
+  margin: 0 0 2px;
+  line-height: 1.25;
 }
 
 .collection-card__count {
-  font-size: var(--font-size-sm);
+  font-size: 0.8rem;
+  color: var(--color-white);
   opacity: 0.85;
+  margin: 0;
 }
 
 .collection-card__link {
@@ -1109,34 +1104,48 @@ p:last-child {
 }
 
 @media (max-width: 768px) {
+  .shop-by-goal-section {
+    padding: var(--spacing-xl) 0;
+  }
   .collections-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-  }
-  .collection-card {
-    padding: 24px 16px 20px;
-    gap: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .collections-grid {
     gap: var(--spacing-sm);
   }
   .collection-card {
-    padding: 20px 12px 18px;
-    gap: 10px;
+    padding: 18px 12px 14px;
   }
   .collection-card__icon-wrap {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 8px;
   }
   .collection-card__icon-wrap svg {
     width: 28px;
     height: 28px;
   }
   .collection-card__title {
-    font-size: var(--font-size-sm);
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .collection-card {
+    padding: 16px 10px 12px;
+  }
+  .collection-card__icon-wrap {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 6px;
+  }
+  .collection-card__icon-wrap svg {
+    width: 24px;
+    height: 24px;
+  }
+  .collection-card__title {
+    font-size: 0.875rem;
+  }
+  .collection-card__count {
+    font-size: 0.72rem;
   }
 }
 
