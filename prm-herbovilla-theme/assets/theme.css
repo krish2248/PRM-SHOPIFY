@@ -1033,22 +1033,20 @@ p:last-child {
    SHOP BY GOAL / COLLECTIONS GRID (icon cards)
    ============================================ */
 .shop-by-goal-section {
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-3xl) 0;
 }
 
 .collections-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-sm);
-  max-width: 1080px;
-  margin: 0 auto;
+  gap: var(--spacing-lg);
 }
 
 .collection-card {
   position: relative;
   background-color: var(--card-color, var(--color-primary));
-  border-radius: var(--border-radius-md);
-  padding: 16px 12px 14px;
+  border-radius: var(--border-radius-lg);
+  padding: 34px 24px 28px;
   text-align: center;
   color: var(--color-white);
   overflow: hidden;
@@ -1056,14 +1054,14 @@ p:last-child {
 }
 
 .collection-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
 }
 
 .collection-card__icon-wrap {
-  width: 48px;
-  height: 48px;
-  margin: 0 auto 8px;
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1072,22 +1070,22 @@ p:last-child {
 }
 
 .collection-card__icon-wrap svg {
-  width: 26px;
-  height: 26px;
+  width: 44px;
+  height: 44px;
   display: block;
 }
 
 .collection-card__title {
   font-family: var(--font-heading);
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: var(--color-white);
-  margin: 0 0 2px;
+  margin: 0 0 4px;
   line-height: 1.25;
 }
 
 .collection-card__count {
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   color: var(--color-white);
   opacity: 0.85;
   margin: 0;
@@ -1107,47 +1105,47 @@ p:last-child {
 
 @media (max-width: 768px) {
   .shop-by-goal-section {
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-2xl) 0;
   }
   .collections-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
   }
   .collection-card {
-    padding: 14px 10px 12px;
+    padding: 26px 18px 22px;
   }
   .collection-card__icon-wrap {
-    width: 44px;
-    height: 44px;
-    margin-bottom: 6px;
+    width: 68px;
+    height: 68px;
+    margin-bottom: 12px;
   }
   .collection-card__icon-wrap svg {
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
   }
   .collection-card__title {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 480px) {
   .collection-card {
-    padding: 12px 8px 10px;
+    padding: 22px 14px 18px;
   }
   .collection-card__icon-wrap {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 5px;
+    width: 58px;
+    height: 58px;
+    margin-bottom: 10px;
   }
   .collection-card__icon-wrap svg {
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 30px;
   }
   .collection-card__title {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
   .collection-card__count {
-    font-size: 0.68rem;
+    font-size: 0.8rem;
   }
 }
 
