@@ -418,32 +418,130 @@
     color: var(--color-text-light);
     line-height: 1.8;
   }
+  .ingredients-intro {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .ingredients-footnote {
+    margin-top: 22px;
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    font-style: italic;
+    border-top: 1px dashed #e5e5e5;
+    padding-top: 14px;
+  }
   .ingredients-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 12px;
   }
   .ingredient-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
-    padding: 15px;
-    background: #f8f8f8;
+    padding: 14px 16px;
+    background: #f8fdf8;
+    border: 1px solid rgba(45, 106, 79, 0.12);
     border-radius: 10px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .ingredient-item:hover {
+    box-shadow: 0 4px 14px rgba(45, 106, 79, 0.12);
+    transform: translateY(-1px);
   }
   .ingredient-icon {
-    width: 40px;
-    height: 40px;
-    background: rgba(45, 106, 79, 0.1);
+    width: 36px;
+    height: 36px;
+    background: rgba(45, 106, 79, 0.12);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
   }
   .ingredient-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     color: var(--color-primary);
+  }
+  .ingredient-text {
+    flex: 1;
+    min-width: 0;
+  }
+  .ingredient-text strong {
+    display: block;
+    color: var(--color-text);
+    font-size: 0.92rem;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+  .ingredient-dose {
+    font-size: 0.8rem;
+    margin-top: 3px;
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+  .product-description-structured .rte {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-text-light);
+  }
+  .product-description-structured .rte p {
+    margin-bottom: 14px;
+  }
+  .desc-section {
+    margin-top: 28px;
+  }
+  .desc-heading {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    color: var(--color-text);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid rgba(45, 106, 79, 0.15);
+  }
+  .desc-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .desc-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #f8fdf8;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+  .desc-benefits li svg {
+    width: 16px;
+    height: 16px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+  .desc-spec-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 20px;
+    margin: 0;
+  }
+  .desc-spec-list dt {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: 0.9rem;
+  }
+  .desc-spec-list dd {
+    margin: 0;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
   }
   .usage-steps {
     counter-reset: step;
@@ -496,6 +594,16 @@
     }
     .ingredients-list {
       grid-template-columns: 1fr;
+    }
+    .desc-benefits {
+      grid-template-columns: 1fr;
+    }
+    .desc-spec-list {
+      grid-template-columns: 1fr;
+      gap: 4px 0;
+    }
+    .desc-spec-list dt {
+      margin-top: 8px;
     }
     .tabs-nav {
       gap: 15px;
@@ -688,7 +796,9 @@
         {%- endif -%}
         
         <!-- Product PDF/PPT Download Button -->
-        {%- assign download_url = product.metafields.custom.product_presentation_url | default: section.settings.default_download_url -%}
+        {%- capture resolved_pdf_url -%}{%- render 'product-pdf-url', product: product -%}{%- endcapture -%}
+        {%- assign resolved_pdf_url = resolved_pdf_url | strip -%}
+        {%- assign download_url = product.metafields.custom.product_presentation_url | default: resolved_pdf_url | default: section.settings.default_download_url -%}
         {%- if download_url != blank or section.settings.show_download_placeholder -%}
           {%- if download_url != blank -%}
             <a href="{{ download_url }}" class="product-download-btn" target="_blank" rel="noopener" download>
@@ -750,30 +860,108 @@
       </div>
       
       <div class="tab-content active" id="tab-description">
-        <div class="rte">
-          {{ product.description }}
-        </div>
-      </div>
-      
-      <div class="tab-content" id="tab-ingredients">
-        <h3>Natural Ingredients</h3>
-        <div class="ingredients-list">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'ingredient' -%}
-              <div class="ingredient-item" {{ block.shopify_attributes }}>
-                <div class="ingredient-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
-                  </svg>
-                </div>
-                <div>
-                  <strong>{{ block.settings.name }}</strong>
-                  <p style="font-size: 0.85rem; margin-top: 4px;">{{ block.settings.benefit }}</p>
-                </div>
+        <div class="product-description-structured">
+          {%- if product.description != blank -%}
+            <div class="rte">
+              {{ product.description }}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.show_highlights -%}
+            {%- assign highlight_count = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'highlight' -%}{%- assign highlight_count = highlight_count | plus: 1 -%}{%- endif -%}
+            {%- endfor -%}
+            {%- if highlight_count > 0 -%}
+              <div class="desc-section">
+                <h4 class="desc-heading">Key Benefits</h4>
+                <ul class="desc-benefits">
+                  {%- for block in section.blocks -%}
+                    {%- if block.type == 'highlight' -%}
+                      <li {{ block.shopify_attributes }}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>{{ block.settings.text }}</span>
+                      </li>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </ul>
               </div>
             {%- endif -%}
-          {%- endfor -%}
+          {%- endif -%}
+
+          {%- if product.vendor != blank or product.type != blank -%}
+            <div class="desc-section desc-specs">
+              <h4 class="desc-heading">Product Details</h4>
+              <dl class="desc-spec-list">
+                {%- if product.vendor != blank -%}
+                  <dt>Brand</dt><dd>{{ product.vendor }}</dd>
+                {%- endif -%}
+                {%- if product.type != blank -%}
+                  <dt>Category</dt><dd>{{ product.type }}</dd>
+                {%- endif -%}
+                <dt>Format</dt><dd>Ayurvedic formulation</dd>
+                <dt>Suitable For</dt><dd>Adults as directed</dd>
+              </dl>
+            </div>
+          {%- endif -%}
         </div>
+      </div>
+
+      <div class="tab-content" id="tab-ingredients">
+        <h3>Complete Ingredient List</h3>
+        {%- capture ingredients_raw -%}{%- render 'product-ingredients-data', product: product -%}{%- endcapture -%}
+        {%- assign ingredients_raw = ingredients_raw | strip -%}
+        {%- if ingredients_raw != blank -%}
+          {%- assign ingredients_array = ingredients_raw | split: '|' -%}
+          <p class="ingredients-intro">Formulated with {{ ingredients_array.size }} premium Ayurvedic ingredients, sourced and processed under strict quality standards.</p>
+          <div class="ingredients-list">
+            {%- for raw_item in ingredients_array -%}
+              {%- assign item = raw_item | strip -%}
+              {%- if item != blank -%}
+                {%- assign parts = item | split: ' - ' -%}
+                {%- assign ing_name = parts[0] | strip -%}
+                {%- assign ing_dose = '' -%}
+                {%- if parts.size > 1 -%}
+                  {%- assign ing_dose = parts | slice: 1, 10 | join: ' - ' | strip -%}
+                {%- endif -%}
+                <div class="ingredient-item">
+                  <div class="ingredient-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    </svg>
+                  </div>
+                  <div class="ingredient-text">
+                    <strong>{{ ing_name }}</strong>
+                    {%- if ing_dose != blank -%}
+                      <p class="ingredient-dose">{{ ing_dose }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          <p class="ingredients-footnote">All ingredients verified against Ayurvedic Pharmacopoeia (A.B. / BHP standards). For the use of registered medical practitioner only.</p>
+        {%- else -%}
+          <div class="ingredients-list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'ingredient' -%}
+                <div class="ingredient-item" {{ block.shopify_attributes }}>
+                  <div class="ingredient-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                    </svg>
+                  </div>
+                  <div class="ingredient-text">
+                    <strong>{{ block.settings.name }}</strong>
+                    <p class="ingredient-dose">{{ block.settings.benefit }}</p>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
       
       <div class="tab-content" id="tab-usage">
