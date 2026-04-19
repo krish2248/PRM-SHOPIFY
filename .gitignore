@@ -1,0 +1,24 @@
+# Claude Code local config
+.claude/
+
+# Accidental Windows stdout redirect
+nul
+
+# Theme zip (we track the unpacked folder instead)
+*.zip
+
+# Large source materials (not needed at runtime)
+307399052.pdf
+presentation pdfs/
+CatalogFormat*.xlsx
+All product 3d photo/
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
