@@ -254,27 +254,44 @@
     .hero__stats { justify-content: center; }
   }
   @media (max-width: 576px) {
-    .hero__title {
-      font-size: 2rem;
-    }
-    .hero__actions {
-      flex-direction: column;
-    }
-    .hero__actions .btn {
-      width: 100%;
-      justify-content: center;
-    }
-    .hero__features {
-      flex-direction: column;
-      gap: 15px;
-    }
-    .hero__stats {
-      flex-wrap: wrap;
-      gap: 25px;
-    }
-    .hero__features-grid {
-      grid-template-columns: 1fr;
-    }
+    .hero { padding: 40px 0 36px; }
+    .hero__title { font-size: clamp(1.6rem, 7vw, 2.1rem); }
+    .hero__text  { font-size: 0.95rem; }
+    .hero__actions { flex-direction: column; gap: 12px; }
+    .hero__actions .btn { width: 100%; justify-content: center; }
+    .hero__features { flex-direction: column; gap: 12px; }
+    .hero__stats { flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .hero__features-grid { grid-template-columns: 1fr; gap: 16px; }
+    .hero__feature-card { padding: 22px 20px; }
+  }
+
+  /* Tiny phones (≤375px) — iPhone SE / small Androids */
+  @media (max-width: 375px) {
+    .hero { padding: 32px 0 28px; }
+    .hero__title { font-size: 1.45rem; line-height: 1.2; }
+    .hero__text  { font-size: 0.88rem; }
+    .hero__label { font-size: 0.7rem; padding: 6px 14px; }
+    .hero__stat-number { font-size: 1.5rem; }
+    .hero__stat-label  { font-size: 0.72rem; }
+  }
+
+  /* Landscape phones — keep hero from dominating the viewport */
+  @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+    .hero { padding: 28px 0 24px; min-height: auto; }
+    .hero__grid { grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
+    .hero__content { order: 0; text-align: left; }
+    .hero__right   { order: 0; }
+    .hero__text    { margin-left: 0; }
+    .hero__actions,
+    .hero__features { justify-content: flex-start; flex-direction: row; }
+    .hero__actions .btn { width: auto; }
+    .hero__product-image { max-width: 180px; }
+  }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero__product-image,
+    .hero__floating-badge { animation: none; }
   }
 {%- endstyle -%}
 
