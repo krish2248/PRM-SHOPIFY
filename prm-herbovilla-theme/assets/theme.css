@@ -1892,17 +1892,39 @@ p:last-child {
 }
 
 @media (max-width: 768px) {
+  .footer {
+    padding-top: var(--spacing-2xl);
+  }
   .footer__grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xl);
   }
-  
   .footer__brand {
     grid-column: span 2;
   }
-  
   .footer__bottom {
     flex-direction: column;
     text-align: center;
+  }
+  .footer__payments {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    text-align: center;
+  }
+  .footer__brand {
+    grid-column: span 1;
+  }
+  .footer__links {
+    align-items: center;
+  }
+  .footer__contact-item {
+    justify-content: center;
   }
 }
 
