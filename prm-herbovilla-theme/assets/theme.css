@@ -538,6 +538,14 @@ p:last-child {
   opacity: 0.9;
 }
 
+@media (max-width: 480px) {
+  .announcement-bar {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-sm);
+    line-height: 1.45;
+  }
+}
+
 /* ============================================
    HEADER
    ============================================ */
