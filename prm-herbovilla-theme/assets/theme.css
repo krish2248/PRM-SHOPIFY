@@ -1220,6 +1220,40 @@ p:last-child {
   margin-top: var(--spacing-sm);
 }
 
+@media (max-width: 768px) {
+  .product-card__content {
+    padding: var(--spacing-md);
+  }
+  .product-card__title {
+    font-size: var(--font-size-lg);
+  }
+  .product-card__description {
+    font-size: var(--font-size-sm);
+    -webkit-line-clamp: 2;
+  }
+  .product-card__price-current {
+    font-size: var(--font-size-xl);
+  }
+  /* Show actions by default on touch — no hover state */
+  .product-card__actions {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card__content {
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
+    gap: var(--spacing-xs);
+  }
+  .product-card__vendor {
+    font-size: var(--font-size-xs);
+  }
+  .product-card__title {
+    font-size: var(--font-size-md);
+  }
+}
+
 /* ============================================
    FEATURED PRODUCTS CAROUSEL
    ============================================ */
