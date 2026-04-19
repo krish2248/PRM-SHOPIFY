@@ -144,6 +144,21 @@ p:last-child {
   background-color: var(--color-background-alt);
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+  .section    { padding: var(--spacing-3xl) 0; }
+  .section--sm { padding: var(--spacing-xl) 0; }
+  .section--lg { padding: var(--spacing-4xl) 0; }
+}
+
+@media (max-width: 480px) {
+  .section    { padding: var(--spacing-2xl) 0; }
+  .section--sm { padding: var(--spacing-lg) 0; }
+  .section--lg { padding: var(--spacing-3xl) 0; }
+}
+
 .section--primary {
   background-color: var(--color-primary);
   color: var(--color-white);
