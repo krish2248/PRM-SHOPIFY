@@ -1,38 +1,39 @@
 {%- style -%}
   .collection-template {
-    padding: 40px 0 80px;
+    padding: 24px 0 56px;
   }
   .collection-header {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 28px;
   }
   .collection-breadcrumbs {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
   .collection-breadcrumbs a {
     color: var(--color-text-light);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
   }
   .collection-breadcrumbs a:hover {
     color: var(--color-primary);
   }
   .collection-breadcrumbs span {
     color: var(--color-text-light);
-    margin: 0 8px;
+    margin: 0 6px;
+    font-size: 0.82rem;
   }
   .collection-title {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
+    font-size: 1.75rem;
     color: var(--color-text);
-    margin-bottom: 15px;
+    margin-bottom: 8px;
   }
   .collection-description {
     color: var(--color-text-light);
-    font-size: 1.1rem;
-    max-width: 700px;
+    font-size: 0.92rem;
+    max-width: 620px;
     margin: 0 auto;
-    line-height: 1.7;
+    line-height: 1.55;
   }
   .collection-image {
     width: 100%;
@@ -45,15 +46,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
     border-bottom: 1px solid #eee;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 14px;
   }
   .collection-count {
     color: var(--color-text-light);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
   .collection-filters {
     display: flex;
@@ -116,7 +117,7 @@
   .collection-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 20px;
   }
   .collection-grid.list-view {
     grid-template-columns: 1fr;
@@ -270,12 +271,21 @@
     }
   }
   @media (max-width: 768px) {
+    .collection-template {
+      padding: 18px 0 40px;
+    }
     .collection-grid {
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 14px;
     }
     .collection-title {
-      font-size: 2rem;
+      font-size: 1.5rem;
+    }
+    .collection-description {
+      font-size: 0.88rem;
+    }
+    .collection-header {
+      margin-bottom: 22px;
     }
     .collection-toolbar {
       flex-direction: column;
@@ -293,10 +303,13 @@
   }
   @media (max-width: 480px) {
     .collection-grid {
-      gap: 15px;
+      gap: 10px;
     }
     .collection-title {
-      font-size: 1.75rem;
+      font-size: 1.3rem;
+    }
+    .collection-description {
+      font-size: 0.85rem;
     }
     .filter-select {
       min-width: 120px;
