@@ -468,55 +468,84 @@
   @media (max-width: 900px) {
     .vedacold-container {
       grid-template-columns: 1fr;
-      gap: 40px;
+      gap: 36px;
     }
-    
+
     .vedacold-image {
       order: -1;
-      max-width: 350px;
+      max-width: 320px;
       margin: 0 auto;
     }
-    
+
     .vedacold-title {
-      font-size: 32px;
+      font-size: 30px;
     }
-    
+
     .vedacold-herbs {
       flex-direction: column;
       text-align: center;
     }
-    
+
     .vedacold-herbs-list {
       justify-content: center;
     }
-    
+
     .vedacold-purchase {
       flex-direction: column;
+      align-items: stretch;
+      gap: 16px;
+    }
+
+    .vedacold-price {
       align-items: flex-start;
     }
   }
-  
+
   @media (max-width: 480px) {
     .vedacold-featured {
-      padding: 50px 16px;
+      padding: 40px 16px;
     }
-    
+
+    .vedacold-image {
+      max-width: 260px;
+    }
+
     .vedacold-title {
-      font-size: 28px;
+      font-size: 24px;
+      line-height: 1.2;
     }
-    
+
     .vedacold-tagline {
-      font-size: 16px;
+      font-size: 14px;
     }
-    
+
+    .vedacold-description {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
     .vedacold-actions {
       width: 100%;
+      flex-direction: column;
+      gap: 10px;
     }
-    
-    .vedacold-add-btn {
+
+    .vedacold-add-btn,
+    .vedacold-view-btn {
       width: 100%;
       justify-content: center;
     }
+
+    .vedacold-herbs-list span {
+      font-size: 12px;
+    }
+  }
+
+  /* Tiny phones */
+  @media (max-width: 360px) {
+    .vedacold-featured { padding: 32px 14px; }
+    .vedacold-title    { font-size: 22px; }
+    .vedacold-image    { max-width: 220px; }
   }
 </style>
 
