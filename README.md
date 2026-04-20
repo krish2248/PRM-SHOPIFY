@@ -10,6 +10,7 @@
 
 <p align="center">
   <a href="https://prm-herbovilla.myshopify.com/">🌿 Visit Store</a> &nbsp;|&nbsp;
+  <a href="https://krish2248.github.io/PRM-SHOPIFY/">🖼️ GitHub Pages Preview</a> &nbsp;|&nbsp;
   <a href="https://www.prmpharmaceuticals.com/">🏢 Company Website</a> &nbsp;|&nbsp;
   <a href="mailto:contact@prmpharmaceuticals.com">📧 Contact Us</a>
 </p>
@@ -19,6 +20,7 @@
   <img src="https://img.shields.io/badge/Products-100+-2D6A4F?style=for-the-badge" alt="Products">
   <img src="https://img.shields.io/badge/Collections-13-8B5E3C?style=for-the-badge" alt="Collections">
   <img src="https://img.shields.io/badge/Currency-INR_%E2%82%B9-orange?style=for-the-badge" alt="INR">
+  <img src="https://img.shields.io/badge/GH_Pages-Live-2D6A4F?style=for-the-badge&logo=github&logoColor=white" alt="GH Pages">
 </p>
 
 ---
@@ -28,6 +30,7 @@
 **PRM HerboVilla** is the official online storefront for **PRM Pharmaceuticals** -- a trusted Ayurvedic and herbal healthcare brand from India. We offer 100+ authentic herbal products ranging from syrups, tablets, creams, oils, soaps, and more.
 
 🔗 **Live Store**: [https://prm-herbovilla.myshopify.com/](https://prm-herbovilla.myshopify.com/)
+🖼️ **GitHub Pages Preview**: [https://krish2248.github.io/PRM-SHOPIFY/](https://krish2248.github.io/PRM-SHOPIFY/) — branded landing page with the live storefront embedded inline.
 
 This repository contains the complete Shopify store setup: custom theme, 500+ product images, collection configs, and setup documentation.
 
@@ -49,7 +52,8 @@ This repository contains the complete Shopify store setup: custom theme, 500+ pr
 
 ```
 PRM-SHOPIFY/
-├── prm-herbovilla-theme/          # Custom Shopify theme (v1.0.0)
+├── docs/                          # GitHub Pages landing (index.html + brand CSS)
+├── prm-herbovilla-theme/          # Custom Shopify theme (v1.1.0)
 │   ├── assets/                    # theme.css & theme.js
 │   ├── config/                    # Settings schema & data
 │   ├── layout/theme.liquid        # Base layout
@@ -129,7 +133,7 @@ The repository includes **500+ high-quality product images** in `All product 3d 
 
 ## 🎨 Custom Theme Features
 
-The **PRM HerboVilla Theme** (v1.0.0) includes:
+The **PRM HerboVilla Theme** (v1.1.0) includes:
 
 - **Hero Banner** -- Full-width with CTA buttons
 - **Shop by Goal** -- Collection-based category grid
@@ -146,6 +150,21 @@ The **PRM HerboVilla Theme** (v1.0.0) includes:
 ### Page Templates
 
 15+ templates: Homepage, Product, Collection, Cart, Search, About, Contact, FAQ, Blog, and 5 policy pages.
+
+---
+
+## 🔧 Recent Theme Updates (v1.1.0)
+
+Storefront polish released in April 2026:
+
+| Area | Fix |
+|------|-----|
+| Footer | Removed the redundant Quick Links column; surfaced the customer-service phone (`0278 244 8087`) and email as `tel:` / `mailto:` links. |
+| Homepage — Shop by Health Goal | Collapsed the 4-column grid to 3 columns so six tiles render as a symmetric 3×2 block instead of 4 + orphan 2. |
+| Mobile menu | Raised the hamburger toggle's z-index so taps register, switched drawer background to white, added auto-close on link tap and `Escape`. |
+| Product pages | Capped gallery width/height across desktop/tablet/mobile ladders and added `min-width: 0` to grid children so product shots stop overflowing the viewport on phones. |
+| Homepage — Ingredients | Resynced the section with the live theme, bolded category titles, and darkened all ingredient items to full contrast. |
+| Docs | Added a branded GitHub Pages landing page (`docs/index.html`) that embeds the live Shopify storefront inline. |
 
 ---
 
@@ -180,7 +199,8 @@ The **PRM HerboVilla Theme** (v1.0.0) includes:
 | 🌐 Website | [prmpharmaceuticals.com](https://www.prmpharmaceuticals.com/) |
 | 🛒 Store | [prm-herbovilla.myshopify.com](https://prm-herbovilla.myshopify.com/) |
 | 📧 Email | contact@prmpharmaceuticals.com |
-| 📱 Phone | +91-9227928075 |
+| 📱 Customer Service | 0278 244 8087 |
+| 📱 WhatsApp | +91-9227928075 |
 
 ---
 
