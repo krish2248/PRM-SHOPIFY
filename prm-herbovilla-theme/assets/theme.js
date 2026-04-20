@@ -60,6 +60,14 @@
       if (this.menuToggle && this.mobileMenu) {
         this.menuToggle.addEventListener('click', () => this.openMobileMenu());
         this.mobileMenuClose?.addEventListener('click', () => this.closeMobileMenu());
+        this.mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => this.closeMobileMenu());
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.mobileMenu.classList.contains('mobile-menu--open')) {
+            this.closeMobileMenu();
+          }
+        });
       }
     }
 
