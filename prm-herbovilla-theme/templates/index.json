@@ -32,49 +32,8 @@
         "button_text_2": "Learn More",
         "button_link_2": "/pages/about-us",
         "show_features": true,
-        "show_stats": true,
-        "stat_1_number": "50+",
-        "stat_1_label": "Products",
-        "stat_2_number": "10K+",
-        "stat_2_label": "Happy Customers",
-        "stat_3_number": "25+",
-        "stat_3_label": "Years Experience"
+        "show_stats": false
       }
-    },
-    "social-proof": {
-      "type": "social-proof-bar",
-      "blocks": {
-        "stat-1": {
-          "type": "stat",
-          "settings": {
-            "number": "10,000+",
-            "label": "Happy Customers"
-          }
-        },
-        "stat-2": {
-          "type": "stat",
-          "settings": {
-            "number": "44+",
-            "label": "Natural Products"
-          }
-        },
-        "stat-3": {
-          "type": "stat",
-          "settings": {
-            "number": "25+",
-            "label": "Years Experience"
-          }
-        },
-        "stat-4": {
-          "type": "stat",
-          "settings": {
-            "number": "100%",
-            "label": "Natural Ingredients"
-          }
-        }
-      },
-      "block_order": ["stat-1", "stat-2", "stat-3", "stat-4"],
-      "settings": {}
     },
     "shop-by-goal": {
       "type": "shop-by-goal",
@@ -82,37 +41,43 @@
         "collection-1": {
           "type": "collection",
           "settings": {
+            "collection": "immunity-boosters",
             "title": "Immunity Boost"
           }
         },
         "collection-2": {
           "type": "collection",
           "settings": {
+            "collection": "hair-skin-care",
             "title": "Skin & Hair Care"
           }
         },
         "collection-3": {
           "type": "collection",
           "settings": {
+            "collection": "digestive-health",
             "title": "Digestive Health"
           }
         },
         "collection-4": {
           "type": "collection",
           "settings": {
-            "title": "Stress Relief"
+            "collection": "respiratory-care",
+            "title": "Respiratory Care"
           }
         },
         "collection-5": {
           "type": "collection",
           "settings": {
-            "title": "Joint & Bone"
+            "collection": "joint-pain-relief",
+            "title": "Joint & Pain Relief"
           }
         },
         "collection-6": {
           "type": "collection",
           "settings": {
-            "title": "Energy & Vitality"
+            "collection": "womens-health",
+            "title": "Women's Wellness"
           }
         }
       },
@@ -121,180 +86,6 @@
         "label": "Shop by Health Goal",
         "title": "Find Your Wellness Solution",
         "text": "Browse our curated collections to find the perfect Ayurvedic solution for your health needs."
-      }
-    },
-    "collection-list": {
-      "type": "collection-list",
-      "blocks": {
-        "col-1": {
-          "type": "collection",
-          "settings": {
-            "collection": "digestive-care"
-          }
-        },
-        "col-2": {
-          "type": "collection",
-          "settings": {
-            "collection": "respiratory-health"
-          }
-        },
-        "col-3": {
-          "type": "collection",
-          "settings": {
-            "collection": "skin-care"
-          }
-        },
-        "col-4": {
-          "type": "collection",
-          "settings": {
-            "collection": "hair-care"
-          }
-        },
-        "col-5": {
-          "type": "collection",
-          "settings": {
-            "collection": "pain-relief"
-          }
-        },
-        "col-6": {
-          "type": "collection",
-          "settings": {
-            "collection": "immunity-boosters"
-          }
-        }
-      },
-      "block_order": ["col-1", "col-2", "col-3", "col-4", "col-5", "col-6"],
-      "settings": {
-        "label": "Shop by Category",
-        "title": "Explore Our Collections",
-        "text": "Browse our curated collections of authentic Ayurvedic products for every health need",
-        "columns": 3,
-        "show_view_all": true
-      }
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "label": "Featured",
-        "title": "Bestselling Products",
-        "text": "Discover our most loved Ayurvedic products trusted by thousands",
-        "collection": "bestsellers",
-        "products_count": 8,
-        "columns": 4,
-        "show_view_all": true
-      }
-    },
-    "vedacold-featured": {
-      "type": "vedacold-featured",
-      "settings": {}
-    },
-    "new-arrivals": {
-      "type": "new-arrivals-large",
-      "settings": {
-        "label": "Just Launched",
-        "title": "New Arrivals",
-        "text": "Discover our latest Ayurvedic formulations crafted with ancient wisdom and modern science.",
-        "products_count": 4,
-        "show_vendor": true,
-        "button_text": "View All New Products",
-        "button_link": "/collections/all",
-        "alt_background": false
-      }
-    },
-    "ingredients": {
-      "type": "ingredients",
-      "blocks": {
-        "ing-1": {
-          "type": "ingredient",
-          "settings": {
-            "title": "Ashwagandha",
-            "text": "Reduces stress & boosts immunity"
-          }
-        },
-        "ing-2": {
-          "type": "ingredient",
-          "settings": {
-            "title": "Tulsi",
-            "text": "Natural adaptogen & antioxidant"
-          }
-        },
-        "ing-3": {
-          "type": "ingredient",
-          "settings": {
-            "title": "Amla",
-            "text": "Rich in Vitamin C & rejuvenating"
-          }
-        },
-        "ing-4": {
-          "type": "ingredient",
-          "settings": {
-            "title": "Giloy",
-            "text": "Immunity booster & detoxifier"
-          }
-        },
-        "ing-5": {
-          "type": "ingredient",
-          "settings": {
-            "title": "Brahmi",
-            "text": "Enhances memory & focus"
-          }
-        },
-        "ing-6": {
-          "type": "ingredient",
-          "settings": {
-            "title": "Shatavari",
-            "text": "Women's wellness & vitality"
-          }
-        }
-      },
-      "block_order": ["ing-1", "ing-2", "ing-3", "ing-4", "ing-5", "ing-6"],
-      "settings": {
-        "label": "Pure Ingredients",
-        "title": "Powered by Nature's Finest",
-        "text": "We source only the purest, highest-quality herbs from trusted organic farms across India"
-      }
-    },
-    "how-it-works": {
-      "type": "how-it-works",
-      "blocks": {
-        "step-1": {
-          "type": "step",
-          "settings": {
-            "icon": "search",
-            "title": "Browse Products",
-            "text": "Explore our wide range of authentic Ayurvedic solutions for your health needs"
-          }
-        },
-        "step-2": {
-          "type": "step",
-          "settings": {
-            "icon": "cart",
-            "title": "Place Your Order",
-            "text": "Add products to cart and checkout securely with multiple payment options"
-          }
-        },
-        "step-3": {
-          "type": "step",
-          "settings": {
-            "icon": "truck",
-            "title": "Fast Delivery",
-            "text": "We deliver across India within 5-7 days. Free shipping above Rs.400"
-          }
-        },
-        "step-4": {
-          "type": "step",
-          "settings": {
-            "icon": "heart",
-            "title": "Feel the Difference",
-            "text": "Experience the natural healing power of Ayurveda in your daily wellness routine"
-          }
-        }
-      },
-      "block_order": ["step-1", "step-2", "step-3", "step-4"],
-      "settings": {
-        "label": "Simple Process",
-        "title": "Your Journey to Wellness",
-        "text": "Getting started with Ayurvedic wellness has never been easier"
       }
     },
     "certifications": {
@@ -350,47 +141,142 @@
         "trust_text": "Trusted by over 10,000+ customers across India"
       }
     },
-    "why-us": {
-      "type": "why-us",
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "label": "Featured",
+        "title": "Bestselling Products",
+        "text": "Discover our most loved Ayurvedic products trusted by thousands",
+        "collection": "bestsellers",
+        "products_count": 8,
+        "columns": 4,
+        "show_view_all": true,
+        "show_secondary_image": true
+      }
+    },
+    "vedacold-featured": {
+      "type": "vedacold-featured",
+      "settings": {}
+    },
+    "new-arrivals": {
+      "type": "new-arrivals-large",
+      "settings": {
+        "label": "Just Launched",
+        "title": "New Arrivals",
+        "text": "Discover our latest Ayurvedic formulations crafted with ancient wisdom and modern science.",
+        "products_count": 8,
+        "show_vendor": true,
+        "button_text": "View All New Products",
+        "button_link": "/collections/all",
+        "alt_background": false
+      }
+    },
+    "herbs-uses": {
+      "type": "herbs-uses",
       "blocks": {
-        "feature-1": {
-          "type": "feature",
+        "cat-1": {
+          "type": "category",
           "settings": {
-            "icon": "leaf",
-            "title": "100% Natural",
-            "text": "Pure herbal ingredients with no chemicals or artificial additives"
+            "icon": "immunity",
+            "title": "Immunity & Vitality",
+            "subtitle": "Strength, energy, daily resilience",
+            "herbs": "Ashwagandha\nTulsi\nGiloy (Guduchi)\nAmla\nTriphala\nShilajit\nGokhru\nSafed Musli"
           }
         },
-        "feature-2": {
-          "type": "feature",
+        "cat-2": {
+          "type": "category",
           "settings": {
-            "icon": "shield",
-            "title": "GMP Certified",
-            "text": "Manufactured in state-of-the-art GMP certified facilities"
+            "icon": "digestive",
+            "title": "Digestive & Liver",
+            "subtitle": "Gut health, appetite, detox",
+            "herbs": "Triphala\nAjwain\nJeera\nSaunf (Fennel)\nHaritaki\nKutki\nBhringraj\nPunarnava"
           }
         },
-        "feature-3": {
-          "type": "feature",
+        "cat-3": {
+          "type": "category",
           "settings": {
-            "icon": "heart",
-            "title": "Cruelty Free",
-            "text": "Never tested on animals, vegan-friendly formulations"
+            "icon": "respiratory",
+            "title": "Respiratory & Cold",
+            "subtitle": "Cough, congestion, immunity",
+            "herbs": "Tulsi\nVasaka\nYashtimadhu (Mulethi)\nPippali\nSunthi (Ginger)\nKantkari\nBharangi\nKalmegh"
           }
         },
-        "feature-4": {
-          "type": "feature",
+        "cat-4": {
+          "type": "category",
           "settings": {
-            "icon": "award",
-            "title": "AYUSH Approved",
-            "text": "Government certified authentic Ayurvedic products"
+            "icon": "joint",
+            "title": "Joint & Pain Relief",
+            "subtitle": "Mobility, inflammation, recovery",
+            "herbs": "Shallaki (Boswellia)\nNirgundi\nRasna\nGuggul\nAshwagandha\nHaridra (Turmeric)\nDashmool\nMethi"
+          }
+        },
+        "cat-5": {
+          "type": "category",
+          "settings": {
+            "icon": "skin",
+            "title": "Skin & Hair Care",
+            "subtitle": "Glow, clarity, nourishment",
+            "herbs": "Neem\nHaridra (Turmeric)\nManjistha\nAloe Vera\nBhringraj\nAmla\nBrahmi\nChandan (Sandalwood)"
+          }
+        },
+        "cat-6": {
+          "type": "category",
+          "settings": {
+            "icon": "women",
+            "title": "Women's Wellness",
+            "subtitle": "Hormonal balance, vitality",
+            "herbs": "Shatavari\nAshoka\nLodhra\nAloe Vera\nTriphala\nPunarnava\nDashamoola\nManjistha"
           }
         }
       },
-      "block_order": ["feature-1", "feature-2", "feature-3", "feature-4"],
+      "block_order": ["cat-1", "cat-2", "cat-3", "cat-4", "cat-5", "cat-6"],
       "settings": {
-        "label": "Why Choose Us",
-        "title": "The PRM HerboVilla Difference",
-        "text": "We're committed to bringing you the finest Ayurvedic products"
+        "label": "Nature's Medicine Cabinet",
+        "title": "Herbs & Their Uses",
+        "text": "Discover the classical Ayurvedic herbs behind every HerboVilla formulation — grouped by the wellness concern they traditionally support."
+      }
+    },
+    "how-it-works": {
+      "type": "how-it-works",
+      "blocks": {
+        "step-1": {
+          "type": "step",
+          "settings": {
+            "icon": "search",
+            "title": "Browse Products",
+            "text": "Explore our wide range of authentic Ayurvedic solutions for your health needs"
+          }
+        },
+        "step-2": {
+          "type": "step",
+          "settings": {
+            "icon": "cart",
+            "title": "Place Your Order",
+            "text": "Add products to cart and checkout securely with multiple payment options"
+          }
+        },
+        "step-3": {
+          "type": "step",
+          "settings": {
+            "icon": "truck",
+            "title": "Fast Delivery",
+            "text": "We deliver across India within 5-7 days. Free shipping above Rs.400"
+          }
+        },
+        "step-4": {
+          "type": "step",
+          "settings": {
+            "icon": "heart",
+            "title": "Feel the Difference",
+            "text": "Experience the natural healing power of Ayurveda in your daily wellness routine"
+          }
+        }
+      },
+      "block_order": ["step-1", "step-2", "step-3", "step-4"],
+      "settings": {
+        "label": "Simple Process",
+        "title": "Your Journey to Wellness",
+        "text": "Getting started with Ayurvedic wellness has never been easier"
       }
     },
     "testimonials": {
@@ -399,157 +285,81 @@
         "testimonial-1": {
           "type": "testimonial",
           "settings": {
-            "text": "I've been using their immunity boosters for 6 months now and the results are amazing. My energy levels have improved significantly!",
-            "name": "Priya Sharma",
-            "location": "Mumbai",
+            "text": "I recommend PRM HerboVilla's immunity formulations to patients recovering from seasonal illnesses. The clinical response has been consistent and reliable.",
+            "name": "Dr. Priya Sharma",
+            "location": "Ayurveda Physician, Mumbai",
             "rating": 5
           }
         },
         "testimonial-2": {
           "type": "testimonial",
           "settings": {
-            "text": "Finally found authentic Ayurvedic products that actually work. The hair oil has completely transformed my hair health.",
-            "name": "Rahul Patel",
-            "location": "Ahmedabad",
+            "text": "The sourcing and standardization of their herbal extracts is excellent. I trust their products for my patients with chronic respiratory concerns.",
+            "name": "Dr. Rahul Patel",
+            "location": "BAMS, Ahmedabad",
             "rating": 5
           }
         },
         "testimonial-3": {
           "type": "testimonial",
           "settings": {
-            "text": "The quality is exceptional and you can feel the difference. Their customer service is also very responsive.",
-            "name": "Sneha Reddy",
-            "location": "Bangalore",
+            "text": "Authentic classical formulations backed by modern quality control. HerboVilla has become my go-to for integrative wellness protocols.",
+            "name": "Dr. Sneha Reddy",
+            "location": "Integrative Medicine, Bangalore",
             "rating": 5
           }
         },
         "testimonial-4": {
           "type": "testimonial",
           "settings": {
-            "text": "As a yoga instructor, I recommend PRM HerboVilla products to all my students. Pure, authentic, and effective!",
-            "name": "Amit Kumar",
-            "location": "Delhi",
+            "text": "As an Ayurvedic practitioner, I appreciate GMP-certified manufacturing combined with classical Ayurvedic texts. PRM HerboVilla delivers both.",
+            "name": "Dr. Amit Kumar",
+            "location": "Panchakarma Specialist, Delhi",
             "rating": 5
           }
         },
         "testimonial-5": {
           "type": "testimonial",
           "settings": {
-            "text": "My whole family uses their digestive health products. No more acidity issues! Highly recommended for everyone.",
-            "name": "Kavita Desai",
-            "location": "Pune",
+            "text": "Their digestive health range is remarkable. My patients with IBS and acidity have shown measurable improvement within weeks of use.",
+            "name": "Dr. Kavita Desai",
+            "location": "Gastro Wellness, Pune",
             "rating": 5
           }
         },
         "testimonial-6": {
           "type": "testimonial",
           "settings": {
-            "text": "The Chyawanprash is the best I've ever had. You can taste the quality of herbs. My kids love it too!",
-            "name": "Vikram Singh",
-            "location": "Jaipur",
+            "text": "The Chyawanprash formulation follows the classical text faithfully. I prescribe it for paediatric immunity with excellent outcomes.",
+            "name": "Dr. Vikram Singh",
+            "location": "Paediatric Ayurveda, Jaipur",
             "rating": 5
           }
         },
         "testimonial-7": {
           "type": "testimonial",
           "settings": {
-            "text": "I suffered from joint pain for years. Their herbal pain relief oil gave me relief within weeks. Thank you PRM!",
-            "name": "Lakshmi Nair",
-            "location": "Chennai",
+            "text": "Their joint care oils and Rasna-based formulations have given my arthritis patients meaningful relief. Highly trusted in my practice.",
+            "name": "Dr. Lakshmi Nair",
+            "location": "Ortho-Ayurveda, Chennai",
             "rating": 5
           }
         },
         "testimonial-8": {
           "type": "testimonial",
           "settings": {
-            "text": "Switched from chemical skincare to their herbal products. My skin has never been clearer. 100% natural works!",
-            "name": "Neha Gupta",
-            "location": "Kolkata",
+            "text": "Clean, chemical-free herbal skincare backed by dermatological screening. My patients with sensitive skin tolerate these products exceptionally well.",
+            "name": "Dr. Neha Gupta",
+            "location": "Dermatology, Kolkata",
             "rating": 5
           }
         }
       },
       "block_order": ["testimonial-1", "testimonial-2", "testimonial-3", "testimonial-4", "testimonial-5", "testimonial-6", "testimonial-7", "testimonial-8"],
       "settings": {
-        "label": "Customer Stories",
-        "title": "Loved by Thousands",
-        "text": "See what our customers are saying about their wellness journey with us"
-      }
-    },
-    "blog-posts": {
-      "type": "blog-posts",
-      "settings": {
-        "label": "Ayurveda Insights",
-        "title": "Wellness Insights",
-        "text": "Expert tips and knowledge for your Ayurvedic journey",
-        "articles_count": 3
-      }
-    },
-    "brand-mission": {
-      "type": "brand-mission",
-      "blocks": {
-        "value-1": {
-          "type": "value",
-          "settings": {
-            "icon": "leaf",
-            "title": "100% Natural",
-            "text": "Pure herbal ingredients"
-          }
-        },
-        "value-2": {
-          "type": "value",
-          "settings": {
-            "icon": "shield",
-            "title": "GMP Certified",
-            "text": "Quality assured manufacturing"
-          }
-        },
-        "value-3": {
-          "type": "value",
-          "settings": {
-            "icon": "heart",
-            "title": "Cruelty Free",
-            "text": "Never tested on animals"
-          }
-        },
-        "value-4": {
-          "type": "value",
-          "settings": {
-            "icon": "star",
-            "title": "Ayush Approved",
-            "text": "Government certified"
-          }
-        },
-        "stat-1": {
-          "type": "stat",
-          "settings": {
-            "number": "44+",
-            "label": "Products"
-          }
-        },
-        "stat-2": {
-          "type": "stat",
-          "settings": {
-            "number": "10K+",
-            "label": "Happy Customers"
-          }
-        },
-        "stat-3": {
-          "type": "stat",
-          "settings": {
-            "number": "25+",
-            "label": "Years Experience"
-          }
-        }
-      },
-      "block_order": ["value-1", "value-2", "value-3", "value-4", "stat-1", "stat-2", "stat-3"],
-      "settings": {
-        "label": "Our Mission",
-        "title": "Bringing <span>Ancient Wisdom</span> to Modern Wellness",
-        "description": "At PRM HerboVilla, we believe that true health comes from nature. Our mission is to make authentic Ayurvedic remedies accessible to everyone, while maintaining the highest standards of quality and purity.",
-        "cta_text": "Learn Our Story",
-        "cta_link": "/pages/about-us",
-        "show_stats": true
+        "label": "Doctor's Reviews",
+        "title": "Trusted by Healthcare Professionals",
+        "text": "Leading Ayurvedic doctors and practitioners recommend PRM HerboVilla"
       }
     },
     "newsletter": {
@@ -585,19 +395,14 @@
   },
   "order": [
     "hero",
-    "social-proof",
     "shop-by-goal",
-    "collection-list",
+    "certifications",
     "featured-collection",
     "vedacold-featured",
     "new-arrivals",
+    "herbs-uses",
     "how-it-works",
-    "ingredients",
-    "certifications",
-    "why-us",
     "testimonials",
-    "blog-posts",
-    "brand-mission",
     "newsletter"
   ]
 }
