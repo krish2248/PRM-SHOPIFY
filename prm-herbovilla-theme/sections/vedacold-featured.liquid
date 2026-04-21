@@ -150,27 +150,18 @@
         
         <div class="vedacold-actions">
           {%- assign vedacold_product = all_products['vedacold-cv-675'] -%}
-          {%- if vedacold_product != blank and vedacold_product.available -%}
-            <button type="button" class="vedacold-add-btn" data-add-to-cart data-variant-id="{{ vedacold_product.first_available_variant.id }}">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-              </svg>
-              Add to Cart
-            </button>
-            <a href="{{ vedacold_product.url }}" class="vedacold-view-btn">View Details</a>
-          {%- else -%}
-            <a href="/collections/all" class="vedacold-add-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-              </svg>
-              Shop Now
-            </a>
-            <span class="vedacold-coming-soon">Coming Soon to Store</span>
+          {%- assign vedacold_url = '/products/vedacold-cv-675' -%}
+          {%- if vedacold_product != blank -%}
+            {%- assign vedacold_url = vedacold_product.url -%}
           {%- endif -%}
+          <a href="{{ vedacold_url }}" class="vedacold-add-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            Order Now
+          </a>
         </div>
       </div>
     </div>
