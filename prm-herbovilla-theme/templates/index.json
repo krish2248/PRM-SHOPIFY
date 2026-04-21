@@ -198,7 +198,11 @@
         "show_vendor": true,
         "button_text": "View All New Products",
         "button_link": "/collections/all",
-        "alt_background": false
+        "alt_background": false,
+        "product_1": "prm-castro-softgel-capsules-pack-of-2-ayurvedic-digestive-gastric-care-formula",
+        "product_2": "prm-harry-g-ayurvedic-capsules-30-caps-pack-of-1-boosts-vigour-vitality-stamina-with-suvarna-bhasma-safed-musli-ashwagandha",
+        "product_3": "prm-saheli-fairness-cream-25g-pack-of-2-glowing-supple-acne-free-skin-with-haldi-chandan-wheat-germ-oil",
+        "product_4": "prm-zymo-villa-ayurvedic-enzyme-tablet-30-tabs-pack-of-2-enhances-appetite-digestion-with-dhania-sunth-ajmo-pippali"
       }
     },
     "ingredients": {
