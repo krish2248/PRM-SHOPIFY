@@ -17,13 +17,61 @@
     
     <div class="new-arrivals-grid">
       {%- liquid
+        assign has_manual = false
+        if section.settings.product_1 != blank or section.settings.product_2 != blank or section.settings.product_3 != blank or section.settings.product_4 != blank
+          assign has_manual = true
+        endif
+
         if section.settings.collection != blank
           assign products = section.settings.collection.products
         else
           assign products = collections['all'].products
         endif
       -%}
-      
+
+      {%- if has_manual -%}
+        {%- for idx in (0..3) -%}
+          {%- if idx == 0 -%}{%- assign product = section.settings.product_1 -%}{%- endif -%}
+          {%- if idx == 1 -%}{%- assign product = section.settings.product_2 -%}{%- endif -%}
+          {%- if idx == 2 -%}{%- assign product = section.settings.product_3 -%}{%- endif -%}
+          {%- if idx == 3 -%}{%- assign product = section.settings.product_4 -%}{%- endif -%}
+          {%- if product != blank -%}
+            <div class="new-arrival-card">
+              <a href="{{ product.url }}" class="new-arrival-card__link">
+                <div class="new-arrival-card__image">
+                  {%- if product.featured_image != blank -%}
+                    <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" loading="lazy" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                  <div class="new-arrival-card__badges">
+                    {%- if product.compare_at_price > product.price -%}
+                      {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                      <span class="badge badge--sale">-{{ discount }}%</span>
+                    {%- endif -%}
+                    <span class="badge badge--new">New</span>
+                  </div>
+                </div>
+                <div class="new-arrival-card__content">
+                  {%- if section.settings.show_vendor and product.vendor != blank -%}
+                    <p class="new-arrival-card__vendor">{{ product.vendor }}</p>
+                  {%- endif -%}
+                  <h3 class="new-arrival-card__title">{{ product.title | truncate: 60 }}</h3>
+                  {%- if product.description != blank -%}
+                    <p class="new-arrival-card__description">{{ product.description | strip_html | truncate: 100 }}</p>
+                  {%- endif -%}
+                  <div class="new-arrival-card__price">
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="new-arrival-card__price-compare">{{ product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                    <span class="new-arrival-card__price-current">{{ product.price | money }}</span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
       {%- for product in products limit: section.settings.products_count -%}
         <div class="new-arrival-card">
           <a href="{{ product.url }}" class="new-arrival-card__link">
@@ -118,8 +166,9 @@
           </div>
         {%- endfor -%}
       {%- endfor -%}
+      {%- endif -%}
     </div>
-    
+
     {%- if section.settings.button_text != blank -%}
       <div class="text-center mt-2xl">
         <a href="{{ section.settings.button_link | default: section.settings.collection.url | default: routes.all_products_collection_url }}" class="btn btn--secondary">
@@ -390,6 +439,31 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Hand-picked products (optional)",
+      "info": "If any of the four product pickers below is set, they override the collection above and these exact products are shown."
+    },
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "product",
+      "id": "product_4",
+      "label": "Product 4"
     },
     {
       "type": "range",
