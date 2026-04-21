@@ -1,0 +1,19 @@
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fdf0f5"/>
+      <stop offset="100%" stop-color="#fae0ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="200" rx="14" fill="url(#bg)"/>
+  <rect x="0" y="0" width="300" height="5" rx="3" fill="#f0a0c0"/>
+  <rect x="0" y="195" width="300" height="5" rx="3" fill="#f8c0d8"/>
+  <path d="M150 46 Q174 46 178 62 Q182 78 168 90 Q160 98 150 106 Q140 98 132 90 Q118 78 122 62 Q126 46 150 46Z" fill="#fcd0e0" stroke="#e890b8" stroke-width="1.5"/>
+  <path d="M134 68 Q150 60 166 68" fill="none" stroke="#e070a8" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M138 80 Q150 76 162 80" fill="none" stroke="#e890b8" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M136 92 Q150 88 164 92" fill="none" stroke="#f0b0d0" stroke-width="1.2" stroke-linecap="round"/>
+  <text x="150" y="136" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" fill="#902060" letter-spacing="1">WOMEN'S HEALTH</text>
+  <text x="150" y="154" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#c06090" letter-spacing="2">BALANCE &amp; CARE</text>
+  <rect x="113" y="164" width="74" height="12" rx="6" fill="#f8d0e8"/>
+  <text x="150" y="174" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="8" font-weight="600" fill="#902060" letter-spacing="1">FOR HER</text>
+</svg>

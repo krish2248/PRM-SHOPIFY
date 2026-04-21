@@ -6,6 +6,10 @@ nul
 
 # Theme zip (we track the unpacked folder instead)
 *.zip
+*.rar
+
+# Local backup / source-of-truth working copy (not for git)
+last prm update/
 
 # Large source materials (not needed at runtime)
 307399052.pdf
