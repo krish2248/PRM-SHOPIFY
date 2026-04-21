@@ -8,16 +8,69 @@
     <!-- Left: Product Image -->
     <div class="vedacold-image">
       <div class="vedacold-image-wrapper">
-        <img class="vedacold-hero-img"
-             src="{{ 'vedacold-box-front.png' | asset_url }}"
-             alt="VedaCold-CV 675 Tablets — Box Front"
-             loading="lazy">
-        <div class="vedacold-thumbs">
-          <img src="{{ 'vedacold-box-back.png' | asset_url }}" alt="VedaCold box back" loading="lazy">
-          <img src="{{ 'vedacold-strip-3d.png' | asset_url }}" alt="VedaCold strip 3D" loading="lazy">
-          <img src="{{ 'vedacold-strip-back.png' | asset_url }}" alt="VedaCold strip back" loading="lazy">
-        </div>
-
+        <!-- Placeholder tablet/medicine illustration -->
+        <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" class="vedacold-placeholder-svg">
+          <!-- Background gradient -->
+          <defs>
+            <linearGradient id="vedacold-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#E8F5E9"/>
+              <stop offset="100%" style="stop-color:#C8E6C9"/>
+            </linearGradient>
+            <linearGradient id="bottle-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#1B5E20"/>
+              <stop offset="50%" style="stop-color:#2D6A4F"/>
+              <stop offset="100%" style="stop-color:#1B5E20"/>
+            </linearGradient>
+            <linearGradient id="cap-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#8B5E3C"/>
+              <stop offset="50%" style="stop-color:#A0522D"/>
+              <stop offset="100%" style="stop-color:#8B5E3C"/>
+            </linearGradient>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000" flood-opacity="0.15"/>
+            </filter>
+          </defs>
+          
+          <!-- Background circle -->
+          <circle cx="200" cy="250" r="180" fill="url(#vedacold-bg)"/>
+          
+          <!-- Medicine Bottle -->
+          <g filter="url(#shadow)">
+            <!-- Bottle body -->
+            <rect x="120" y="180" width="160" height="220" rx="12" fill="url(#bottle-gradient)"/>
+            
+            <!-- Bottle neck -->
+            <rect x="155" y="140" width="90" height="50" rx="6" fill="url(#bottle-gradient)"/>
+            
+            <!-- Cap -->
+            <rect x="145" y="110" width="110" height="40" rx="8" fill="url(#cap-gradient)"/>
+            
+            <!-- Label area -->
+            <rect x="135" y="210" width="130" height="160" rx="6" fill="#FDF8F0"/>
+            
+            <!-- Label content -->
+            <text x="200" y="245" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#2D6A4F">VedaCold</text>
+            <text x="200" y="265" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#2D6A4F">CV-675</text>
+            
+            <!-- Leaf decoration on label -->
+            <path d="M175 290 Q200 270 225 290 Q200 320 175 290" fill="#4CAF50" opacity="0.6"/>
+            <path d="M185 310 Q200 295 215 310 Q200 330 185 310" fill="#81C784" opacity="0.6"/>
+            
+            <!-- 22 Herbs badge -->
+            <circle cx="200" cy="350" r="25" fill="#2D6A4F"/>
+            <text x="200" y="347" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fff">22</text>
+            <text x="200" y="361" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#fff">HERBS</text>
+          </g>
+          
+          <!-- Floating herb leaves decoration -->
+          <g opacity="0.4">
+            <ellipse cx="80" cy="150" rx="20" ry="10" fill="#4CAF50" transform="rotate(-30 80 150)"/>
+            <ellipse cx="320" cy="180" rx="18" ry="8" fill="#81C784" transform="rotate(20 320 180)"/>
+            <ellipse cx="70" cy="350" rx="15" ry="7" fill="#66BB6A" transform="rotate(-15 70 350)"/>
+            <ellipse cx="330" cy="320" rx="22" ry="9" fill="#4CAF50" transform="rotate(35 330 320)"/>
+          </g>
+        </svg>
+        
         <!-- Ayurvedic badge -->
         <div class="vedacold-badge">
           <span>100%</span>
@@ -146,47 +199,16 @@
   
   .vedacold-image-wrapper {
     position: relative;
+    aspect-ratio: 4/5;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
   }
-
-  .vedacold-hero-img {
+  
+  .vedacold-placeholder-svg {
     width: 100%;
-    max-width: 460px;
-    height: auto;
-    display: block;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-    padding: 24px;
-    box-shadow: 0 10px 30px rgba(45, 106, 79, 0.15);
-    object-fit: contain;
-  }
-
-  .vedacold-thumbs {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    width: 100%;
-    max-width: 460px;
-  }
-
-  .vedacold-thumbs img {
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: contain;
-    background: #F5EDE0;
-    border-radius: 10px;
-    padding: 8px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .vedacold-thumbs img:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    height: 100%;
+    max-width: 400px;
   }
   
   .vedacold-badge {

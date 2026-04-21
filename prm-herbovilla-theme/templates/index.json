@@ -178,7 +178,7 @@
         "label": "Featured",
         "title": "Bestselling Products",
         "text": "Discover our most loved Ayurvedic products trusted by thousands",
-        "collection": "best-sellers",
+        "collection": "bestsellers",
         "products_count": 8,
         "columns": 4,
         "show_view_all": true
