@@ -6,17 +6,54 @@
     text-align: center;
     margin-bottom: 50px;
   }
+  .blog-header__label {
+    display: inline-block;
+    background: rgba(45, 106, 79, 0.1);
+    color: var(--color-primary);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
   .blog-title {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     color: var(--color-text);
     margin-bottom: 15px;
+    line-height: 1.2;
   }
   .blog-description {
     color: var(--color-text-light);
     font-size: 1.1rem;
-    max-width: 600px;
+    max-width: 680px;
     margin: 0 auto;
+    line-height: 1.7;
+  }
+  .blog-card__meta-cat {
+    display: inline-block;
+    background: rgba(45, 106, 79, 0.1);
+    color: var(--color-primary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+  .blog-card__external-src {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    margin-top: 10px;
+    opacity: 0.8;
+  }
+  .blog-card__external-src svg {
+    width: 11px;
+    height: 11px;
   }
   .blog-grid {
     display: grid;
@@ -173,12 +210,13 @@
 <section class="blog-template" data-section-id="{{ section.id }}">
   <div class="container">
     <div class="blog-header">
-      <h1 class="blog-title">{{ blog.title }}</h1>
+      <span class="blog-header__label">Ayurveda Insights</span>
+      <h1 class="blog-title">{{ blog.title | default: 'Wellness Journal' }}</h1>
       {%- if section.settings.description != blank -%}
         <p class="blog-description">{{ section.settings.description }}</p>
       {%- endif -%}
     </div>
-    
+
     {%- if blog.all_tags.size > 0 and section.settings.show_tags -%}
       <div class="blog-tags">
         <a href="{{ blog.url }}" class="blog-tag {% unless current_tags %}active{% endunless %}">All</a>
@@ -187,7 +225,7 @@
         {%- endfor -%}
       </div>
     {%- endif -%}
-    
+
     <div class="blog-grid">
       {%- for article in blog.articles -%}
         <article class="article-card">
@@ -240,9 +278,272 @@
             </a>
           </div>
         </article>
+      {%- else -%}
+        {%- comment -%} Curated expert-sourced Ayurvedic & herbal wellness articles {%- endcomment -%}
+
+        <article class="article-card">
+          <div class="article-card__image">
+            <a href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/ayurveda" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=500&fit=crop" alt="Ayurvedic healing herbs and spices" loading="lazy">
+            </a>
+          </div>
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span class="blog-card__meta-cat">Ayurveda 101</span>
+              <span class="article-card__date">6 min read</span>
+            </div>
+            <h2 class="article-card__title">
+              <a href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/ayurveda" target="_blank" rel="noopener noreferrer">Ayurveda: What It Is & How This 5,000-Year-Old System Heals</a>
+            </h2>
+            <p class="article-card__excerpt">Johns Hopkins explains Ayurveda — the ancient Indian system of natural healing that focuses on balance between body, mind and spirit using diet, herbs and lifestyle changes.</p>
+            <a href="https://www.hopkinsmedicine.org/health/wellness-and-prevention/ayurveda" target="_blank" rel="noopener noreferrer" class="article-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <span class="blog-card__external-src">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Johns Hopkins Medicine
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-card__image">
+            <a href="https://www.healthline.com/nutrition/ashwagandha" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&h=500&fit=crop" alt="Ashwagandha roots and powder" loading="lazy">
+            </a>
+          </div>
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span class="blog-card__meta-cat">Herbal Science</span>
+              <span class="article-card__date">10 min read</span>
+            </div>
+            <h2 class="article-card__title">
+              <a href="https://www.healthline.com/nutrition/ashwagandha" target="_blank" rel="noopener noreferrer">Ashwagandha: 12 Proven Benefits of This Ancient Adaptogen</a>
+            </h2>
+            <p class="article-card__excerpt">Ashwagandha (Withania somnifera) is a cornerstone of Ayurveda. Research confirms it can reduce cortisol, boost brain function, and help fight anxiety and stress.</p>
+            <a href="https://www.healthline.com/nutrition/ashwagandha" target="_blank" rel="noopener noreferrer" class="article-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <span class="blog-card__external-src">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-card__image">
+            <a href="https://www.healthline.com/nutrition/top-10-evidence-based-health-benefits-of-turmeric" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=800&h=500&fit=crop" alt="Turmeric golden spice" loading="lazy">
+            </a>
+          </div>
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span class="blog-card__meta-cat">Superfoods</span>
+              <span class="article-card__date">9 min read</span>
+            </div>
+            <h2 class="article-card__title">
+              <a href="https://www.healthline.com/nutrition/top-10-evidence-based-health-benefits-of-turmeric" target="_blank" rel="noopener noreferrer">Turmeric (Haldi): 10 Evidence-Backed Health Benefits</a>
+            </h2>
+            <p class="article-card__excerpt">Curcumin, turmeric's active compound, has powerful anti-inflammatory and antioxidant properties. Modern science confirms what Ayurveda recognised 4,000 years ago.</p>
+            <a href="https://www.healthline.com/nutrition/top-10-evidence-based-health-benefits-of-turmeric" target="_blank" rel="noopener noreferrer" class="article-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <span class="blog-card__external-src">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-card__image">
+            <a href="https://www.healthline.com/nutrition/triphala" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=500&fit=crop" alt="Triphala fruits and powder" loading="lazy">
+            </a>
+          </div>
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span class="blog-card__meta-cat">Digestion</span>
+              <span class="article-card__date">6 min read</span>
+            </div>
+            <h2 class="article-card__title">
+              <a href="https://www.healthline.com/nutrition/triphala" target="_blank" rel="noopener noreferrer">Triphala: Ayurveda's Superfruit for Gut Health & Detox</a>
+            </h2>
+            <p class="article-card__excerpt">Triphala — a blend of Amla, Haritaki and Bibhitaki — is one of Ayurveda's most potent formulas for digestive balance, gentle detoxification and daily regularity.</p>
+            <a href="https://www.healthline.com/nutrition/triphala" target="_blank" rel="noopener noreferrer" class="article-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <span class="blog-card__external-src">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-card__image">
+            <a href="https://www.healthline.com/nutrition/how-to-boost-immune-health" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&h=500&fit=crop" alt="Immunity boosting herbs" loading="lazy">
+            </a>
+          </div>
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span class="blog-card__meta-cat">Immunity</span>
+              <span class="article-card__date">8 min read</span>
+            </div>
+            <h2 class="article-card__title">
+              <a href="https://www.healthline.com/nutrition/how-to-boost-immune-health" target="_blank" rel="noopener noreferrer">Boost Immunity Naturally: Ayurvedic Herbs & Diet Tips</a>
+            </h2>
+            <p class="article-card__excerpt">Strengthen your natural defences with Tulsi, Giloy, Amla and adaptogenic allies. Learn how classical Ayurvedic rasayanas build long-term resilience — not just seasonal protection.</p>
+            <a href="https://www.healthline.com/nutrition/how-to-boost-immune-health" target="_blank" rel="noopener noreferrer" class="article-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <span class="blog-card__external-src">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-card__image">
+            <a href="https://www.who.int/news-room/fact-sheets/detail/traditional-complementary-and-integrative-medicine" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=500&fit=crop" alt="Traditional herbal medicine" loading="lazy">
+            </a>
+          </div>
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span class="blog-card__meta-cat">Research</span>
+              <span class="article-card__date">5 min read</span>
+            </div>
+            <h2 class="article-card__title">
+              <a href="https://www.who.int/news-room/fact-sheets/detail/traditional-complementary-and-integrative-medicine" target="_blank" rel="noopener noreferrer">WHO on Traditional Medicine: The World Is Returning to Herbs</a>
+            </h2>
+            <p class="article-card__excerpt">The World Health Organization recognises traditional medicine systems like Ayurveda. 80% of the world still relies on herbal remedies — here's why ancient wisdom is shaping modern healthcare.</p>
+            <a href="https://www.who.int/news-room/fact-sheets/detail/traditional-complementary-and-integrative-medicine" target="_blank" rel="noopener noreferrer" class="article-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <span class="blog-card__external-src">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              World Health Organization
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-card__image">
+            <a href="https://www.healthline.com/health/beauty-skin-care/toxic-ingredients-in-skin-care" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&h=500&fit=crop" alt="Natural skincare alternatives" loading="lazy">
+            </a>
+          </div>
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span class="blog-card__meta-cat">Skin Care</span>
+              <span class="article-card__date">7 min read</span>
+            </div>
+            <h2 class="article-card__title">
+              <a href="https://www.healthline.com/health/beauty-skin-care/toxic-ingredients-in-skin-care" target="_blank" rel="noopener noreferrer">Chemicals to Avoid in Skincare — and Ayurvedic Alternatives</a>
+            </h2>
+            <p class="article-card__excerpt">From parabens to phthalates, everyday skincare can expose you to harmful toxins. Discover which ingredients to avoid and why Neem, Manjistha and Chandan are safer, time-tested choices.</p>
+            <a href="https://www.healthline.com/health/beauty-skin-care/toxic-ingredients-in-skin-care" target="_blank" rel="noopener noreferrer" class="article-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <span class="blog-card__external-src">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-card__image">
+            <a href="https://www.healthline.com/nutrition/11-proven-health-benefits-of-ginger" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1573414495803-c65ae5e55cbe?w=800&h=500&fit=crop" alt="Ginger root benefits" loading="lazy">
+            </a>
+          </div>
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span class="blog-card__meta-cat">Respiratory</span>
+              <span class="article-card__date">7 min read</span>
+            </div>
+            <h2 class="article-card__title">
+              <a href="https://www.healthline.com/nutrition/11-proven-health-benefits-of-ginger" target="_blank" rel="noopener noreferrer">Sunthi (Ginger): 11 Benefits Backed by Modern Research</a>
+            </h2>
+            <p class="article-card__excerpt">Called "Vishwa Bheshaj" (universal medicine) in Ayurveda, ginger eases nausea, supports digestion, reduces muscle soreness and may lower blood sugar — here's what research actually shows.</p>
+            <a href="https://www.healthline.com/nutrition/11-proven-health-benefits-of-ginger" target="_blank" rel="noopener noreferrer" class="article-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <span class="blog-card__external-src">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-card__image">
+            <a href="https://www.healthline.com/health/tulsi" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1593252719914-9b36ce9baee6?w=800&h=500&fit=crop" alt="Tulsi holy basil" loading="lazy">
+            </a>
+          </div>
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span class="blog-card__meta-cat">Adaptogens</span>
+              <span class="article-card__date">6 min read</span>
+            </div>
+            <h2 class="article-card__title">
+              <a href="https://www.healthline.com/health/tulsi" target="_blank" rel="noopener noreferrer">Tulsi (Holy Basil): The Queen of Ayurvedic Herbs</a>
+            </h2>
+            <p class="article-card__excerpt">Revered for millennia, Tulsi (Ocimum sanctum) is both spiritual and medicinal. Learn how this adaptogen supports stress response, respiratory health and metabolic balance.</p>
+            <a href="https://www.healthline.com/health/tulsi" target="_blank" rel="noopener noreferrer" class="article-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <span class="blog-card__external-src">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-card__image">
+            <a href="https://www.healthline.com/nutrition/neem" target="_blank" rel="noopener noreferrer">
+              <img src="https://images.unsplash.com/photo-1515688594390-b649af70d282?w=800&h=500&fit=crop" alt="Neem leaves" loading="lazy">
+            </a>
+          </div>
+          <div class="article-card__content">
+            <div class="article-card__meta">
+              <span class="blog-card__meta-cat">Skin & Detox</span>
+              <span class="article-card__date">8 min read</span>
+            </div>
+            <h2 class="article-card__title">
+              <a href="https://www.healthline.com/nutrition/neem" target="_blank" rel="noopener noreferrer">Neem: Ancient Indian Secret for Skin, Blood & Oral Health</a>
+            </h2>
+            <p class="article-card__excerpt">Known as "Sarva Roga Nivarini" — the reliever of all diseases. Neem's antibacterial, antifungal and detoxifying properties make it a staple in Ayurvedic skincare and oral hygiene.</p>
+            <a href="https://www.healthline.com/nutrition/neem" target="_blank" rel="noopener noreferrer" class="article-card__link">
+              Read Article
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <span class="blog-card__external-src">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Healthline
+            </span>
+          </div>
+        </article>
+
       {%- endfor -%}
     </div>
-    
+
     {%- if paginate.pages > 1 -%}
       <nav class="blog-pagination" aria-label="Pagination">
         {%- if paginate.previous -%}
