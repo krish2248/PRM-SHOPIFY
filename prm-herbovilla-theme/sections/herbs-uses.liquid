@@ -1,0 +1,394 @@
+{% comment %}
+  Herbs & Their Uses — category cards listing classical Ayurvedic herbs
+{% endcomment %}
+
+<section class="herbs-uses" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="herbs-uses__header">
+      {%- if section.settings.label != blank -%}
+        <span class="herbs-uses__eyebrow">{{ section.settings.label }}</span>
+      {%- endif -%}
+      <h2 class="herbs-uses__title">{{ section.settings.title | default: 'Herbs & Their Uses' }}</h2>
+      {%- if section.settings.text != blank -%}
+        <p class="herbs-uses__subtitle">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="herbs-uses__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'category' -%}
+          <article class="herb-card" {{ block.shopify_attributes }}>
+            <div class="herb-card__icon" style="background: {{ block.settings.icon_bg | default: '#E8F5E9' }}; color: {{ block.settings.icon_color | default: '#2D6A4F' }};">
+              {%- case block.settings.icon -%}
+                {%- when 'immunity' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                {%- when 'digestive' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v6a6 6 0 0 0 6 6h0a6 6 0 0 0 6-6V2"/><path d="M8 22a4 4 0 1 1 8 0"/><circle cx="12" cy="14" r="1"/></svg>
+                {%- when 'respiratory' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.08 20A8 8 0 0 1 3 13.8C3 9 6 6 9 6c1.5 0 2.5.5 3 1.5.5-1 1.5-1.5 3-1.5 3 0 6 3 6 7.8A8 8 0 0 1 17.92 20"/><path d="M12 7v10"/></svg>
+                {%- when 'joint' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 10V5a3 3 0 0 0-6 0v5"/><path d="M7 14v5a3 3 0 0 0 6 0v-5"/><circle cx="7" cy="12" r="2"/><circle cx="17" cy="12" r="2"/></svg>
+                {%- when 'skin' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 14.8 7.1 17.2 8 11.7 4 7.8 9.5 7z"/></svg>
+                {%- when 'women' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M12 15v7M9 19h6"/></svg>
+                {%- when 'men' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="6"/><path d="M14 10l6-6M15 4h5v5"/></svg>
+                {%- when 'heart' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                {%- when 'mind' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3a4 4 0 0 0-4 4v2a4 4 0 0 0-2 3.46A4 4 0 0 0 5 19a4 4 0 0 0 4 2h1V3z"/><path d="M15 3a4 4 0 0 1 4 4v2a4 4 0 0 1 2 3.46A4 4 0 0 1 19 19a4 4 0 0 1-4 2h-1V3z"/></svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-3.9 2.5-7.2 6-8.5 1 2 1 5 1 6 1-1 3-2 4-2 1 4-1 10-4 11z"/></svg>
+              {%- endcase -%}
+            </div>
+            <h3 class="herb-card__title">{{ block.settings.title }}</h3>
+            {%- if block.settings.subtitle != blank -%}
+              <p class="herb-card__subtitle">{{ block.settings.subtitle }}</p>
+            {%- endif -%}
+            <ul class="herb-card__list">
+              {%- assign herbs = block.settings.herbs | newline_to_br | split: '<br />' -%}
+              {%- for herb in herbs -%}
+                {%- assign trimmed = herb | strip -%}
+                {%- if trimmed != blank -%}
+                  <li>{{ trimmed }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+            {%- if block.settings.collection_link != blank -%}
+              <a href="{{ block.settings.collection_link }}" class="herb-card__link">
+                Shop {{ block.settings.title }}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            {%- endif -%}
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .herbs-uses {
+    padding: clamp(56px, 7vw, 96px) 20px;
+    background: #FDF8F0;
+  }
+
+  .herbs-uses .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .herbs-uses__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 48px;
+  }
+
+  .herbs-uses__eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #2D6A4F;
+    margin-bottom: 14px;
+  }
+
+  .herbs-uses__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 3.6vw, 40px);
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+
+  .herbs-uses__subtitle {
+    font-size: clamp(14px, 1.4vw, 16px);
+    color: #666;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .herbs-uses__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .herb-card {
+    background: #ffffff;
+    border: 1px solid #EFE7D9;
+    border-radius: 18px;
+    padding: 28px 24px 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .herb-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 35px rgba(27, 67, 50, 0.10);
+    border-color: #d8c9a8;
+  }
+
+  .herb-card__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .herb-card__icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .herb-card__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1B4332;
+    margin: 0 0 4px;
+    line-height: 1.25;
+  }
+
+  .herb-card__subtitle {
+    font-size: 13px;
+    color: #8B5E3C;
+    margin: 0 0 14px;
+    font-style: italic;
+  }
+
+  .herb-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px;
+    flex: 1;
+  }
+
+  .herb-card__list li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  .herb-card__list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #40916C;
+    opacity: 0.8;
+  }
+
+  .herb-card__list li::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 10px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  .herb-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 6px;
+    color: #2D6A4F;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-top: 1px dashed #E0D5C7;
+    padding-top: 14px;
+    transition: gap 0.25s ease, color 0.25s ease;
+  }
+
+  .herb-card__link svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.25s ease;
+  }
+
+  .herb-card__link:hover {
+    color: #1B4332;
+    gap: 12px;
+  }
+
+  .herb-card__link:hover svg {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 576px) {
+    .herb-card {
+      padding: 24px 20px 20px;
+    }
+
+    .herb-card__list li {
+      font-size: 13px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Herbs & Uses",
+  "tag": "section",
+  "class": "section-herbs-uses",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Eyebrow Label",
+      "default": "Nature's Medicine Cabinet"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Herbs & Their Uses"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Discover the classical Ayurvedic herbs behind every HerboVilla formulation — grouped by the wellness concern they traditionally support."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "immunity", "label": "Shield (Immunity)" },
+            { "value": "digestive", "label": "Digestive" },
+            { "value": "respiratory", "label": "Lungs" },
+            { "value": "joint", "label": "Bones & Joints" },
+            { "value": "skin", "label": "Skin & Hair" },
+            { "value": "women", "label": "Women's Wellness" },
+            { "value": "men", "label": "Men's Wellness" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "mind", "label": "Mind / Brain" }
+          ],
+          "default": "immunity"
+        },
+        {
+          "type": "color",
+          "id": "icon_bg",
+          "label": "Icon Background",
+          "default": "#E8F5E9"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "label": "Icon Color",
+          "default": "#2D6A4F"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Immunity & Vitality"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Strength, energy, daily resilience"
+        },
+        {
+          "type": "textarea",
+          "id": "herbs",
+          "label": "Herbs (one per line)",
+          "default": "Ashwagandha\nTulsi\nGiloy\nAmla\nTriphala\nShilajit"
+        },
+        {
+          "type": "url",
+          "id": "collection_link",
+          "label": "Shop link (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Herbs & Uses",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "icon": "immunity",
+            "title": "Immunity & Vitality",
+            "subtitle": "Strength, energy, daily resilience",
+            "herbs": "Ashwagandha\nTulsi\nGiloy (Guduchi)\nAmla\nTriphala\nShilajit\nGokhru\nSafed Musli"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "digestive",
+            "title": "Digestive & Liver",
+            "subtitle": "Gut health, appetite, detox",
+            "herbs": "Triphala\nAjwain\nJeera\nSaunf (Fennel)\nHaritaki\nKutki\nBhringraj\nPunarnava"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "respiratory",
+            "title": "Respiratory & Cold",
+            "subtitle": "Cough, congestion, immunity",
+            "herbs": "Tulsi\nVasaka\nYashtimadhu (Mulethi)\nPippali\nSunthi (Ginger)\nKantkari\nBharangi\nKalmegh"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "joint",
+            "title": "Joint & Pain Relief",
+            "subtitle": "Mobility, inflammation, recovery",
+            "herbs": "Shallaki (Boswellia)\nNirgundi\nRasna\nGuggul\nAshwagandha\nHaridra (Turmeric)\nDashmool\nMethi"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "skin",
+            "title": "Skin & Hair Care",
+            "subtitle": "Glow, clarity, nourishment",
+            "herbs": "Neem\nHaridra (Turmeric)\nManjistha\nAloe Vera\nBhringraj\nAmla\nBrahmi\nChandan (Sandalwood)"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "icon": "women",
+            "title": "Women's Wellness",
+            "subtitle": "Hormonal balance, vitality",
+            "herbs": "Shatavari\nAshoka\nLodhra\nAloe Vera\nTriphala\nPunarnava\nDashamoola\nManjistha"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
