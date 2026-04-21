@@ -5,7 +5,7 @@
     "theme_version": "1.0.0",
     "theme_author": "PRM HerboVilla",
     "theme_documentation_url": "https://www.prmpharmaceuticals.com/",
-    "theme_support_url": "mailto:contact@prmpharmaceuticals.com"
+    "theme_support_url": "https://www.prmpharmaceuticals.com/contact"
   },
   {
     "name": "Colors",
@@ -334,7 +334,7 @@
     "settings": [
       {
         "type": "image_picker",
-        "id": "checkout_logo",
+        "id": "checkout_brand_logo",
         "label": "Checkout Logo"
       }
     ]
