@@ -10,7 +10,31 @@
       <div class="about-hero__content">
         <span class="about-hero__label">{{ section.settings.hero_label | default: 'Our Story' }}</span>
         <h1 class="about-hero__title">{{ section.settings.hero_title | default: 'Rooted in Tradition, Driven by Wellness' }}</h1>
-        <p class="about-hero__text">{{ section.settings.hero_text | default: 'Since our founding, PRM HerboVilla has been committed to bringing authentic Ayurvedic wellness solutions to modern families.' }}</p>
+        <p class="about-hero__text">{{ section.settings.hero_text | default: 'Since our founding, PRM HerboVilla has been committed to bringing authentic Ayurvedic wellness solutions to modern families. From the fertile soils of Gujarat to the wellness shelves of thousands of Indian homes, we carry forward a 5,000-year-old healing tradition with uncompromising integrity, scientific rigor, and a deep love for the plants that have nourished generations.' }}</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Stats Strip {%- endcomment -%}
+  <section class="about-stats">
+    <div class="container">
+      <div class="about-stats__grid">
+        <div class="about-stats__item">
+          <div class="about-stats__num">{{ section.settings.stat_1_num | default: '15+' }}</div>
+          <div class="about-stats__label">{{ section.settings.stat_1_label | default: 'Years of Experience' }}</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__num">{{ section.settings.stat_2_num | default: '44+' }}</div>
+          <div class="about-stats__label">{{ section.settings.stat_2_label | default: 'Authentic Products' }}</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__num">{{ section.settings.stat_3_num | default: '50,000+' }}</div>
+          <div class="about-stats__label">{{ section.settings.stat_3_label | default: 'Happy Customers' }}</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__num">{{ section.settings.stat_4_num | default: '100%' }}</div>
+          <div class="about-stats__label">{{ section.settings.stat_4_label | default: 'Natural Ingredients' }}</div>
+        </div>
       </div>
     </div>
   </section>
@@ -36,8 +60,21 @@
           <span class="about-mission__label">{{ section.settings.mission_label | default: 'Our Mission' }}</span>
           <h2 class="about-mission__title">{{ section.settings.mission_title | default: 'Bringing Ayurveda to Every Home' }}</h2>
           <div class="about-mission__text">
-            {{ section.settings.mission_text | default: '<p>At PRM HerboVilla, we believe that nature holds the key to optimal health. Our mission is to make authentic Ayurvedic remedies accessible to everyone, without compromising on quality or purity.</p><p>Every product we create is a result of extensive research, traditional knowledge, and modern manufacturing practices that ensure safety and efficacy.</p>' }}
+            {{ section.settings.mission_text | default: '<p>At PRM HerboVilla, we believe that nature holds the key to optimal health. Our mission is to make authentic Ayurvedic remedies accessible to everyone, without compromising on quality or purity. We work hand-in-hand with local herb growers, traditional Vaidyas, and modern formulation scientists to bring you remedies that honour ancient wisdom while standing up to today\'s rigorous safety standards.</p><p>Every product we create is the result of extensive research, time-tested traditional knowledge, and modern manufacturing practices that ensure safety, potency, and consistency in every single batch. Whether it is a digestive tonic for your morning routine or a nourishing tablet for long-term vitality, we craft each formulation as if it were going to our own family.</p><p>Beyond products, our mission is to rebuild a culture of preventive, plant-based wellness in every Indian household — one trusted bottle at a time.</p>' }}
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Vision Section {%- endcomment -%}
+  <section class="about-vision section section--alt">
+    <div class="container">
+      <div class="about-vision__inner">
+        <span class="about-vision__label">{{ section.settings.vision_label | default: 'Our Vision' }}</span>
+        <h2 class="about-vision__title">{{ section.settings.vision_title | default: 'A Healthier India, the Ayurvedic Way' }}</h2>
+        <div class="about-vision__text rte">
+          {{ section.settings.vision_text | default: '<p>We envision a future where every Indian family begins their day with the wisdom of Ayurveda — where preventive care is a way of life, where chemicals give way to chlorophyll, and where wellness is not a luxury but a daily right. PRM HerboVilla is committed to building that future, one authentic herbal solution at a time.</p><p>Through trusted formulations, transparent sourcing, and continuous education, we want to make Ayurveda the first choice — not the last resort — for the modern Indian household.</p>' }}
         </div>
       </div>
     </div>
@@ -151,6 +188,171 @@
               </svg>
             </div>
           {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Why Choose Us {%- endcomment -%}
+  <section class="about-why section">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-header__label">{{ section.settings.why_label | default: 'Why PRM HerboVilla' }}</span>
+        <h2 class="section-header__title">{{ section.settings.why_title | default: 'Six Reasons Families Trust Us' }}</h2>
+      </div>
+
+      <div class="about-why__grid">
+        <div class="about-why__card">
+          <div class="about-why__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          </div>
+          <h3>Single-Origin Herbs</h3>
+          <p>Each batch is traced to its farm, harvested at peak potency by Indian growers we know by name.</p>
+        </div>
+        <div class="about-why__card">
+          <div class="about-why__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Triple-Tested Safety</h3>
+          <p>Every raw material, in-process batch, and finished bottle passes three independent quality checkpoints.</p>
+        </div>
+        <div class="about-why__card">
+          <div class="about-why__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-5"/></svg>
+          </div>
+          <h3>Clinically Aware Formulations</h3>
+          <p>Classical Ayurvedic recipes refined through modern pharmacology so dosages are reliable and effective.</p>
+        </div>
+        <div class="about-why__card">
+          <div class="about-why__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>Fresh-Batch Promise</h3>
+          <p>Nothing sits on a warehouse shelf. We manufacture in small, frequent runs so you receive truly fresh medicine.</p>
+        </div>
+        <div class="about-why__card">
+          <div class="about-why__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <h3>Family-First Care</h3>
+          <p>From mothers to grandparents, every formulation is designed to be gentle enough for daily household wellness.</p>
+        </div>
+        <div class="about-why__card">
+          <div class="about-why__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <h3>AYUSH-Recognised</h3>
+          <p>Licensed and recognised by the Ministry of AYUSH, with full GMP and ISO compliance documented for every product.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Milestones / Timeline {%- endcomment -%}
+  <section class="about-timeline section section--alt">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-header__label">{{ section.settings.timeline_label | default: 'Milestones' }}</span>
+        <h2 class="section-header__title">{{ section.settings.timeline_title | default: 'A Decade and a Half of Wellness' }}</h2>
+      </div>
+      <div class="about-timeline__list">
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">2009</div>
+          <div class="about-timeline__body">
+            <h4>The Beginning</h4>
+            <p>PRM Pharmaceuticals is founded in Bhavnagar, Gujarat with a single mission — bring authentic Ayurveda back into Indian homes.</p>
+          </div>
+        </div>
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">2012</div>
+          <div class="about-timeline__body">
+            <h4>GMP Certification</h4>
+            <p>Our facility receives full GMP certification, allowing us to scale manufacturing without compromising on purity.</p>
+          </div>
+        </div>
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">2015</div>
+          <div class="about-timeline__body">
+            <h4>AYUSH Licensing</h4>
+            <p>Officially licensed by the Ministry of AYUSH, validating our formulations against classical Ayurvedic standards.</p>
+          </div>
+        </div>
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">2018</div>
+          <div class="about-timeline__body">
+            <h4>HerboVilla Brand Launches</h4>
+            <p>The HerboVilla consumer brand is launched, taking our flagship formulations directly to households across India.</p>
+          </div>
+        </div>
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">2021</div>
+          <div class="about-timeline__body">
+            <h4>ISO 9001:2015</h4>
+            <p>Achieved international ISO 9001:2015 quality management certification across all production lines.</p>
+          </div>
+        </div>
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">2024</div>
+          <div class="about-timeline__body">
+            <h4>50,000+ Families Served</h4>
+            <p>Crossed 50,000 active customers nationwide with a product range spanning 44+ trusted Ayurvedic formulations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Testimonials {%- endcomment -%}
+  <section class="about-testimonials section">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-header__label">{{ section.settings.tst_label | default: 'In Their Words' }}</span>
+        <h2 class="section-header__title">{{ section.settings.tst_title | default: 'What Our Customers Say' }}</h2>
+      </div>
+      <div class="about-testimonials__grid">
+        <figure class="about-testimonial">
+          <blockquote>"I have been using PRM Castro Softgel for almost a year. My digestion has never been this comfortable. It feels like a remedy made by family, not a factory."</blockquote>
+          <figcaption>— Anjali M., Ahmedabad</figcaption>
+        </figure>
+        <figure class="about-testimonial">
+          <blockquote>"What I love most is the freshness. Every bottle smells like real herbs, not chemicals. PRM HerboVilla has earned a permanent place in my mother's medicine cabinet."</blockquote>
+          <figcaption>— Rohit S., Mumbai</figcaption>
+        </figure>
+        <figure class="about-testimonial">
+          <blockquote>"Vedacold actually works. My family has stopped buying every cough syrup on the shelf — this one is gentle, effective, and trustworthy."</blockquote>
+          <figcaption>— Priya K., Pune</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Awards & Certifications {%- endcomment -%}
+  <section class="about-awards section section--alt">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-header__label">{{ section.settings.awards_label | default: 'Recognitions' }}</span>
+        <h2 class="section-header__title">{{ section.settings.awards_title | default: 'Certifications & Approvals' }}</h2>
+      </div>
+      <div class="about-awards__grid">
+        <div class="about-awards__badge">
+          <div class="about-awards__icon">GMP</div>
+          <div class="about-awards__name">Good Manufacturing Practices</div>
+          <div class="about-awards__desc">WHO-aligned GMP certification for our entire production facility.</div>
+        </div>
+        <div class="about-awards__badge">
+          <div class="about-awards__icon">ISO</div>
+          <div class="about-awards__name">ISO 9001:2015</div>
+          <div class="about-awards__desc">International quality management standard, audited annually.</div>
+        </div>
+        <div class="about-awards__badge">
+          <div class="about-awards__icon">AYUSH</div>
+          <div class="about-awards__name">Ministry of AYUSH</div>
+          <div class="about-awards__desc">Licensed Ayurvedic manufacturer under the Government of India.</div>
+        </div>
+        <div class="about-awards__badge">
+          <div class="about-awards__icon">FSSAI</div>
+          <div class="about-awards__name">FSSAI Compliant</div>
+          <div class="about-awards__desc">Full food-safety compliance for all consumable formulations.</div>
         </div>
       </div>
     </div>
@@ -466,6 +668,243 @@
   .about-cta .btn--outline:hover {
     background: var(--color-white);
     color: var(--color-primary);
+  }
+
+  /* Stats Strip */
+  .about-stats {
+    background: #fff;
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(45, 106, 79, 0.08);
+  }
+  .about-stats__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .about-stats__grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .about-stats__num {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .about-stats__label {
+    font-size: 0.95rem;
+    color: var(--color-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Vision */
+  .about-vision__inner {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .about-vision__label {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+  .about-vision__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+  }
+  .about-vision__text {
+    color: var(--color-text-light);
+    font-size: 1.0625rem;
+    line-height: 1.85;
+  }
+  .about-vision__text p + p { margin-top: 1rem; }
+
+  /* Why Choose */
+  .about-why__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.75rem;
+    margin-top: 3rem;
+  }
+  .about-why__card {
+    background: #fff;
+    border: 1px solid rgba(45, 106, 79, 0.08);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .about-why__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(27, 67, 50, 0.08);
+  }
+  .about-why__icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2D6A4F, #1e4d3a);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .about-why__icon svg { width: 24px; height: 24px; color: #fff; }
+  .about-why__card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    margin: 0 0 .5rem;
+    color: var(--color-text);
+  }
+  .about-why__card p {
+    color: var(--color-text-light);
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  /* Timeline */
+  .about-timeline__list {
+    margin-top: 3rem;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+  .about-timeline__list::before {
+    content: '';
+    position: absolute;
+    left: 70px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: rgba(45, 106, 79, 0.18);
+  }
+  .about-timeline__item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.25rem 0;
+    position: relative;
+  }
+  .about-timeline__year {
+    flex: 0 0 60px;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    font-weight: 700;
+    text-align: right;
+    padding-right: 1rem;
+    position: relative;
+  }
+  .about-timeline__year::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 8px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px rgba(45,106,79,0.2);
+  }
+  .about-timeline__body {
+    flex: 1;
+    padding-left: 1.5rem;
+  }
+  .about-timeline__body h4 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    margin: 0 0 .35rem;
+    color: var(--color-text);
+  }
+  .about-timeline__body p {
+    color: var(--color-text-light);
+    margin: 0;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+  @media (max-width: 576px) {
+    .about-timeline__list::before { left: 50px; }
+    .about-timeline__year { flex-basis: 44px; font-size: 0.95rem; }
+  }
+
+  /* Testimonials */
+  .about-testimonials__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+    margin-top: 3rem;
+  }
+  .about-testimonial {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    margin: 0;
+    border: 1px solid rgba(45,106,79,0.08);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    position: relative;
+  }
+  .about-testimonial::before {
+    content: '\201C';
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    line-height: 1;
+    color: rgba(45,106,79,0.18);
+    position: absolute;
+    top: 8px;
+    left: 14px;
+  }
+  .about-testimonial blockquote {
+    margin: 0 0 1rem;
+    color: var(--color-text);
+    line-height: 1.75;
+    font-size: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .about-testimonial figcaption {
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  /* Awards */
+  .about-awards__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .about-awards__badge {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    text-align: center;
+    border: 1px solid rgba(45,106,79,0.08);
+  }
+  .about-awards__icon {
+    width: 70px; height: 70px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2D6A4F, #1e4d3a);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+  }
+  .about-awards__name {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    color: var(--color-text);
+    margin-bottom: .35rem;
+  }
+  .about-awards__desc {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 </style>
 
