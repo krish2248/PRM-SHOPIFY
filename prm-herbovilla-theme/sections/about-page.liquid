@@ -1,42 +1,124 @@
 {%- comment -%}
   About Us Page Template
-  Showcases company history, values, and team
+  HerboVilla — the Ayurvedic & herbal wellness division of PRM Pharmaceuticals
 {%- endcomment -%}
 
 <div class="about-page">
-  {%- comment -%} Hero Section {%- endcomment -%}
+  {%- comment -%} Hero {%- endcomment -%}
   <section class="about-hero">
     <div class="container">
       <div class="about-hero__content">
         <span class="about-hero__label">{{ section.settings.hero_label | default: 'Our Story' }}</span>
         <h1 class="about-hero__title">{{ section.settings.hero_title | default: 'Rooted in Tradition, Driven by Wellness' }}</h1>
-        <p class="about-hero__text">{{ section.settings.hero_text | default: 'Since our founding, PRM HerboVilla has been committed to bringing authentic Ayurvedic wellness solutions to modern families.' }}</p>
+        <p class="about-hero__text">{{ section.settings.hero_text | default: "HerboVilla is the Ayurvedic and herbal wellness division of PRM Pharmaceuticals — a 25-year-old Indian pharmaceutical house serving more than three lakh healthcare professionals across 28 states." }}</p>
+        <div class="about-hero__badges">
+          <span class="about-hero__badge">Ayurveda &amp; Herbal</span>
+          <span class="about-hero__badge">Est. 2013</span>
+          <span class="about-hero__badge">Backed by PRM Pharma (1999)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Stats Bar {%- endcomment -%}
+  <section class="about-stats">
+    <div class="container">
+      <div class="about-stats__grid">
+        <div class="about-stats__item">
+          <div class="about-stats__number">1999</div>
+          <div class="about-stats__label">PRM Pharma Founded</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__number">2013</div>
+          <div class="about-stats__label">HerboVilla Division Launched</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__number">3,00,000<span>+</span></div>
+          <div class="about-stats__label">Healthcare Professionals</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__number">85<span>+</span></div>
+          <div class="about-stats__label">Brands</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__number">250<span>+</span></div>
+          <div class="about-stats__label">Formulations</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__number">28<span>+</span></div>
+          <div class="about-stats__label">Indian States</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Parent Brand Section {%- endcomment -%}
+  <section class="about-parent section">
+    <div class="container">
+      <div class="about-parent__grid">
+        <div class="about-parent__content">
+          <span class="about-parent__label">The Parent Brand</span>
+          <h2 class="about-parent__title">Born from 25 Years of Pharmaceutical Excellence</h2>
+          <div class="about-parent__text rte">
+            <p><strong>PRM Pharmaceuticals</strong> was founded in <strong>1999</strong> in Bhavnagar, Gujarat, beginning its journey as a trusted allopathic pharmaceutical manufacturer and distributor. Over the past twenty-five years, PRM Pharma has grown into one of India's respected mid-size pharmaceutical houses — with more than <strong>85 brands</strong>, <strong>250+ formulations</strong>, and a distribution footprint covering <strong>28+ Indian states</strong> and <strong>3 international markets</strong>.</p>
+            <p>In <strong>2013</strong>, recognising a growing demand for authentic, high-quality Ayurvedic remedies, PRM Pharmaceuticals launched its Ayurveda and herbal wellness division — <strong>HerboVilla</strong>. While PRM Pharma continues to lead in allopathic healthcare, HerboVilla carries the same commitment to quality into the world of classical Indian medicine: pure herbs, GMP-grade manufacturing, and formulations that honour the Ayurvedic texts they come from.</p>
+            <p>Every HerboVilla product is manufactured at our <strong>Bhavnagar G.I.D.C. facility</strong> under the same pharmaceutical-grade quality systems our allopathic division is known for — so you get the best of both worlds: <em>Ayurvedic wisdom, pharmaceutical rigour.</em></p>
+          </div>
+          <div class="about-parent__links">
+            <a href="https://www.prmpharmaceuticals.com/" target="_blank" rel="noopener" class="btn btn--outline btn--small">
+              Visit PRM Pharmaceuticals
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="about-parent__visual">
+          <div class="about-parent__card">
+            <div class="about-parent__card-head">
+              <span class="about-parent__card-logo">PRM<span>Pharma</span></span>
+              <span class="about-parent__card-year">Since 1999</span>
+            </div>
+            <ul class="about-parent__card-list">
+              <li><strong>Allopathic</strong> — Core pharmaceutical manufacturing &amp; distribution</li>
+              <li><strong>85+ Brands</strong> across therapy areas</li>
+              <li><strong>250+ Formulations</strong> in tablets, syrups, capsules, ointments</li>
+              <li><strong>28+ States, 3 Countries</strong> of active distribution</li>
+              <li><strong>WHO-GMP, ISO 9001:2015</strong> certified facility</li>
+            </ul>
+            <div class="about-parent__card-divider"><span>Ayurvedic Division</span></div>
+            <div class="about-parent__card-child">
+              <span class="about-parent__card-logo about-parent__card-logo--child">Herbo<span>Villa</span></span>
+              <span class="about-parent__card-year">Since 2013</span>
+              <p>Classical Ayurvedic &amp; herbal formulations manufactured to pharmaceutical standards.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   {%- comment -%} Mission Section {%- endcomment -%}
-  <section class="about-mission section">
+  <section class="about-mission section section--alt">
     <div class="container">
       <div class="about-mission__grid">
         <div class="about-mission__image">
           {%- if section.settings.mission_image != blank -%}
-            <img src="{{ section.settings.mission_image | image_url: width: 600 }}" 
+            <img src="{{ section.settings.mission_image | image_url: width: 800 }}"
                  alt="{{ section.settings.mission_image.alt | default: 'Our Mission' }}"
                  loading="lazy">
           {%- else -%}
             <div class="about-mission__placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M40 10c-8 20-22 28-32 32 6 28 16 42 32 48 16-6 26-20 32-48-10-4-24-12-32-32z"/>
+                <path d="M40 30v26M30 40h20M35 45c2 2 6 2 10 0M28 50h24"/>
               </svg>
             </div>
           {%- endif -%}
         </div>
         <div class="about-mission__content">
           <span class="about-mission__label">{{ section.settings.mission_label | default: 'Our Mission' }}</span>
-          <h2 class="about-mission__title">{{ section.settings.mission_title | default: 'Bringing Ayurveda to Every Home' }}</h2>
+          <h2 class="about-mission__title">{{ section.settings.mission_title | default: 'Bringing Ayurveda Home with Pharmaceutical Integrity' }}</h2>
           <div class="about-mission__text">
-            {{ section.settings.mission_text | default: '<p>At PRM HerboVilla, we believe that nature holds the key to optimal health. Our mission is to make authentic Ayurvedic remedies accessible to everyone, without compromising on quality or purity.</p><p>Every product we create is a result of extensive research, traditional knowledge, and modern manufacturing practices that ensure safety and efficacy.</p>' }}
+            {{ section.settings.mission_text | default: '<p>At HerboVilla, we believe Ayurveda deserves the same rigour as any modern medicine. Every formulation we produce is sourced from certified herbal suppliers, tested for heavy metals and microbial safety, and manufactured in a GMP-certified facility shared with our allopathic parent brand.</p><p>Our mission is simple: make authentic Ayurvedic wellness accessible to every Indian family — without compromise on purity, potency, or safety.</p>' }}
           </div>
         </div>
       </div>
@@ -44,13 +126,13 @@
   </section>
 
   {%- comment -%} Values Section {%- endcomment -%}
-  <section class="about-values section section--alt">
+  <section class="about-values section">
     <div class="container">
       <div class="section-header section-header--center">
         <span class="section-header__label">{{ section.settings.values_label | default: 'What We Stand For' }}</span>
         <h2 class="section-header__title">{{ section.settings.values_title | default: 'Our Core Values' }}</h2>
       </div>
-      
+
       <div class="about-values__grid">
         {%- for block in section.blocks -%}
           {%- if block.type == 'value' -%}
@@ -58,35 +140,17 @@
               <div class="value-card__icon">
                 {%- case block.settings.icon -%}
                   {%- when 'leaf' -%}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-                      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
                   {%- when 'shield' -%}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                      <path d="m9 12 2 2 4-4"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
                   {%- when 'heart' -%}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                   {%- when 'users' -%}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                      <circle cx="9" cy="7" r="4"/>
-                      <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                   {%- when 'award' -%}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <circle cx="12" cy="8" r="6"/>
-                      <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
                   {%- else -%}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 {%- endcase -%}
               </div>
               <h3 class="value-card__title">{{ block.settings.title }}</h3>
@@ -99,16 +163,80 @@
   </section>
 
   {%- comment -%} Story Timeline {%- endcomment -%}
-  <section class="about-story section">
+  <section class="about-story section section--alt">
     <div class="container">
       <div class="section-header section-header--center">
         <span class="section-header__label">{{ section.settings.story_label | default: 'Our Journey' }}</span>
-        <h2 class="section-header__title">{{ section.settings.story_title | default: 'The PRM HerboVilla Story' }}</h2>
+        <h2 class="section-header__title">{{ section.settings.story_title | default: 'A Quarter Century of Building Trust' }}</h2>
       </div>
-      
-      <div class="about-story__content">
-        <div class="about-story__text rte">
-          {{ section.settings.story_content | default: '<p>Founded in the heart of Gujarat, PRM HerboVilla began with a simple vision: to bring the healing power of Ayurveda to every household. What started as a small manufacturing unit has grown into a trusted name in herbal wellness.</p><p>Our journey has been guided by the principles of Ayurveda — balance, purity, and harmony with nature. Every formulation we create honors centuries of traditional knowledge while meeting modern standards of quality and safety.</p><p>Today, we are proud to serve thousands of customers across India, helping them achieve their health goals naturally. Our state-of-the-art facility in Bhavnagar combines traditional Ayurvedic practices with modern manufacturing excellence.</p>' }}
+
+      <div class="about-timeline">
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">1999</div>
+          <div class="about-timeline__body">
+            <h3>PRM Pharmaceuticals is Founded</h3>
+            <p>PRM Pharma begins operations in Bhavnagar, Gujarat as an allopathic pharmaceutical manufacturer and distributor — built on the belief that quality Indian medicine should be accessible to every family.</p>
+          </div>
+        </div>
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">2005</div>
+          <div class="about-timeline__body">
+            <h3>National Distribution Footprint</h3>
+            <p>Expansion across the western and northern Indian states. Brand portfolio grows past 30+ formulations across therapy areas including antibiotics, anti-infectives, and chronic care.</p>
+          </div>
+        </div>
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">2010</div>
+          <div class="about-timeline__body">
+            <h3>WHO-GMP Manufacturing Facility</h3>
+            <p>Commissioning of the Chitra G.I.D.C. plant in Bhavnagar — a WHO-GMP &amp; ISO 9001:2015 certified facility designed to pharmaceutical standards for tablets, syrups, capsules, and topicals.</p>
+          </div>
+        </div>
+        <div class="about-timeline__item about-timeline__item--highlight">
+          <div class="about-timeline__year">2013</div>
+          <div class="about-timeline__body">
+            <h3>HerboVilla — The Ayurveda Division is Launched</h3>
+            <p>Responding to growing demand for authentic, safety-tested Ayurvedic medicines, PRM Pharma launches <strong>HerboVilla</strong> — a dedicated Ayurveda and herbal wellness brand, manufactured under the same pharmaceutical-grade systems.</p>
+          </div>
+        </div>
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">2018</div>
+          <div class="about-timeline__body">
+            <h3>AYUSH Licensed &amp; FSSAI Compliant</h3>
+            <p>HerboVilla receives AYUSH Ministry licensing for classical and proprietary Ayurvedic medicines, with parallel FSSAI compliance for nutraceutical formulations.</p>
+          </div>
+        </div>
+        <div class="about-timeline__item">
+          <div class="about-timeline__year">2024</div>
+          <div class="about-timeline__body">
+            <h3>Serving 3,00,000+ Healthcare Professionals</h3>
+            <p>Across 28+ Indian states and 3 international markets, 85+ brands, and 250+ formulations. HerboVilla continues to be the fastest-growing division within the PRM group — now reaching consumers directly through herbovilla.myshopify.com.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Leadership {%- endcomment -%}
+  <section class="about-leadership section">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-header__label">Leadership</span>
+        <h2 class="section-header__title">The People Behind the Promise</h2>
+        <p class="section-header__text">Two generations leading a pharmaceutical family business into the future of integrative wellness.</p>
+      </div>
+      <div class="about-leadership__grid">
+        <div class="about-leader">
+          <div class="about-leader__avatar">HS</div>
+          <h3 class="about-leader__name">Hemang Soni</h3>
+          <p class="about-leader__role">Founder &amp; Managing Director, PRM Pharmaceuticals</p>
+          <p class="about-leader__bio">Founded PRM Pharma in 1999. Spent over two decades building India-wide pharmaceutical distribution and championed the launch of the HerboVilla Ayurveda division in 2013.</p>
+        </div>
+        <div class="about-leader">
+          <div class="about-leader__avatar">DS</div>
+          <h3 class="about-leader__name">Dhyey Soni</h3>
+          <p class="about-leader__role">Director, Next-Gen Leadership</p>
+          <p class="about-leader__bio">Leading the HerboVilla brand's modernisation — digital presence, direct-to-consumer commerce, and new herbal formulations grounded in classical Ayurvedic research.</p>
         </div>
       </div>
     </div>
@@ -120,11 +248,11 @@
       <div class="about-manufacturing__grid">
         <div class="about-manufacturing__content">
           <span class="about-manufacturing__label">{{ section.settings.mfg_label | default: 'Quality Assurance' }}</span>
-          <h2 class="about-manufacturing__title">{{ section.settings.mfg_title | default: 'Our Manufacturing Excellence' }}</h2>
+          <h2 class="about-manufacturing__title">{{ section.settings.mfg_title | default: 'Pharmaceutical-Grade Manufacturing in Bhavnagar' }}</h2>
           <div class="about-manufacturing__text rte">
-            {{ section.settings.mfg_text | default: '<p>Our manufacturing facility is located in the Gujarat Industrial Development Corporation area in Bhavnagar. We follow strict GMP (Good Manufacturing Practices) guidelines to ensure every product meets the highest quality standards.</p>' }}
+            {{ section.settings.mfg_text | default: '<p>Our manufacturing facility is located at <strong>Plot No. 343, 1-A, Chitra Gujarat Industrial Development Corporation, Bhavnagar, Gujarat 364004</strong>. The plant is WHO-GMP and ISO 9001:2015 certified — the same infrastructure that produces our allopathic PRM Pharma portfolio also produces every HerboVilla formulation.</p><p>Raw herbs are sourced from verified organic and contract-farmed suppliers across India, assayed for identity and potency, screened for heavy metals, pesticides, and microbial contamination, and only then approved for batch production.</p>' }}
           </div>
-          
+
           <ul class="about-manufacturing__features">
             {%- for block in section.blocks -%}
               {%- if block.type == 'feature' -%}
@@ -140,15 +268,20 @@
         </div>
         <div class="about-manufacturing__image">
           {%- if section.settings.mfg_image != blank -%}
-            <img src="{{ section.settings.mfg_image | image_url: width: 600 }}" 
+            <img src="{{ section.settings.mfg_image | image_url: width: 800 }}"
                  alt="{{ section.settings.mfg_image.alt | default: 'Our Manufacturing Facility' }}"
                  loading="lazy">
           {%- else -%}
             <div class="about-manufacturing__placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
-                <path d="M17 18h1M12 18h1M7 18h1"/>
+              <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="10" y="28" width="60" height="42" rx="2"/>
+                <rect x="18" y="40" width="10" height="30"/>
+                <rect x="52" y="40" width="10" height="30"/>
+                <path d="M10 28l30-20 30 20"/>
+                <rect x="35" y="46" width="10" height="12"/>
+                <path d="M15 20l5 5M60 20l-5 5"/>
               </svg>
+              <span>Bhavnagar G.I.D.C. Facility</span>
             </div>
           {%- endif -%}
         </div>
@@ -156,12 +289,54 @@
     </div>
   </section>
 
-  {%- comment -%} Contact CTA {%- endcomment -%}
+  {%- comment -%} Certifications Grid {%- endcomment -%}
+  <section class="about-certs section">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-header__label">Certifications &amp; Approvals</span>
+        <h2 class="section-header__title">Built on Trust, Proven by Standards</h2>
+      </div>
+      <div class="about-certs__grid">
+        <div class="about-cert">
+          <div class="about-cert__icon">WHO</div>
+          <h4>WHO-GMP</h4>
+          <p>World Health Organization Good Manufacturing Practices — the global benchmark for pharmaceutical manufacturing quality.</p>
+        </div>
+        <div class="about-cert">
+          <div class="about-cert__icon">ISO</div>
+          <h4>ISO 9001:2015</h4>
+          <p>Certified quality management system across sourcing, manufacturing, packaging, and distribution.</p>
+        </div>
+        <div class="about-cert">
+          <div class="about-cert__icon about-cert__icon--small">AYUSH</div>
+          <h4>AYUSH Ministry</h4>
+          <p>Government of India licence for Ayurvedic medicines — both classical formulations and proprietary Ayurvedic products.</p>
+        </div>
+        <div class="about-cert">
+          <div class="about-cert__icon about-cert__icon--small">FSSAI</div>
+          <h4>FSSAI Licensed</h4>
+          <p>Food Safety and Standards Authority of India compliance for nutraceutical and food-grade herbal products.</p>
+        </div>
+        <div class="about-cert">
+          <div class="about-cert__icon">FDA</div>
+          <h4>FDA Compliant</h4>
+          <p>State FDA inspected and approved manufacturing facility with ongoing pharmacovigilance protocols.</p>
+        </div>
+        <div class="about-cert">
+          <div class="about-cert__icon about-cert__icon--small">HALAL</div>
+          <h4>Export Ready</h4>
+          <p>Capability to supply Halal, Kosher, and other export-compliance documentation for international partners.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} CTA {%- endcomment -%}
   <section class="about-cta section">
     <div class="container">
       <div class="about-cta__content">
-        <h2 class="about-cta__title">{{ section.settings.cta_title | default: 'Have Questions? We\'re Here to Help' }}</h2>
-        <p class="about-cta__text">{{ section.settings.cta_text | default: 'Our team is ready to assist you on your wellness journey. Reach out to us for product recommendations or any queries.' }}</p>
+        <h2 class="about-cta__title">{{ section.settings.cta_title | default: "Have Questions? We're Here to Help" }}</h2>
+        <p class="about-cta__text">{{ section.settings.cta_text | default: 'Our team is ready to assist you on your wellness journey. Reach out for product recommendations, bulk or distributor enquiries, or any question about our formulations.' }}</p>
         <div class="about-cta__buttons">
           <a href="{{ section.settings.cta_button_url | default: '/pages/contact' }}" class="btn btn--primary">
             {{ section.settings.cta_button_text | default: 'Contact Us' }}
@@ -182,290 +357,761 @@
 
   /* Hero */
   .about-hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, #1e4d3a 100%);
-    color: var(--color-white);
-    padding: 5rem 0;
+    background: linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%);
+    color: #fff;
+    padding: clamp(56px, 8vw, 96px) 20px;
     text-align: center;
   }
 
   .about-hero__label {
     display: inline-block;
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.18em;
     opacity: 0.9;
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
   }
 
   .about-hero__title {
-    font-family: var(--font-heading);
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 5vw, 3.4rem);
     font-weight: 600;
-    margin-bottom: 1.5rem;
-    max-width: 800px;
+    margin-bottom: 1.2rem;
+    max-width: 820px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.2;
   }
 
   .about-hero__text {
-    font-size: 1.125rem;
-    opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto;
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    opacity: 0.92;
+    max-width: 680px;
+    margin: 0 auto 1.75rem;
     line-height: 1.7;
   }
 
-  /* Mission Section */
-  .about-mission__grid {
+  .about-hero__badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .about-hero__badge {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: #fff;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 7px 14px;
+    border-radius: 30px;
+    backdrop-filter: blur(3px);
+  }
+
+  /* Stats Bar */
+  .about-stats {
+    background: #FDF8F0;
+    padding: clamp(40px, 5vw, 60px) 20px;
+    border-bottom: 1px solid #EFE7D9;
+  }
+
+  .about-stats__grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 24px;
+    text-align: center;
+  }
+
+  .about-stats__number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    color: #2D6A4F;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .about-stats__number span {
+    color: #8B5E3C;
+    font-size: 0.75em;
+    margin-left: 2px;
+  }
+
+  .about-stats__label {
+    font-size: 0.82rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-weight: 500;
+  }
+
+  /* Parent Brand Section */
+  .about-parent {
+    padding: clamp(56px, 7vw, 96px) 20px;
+    background: #fff;
+  }
+
+  .about-parent__grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
     align-items: center;
   }
 
-  @media (min-width: 768px) {
-    .about-mission__grid {
-      grid-template-columns: 1fr 1fr;
-    }
+  .about-parent__label {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: #8B5E3C;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .about-parent__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    color: #1B4332;
+    margin-bottom: 1.4rem;
+    line-height: 1.25;
+  }
+
+  .about-parent__text p {
+    color: #444;
+    line-height: 1.85;
+    margin-bottom: 1rem;
+  }
+
+  .about-parent__text strong {
+    color: #1B4332;
+  }
+
+  .about-parent__links {
+    margin-top: 1.4rem;
+  }
+
+  .btn--small {
+    padding: 10px 18px;
+    font-size: 0.88rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .about-parent__card {
+    background: linear-gradient(145deg, #FDF8F0 0%, #F5EDE0 100%);
+    border: 1px solid #E8DEC8;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 18px 40px rgba(27, 67, 50, 0.08);
+  }
+
+  .about-parent__card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+  }
+
+  .about-parent__card-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: #1B4332;
+  }
+
+  .about-parent__card-logo span {
+    color: #8B5E3C;
+    font-weight: 600;
+    margin-left: 4px;
+  }
+
+  .about-parent__card-logo--child {
+    font-size: 1.45rem;
+  }
+
+  .about-parent__card-year {
+    font-size: 0.8rem;
+    color: #666;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .about-parent__card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .about-parent__card-list li {
+    font-size: 0.9rem;
+    color: #444;
+    padding: 7px 0;
+    border-bottom: 1px dashed #E8DEC8;
+  }
+
+  .about-parent__card-list li:last-child {
+    border-bottom: none;
+  }
+
+  .about-parent__card-divider {
+    text-align: center;
+    margin: 20px 0 14px;
+    position: relative;
+  }
+
+  .about-parent__card-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: #E8DEC8;
+  }
+
+  .about-parent__card-divider span {
+    position: relative;
+    background: linear-gradient(145deg, #FDF8F0 0%, #F5EDE0 100%);
+    padding: 0 12px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #8B5E3C;
+    font-weight: 600;
+  }
+
+  .about-parent__card-child {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px;
+  }
+
+  .about-parent__card-child p {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 10px 0 0;
+  }
+
+  /* Section Utility */
+  .about-page .section {
+    padding: clamp(56px, 7vw, 88px) 20px;
+  }
+
+  .about-page .section--alt {
+    background: #FDF8F0;
+  }
+
+  /* Mission */
+  .about-mission__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
   }
 
   .about-mission__image img,
   .about-mission__placeholder {
     width: 100%;
-    border-radius: var(--radius-lg);
+    border-radius: 16px;
     aspect-ratio: 4/3;
     object-fit: cover;
   }
 
   .about-mission__placeholder {
-    background: var(--color-background-alt);
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .about-mission__placeholder svg {
-    width: 64px;
-    height: 64px;
-    color: var(--color-primary);
-    opacity: 0.5;
+    width: 140px;
+    height: 140px;
+    color: #2D6A4F;
+    opacity: 0.45;
   }
 
   .about-mission__label {
     display: inline-block;
-    font-size: 0.875rem;
-    color: var(--color-primary);
+    font-size: 0.85rem;
+    color: #2D6A4F;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.75rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
   }
 
   .about-mission__title {
-    font-family: var(--font-heading);
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    color: var(--color-text);
-    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    color: #1a1a1a;
+    margin-bottom: 1.3rem;
+    line-height: 1.25;
   }
 
   .about-mission__text {
-    color: var(--color-text-light);
-    line-height: 1.8;
+    color: #555;
+    line-height: 1.85;
   }
 
   .about-mission__text p + p {
     margin-top: 1rem;
   }
 
-  /* Values Section */
+  /* Values */
   .about-values__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 44px;
   }
 
   .value-card {
-    background: var(--color-white);
-    padding: 2rem;
-    border-radius: var(--radius-lg);
+    background: #fff;
+    padding: 32px 24px;
+    border-radius: 16px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid #EFE7D9;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(27, 67, 50, 0.08);
   }
 
   .value-card__icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--color-primary) 0%, #1e4d3a 100%);
+    width: 58px;
+    height: 58px;
+    background: linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 1.2rem;
   }
 
   .value-card__icon svg {
-    width: 28px;
-    height: 28px;
-    color: var(--color-white);
+    width: 26px;
+    height: 26px;
+    color: #fff;
   }
 
   .value-card__title {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    color: var(--color-text);
-    margin-bottom: 0.75rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: #1B4332;
+    margin-bottom: 0.6rem;
   }
 
   .value-card__text {
-    color: var(--color-text-light);
-    font-size: 0.9375rem;
-    line-height: 1.7;
+    color: #555;
+    font-size: 0.92rem;
+    line-height: 1.65;
   }
 
-  /* Story Section */
-  .about-story__content {
-    max-width: 800px;
-    margin: 3rem auto 0;
+  /* Timeline */
+  .about-timeline {
+    max-width: 900px;
+    margin: 44px auto 0;
+    position: relative;
   }
 
-  .about-story__text {
-    color: var(--color-text-light);
-    font-size: 1.0625rem;
-    line-height: 1.9;
+  .about-timeline::before {
+    content: '';
+    position: absolute;
+    left: 110px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, #40916C 15%, #40916C 85%, transparent);
   }
 
-  .about-story__text p + p {
-    margin-top: 1.5rem;
+  .about-timeline__item {
+    display: grid;
+    grid-template-columns: 90px 30px 1fr;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px 0;
+    position: relative;
   }
 
-  /* Manufacturing Section */
+  .about-timeline__item::before {
+    content: '';
+    position: absolute;
+    left: 104px;
+    top: 30px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #40916C;
+    border: 3px solid #FDF8F0;
+    z-index: 1;
+  }
+
+  .about-timeline__item--highlight::before {
+    background: #8B5E3C;
+    width: 18px;
+    height: 18px;
+    left: 102px;
+    top: 28px;
+  }
+
+  .about-timeline__year {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2D6A4F;
+    text-align: right;
+  }
+
+  .about-timeline__item--highlight .about-timeline__year {
+    color: #8B5E3C;
+  }
+
+  .about-timeline__body {
+    grid-column: 3;
+    background: #fff;
+    padding: 18px 22px;
+    border-radius: 12px;
+    border: 1px solid #EFE7D9;
+  }
+
+  .about-timeline__item--highlight .about-timeline__body {
+    background: linear-gradient(135deg, #fff 0%, #FFF8E1 100%);
+    border-color: #E8DEC8;
+  }
+
+  .about-timeline__body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #1B4332;
+    margin: 0 0 6px;
+  }
+
+  .about-timeline__body p {
+    color: #555;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Leadership */
+  .about-leadership__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 44px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-leader {
+    background: #fff;
+    padding: 32px 28px;
+    border-radius: 16px;
+    border: 1px solid #EFE7D9;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  }
+
+  .about-leader__avatar {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+
+  .about-leader__name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #1B4332;
+    margin: 0 0 4px;
+  }
+
+  .about-leader__role {
+    color: #8B5E3C;
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin: 0 0 14px;
+  }
+
+  .about-leader__bio {
+    color: #555;
+    font-size: 0.93rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Manufacturing */
   .about-manufacturing__grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
     align-items: center;
-  }
-
-  @media (min-width: 768px) {
-    .about-manufacturing__grid {
-      grid-template-columns: 1fr 1fr;
-    }
   }
 
   .about-manufacturing__label {
     display: inline-block;
-    font-size: 0.875rem;
-    color: var(--color-primary);
+    font-size: 0.85rem;
+    color: #2D6A4F;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.75rem;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
   }
 
   .about-manufacturing__title {
-    font-family: var(--font-heading);
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    color: var(--color-text);
-    margin-bottom: 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+    color: #1a1a1a;
+    margin-bottom: 1.3rem;
+    line-height: 1.25;
   }
 
   .about-manufacturing__text {
-    color: var(--color-text-light);
-    line-height: 1.8;
-    margin-bottom: 2rem;
+    color: #555;
+    line-height: 1.85;
+    margin-bottom: 1.6rem;
+  }
+
+  .about-manufacturing__text p + p {
+    margin-top: 0.9rem;
   }
 
   .about-manufacturing__features {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 4px 20px;
   }
 
   .about-manufacturing__feature {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 0;
-    color: var(--color-text);
+    gap: 10px;
+    padding: 8px 0;
+    color: #333;
+    font-size: 0.92rem;
   }
 
   .about-manufacturing__feature svg {
-    width: 20px;
-    height: 20px;
-    color: var(--color-primary);
+    width: 18px;
+    height: 18px;
+    color: #2D6A4F;
     flex-shrink: 0;
   }
 
   .about-manufacturing__image img,
   .about-manufacturing__placeholder {
     width: 100%;
-    border-radius: var(--radius-lg);
+    border-radius: 16px;
     aspect-ratio: 4/3;
     object-fit: cover;
   }
 
   .about-manufacturing__placeholder {
-    background: var(--color-white);
+    background: linear-gradient(135deg, #E8F5E9 0%, #B7E4C7 100%);
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .about-manufacturing__placeholder svg {
-    width: 64px;
-    height: 64px;
-    color: var(--color-primary);
-    opacity: 0.5;
+    width: 120px;
+    height: 120px;
+    color: #1B4332;
+    opacity: 0.55;
   }
 
-  /* CTA Section */
+  .about-manufacturing__placeholder span {
+    font-size: 0.9rem;
+    color: #1B4332;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  /* Certifications */
+  .about-certs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    margin-top: 40px;
+  }
+
+  .about-cert {
+    background: #fff;
+    border: 1px solid #EFE7D9;
+    border-radius: 14px;
+    padding: 26px 22px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .about-cert:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(27, 67, 50, 0.08);
+  }
+
+  .about-cert__icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    letter-spacing: 0.04em;
+  }
+
+  .about-cert__icon--small {
+    font-size: 0.85rem;
+  }
+
+  .about-cert h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #1B4332;
+    margin: 0 0 8px;
+  }
+
+  .about-cert p {
+    color: #555;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* CTA */
   .about-cta {
-    background: linear-gradient(135deg, var(--color-primary) 0%, #1e4d3a 100%);
-    color: var(--color-white);
+    background: linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%);
+    color: #fff;
   }
 
   .about-cta__content {
     text-align: center;
-    max-width: 700px;
+    max-width: 720px;
     margin: 0 auto;
   }
 
   .about-cta__title {
-    font-family: var(--font-heading);
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    margin-bottom: 1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.6vw, 2.3rem);
+    margin-bottom: 0.9rem;
+    color: #fff;
   }
 
   .about-cta__text {
-    font-size: 1.0625rem;
-    opacity: 0.9;
-    margin-bottom: 2rem;
+    font-size: 1.02rem;
+    opacity: 0.92;
+    margin-bottom: 1.6rem;
     line-height: 1.7;
   }
 
   .about-cta__buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 14px;
     justify-content: center;
   }
 
   .about-cta .btn--primary {
-    background: var(--color-white);
-    color: var(--color-primary);
+    background: #fff;
+    color: #2D6A4F;
+    border-color: #fff;
   }
 
   .about-cta .btn--primary:hover {
-    background: var(--color-background);
+    background: #FDF8F0;
   }
 
   .about-cta .btn--outline {
-    border-color: var(--color-white);
-    color: var(--color-white);
+    border-color: #fff;
+    color: #fff;
+    background: transparent;
   }
 
   .about-cta .btn--outline:hover {
-    background: var(--color-white);
-    color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Tablet & mobile */
+  @media (max-width: 900px) {
+    .about-parent__grid,
+    .about-mission__grid,
+    .about-manufacturing__grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .about-mission__image,
+    .about-manufacturing__image {
+      order: -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .about-timeline::before {
+      left: 30px;
+    }
+
+    .about-timeline__item {
+      grid-template-columns: 1fr;
+      padding-left: 60px;
+    }
+
+    .about-timeline__item::before {
+      left: 24px;
+      top: 24px;
+    }
+
+    .about-timeline__item--highlight::before {
+      left: 22px;
+    }
+
+    .about-timeline__year {
+      text-align: left;
+      margin-bottom: 6px;
+    }
+
+    .about-timeline__body {
+      grid-column: 1;
+    }
+
+    .about-hero__badge {
+      font-size: 0.7rem;
+      padding: 5px 10px;
+    }
+
+    .about-parent__card {
+      padding: 22px;
+    }
+
+    .about-cta__buttons .btn {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
   }
 </style>
 
@@ -495,7 +1141,7 @@
       "type": "textarea",
       "id": "hero_text",
       "label": "Hero Text",
-      "default": "Since our founding, PRM HerboVilla has been committed to bringing authentic Ayurvedic wellness solutions to modern families."
+      "default": "HerboVilla is the Ayurvedic and herbal wellness division of PRM Pharmaceuticals — a 25-year-old Indian pharmaceutical house serving more than three lakh healthcare professionals across 28 states."
     },
     {
       "type": "header",
@@ -516,13 +1162,13 @@
       "type": "text",
       "id": "mission_title",
       "label": "Mission Title",
-      "default": "Bringing Ayurveda to Every Home"
+      "default": "Bringing Ayurveda Home with Pharmaceutical Integrity"
     },
     {
       "type": "richtext",
       "id": "mission_text",
       "label": "Mission Text",
-      "default": "<p>At PRM HerboVilla, we believe that nature holds the key to optimal health. Our mission is to make authentic Ayurvedic remedies accessible to everyone, without compromising on quality or purity.</p><p>Every product we create is a result of extensive research, traditional knowledge, and modern manufacturing practices that ensure safety and efficacy.</p>"
+      "default": "<p>At HerboVilla, we believe Ayurveda deserves the same rigour as any modern medicine. Every formulation we produce is sourced from certified herbal suppliers, tested for heavy metals and microbial safety, and manufactured in a GMP-certified facility shared with our allopathic parent brand.</p><p>Our mission is simple: make authentic Ayurvedic wellness accessible to every Indian family — without compromise on purity, potency, or safety.</p>"
     },
     {
       "type": "header",
@@ -554,13 +1200,7 @@
       "type": "text",
       "id": "story_title",
       "label": "Story Title",
-      "default": "The PRM HerboVilla Story"
-    },
-    {
-      "type": "richtext",
-      "id": "story_content",
-      "label": "Story Content",
-      "default": "<p>Founded in the heart of Gujarat, PRM HerboVilla began with a simple vision: to bring the healing power of Ayurveda to every household. What started as a small manufacturing unit has grown into a trusted name in herbal wellness.</p><p>Our journey has been guided by the principles of Ayurveda — balance, purity, and harmony with nature. Every formulation we create honors centuries of traditional knowledge while meeting modern standards of quality and safety.</p><p>Today, we are proud to serve thousands of customers across India, helping them achieve their health goals naturally. Our state-of-the-art facility in Bhavnagar combines traditional Ayurvedic practices with modern manufacturing excellence.</p>"
+      "default": "A Quarter Century of Building Trust"
     },
     {
       "type": "header",
@@ -581,13 +1221,13 @@
       "type": "text",
       "id": "mfg_title",
       "label": "Manufacturing Title",
-      "default": "Our Manufacturing Excellence"
+      "default": "Pharmaceutical-Grade Manufacturing in Bhavnagar"
     },
     {
       "type": "richtext",
       "id": "mfg_text",
       "label": "Manufacturing Text",
-      "default": "<p>Our manufacturing facility is located in the Gujarat Industrial Development Corporation area in Bhavnagar. We follow strict GMP (Good Manufacturing Practices) guidelines to ensure every product meets the highest quality standards.</p>"
+      "default": "<p>Our manufacturing facility is located at <strong>Plot No. 343, 1-A, Chitra Gujarat Industrial Development Corporation, Bhavnagar, Gujarat 364004</strong>. The plant is WHO-GMP and ISO 9001:2015 certified — the same infrastructure that produces our allopathic PRM Pharma portfolio also produces every HerboVilla formulation.</p><p>Raw herbs are sourced from verified organic and contract-farmed suppliers across India, assayed for identity and potency, screened for heavy metals, pesticides, and microbial contamination, and only then approved for batch production.</p>"
     },
     {
       "type": "header",
@@ -603,7 +1243,7 @@
       "type": "textarea",
       "id": "cta_text",
       "label": "CTA Text",
-      "default": "Our team is ready to assist you on your wellness journey. Reach out to us for product recommendations or any queries."
+      "default": "Our team is ready to assist you on your wellness journey. Reach out for product recommendations, bulk or distributor enquiries, or any question about our formulations."
     },
     {
       "type": "text",
@@ -677,68 +1317,18 @@
     {
       "name": "About Page",
       "blocks": [
-        {
-          "type": "value",
-          "settings": {
-            "icon": "leaf",
-            "title": "100% Natural",
-            "text": "Every ingredient is sourced from nature, ensuring purity and authenticity in every product."
-          }
-        },
-        {
-          "type": "value",
-          "settings": {
-            "icon": "shield",
-            "title": "Quality Assured",
-            "text": "Rigorous testing and GMP compliance guarantee safety and efficacy in all our products."
-          }
-        },
-        {
-          "type": "value",
-          "settings": {
-            "icon": "heart",
-            "title": "Customer First",
-            "text": "Your wellness is our priority. We're committed to your satisfaction and health journey."
-          }
-        },
-        {
-          "type": "value",
-          "settings": {
-            "icon": "award",
-            "title": "Traditional Wisdom",
-            "text": "Formulations based on ancient Ayurvedic texts, validated by modern science."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "text": "GMP Certified Manufacturing Facility"
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "text": "ISO Quality Management Standards"
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "text": "AYUSH Ministry Licensed"
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "text": "100% Quality Tested Raw Materials"
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "text": "State-of-the-Art Laboratory Testing"
-          }
-        }
+        { "type": "value", "settings": { "icon": "leaf", "title": "Purity First", "text": "Every herb is tested for identity, potency, heavy metals, and microbial safety before it enters production." } },
+        { "type": "value", "settings": { "icon": "shield", "title": "Pharmaceutical-Grade", "text": "Manufactured in the same WHO-GMP certified facility as our allopathic PRM Pharma portfolio." } },
+        { "type": "value", "settings": { "icon": "heart", "title": "Classical & Clinical", "text": "Formulations rooted in Ayurvedic texts, validated by modern quality and safety standards." } },
+        { "type": "value", "settings": { "icon": "award", "title": "Trusted by Professionals", "text": "Over 3,00,000 healthcare professionals across India choose products from the PRM group." } },
+        { "type": "feature", "settings": { "text": "WHO-GMP Certified Facility" } },
+        { "type": "feature", "settings": { "text": "ISO 9001:2015 Quality System" } },
+        { "type": "feature", "settings": { "text": "AYUSH Ministry Licensed" } },
+        { "type": "feature", "settings": { "text": "FSSAI Compliant Nutraceuticals" } },
+        { "type": "feature", "settings": { "text": "State FDA Inspected Plant" } },
+        { "type": "feature", "settings": { "text": "Heavy-Metal &amp; Microbial Tested" } },
+        { "type": "feature", "settings": { "text": "Contract-Farmed Organic Herbs" } },
+        { "type": "feature", "settings": { "text": "Batch-Wise Analytical QC" } }
       ]
     }
   ]
