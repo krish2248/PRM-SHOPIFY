@@ -5,100 +5,68 @@
 
 <section class="vedacold-featured">
   <div class="vedacold-container">
-    <!-- Left: Product Image -->
+    <!-- Left: Product Image Gallery -->
     <div class="vedacold-image">
       <div class="vedacold-image-wrapper">
-        <!-- Placeholder tablet/medicine illustration -->
-        <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" class="vedacold-placeholder-svg">
-          <!-- Background gradient -->
-          <defs>
-            <linearGradient id="vedacold-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#E8F5E9"/>
-              <stop offset="100%" style="stop-color:#C8E6C9"/>
-            </linearGradient>
-            <linearGradient id="bottle-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:#1B5E20"/>
-              <stop offset="50%" style="stop-color:#2D6A4F"/>
-              <stop offset="100%" style="stop-color:#1B5E20"/>
-            </linearGradient>
-            <linearGradient id="cap-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:#8B5E3C"/>
-              <stop offset="50%" style="stop-color:#A0522D"/>
-              <stop offset="100%" style="stop-color:#8B5E3C"/>
-            </linearGradient>
-            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000" flood-opacity="0.15"/>
-            </filter>
-          </defs>
-          
-          <!-- Background circle -->
-          <circle cx="200" cy="250" r="180" fill="url(#vedacold-bg)"/>
-          
-          <!-- Medicine Bottle -->
-          <g filter="url(#shadow)">
-            <!-- Bottle body -->
-            <rect x="120" y="180" width="160" height="220" rx="12" fill="url(#bottle-gradient)"/>
-            
-            <!-- Bottle neck -->
-            <rect x="155" y="140" width="90" height="50" rx="6" fill="url(#bottle-gradient)"/>
-            
-            <!-- Cap -->
-            <rect x="145" y="110" width="110" height="40" rx="8" fill="url(#cap-gradient)"/>
-            
-            <!-- Label area -->
-            <rect x="135" y="210" width="130" height="160" rx="6" fill="#FDF8F0"/>
-            
-            <!-- Label content -->
-            <text x="200" y="245" text-anchor="middle" font-family="serif" font-size="16" font-weight="bold" fill="#2D6A4F">VedaCold</text>
-            <text x="200" y="265" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#2D6A4F">CV-675</text>
-            
-            <!-- Leaf decoration on label -->
-            <path d="M175 290 Q200 270 225 290 Q200 320 175 290" fill="#4CAF50" opacity="0.6"/>
-            <path d="M185 310 Q200 295 215 310 Q200 330 185 310" fill="#81C784" opacity="0.6"/>
-            
-            <!-- 22 Herbs badge -->
-            <circle cx="200" cy="350" r="25" fill="#2D6A4F"/>
-            <text x="200" y="347" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fff">22</text>
-            <text x="200" y="361" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#fff">HERBS</text>
-          </g>
-          
-          <!-- Floating herb leaves decoration -->
-          <g opacity="0.4">
-            <ellipse cx="80" cy="150" rx="20" ry="10" fill="#4CAF50" transform="rotate(-30 80 150)"/>
-            <ellipse cx="320" cy="180" rx="18" ry="8" fill="#81C784" transform="rotate(20 320 180)"/>
-            <ellipse cx="70" cy="350" rx="15" ry="7" fill="#66BB6A" transform="rotate(-15 70 350)"/>
-            <ellipse cx="330" cy="320" rx="22" ry="9" fill="#4CAF50" transform="rotate(35 330 320)"/>
-          </g>
-        </svg>
-        
-        <!-- Ayurvedic badge -->
-        <div class="vedacold-badge">
-          <span>100%</span>
-          <span>Ayurvedic</span>
+        <div class="vedacold-main-image">
+          <img src="{{ 'vedacold-box-front.png' | asset_url }}"
+               alt="VedaCold-CV 675 Tablets - Front"
+               class="vedacold-hero-img is-active"
+               data-vedacold-img="front"
+               loading="lazy">
+          <img src="{{ 'vedacold-box-back.png' | asset_url }}"
+               alt="VedaCold-CV 675 Tablets - Back"
+               class="vedacold-hero-img"
+               data-vedacold-img="back"
+               loading="lazy">
+          <img src="{{ 'vedacold-strip-3d.png' | asset_url }}"
+               alt="VedaCold-CV 675 Tablets - Strip"
+               class="vedacold-hero-img"
+               data-vedacold-img="strip"
+               loading="lazy">
+          <img src="{{ 'vedacold-strip-back.png' | asset_url }}"
+               alt="VedaCold-CV 675 Tablets - Strip Back"
+               class="vedacold-hero-img"
+               data-vedacold-img="strip-back"
+               loading="lazy">
+        </div>
+        <div class="vedacold-thumbs">
+          <button type="button" class="vedacold-thumb is-active" data-vedacold-target="front" aria-label="Box front">
+            <img src="{{ 'vedacold-box-front.png' | asset_url }}" alt="" loading="lazy">
+          </button>
+          <button type="button" class="vedacold-thumb" data-vedacold-target="back" aria-label="Box back">
+            <img src="{{ 'vedacold-box-back.png' | asset_url }}" alt="" loading="lazy">
+          </button>
+          <button type="button" class="vedacold-thumb" data-vedacold-target="strip" aria-label="Strip">
+            <img src="{{ 'vedacold-strip-3d.png' | asset_url }}" alt="" loading="lazy">
+          </button>
+          <button type="button" class="vedacold-thumb" data-vedacold-target="strip-back" aria-label="Strip back">
+            <img src="{{ 'vedacold-strip-back.png' | asset_url }}" alt="" loading="lazy">
+          </button>
         </div>
       </div>
     </div>
-    
+
     <!-- Right: Product Info -->
     <div class="vedacold-info">
       <span class="vedacold-tag">Featured Product</span>
-      
+
       <h2 class="vedacold-title">VedaCold-CV 675 Tablets</h2>
-      
+
       <p class="vedacold-tagline">Power of 22 Ancient Herbs in Every Tablet</p>
-      
+
       <p class="vedacold-description">
-        Naturally soothes cough, clears cold, and strengthens immunity through authentic Ayurveda. 
+        Naturally soothes cough, clears cold, and strengthens immunity through authentic Ayurveda.
         Each 710mg coated tablet combines 22 time-tested herbs for comprehensive respiratory care.
       </p>
-      
+
       <!-- Benefits -->
       <div class="vedacold-benefits">
         <div class="vedacold-benefit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          <span>Instant relief from nasal congestion, sore throat & headache</span>
+          <span>Instant relief from nasal congestion, sore throat &amp; headache</span>
         </div>
         <div class="vedacold-benefit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -119,7 +87,7 @@
           <span>Antipyretic herbs normalize body temperature</span>
         </div>
       </div>
-      
+
       <!-- Ingredients highlight -->
       <div class="vedacold-herbs">
         <div class="vedacold-herbs-badge">
@@ -128,61 +96,82 @@
         </div>
         <div class="vedacold-herbs-list">
           <span>Tulsi</span>
-          <span>Turmeric</span>
-          <span>Neem</span>
-          <span>Trikatu</span>
           <span>Vasaka</span>
-          <span>+17 more</span>
+          <span>Yashtimadhu</span>
+          <span>Kantkari</span>
+          <span>Bharangi</span>
+          <span>Pippali</span>
+          <span>Sunthi</span>
+          <span>Marich</span>
+          <span>Haridra</span>
+          <span>Neem</span>
+          <span>Guduchi</span>
+          <span>Kalmegh</span>
+          <span>Pudina</span>
+          <span>Ajwain</span>
+          <span>Dalchini</span>
+          <span>Laung</span>
+          <span>Ela</span>
+          <span>Akarkara</span>
+          <span>Amla</span>
+          <span>Haritaki</span>
+          <span>Bibhitaki</span>
+          <span>Munakka</span>
         </div>
       </div>
-      
+
       <!-- Dosage -->
       <div class="vedacold-dosage">
         <strong>Dosage:</strong> Adults: 1-2 tablets twice/thrice daily with warm water
       </div>
-      
+
       <!-- Price & CTA -->
       <div class="vedacold-purchase">
         <div class="vedacold-price">
           <span class="price-amount">&#8377;180</span>
           <span class="price-pack">Pack of 30 Tablets (2x15)</span>
         </div>
-        
+
         <div class="vedacold-actions">
-          {%- assign vedacold_product = all_products['vedacold-cv-675'] -%}
-          {%- if vedacold_product != blank and vedacold_product.available -%}
-            <button type="button" class="vedacold-add-btn" data-add-to-cart data-variant-id="{{ vedacold_product.first_available_variant.id }}">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-              </svg>
-              Add to Cart
-            </button>
-            <a href="{{ vedacold_product.url }}" class="vedacold-view-btn">View Details</a>
-          {%- else -%}
-            <a href="/collections/all" class="vedacold-add-btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-              </svg>
-              Shop Now
-            </a>
-            <span class="vedacold-coming-soon">Coming Soon to Store</span>
-          {%- endif -%}
+          <a href="/products/vedacold-cv-675" class="vedacold-add-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            Order Now
+          </a>
+          <a href="/products/vedacold-cv-675" class="vedacold-view-btn">View Details</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<script>
+  (function() {
+    var root = document.currentScript.closest('.vedacold-featured') || document;
+    var thumbs = root.querySelectorAll('[data-vedacold-target]');
+    var images = root.querySelectorAll('[data-vedacold-img]');
+    thumbs.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var target = btn.getAttribute('data-vedacold-target');
+        thumbs.forEach(function(t) { t.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        images.forEach(function(img) {
+          img.classList.toggle('is-active', img.getAttribute('data-vedacold-img') === target);
+        });
+      });
+    });
+  })();
+</script>
+
 <style>
   .vedacold-featured {
     padding: 80px 20px;
     background: linear-gradient(135deg, #FDF8F0 0%, #F5F0E8 100%);
   }
-  
+
   .vedacold-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -191,59 +180,90 @@
     gap: 60px;
     align-items: center;
   }
-  
+
   /* Image Section */
   .vedacold-image {
     position: relative;
   }
-  
+
   .vedacold-image-wrapper {
     position: relative;
-    aspect-ratio: 4/5;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .vedacold-main-image {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 1 / 1;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    padding: 28px;
   }
-  
-  .vedacold-placeholder-svg {
+
+  .vedacold-hero-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    max-width: 400px;
+    object-fit: contain;
+    padding: 28px;
+    opacity: 0;
+    transform: scale(0.97);
+    transition: opacity 0.4s ease, transform 0.4s ease;
   }
-  
-  .vedacold-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: #2D6A4F;
-    color: #fff;
-    padding: 12px 16px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(45, 106, 79, 0.3);
+
+  .vedacold-hero-img.is-active {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  .vedacold-badge span {
-    display: block;
+
+  .vedacold-thumbs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  
-  .vedacold-badge span:first-child {
-    font-size: 18px;
-    font-weight: 700;
+
+  .vedacold-thumb {
+    width: 64px;
+    height: 64px;
+    padding: 4px;
+    background: #fff;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
-  
-  .vedacold-badge span:last-child {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    opacity: 0.9;
+
+  .vedacold-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
-  
+
+  .vedacold-thumb:hover {
+    transform: translateY(-2px);
+  }
+
+  .vedacold-thumb.is-active {
+    border-color: #2D6A4F;
+  }
+
   /* Info Section */
   .vedacold-info {
     padding: 20px 0;
   }
-  
+
   .vedacold-tag {
     display: inline-block;
     background: #2D6A4F;
@@ -256,7 +276,7 @@
     border-radius: 20px;
     margin-bottom: 16px;
   }
-  
+
   .vedacold-title {
     font-family: 'Playfair Display', serif;
     font-size: 42px;
@@ -265,7 +285,7 @@
     margin: 0 0 12px 0;
     line-height: 1.2;
   }
-  
+
   .vedacold-tagline {
     font-size: 18px;
     color: #2D6A4F;
@@ -273,14 +293,14 @@
     margin: 0 0 20px 0;
     font-style: italic;
   }
-  
+
   .vedacold-description {
     font-size: 16px;
     line-height: 1.7;
     color: #555;
     margin: 0 0 28px 0;
   }
-  
+
   /* Benefits */
   .vedacold-benefits {
     display: flex;
@@ -288,13 +308,13 @@
     gap: 12px;
     margin-bottom: 28px;
   }
-  
+
   .vedacold-benefit {
     display: flex;
     align-items: flex-start;
     gap: 12px;
   }
-  
+
   .vedacold-benefit svg {
     width: 20px;
     height: 20px;
@@ -302,25 +322,25 @@
     flex-shrink: 0;
     margin-top: 2px;
   }
-  
+
   .vedacold-benefit span {
     font-size: 15px;
     color: #333;
     line-height: 1.4;
   }
-  
+
   /* Herbs highlight */
   .vedacold-herbs {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
     background: #fff;
-    padding: 16px 20px;
+    padding: 18px 22px;
     border-radius: 12px;
     margin-bottom: 20px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   }
-  
+
   .vedacold-herbs-badge {
     display: flex;
     flex-direction: column;
@@ -331,40 +351,35 @@
     border-radius: 10px;
     flex-shrink: 0;
   }
-  
+
   .herbs-number {
     font-size: 28px;
     font-weight: 700;
     line-height: 1;
   }
-  
+
   .herbs-label {
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     opacity: 0.9;
   }
-  
+
   .vedacold-herbs-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 6px;
   }
-  
+
   .vedacold-herbs-list span {
     background: #E8F5E9;
     color: #2D6A4F;
-    font-size: 13px;
-    padding: 6px 12px;
+    font-size: 12px;
+    padding: 5px 10px;
     border-radius: 20px;
     font-weight: 500;
   }
-  
-  .vedacold-herbs-list span:last-child {
-    background: #2D6A4F;
-    color: #fff;
-  }
-  
+
   /* Dosage */
   .vedacold-dosage {
     font-size: 14px;
@@ -375,11 +390,11 @@
     border-radius: 8px;
     border-left: 4px solid #8B5E3C;
   }
-  
+
   .vedacold-dosage strong {
     color: #8B5E3C;
   }
-  
+
   /* Purchase section */
   .vedacold-purchase {
     display: flex;
@@ -387,32 +402,32 @@
     align-items: center;
     gap: 24px;
   }
-  
+
   .vedacold-price {
     display: flex;
     flex-direction: column;
   }
-  
+
   .price-amount {
     font-size: 36px;
     font-weight: 700;
     color: #2D6A4F;
     line-height: 1;
   }
-  
+
   .price-pack {
     font-size: 13px;
     color: #888;
     margin-top: 4px;
   }
-  
+
   .vedacold-actions {
     display: flex;
     align-items: center;
     gap: 12px;
     flex-wrap: wrap;
   }
-  
+
   .vedacold-add-btn {
     display: inline-flex;
     align-items: center;
@@ -428,18 +443,18 @@
     text-decoration: none;
     transition: all 0.3s ease;
   }
-  
+
   .vedacold-add-btn:hover {
     background: #1B5E20;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(45, 106, 79, 0.35);
   }
-  
+
   .vedacold-add-btn svg {
     width: 20px;
     height: 20px;
   }
-  
+
   .vedacold-view-btn {
     display: inline-flex;
     align-items: center;
@@ -452,18 +467,12 @@
     border-radius: 8px;
     transition: all 0.3s ease;
   }
-  
+
   .vedacold-view-btn:hover {
     background: #2D6A4F;
     color: #fff;
   }
-  
-  .vedacold-coming-soon {
-    font-size: 13px;
-    color: #888;
-    font-style: italic;
-  }
-  
+
   /* Responsive */
   @media (max-width: 900px) {
     .vedacold-container {
@@ -473,8 +482,9 @@
 
     .vedacold-image {
       order: -1;
-      max-width: 320px;
+      max-width: 360px;
       margin: 0 auto;
+      width: 100%;
     }
 
     .vedacold-title {
@@ -484,6 +494,7 @@
     .vedacold-herbs {
       flex-direction: column;
       text-align: center;
+      align-items: center;
     }
 
     .vedacold-herbs-list {
@@ -507,7 +518,7 @@
     }
 
     .vedacold-image {
-      max-width: 260px;
+      max-width: 280px;
     }
 
     .vedacold-title {
@@ -537,15 +548,20 @@
     }
 
     .vedacold-herbs-list span {
-      font-size: 12px;
+      font-size: 11px;
+      padding: 4px 8px;
+    }
+
+    .vedacold-thumb {
+      width: 52px;
+      height: 52px;
     }
   }
 
-  /* Tiny phones */
   @media (max-width: 360px) {
     .vedacold-featured { padding: 32px 14px; }
     .vedacold-title    { font-size: 22px; }
-    .vedacold-image    { max-width: 220px; }
+    .vedacold-image    { max-width: 240px; }
   }
 </style>
 
