@@ -40,24 +40,30 @@
         "blocks": {
           "cert-1": {
             "type": "certification",
-            "settings": {
-              "text": "GMP Certified"
-            }
+            "settings": { "text": "GMP Certified" }
           },
           "cert-2": {
             "type": "certification",
-            "settings": {
-              "text": "ISO 9001:2015"
-            }
+            "settings": { "text": "ISO 9001:2015" }
           },
           "cert-3": {
             "type": "certification",
-            "settings": {
-              "text": "AYUSH Approved"
-            }
-          }
+            "settings": { "text": "AYUSH Approved" }
+          },
+          "shop-1": { "type": "link_shop", "settings": { "text": "All Products", "link": "/collections/all" } },
+          "shop-2": { "type": "link_shop", "settings": { "text": "Bestsellers", "link": "/collections/bestsellers" } },
+          "shop-3": { "type": "link_shop", "settings": { "text": "Immunity Boosters", "link": "/collections/immunity-boosters" } },
+          "shop-4": { "type": "link_shop", "settings": { "text": "Skin Care", "link": "/collections/skin-care" } },
+          "shop-5": { "type": "link_shop", "settings": { "text": "Hair Care", "link": "/collections/hair-care" } },
+          "shop-6": { "type": "link_shop", "settings": { "text": "Digestive Care", "link": "/collections/digestive-care" } },
+          "help-1": { "type": "link_col2", "settings": { "text": "Contact Us", "link": "/pages/contact" } },
+          "help-2": { "type": "link_col2", "settings": { "text": "About Us", "link": "/pages/about-us" } },
+          "help-3": { "type": "link_col2", "settings": { "text": "FAQs", "link": "/pages/faq" } },
+          "help-4": { "type": "link_col2", "settings": { "text": "Track Order", "link": "/pages/track-order" } },
+          "help-5": { "type": "link_col2", "settings": { "text": "Returns & Refunds", "link": "/policies/refund-policy" } },
+          "help-6": { "type": "link_col2", "settings": { "text": "Shipping Info", "link": "/policies/shipping-policy" } }
         },
-        "block_order": ["cert-1", "cert-2", "cert-3"]
+        "block_order": ["cert-1", "cert-2", "cert-3", "shop-1", "shop-2", "shop-3", "shop-4", "shop-5", "shop-6", "help-1", "help-2", "help-3", "help-4", "help-5", "help-6"]
       }
     }
   },
