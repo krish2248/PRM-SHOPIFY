@@ -32,13 +32,21 @@
     aspect-ratio: 1;
     border-radius: 20px;
     overflow: hidden;
-    background: #f8f8f8;
+    background: #FDF8F0;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    box-sizing: border-box;
+    border: 1px solid #EFE7D9;
   }
   .product-main-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
   .product-thumbnails {
     display: flex;
@@ -47,23 +55,32 @@
     padding-bottom: 10px;
   }
   .product-thumbnail {
-    width: 80px;
-    height: 80px;
+    width: 78px;
+    height: 78px;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
-    border: 2px solid transparent;
+    border: 2px solid #EFE7D9;
+    background: #FDF8F0;
     flex-shrink: 0;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+    padding: 6px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .product-thumbnail.active,
   .product-thumbnail:hover {
     border-color: var(--color-primary);
+    transform: translateY(-1px);
   }
   .product-thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
   .product-badges {
     display: flex;
@@ -966,21 +983,53 @@
       
       <div class="tab-content" id="tab-usage">
         <h3>How to Use</h3>
+        {%- assign usage_count = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'usage_step' -%}{%- assign usage_count = usage_count | plus: 1 -%}{%- endif -%}
+        {%- endfor -%}
         <ol class="usage-steps">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'usage_step' -%}
-              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-            {%- endif -%}
-          {%- endfor -%}
+          {%- if usage_count > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'usage_step' -%}
+                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            <li>Shake well before use. Take 1-2 tablets/teaspoons twice daily, preferably after meals.</li>
+            <li>Swallow with a glass of lukewarm water or milk for better absorption.</li>
+            <li>Maintain a consistent routine — take at the same time every day for best results.</li>
+            <li>For chronic conditions, continue for at least 8-12 weeks or as directed by your Ayurvedic physician.</li>
+            <li>Pair with a balanced diet, adequate hydration and regular sleep for optimal wellness outcomes.</li>
+          {%- endif -%}
         </ol>
+        <p style="margin-top: 20px; font-size: 0.85rem; color: var(--color-text-light); font-style: italic; padding: 14px 16px; background: #f8fdf8; border-radius: 8px; border-left: 3px solid var(--color-primary);">
+          <strong>Note:</strong> Individual results may vary. Consult your healthcare provider before starting any new wellness regimen, especially if you are pregnant, nursing, or on medication.
+        </p>
       </div>
       
       <div class="tab-content" id="tab-shipping">
         <h3>Shipping & Returns</h3>
-        <p><strong>Free Shipping:</strong> On all orders above ₹400</p>
-        <p><strong>Delivery Time:</strong> 5-7 business days across India</p>
-        <p><strong>Returns:</strong> Easy 7-day return policy for unopened products</p>
-        <p><strong>COD:</strong> Cash on Delivery available</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 28px;">
+          <div style="padding: 18px; background: #f8fdf8; border: 1px solid rgba(45,106,79,0.12); border-radius: 10px;">
+            <h4 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 8px;">Free Shipping</h4>
+            <p style="margin: 0;">On all prepaid orders above <strong>₹400</strong>. A flat ₹50 shipping fee applies on orders below ₹400.</p>
+          </div>
+          <div style="padding: 18px; background: #f8fdf8; border: 1px solid rgba(45,106,79,0.12); border-radius: 10px;">
+            <h4 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 8px;">Delivery Timeline</h4>
+            <p style="margin: 0;"><strong>Metro cities:</strong> 3-5 business days<br><strong>Other locations:</strong> 5-7 business days<br><strong>Remote areas:</strong> Up to 10 days</p>
+          </div>
+          <div style="padding: 18px; background: #f8fdf8; border: 1px solid rgba(45,106,79,0.12); border-radius: 10px;">
+            <h4 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 8px;">Cash on Delivery</h4>
+            <p style="margin: 0;">COD is available across India (serviceable PIN codes). A small handling fee of ₹40 applies on COD orders.</p>
+          </div>
+          <div style="padding: 18px; background: #f8fdf8; border: 1px solid rgba(45,106,79,0.12); border-radius: 10px;">
+            <h4 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 8px;">Returns & Refunds</h4>
+            <p style="margin: 0;">7-day return window on unopened, factory-sealed items. Refunds are processed within 5-7 business days of return approval.</p>
+          </div>
+        </div>
+        <p style="font-size: 0.9rem;"><strong>Tracking:</strong> Once dispatched, a tracking link is sent to your registered email and phone. You can also track shipments from your account page.</p>
+        <p style="font-size: 0.9rem;"><strong>Quality Guarantee:</strong> Every PRM HerboVilla batch is tested for identity, potency and safety at our in-house WHO-GMP certified QC lab before dispatch.</p>
+        <p style="margin-top: 18px; font-size: 0.85rem; color: var(--color-text-light); font-style: italic;">For any shipping queries, please reach us at <a href="mailto:contact@prmpharmaceuticals.com" style="color: var(--color-primary);">contact@prmpharmaceuticals.com</a> or call <strong>0278 244 8087</strong> (Mon-Sat, 9:30 AM - 6:30 PM).</p>
       </div>
     </div>
   </div>
