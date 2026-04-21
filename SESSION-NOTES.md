@@ -117,3 +117,81 @@ This section was heavily modified. Current state:
   doing so would overwrite the newer in-store version with the older
   one-plus-my-mobile-polish. Push individual files instead, e.g.:
   `shopify theme push --only "sections/hero.liquid" --only "assets/theme.css"`.
+
+---
+
+## Session: 2026-04-22 (production-ready overhaul)
+
+- **New theme ID**: `151479124142` (replaces older `150645178542`)
+- **Push command**: `shopify theme push --store=prm-herbovilla.myshopify.com --theme=151479124142 --allow-live --nodelete`
+- **Status as of this session end**: all code changes saved locally and
+  committed to git; **NOT yet pushed to Shopify** — CLI auth token expired.
+  Push blocked pending fresh device-code auth (tomorrow morning).
+
+### Homepage (`templates/index.json`)
+- New section order: hero → shop-by-goal → certifications → featured-collection
+  → vedacold-featured → new-arrivals → herbs-uses → how-it-works →
+  testimonials (renamed "Doctor's Reviews") → newsletter
+- Removed: brand-mission, wellness/blog-posts, why-us, collection-list,
+  hero stats bar
+- `featured-collection` → 8 products, `show_secondary_image: true`
+- `new-arrivals` → 8 products
+- All 6 shop-by-goal blocks now reference real collection handles
+- Added 6 `herbs-uses` category blocks with inline herb lists
+- Replaced all 8 testimonials with Ayurvedic practitioner voices
+
+### Vedacold Featured (`sections/vedacold-featured.liquid`)
+- 4-image carousel (front / back / strip 3D / strip back) driven by JS
+  thumb-click toggle with `is-active` class
+- Removed "Coming Soon to Store" text + "100% Ayurvedic" badge
+- CTA changed to "Order Now" → `/products/vedacold-cv-675`
+- All 22 herbs shown inline in compact pill grid
+
+### New sections & files
+- **`sections/herbs-uses.liquid`** — new section, 6 category cards with
+  SVG icons (immunity / digestive / respiratory / joint / skin / women),
+  responsive grid (minmax 280px), hover lift effect
+- **`prm-herbovilla-theme/layout/password.liquid`** — custom password-
+  page layout (previously missing)
+
+### Footer (`sections/footer.liquid`)
+- Removed Quick Links column entirely + `link_col1`/`col1_title` schema
+- Added hardcoded `contact@prmpharmaceuticals.com` + `0278 244 8087`
+- 3-column structure: Brand (logo+desc+social+certs) /
+  Customer Service (hardcoded contact + dynamic links) /
+  Visit & Connect (address + Mon-Sat hours + email)
+
+### About page (`sections/about-page.liquid` + `templates/page.about.json`)
+- Major expansion: hero with 3 badges, stats bar
+  (1999/2013/3,00,000+/85+/250+/28+), parent-brand comparison card,
+  mission, values (4), 6-milestone timeline (**2013 highlighted**),
+  leadership (Hemang + Dhyey Soni), Bhavnagar G.I.D.C. Plot 343
+  manufacturing, 6-cert grid, CTA
+- Value blocks: Purity First / Pharmaceutical-Grade / Classical & Clinical
+  / Trusted by Professionals
+- 8 feature blocks: WHO-GMP, ISO 9001:2015, AYUSH, FSSAI, State FDA,
+  Heavy-Metal Tested, Contract-Farmed Herbs, Batch-Wise QC
+
+### Product page (`sections/product-template.liquid`)
+- **Image fix**: `.product-main-image` → `display:flex; padding:30px;
+  border; bg #FDF8F0`; `img` → `object-fit: contain` (no more zoom)
+- Thumbnails → 78px with padding + cream bg + contain fit
+- **How to Use tab** — default 5-step fallback when no `usage_step` blocks
+- **Shipping tab** — 4-card grid (Free Shipping / Delivery Timeline /
+  COD / Returns) + tracking & quality notes + contact info
+
+### Blog (`sections/blog-template.liquid`)
+- 10 curated expert articles fall back when no admin articles exist
+  (Johns Hopkins, Healthline, WHO)
+- Categories: Ayurveda 101, Herbal Science, Superfoods, Digestion,
+  Immunity, Research, Skin Care, Respiratory, Adaptogens, Skin & Detox
+- Styled meta chips + source attribution badges
+
+### New images copied to assets/
+- `vedacold-cv-675-box-front.png` / `-box-back.png` / `-strip-3d.png` /
+  `-strip-back.png` (also kept shorter-named duplicates referenced by
+  vedacold-featured.liquid)
+
+### Responsive breakpoints touched
+All sections responsive at 992px (grid collapse), 768px (stack),
+576px (single column + reduced padding), 480px (tiny-screen scale).
