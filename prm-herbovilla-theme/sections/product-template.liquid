@@ -497,6 +497,24 @@
     color: var(--color-primary);
     font-weight: 500;
   }
+  .description-hero-image {
+    margin: 0 0 28px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #f7f1e3;
+    box-shadow: 0 8px 24px rgba(27, 67, 50, 0.08);
+  }
+  .description-hero-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: contain;
+    background: #ffffff;
+  }
+  @media (max-width: 576px) {
+    .description-hero-image img { max-height: 320px; }
+  }
   .product-description-structured .rte {
     font-size: 1rem;
     line-height: 1.75;
@@ -887,6 +905,28 @@
       
       <div class="tab-content active" id="tab-description">
         <div class="product-description-structured">
+          {%- liquid
+            assign hero_image = product.featured_image
+            if product.images.size > 1
+              assign hero_image = product.images[1]
+            endif
+          -%}
+          {%- if hero_image != blank -%}
+            <div class="description-hero-image">
+              <img
+                src="{{ hero_image | image_url: width: 1200 }}"
+                srcset="{{ hero_image | image_url: width: 600 }} 600w,
+                        {{ hero_image | image_url: width: 900 }} 900w,
+                        {{ hero_image | image_url: width: 1200 }} 1200w"
+                sizes="(max-width: 768px) 100vw, 760px"
+                alt="{{ hero_image.alt | default: product.title | escape }}"
+                loading="lazy"
+                width="{{ hero_image.width }}"
+                height="{{ hero_image.height }}"
+              >
+            </div>
+          {%- endif -%}
+
           {%- if product.description != blank -%}
             <div class="rte">
               {{ product.description }}
