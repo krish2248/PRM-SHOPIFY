@@ -20,34 +20,57 @@
     </div>
   </section>
 
-  {%- comment -%} Stats Bar {%- endcomment -%}
+  {%- comment -%} Customer Stats Bar {%- endcomment -%}
   <section class="about-stats">
     <div class="container">
       <div class="about-stats__grid">
         <div class="about-stats__item">
-          <div class="about-stats__number">1999</div>
-          <div class="about-stats__label">PRM Pharma Founded</div>
+          <div class="about-stats__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="about-stats__number">1M<span>+</span></div>
+          <div class="about-stats__label">Happy Customers</div>
         </div>
         <div class="about-stats__item">
-          <div class="about-stats__number">2013</div>
-          <div class="about-stats__label">HerboVilla Division Launched</div>
+          <div class="about-stats__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="about-stats__number">25<span>+</span></div>
+          <div class="about-stats__label">Years of Experience</div>
         </div>
         <div class="about-stats__item">
-          <div class="about-stats__number">3,00,000<span>+</span></div>
-          <div class="about-stats__label">Healthcare Professionals</div>
+          <div class="about-stats__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 6L9 17l-5-5"/><path d="M4 4h16v16H4z"/></svg>
+          </div>
+          <div class="about-stats__number">50<span>+</span></div>
+          <div class="about-stats__label">Products</div>
         </div>
         <div class="about-stats__item">
-          <div class="about-stats__number">85<span>+</span></div>
-          <div class="about-stats__label">Brands</div>
+          <div class="about-stats__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+          </div>
+          <div class="about-stats__number">100<span>%</span></div>
+          <div class="about-stats__label">Natural Ingredients</div>
         </div>
-        <div class="about-stats__item">
-          <div class="about-stats__number">250<span>+</span></div>
-          <div class="about-stats__label">Formulations</div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Compact Certification Strip {%- endcomment -%}
+  <section class="about-certstrip">
+    <div class="container">
+      <div class="about-certstrip__inner">
+        <div class="about-certstrip__head">
+          <span class="about-certstrip__label">Quality Assured</span>
+          <h3 class="about-certstrip__title">Certified for Excellence</h3>
         </div>
-        <div class="about-stats__item">
-          <div class="about-stats__number">28<span>+</span></div>
-          <div class="about-stats__label">Indian States</div>
-        </div>
+        <ul class="about-certstrip__list">
+          <li><span>WHO-GMP</span><small>Global Pharma Standards</small></li>
+          <li><span>ISO 9001:2015</span><small>Quality Management</small></li>
+          <li><span>AYUSH</span><small>Government of India Licensed</small></li>
+          <li><span>FSSAI</span><small>Food Safety Approved</small></li>
+          <li><span>FDA</span><small>State Inspected</small></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -578,48 +601,6 @@
     </div>
   </section>
 
-  {%- comment -%} Certifications Grid {%- endcomment -%}
-  <section class="about-certs section">
-    <div class="container">
-      <div class="section-header section-header--center">
-        <span class="section-header__label">Certifications &amp; Approvals</span>
-        <h2 class="section-header__title">Built on Trust, Proven by Standards</h2>
-      </div>
-      <div class="about-certs__grid">
-        <div class="about-cert">
-          <div class="about-cert__icon">WHO</div>
-          <h4>WHO-GMP</h4>
-          <p>World Health Organization Good Manufacturing Practices — the global benchmark for pharmaceutical manufacturing quality.</p>
-        </div>
-        <div class="about-cert">
-          <div class="about-cert__icon">ISO</div>
-          <h4>ISO 9001:2015</h4>
-          <p>Certified quality management system across sourcing, manufacturing, packaging, and distribution.</p>
-        </div>
-        <div class="about-cert">
-          <div class="about-cert__icon about-cert__icon--small">AYUSH</div>
-          <h4>AYUSH Ministry</h4>
-          <p>Government of India licence for Ayurvedic medicines — both classical formulations and proprietary Ayurvedic products.</p>
-        </div>
-        <div class="about-cert">
-          <div class="about-cert__icon about-cert__icon--small">FSSAI</div>
-          <h4>FSSAI Licensed</h4>
-          <p>Food Safety and Standards Authority of India compliance for nutraceutical and food-grade herbal products.</p>
-        </div>
-        <div class="about-cert">
-          <div class="about-cert__icon">FDA</div>
-          <h4>FDA Compliant</h4>
-          <p>State FDA inspected and approved manufacturing facility with ongoing pharmacovigilance protocols.</p>
-        </div>
-        <div class="about-cert">
-          <div class="about-cert__icon about-cert__icon--small">HALAL</div>
-          <h4>Export Ready</h4>
-          <p>Capability to supply Halal, Kosher, and other export-compliance documentation for international partners.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   {%- comment -%} Why Choose HerboVilla {%- endcomment -%}
   <section class="about-why section section--alt">
     <div class="container">
@@ -1003,27 +984,59 @@
     backdrop-filter: blur(3px);
   }
 
-  /* Stats Bar */
+  /* Customer Stats Bar */
   .about-stats {
     background: #FDF8F0;
-    padding: clamp(40px, 5vw, 60px) 20px;
+    padding: clamp(32px, 4vw, 48px) 20px;
     border-bottom: 1px solid #EFE7D9;
   }
 
   .about-stats__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
     text-align: center;
   }
 
+  .about-stats__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 10px;
+    position: relative;
+  }
+
+  .about-stats__item + .about-stats__item::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 20%;
+    bottom: 20%;
+    width: 1px;
+    background: #E8DEC8;
+  }
+
+  .about-stats__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(45, 106, 79, 0.1);
+    color: #2D6A4F;
+    margin-bottom: 10px;
+  }
+
+  .about-stats__icon svg { width: 24px; height: 24px; }
+
   .about-stats__number {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-size: clamp(1.6rem, 2.8vw, 2.1rem);
     font-weight: 700;
     color: #2D6A4F;
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .about-stats__number span {
@@ -1033,11 +1046,118 @@
   }
 
   .about-stats__label {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     color: #555;
     text-transform: uppercase;
-    letter-spacing: 0.07em;
-    font-weight: 500;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  /* Compact Certification Strip */
+  .about-certstrip {
+    background: #fff;
+    padding: 24px 20px;
+    border-bottom: 1px solid #EFE7D9;
+  }
+
+  .about-certstrip__inner {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) 3fr;
+    gap: 28px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-certstrip__head {
+    border-right: 1px solid #E8DEC8;
+    padding-right: 20px;
+  }
+
+  .about-certstrip__label {
+    font-size: 0.7rem;
+    color: #8B5E3C;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .about-certstrip__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: #1B4332;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .about-certstrip__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .about-certstrip__list li {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 8px 6px;
+    border: 1px solid #EFE7D9;
+    border-radius: 10px;
+    background: #FDF8F0;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .about-certstrip__list li:hover {
+    border-color: #2D6A4F;
+    transform: translateY(-2px);
+  }
+
+  .about-certstrip__list li span {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: #1B4332;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .about-certstrip__list li small {
+    font-size: 0.66rem;
+    color: #777;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 768px) {
+    .about-stats__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .about-stats__item + .about-stats__item::before {
+      display: none;
+    }
+    .about-certstrip__inner {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .about-certstrip__head {
+      border-right: 0;
+      border-bottom: 1px solid #E8DEC8;
+      padding: 0 0 12px;
+      text-align: center;
+    }
+    .about-certstrip__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .about-certstrip__list {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   /* Parent Brand Section */
