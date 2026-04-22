@@ -1,0 +1,196 @@
+{%- comment -%}
+  Qualifications Strip — compact white band of certification chips below hero.
+{%- endcomment -%}
+
+{%- style -%}
+  .quali-strip {
+    background: #ffffff;
+    padding: 22px 0;
+    border-top: 1px solid #eef0ea;
+    border-bottom: 1px solid #eef0ea;
+  }
+  .quali-strip__track {
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size | default: 6 }}, minmax(0, 1fr));
+    gap: 14px;
+    align-items: stretch;
+  }
+  .quali-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    background: #fdfdfb;
+    border: 1px solid #e8ebe0;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .quali-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(45, 106, 79, 0.10);
+    border-color: rgba(45, 106, 79, 0.25);
+  }
+  .quali-chip__icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(45, 106, 79, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+  }
+  .quali-chip__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .quali-chip__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .quali-chip__title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+  }
+  .quali-chip__sub {
+    font-size: 0.72rem;
+    color: var(--color-text-light);
+    line-height: 1.25;
+    margin-top: 2px;
+  }
+  @media (max-width: 1100px) {
+    .quali-strip__track {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 640px) {
+    .quali-strip { padding: 16px 0; }
+    .quali-strip__track {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .quali-chip { padding: 10px; }
+    .quali-chip__icon { width: 30px; height: 30px; }
+    .quali-chip__icon svg { width: 16px; height: 16px; }
+    .quali-chip__title { font-size: 0.78rem; }
+    .quali-chip__sub   { font-size: 0.68rem; }
+  }
+{%- endstyle -%}
+
+<section class="quali-strip" data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="quali-strip__track">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'qual' -%}
+          <div class="quali-chip" {{ block.shopify_attributes }}>
+            <div class="quali-chip__icon">
+              {%- case block.settings.icon -%}
+                {%- when 'gmp' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+                  </svg>
+                {%- when 'fssai' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                  </svg>
+                {%- when 'iso' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                  </svg>
+                {%- when 'ayush' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                  </svg>
+                {%- when 'fda' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+                  </svg>
+                {%- when 'who' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/>
+                  </svg>
+                {%- when 'eco' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2"/><path d="M22 2L12 12"/><path d="M16 2h6v6"/>
+                  </svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+              {%- endcase -%}
+            </div>
+            <div class="quali-chip__text">
+              <span class="quali-chip__title">{{ block.settings.title }}</span>
+              {%- if block.settings.sub != blank -%}
+                <span class="quali-chip__sub">{{ block.settings.sub }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Qualifications Strip",
+  "tag": "section",
+  "class": "section-qualifications-strip",
+  "max_blocks": 8,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "qual",
+      "name": "Qualification",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "gmp",   "label": "GMP / Global GMP" },
+            { "value": "fssai", "label": "FSSAI" },
+            { "value": "iso",   "label": "ISO" },
+            { "value": "ayush", "label": "AYUSH" },
+            { "value": "fda",   "label": "FDA" },
+            { "value": "who",   "label": "WHO-GMP" },
+            { "value": "eco",   "label": "Eco / Export" }
+          ],
+          "default": "gmp"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Global GMP"
+        },
+        {
+          "type": "text",
+          "id": "sub",
+          "label": "Subtitle",
+          "default": "Certified facility"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Qualifications Strip",
+      "blocks": [
+        { "type": "qual", "settings": { "icon": "who",   "title": "WHO-GMP", "sub": "Certified facility" } },
+        { "type": "qual", "settings": { "icon": "gmp",   "title": "Global GMP", "sub": "Schedule T/M" } },
+        { "type": "qual", "settings": { "icon": "iso",   "title": "ISO 9001:2015", "sub": "Quality systems" } },
+        { "type": "qual", "settings": { "icon": "ayush", "title": "AYUSH", "sub": "Govt. of India" } },
+        { "type": "qual", "settings": { "icon": "fssai", "title": "FSSAI", "sub": "Food safety" } },
+        { "type": "qual", "settings": { "icon": "fda",   "title": "FDA", "sub": "Regulatory approved" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
