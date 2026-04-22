@@ -147,8 +147,8 @@
         "label": "Featured",
         "title": "Bestselling Products",
         "text": "Discover our most loved Ayurvedic products trusted by thousands",
-        "collection": "bestsellers",
-        "products_count": 8,
+        "collection": "all",
+        "products_count": 12,
         "columns": 4,
         "show_view_all": true,
         "show_secondary_image": true
@@ -164,7 +164,7 @@
         "label": "Just Launched",
         "title": "New Arrivals",
         "text": "Discover our latest Ayurvedic formulations crafted with ancient wisdom and modern science.",
-        "products_count": 8,
+        "products_count": 4,
         "show_vendor": true,
         "button_text": "View All New Products",
         "button_link": "/collections/all",
@@ -180,7 +180,7 @@
             "icon": "immunity",
             "title": "Immunity & Vitality",
             "subtitle": "Strength, energy, daily resilience",
-            "herbs": "Ashwagandha\nTulsi\nGiloy (Guduchi)\nAmla\nTriphala\nShilajit\nGokhru\nSafed Musli"
+            "herbs": "Ashwagandha\nTulsi (Holy Basil)\nGiloy (Guduchi)\nAmla\nTriphala\nShilajit\nGokhru\nSafed Musli\nKaunch Beej\nVidari Kand\nYashtimadhu (Mulethi)\nChyawanprash herbs\nSuvarna Bhasma\nVidanga\nKalmegha\nChirayata\nSharavari\nPunarnava\nPippali\nSunthi (Dry Ginger)"
           }
         },
         "cat-2": {
@@ -189,7 +189,7 @@
             "icon": "digestive",
             "title": "Digestive & Liver",
             "subtitle": "Gut health, appetite, detox",
-            "herbs": "Triphala\nAjwain\nJeera\nSaunf (Fennel)\nHaritaki\nKutki\nBhringraj\nPunarnava"
+            "herbs": "Haritaki\nBaheda (Bibhitaki)\nAmla\nTriphala\nKutki\nBhumi Amla\nKalmegha\nBhringraj\nPunarnava\nPippali\nAjwain\nJeera\nSaunf (Fennel)\nSanchal (Black Salt)\nSenna\nSonamukhi\nIsabgol\nHing\nChitrak\nSuran\nBilva\nKutaja\nMusta\nDadim\nAnar Chal\nTrikatu\nTrivrut\nShuddha Nepala\nMakoy\nKasmard\nMarorphali\nAritha (Reetha)\nLimbodi\nKalmegha\nArogyavardhini Ras\nChirayata\nSharapunkha\nNimba"
           }
         },
         "cat-3": {
@@ -198,7 +198,7 @@
             "icon": "respiratory",
             "title": "Respiratory & Cold",
             "subtitle": "Cough, congestion, immunity",
-            "herbs": "Tulsi\nVasaka\nYashtimadhu (Mulethi)\nPippali\nSunthi (Ginger)\nKantkari\nBharangi\nKalmegh"
+            "herbs": "Tulsi\nVasaka (Adulsa)\nYashtimadhu (Mulethi)\nPippali\nSunthi (Dry Ginger)\nKantkari\nBharangi\nKalmegh\nArdusi\nJethimadh (Mulethi)\nBhimsenkapoor\nNilgiri (Eucalyptus)\nTulsi Oil\nAtivish Mool\nHoney\nHaldi\nTrikatu\nDalchini (Cinnamon)\nLaung (Clove)\nTejpatra\nMarich (Black Pepper)\nPudina\nKarpoor\nAjwain\nHing\nYashtimadhu\nKantakari Churna\nSitopaladi"
           }
         },
         "cat-4": {
@@ -207,7 +207,7 @@
             "icon": "joint",
             "title": "Joint & Pain Relief",
             "subtitle": "Mobility, inflammation, recovery",
-            "herbs": "Shallaki (Boswellia)\nNirgundi\nRasna\nGuggul\nAshwagandha\nHaridra (Turmeric)\nDashmool\nMethi"
+            "herbs": "Gandhpura Oil (Wintergreen)\nMahanarayan Oil\nMahamash Oil\nShallaki (Boswellia)\nRasna\nNirgundi\nShuddha Guggul\nHadsakal\nDaruharidra\nTil Oil\nKarpoor\nSunthi\nPudina\nMethi (Fenugreek)\nArjuna\nAshwagandha\nHaridra (Turmeric)\nDashmool\nGuggul\nErand Tail\nJyotishmati\nNirgundi Oil\nPrasarani\nKupilu\nVisha Tinduka\nRakt Chandan\nJatamansi\nGandhaka Rasayan"
           }
         },
         "cat-5": {
@@ -216,7 +216,7 @@
             "icon": "skin",
             "title": "Skin & Hair Care",
             "subtitle": "Glow, clarity, nourishment",
-            "herbs": "Neem\nHaridra (Turmeric)\nManjistha\nAloe Vera\nBhringraj\nAmla\nBrahmi\nChandan (Sandalwood)"
+            "herbs": "Neem\nManjishtha\nKalmegha\nChandan (Sandalwood)\nHaldi\nKesar (Saffron)\nWheat Germ Oil\nJojoba Oil\nCoconut Oil\nKokum Butter\nSarjaras\nRose Water\nShikakai\nSitafal Oil\nBhringraj\nAloe Vera\nKaranj\nBerry Berry\nAmla\nBrahmi\nBhangra\nReetha (Aritha)\nNagarmotha\nAnantamool\nKhadir\nRakta Chandan\nYashtimadhu\nDaruharidra\nTil Oil\nSarshap (Mustard Oil)\nGulab (Rose)\nMulethi\nJatamansi\nTriphala\nGairik\nChandanadi Tail\nKumari (Aloe Vera)"
           }
         },
         "cat-6": {
@@ -225,7 +225,7 @@
             "icon": "women",
             "title": "Women's Wellness",
             "subtitle": "Hormonal balance, vitality",
-            "herbs": "Shatavari\nAshoka\nLodhra\nAloe Vera\nTriphala\nPunarnava\nDashamoola\nManjistha"
+            "herbs": "Shatavari\nAshok\nLodhra\nGulabphool (Rose)\nDashmool\nJatamansi\nKumari\nBrahmi\nShankhpushpi\nChandan\nAshwagandha\nMulethi\nYashtimadhu\nGokhru\nAmla\nHaritaki\nNagkesar\nMochras\nUdumbar\nDadim\nManjishtha\nPunarnava\nTriphala\nSharavari\nVacha\nGhrita\nAnupana\nChandana"
           }
         }
       },
@@ -234,49 +234,6 @@
         "label": "Nature's Medicine Cabinet",
         "title": "Herbs & Their Uses",
         "text": "Discover the classical Ayurvedic herbs behind every HerboVilla formulation — grouped by the wellness concern they traditionally support."
-      }
-    },
-    "how-it-works": {
-      "type": "how-it-works",
-      "blocks": {
-        "step-1": {
-          "type": "step",
-          "settings": {
-            "icon": "search",
-            "title": "Browse Products",
-            "text": "Explore our wide range of authentic Ayurvedic solutions for your health needs"
-          }
-        },
-        "step-2": {
-          "type": "step",
-          "settings": {
-            "icon": "cart",
-            "title": "Place Your Order",
-            "text": "Add products to cart and checkout securely with multiple payment options"
-          }
-        },
-        "step-3": {
-          "type": "step",
-          "settings": {
-            "icon": "truck",
-            "title": "Fast Delivery",
-            "text": "We deliver across India within 5-7 days. Free shipping above Rs.400"
-          }
-        },
-        "step-4": {
-          "type": "step",
-          "settings": {
-            "icon": "heart",
-            "title": "Feel the Difference",
-            "text": "Experience the natural healing power of Ayurveda in your daily wellness routine"
-          }
-        }
-      },
-      "block_order": ["step-1", "step-2", "step-3", "step-4"],
-      "settings": {
-        "label": "Simple Process",
-        "title": "Your Journey to Wellness",
-        "text": "Getting started with Ayurvedic wellness has never been easier"
       }
     },
     "testimonials": {
@@ -401,7 +358,6 @@
     "vedacold-featured",
     "new-arrivals",
     "herbs-uses",
-    "how-it-works",
     "testimonials",
     "newsletter"
   ]
