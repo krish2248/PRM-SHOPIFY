@@ -1,0 +1,685 @@
+{%- style -%}
+  .addr-page {
+    --addr-green: #2D6A4F;
+    --addr-green-deep: #1B4332;
+    --addr-cream: #FDF8F0;
+    --addr-gold: #C9A55C;
+    background: var(--addr-cream);
+    min-height: 80vh;
+    padding: 0 0 80px;
+  }
+
+  .addr-banner {
+    background: linear-gradient(135deg, var(--addr-green-deep) 0%, var(--addr-green) 100%);
+    color: #fff;
+    padding: 50px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .addr-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 18% 28%, rgba(255,255,255,0.14) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 72% 68%, rgba(255,255,255,0.1) 50%, transparent 50%);
+    pointer-events: none;
+  }
+  .addr-banner__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .addr-banner__logo img { max-height: 48px; width: auto; filter: brightness(0) invert(1); }
+  .addr-banner__logo-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .addr-banner__logo-text span { color: var(--addr-gold); }
+  .addr-banner__heading { flex: 1; min-width: 220px; }
+  .addr-banner__eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--addr-gold);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .addr-banner__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 600;
+  }
+  .addr-banner__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.92rem;
+    padding: 9px 16px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    transition: background 0.2s ease;
+  }
+  .addr-banner__back:hover { background: rgba(255,255,255,0.1); }
+  .addr-banner__back svg { width: 16px; height: 16px; }
+
+  .addr-shell {
+    margin-top: -50px;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .addr-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 18px 50px -20px rgba(27, 67, 50, 0.18);
+  }
+  .addr-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0e9dc;
+  }
+  .addr-card__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    color: #1B4332;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .addr-card__title svg { width: 22px; height: 22px; color: var(--addr-green); }
+
+  .addr-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .addr-item {
+    background: linear-gradient(135deg, #fafaf6 0%, #f5f1e8 100%);
+    border: 1px solid #ece5d4;
+    border-radius: 14px;
+    padding: 22px;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+  }
+  .addr-item:hover { transform: translateY(-2px); box-shadow: 0 14px 35px -18px rgba(27, 67, 50, 0.18); }
+  .addr-item--default {
+    border-color: var(--addr-green);
+    background: linear-gradient(135deg, #f3faf5 0%, #e8f4ec 100%);
+  }
+  .addr-item__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--addr-green);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .addr-item__badge svg { width: 12px; height: 12px; }
+  .addr-item__name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    color: #1B4332;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .addr-item__lines {
+    color: #4b5563;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .addr-item__lines span { display: block; }
+  .addr-item__phone {
+    color: #6b7280;
+    font-size: 0.86rem;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .addr-item__phone svg { width: 14px; height: 14px; color: var(--addr-green); }
+  .addr-item__actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-top: 14px;
+    border-top: 1px dashed #d8d2c4;
+  }
+  .addr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background: #fff;
+    color: #4b5563;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+  .addr-btn:hover { border-color: var(--addr-green); color: var(--addr-green); }
+  .addr-btn--danger:hover { border-color: #ef4444; color: #ef4444; }
+  .addr-btn svg { width: 14px; height: 14px; }
+  .addr-btn--primary {
+    background: var(--addr-green);
+    color: #fff;
+    border-color: var(--addr-green);
+  }
+  .addr-btn--primary:hover { background: var(--addr-green-deep); border-color: var(--addr-green-deep); color: #fff; }
+
+  .addr-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #fafaf6 0%, #f5f1e8 100%);
+    border-radius: 16px;
+    border: 1px dashed #d8d2c4;
+  }
+  .addr-empty__icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--addr-green);
+  }
+  .addr-empty__icon svg { width: 36px; height: 36px; }
+  .addr-empty__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #1B4332;
+    font-size: 1.3rem;
+    margin: 0 0 8px;
+  }
+  .addr-empty__desc {
+    color: #6b7280;
+    margin-bottom: 22px;
+  }
+
+  /* Form */
+  .addr-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .addr-form__full { grid-column: 1 / -1; }
+  .addr-field label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+  }
+  .addr-field input,
+  .addr-field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fafafa;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+  .addr-field input:focus,
+  .addr-field select:focus {
+    outline: none;
+    border-color: var(--addr-green);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
+  }
+  .addr-checkbox {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #4b5563;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .addr-checkbox input { accent-color: var(--addr-green); }
+  .addr-form__actions {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 12px;
+    padding-top: 8px;
+  }
+  .addr-form__actions .addr-btn--primary { padding: 12px 24px; font-size: 0.95rem; }
+
+  .addr-form-wrap {
+    display: none;
+    margin-top: 16px;
+    padding: 22px;
+    background: #faf6ec;
+    border: 1px solid #ece5d4;
+    border-radius: 14px;
+  }
+  .addr-form-wrap.is-active { display: block; }
+  .addr-form-wrap h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem;
+    color: #1B4332;
+    margin: 0 0 16px;
+  }
+
+  .addr-errors {
+    grid-column: 1 / -1;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    margin-bottom: 6px;
+  }
+
+  /* Sidebar */
+  .addr-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: sticky;
+    top: 24px;
+  }
+  .addr-aside__card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 18px 50px -20px rgba(27, 67, 50, 0.15);
+  }
+  .addr-aside__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.05rem;
+    color: #1B4332;
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .addr-aside__title svg { width: 18px; height: 18px; color: var(--addr-gold); }
+  .addr-aside__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .addr-aside__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #4b5563;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+  .addr-aside__list li svg { width: 16px; height: 16px; color: var(--addr-green); flex: none; margin-top: 2px; }
+
+  .addr-aside__contact {
+    background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: 24px;
+  }
+  .addr-aside__contact h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+  }
+  .addr-aside__contact p {
+    color: rgba(255,255,255,0.82);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin: 0 0 14px;
+  }
+  .addr-aside__contact a {
+    color: var(--addr-gold);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .addr-aside__contact a:hover { text-decoration: underline; }
+
+  @media (max-width: 992px) {
+    .addr-shell { grid-template-columns: 1fr; }
+    .addr-aside { position: static; }
+  }
+  @media (max-width: 576px) {
+    .addr-banner { padding: 40px 0 70px; }
+    .addr-banner__title { font-size: 1.55rem; }
+    .addr-card { padding: 22px; }
+    .addr-grid { grid-template-columns: 1fr; }
+    .addr-form { grid-template-columns: 1fr; }
+  }
+{%- endstyle -%}
+
+<section class="addr-page" aria-labelledby="addr-title">
+  <div class="addr-banner">
+    <div class="container">
+      <div class="addr-banner__inner">
+        <div class="addr-banner__logo">
+          {%- if settings.logo != blank -%}
+            <img src="{{ settings.logo | image_url: width: 240 }}" alt="{{ shop.name }} logo">
+          {%- else -%}
+            <span class="addr-banner__logo-text">Herbo<span>Villa</span></span>
+          {%- endif -%}
+        </div>
+        <div class="addr-banner__heading">
+          <p class="addr-banner__eyebrow">My Account</p>
+          <h1 class="addr-banner__title" id="addr-title">Saved Addresses</h1>
+        </div>
+        <a href="{{ routes.account_url }}" class="addr-banner__back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="addr-shell">
+      <main>
+        <div class="addr-card">
+          <div class="addr-card__head">
+            <h2 class="addr-card__title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Your Addresses ({{ customer.addresses_count }})
+            </h2>
+            <button type="button" class="addr-btn addr-btn--primary" data-add-toggle>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add New Address
+            </button>
+          </div>
+
+          <div class="addr-form-wrap" data-add-form>
+            <h3>Add a new shipping address</h3>
+            {%- form 'customer_address', customer.new_address, class: 'addr-form' -%}
+              {%- if form.errors -%}
+                <div class="addr-errors">{{ form.errors | default_errors }}</div>
+              {%- endif -%}
+              <div class="addr-field">
+                <label for="add-first">First name</label>
+                <input type="text" id="add-first" name="address[first_name]" autocomplete="given-name" value="{{ form.first_name }}" required>
+              </div>
+              <div class="addr-field">
+                <label for="add-last">Last name</label>
+                <input type="text" id="add-last" name="address[last_name]" autocomplete="family-name" value="{{ form.last_name }}" required>
+              </div>
+              <div class="addr-field addr-form__full">
+                <label for="add-company">Company (optional)</label>
+                <input type="text" id="add-company" name="address[company]" autocomplete="organization" value="{{ form.company }}">
+              </div>
+              <div class="addr-field addr-form__full">
+                <label for="add-line1">Address line 1</label>
+                <input type="text" id="add-line1" name="address[address1]" autocomplete="address-line1" value="{{ form.address1 }}" required>
+              </div>
+              <div class="addr-field addr-form__full">
+                <label for="add-line2">Address line 2 (optional)</label>
+                <input type="text" id="add-line2" name="address[address2]" autocomplete="address-line2" value="{{ form.address2 }}">
+              </div>
+              <div class="addr-field">
+                <label for="add-city">City</label>
+                <input type="text" id="add-city" name="address[city]" autocomplete="address-level2" value="{{ form.city }}" required>
+              </div>
+              <div class="addr-field">
+                <label for="add-zip">PIN / ZIP</label>
+                <input type="text" id="add-zip" name="address[zip]" autocomplete="postal-code" value="{{ form.zip }}" required>
+              </div>
+              <div class="addr-field">
+                <label for="add-country">Country</label>
+                <select id="add-country" name="address[country]" data-default="{{ form.country }}">{{ country_option_tags }}</select>
+              </div>
+              <div class="addr-field">
+                <label for="add-province">State / Province</label>
+                <select id="add-province" name="address[province]" data-default="{{ form.province }}"></select>
+              </div>
+              <div class="addr-field addr-form__full">
+                <label for="add-phone">Phone</label>
+                <input type="tel" id="add-phone" name="address[phone]" autocomplete="tel" value="{{ form.phone }}" placeholder="+91 ...">
+              </div>
+              <label class="addr-checkbox">
+                <input type="checkbox" name="address[default]"> Set as my default shipping address
+              </label>
+              <div class="addr-form__actions">
+                <button type="submit" class="addr-btn addr-btn--primary">Save Address</button>
+                <button type="button" class="addr-btn" data-add-cancel>Cancel</button>
+              </div>
+            {%- endform -%}
+          </div>
+
+          <div class="addr-grid" {% if customer.addresses_count == 0 %}style="margin-top:18px;"{% else %}style="margin-top:22px;"{% endif %}>
+            {%- if customer.addresses_count == 0 -%}
+              <div class="addr-empty">
+                <div class="addr-empty__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <h3 class="addr-empty__title">No saved addresses yet</h3>
+                <p class="addr-empty__desc">Add your shipping address once and check out faster on every order.</p>
+                <button type="button" class="addr-btn addr-btn--primary" data-add-toggle>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Add Your First Address
+                </button>
+              </div>
+            {%- else -%}
+              {%- for address in customer.addresses -%}
+                <article class="addr-item {% if address == customer.default_address %}addr-item--default{% endif %}">
+                  {%- if address == customer.default_address -%}
+                    <span class="addr-item__badge">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                      Default
+                    </span>
+                  {%- endif -%}
+                  <h3 class="addr-item__name">{{ address.first_name }} {{ address.last_name }}</h3>
+                  <div class="addr-item__lines">
+                    {%- if address.company != blank -%}<span>{{ address.company }}</span>{%- endif -%}
+                    <span>{{ address.address1 }}</span>
+                    {%- if address.address2 != blank -%}<span>{{ address.address2 }}</span>{%- endif -%}
+                    <span>{{ address.city }}{% if address.province_code %}, {{ address.province_code }}{% endif %} {{ address.zip }}</span>
+                    <span>{{ address.country }}</span>
+                  </div>
+                  {%- if address.phone != blank -%}
+                    <div class="addr-item__phone">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                      {{ address.phone }}
+                    </div>
+                  {%- endif -%}
+                  <div class="addr-item__actions">
+                    <button type="button" class="addr-btn" data-edit-toggle="{{ address.id }}">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                      Edit
+                    </button>
+                    {%- form 'customer_address', address -%}
+                      <button type="submit" name="address[default]" value="true" class="addr-btn" {% if address == customer.default_address %}disabled style="opacity:0.5;cursor:not-allowed"{% endif %}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        {% if address == customer.default_address %}Default{% else %}Make Default{% endif %}
+                      </button>
+                    {%- endform -%}
+                    <button type="button" class="addr-btn addr-btn--danger" data-confirm-message="Delete this address?" data-target="{{ address.url }}" data-form-id="addr-delete-{{ address.id }}">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                      Delete
+                    </button>
+                    <form id="addr-delete-{{ address.id }}" method="post" action="{{ address.url }}" style="display:none;">
+                      <input type="hidden" name="_method" value="delete">
+                    </form>
+                  </div>
+
+                  <div class="addr-form-wrap" data-edit-form="{{ address.id }}" style="margin-top:18px;">
+                    <h3>Edit address</h3>
+                    {%- form 'customer_address', address, class: 'addr-form' -%}
+                      <div class="addr-field">
+                        <label>First name</label>
+                        <input type="text" name="address[first_name]" value="{{ address.first_name }}" required>
+                      </div>
+                      <div class="addr-field">
+                        <label>Last name</label>
+                        <input type="text" name="address[last_name]" value="{{ address.last_name }}" required>
+                      </div>
+                      <div class="addr-field addr-form__full">
+                        <label>Company</label>
+                        <input type="text" name="address[company]" value="{{ address.company }}">
+                      </div>
+                      <div class="addr-field addr-form__full">
+                        <label>Address line 1</label>
+                        <input type="text" name="address[address1]" value="{{ address.address1 }}" required>
+                      </div>
+                      <div class="addr-field addr-form__full">
+                        <label>Address line 2</label>
+                        <input type="text" name="address[address2]" value="{{ address.address2 }}">
+                      </div>
+                      <div class="addr-field">
+                        <label>City</label>
+                        <input type="text" name="address[city]" value="{{ address.city }}" required>
+                      </div>
+                      <div class="addr-field">
+                        <label>PIN / ZIP</label>
+                        <input type="text" name="address[zip]" value="{{ address.zip }}" required>
+                      </div>
+                      <div class="addr-field">
+                        <label>Country</label>
+                        <select name="address[country]" data-default="{{ address.country }}">{{ country_option_tags }}</select>
+                      </div>
+                      <div class="addr-field">
+                        <label>State / Province</label>
+                        <select name="address[province]" data-default="{{ address.province }}"></select>
+                      </div>
+                      <div class="addr-field addr-form__full">
+                        <label>Phone</label>
+                        <input type="tel" name="address[phone]" value="{{ address.phone }}">
+                      </div>
+                      <label class="addr-checkbox">
+                        <input type="checkbox" name="address[default]" {% if address == customer.default_address %}checked{% endif %}> Set as my default shipping address
+                      </label>
+                      <div class="addr-form__actions">
+                        <button type="submit" class="addr-btn addr-btn--primary">Update Address</button>
+                        <button type="button" class="addr-btn" data-edit-cancel="{{ address.id }}">Cancel</button>
+                      </div>
+                    {%- endform -%}
+                  </div>
+                </article>
+              {%- endfor -%}
+            {%- endif -%}
+          </div>
+        </div>
+      </main>
+
+      <aside class="addr-aside">
+        <div class="addr-aside__card">
+          <h3 class="addr-aside__title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            A few good habits
+          </h3>
+          <ul class="addr-aside__list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Mark one address as default for one-tap checkout.</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Use a verified PIN code for accurate Ayurvedic herb delivery dates.</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Add a phone number — our courier partners send live order updates over SMS.</li>
+          </ul>
+        </div>
+
+        <div class="addr-aside__contact">
+          <h4>Need a hand?</h4>
+          <p>Our wellness team in Bhavnagar is happy to help with delivery questions or address changes on a pending order.</p>
+          <a href="mailto:contact@prmpharmaceuticals.com">contact@prmpharmaceuticals.com</a><br>
+          <a href="tel:+912782448087">+91 0278 244 8087</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+<script>
+  (function() {
+    document.querySelectorAll('select[data-default]').forEach(function(el) {
+      if (typeof Shopify !== 'undefined' && Shopify.CountryProvinceSelector) { return; }
+    });
+    if (window.Shopify && Shopify.CountryProvinceSelector) {
+      document.querySelectorAll('.addr-form').forEach(function(form, i) {
+        var country = form.querySelector('select[name="address[country]"]');
+        var province = form.querySelector('select[name="address[province]"]');
+        if (!country || !province) return;
+        country.id = country.id || ('country-' + i);
+        province.id = province.id || ('province-' + i);
+        new Shopify.CountryProvinceSelector(country.id, province.id, {
+          hideElement: province.parentNode
+        });
+      });
+    }
+
+    var addToggle = document.querySelectorAll('[data-add-toggle]');
+    var addForm = document.querySelector('[data-add-form]');
+    var addCancel = document.querySelector('[data-add-cancel]');
+    addToggle.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (!addForm) return;
+        addForm.classList.add('is-active');
+        addForm.scrollIntoView({behavior: 'smooth', block: 'start'});
+      });
+    });
+    if (addCancel) addCancel.addEventListener('click', function() { addForm.classList.remove('is-active'); });
+
+    document.querySelectorAll('[data-edit-toggle]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var id = btn.getAttribute('data-edit-toggle');
+        var panel = document.querySelector('[data-edit-form="' + id + '"]');
+        if (panel) {
+          panel.classList.toggle('is-active');
+          if (panel.classList.contains('is-active')) panel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+        }
+      });
+    });
+    document.querySelectorAll('[data-edit-cancel]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var id = btn.getAttribute('data-edit-cancel');
+        var panel = document.querySelector('[data-edit-form="' + id + '"]');
+        if (panel) panel.classList.remove('is-active');
+      });
+    });
+
+    document.querySelectorAll('[data-confirm-message]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var msg = btn.getAttribute('data-confirm-message');
+        if (window.confirm(msg)) {
+          var formId = btn.getAttribute('data-form-id');
+          var form = document.getElementById(formId);
+          if (form) form.submit();
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Customer Addresses",
+  "settings": []
+}
+{% endschema %}
