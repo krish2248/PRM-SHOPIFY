@@ -1,0 +1,591 @@
+{%- style -%}
+  .ord-page {
+    --ord-green: #2D6A4F;
+    --ord-green-deep: #1B4332;
+    --ord-cream: #FDF8F0;
+    --ord-gold: #C9A55C;
+    background: var(--ord-cream);
+    min-height: 80vh;
+    padding: 0 0 80px;
+  }
+
+  .ord-banner {
+    background: linear-gradient(135deg, var(--ord-green-deep) 0%, var(--ord-green) 100%);
+    color: #fff;
+    padding: 50px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ord-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 18% 28%, rgba(255,255,255,0.14) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 72% 68%, rgba(255,255,255,0.1) 50%, transparent 50%);
+    pointer-events: none;
+  }
+  .ord-banner__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+  }
+  .ord-banner__logo img { max-height: 48px; width: auto; filter: brightness(0) invert(1); }
+  .ord-banner__logo-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .ord-banner__logo-text span { color: var(--ord-gold); }
+  .ord-banner__heading {}
+  .ord-banner__eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ord-gold);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .ord-banner__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .ord-banner__sub {
+    color: rgba(255,255,255,0.78);
+    font-size: 0.9rem;
+  }
+  .ord-banner__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.92rem;
+    padding: 9px 16px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    transition: background 0.2s ease;
+  }
+  .ord-banner__back:hover { background: rgba(255,255,255,0.1); }
+  .ord-banner__back svg { width: 16px; height: 16px; }
+
+  .ord-shell {
+    margin-top: -50px;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .ord-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 18px 50px -20px rgba(27, 67, 50, 0.18);
+    margin-bottom: 22px;
+  }
+  .ord-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0e9dc;
+  }
+  .ord-card__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem;
+    color: #1B4332;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ord-card__title svg { width: 20px; height: 20px; color: var(--ord-green); }
+
+  /* Status timeline */
+  .ord-timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    position: relative;
+  }
+  .ord-timeline::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 12%;
+    right: 12%;
+    height: 2px;
+    background: #ece5d4;
+    z-index: 0;
+  }
+  .ord-step { text-align: center; position: relative; z-index: 1; }
+  .ord-step__dot {
+    width: 36px;
+    height: 36px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #ece5d4;
+    color: #b6a98a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  .ord-step__dot svg { width: 16px; height: 16px; }
+  .ord-step--done .ord-step__dot { background: var(--ord-green); border-color: var(--ord-green); color: #fff; }
+  .ord-step--current .ord-step__dot { background: var(--ord-gold); border-color: var(--ord-gold); color: #fff; box-shadow: 0 0 0 6px rgba(201, 165, 92, 0.18); }
+  .ord-step__label { font-size: 0.78rem; font-weight: 600; color: #4b5563; }
+  .ord-step--done .ord-step__label, .ord-step--current .ord-step__label { color: #1B4332; }
+  .ord-step__sub { font-size: 0.7rem; color: #9ca3af; margin-top: 2px; }
+
+  /* Items */
+  .ord-line {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 18px;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #f3eedf;
+  }
+  .ord-line:last-child { border-bottom: none; }
+  .ord-line__img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    background: #f5f1e8;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+  }
+  .ord-line__img img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .ord-line__img--ph { color: var(--ord-green); opacity: 0.5; }
+  .ord-line__img--ph svg { width: 36px; height: 36px; }
+  .ord-line__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.02rem;
+    color: #1B4332;
+    margin: 0 0 4px;
+    text-decoration: none;
+  }
+  .ord-line__title:hover { color: var(--ord-green); }
+  .ord-line__variant { font-size: 0.85rem; color: #6b7280; margin: 0 0 6px; }
+  .ord-line__qty {
+    display: inline-block;
+    background: #f5f1e8;
+    color: #4b5563;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+  .ord-line__price {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    color: #1B4332;
+    font-size: 1.05rem;
+    text-align: right;
+  }
+
+  /* Totals */
+  .ord-totals {
+    margin-top: 8px;
+    border-top: 2px solid #f0e9dc;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ord-totals__row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.92rem;
+    color: #4b5563;
+  }
+  .ord-totals__row--grand {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.25rem;
+    color: #1B4332;
+    font-weight: 600;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid #f0e9dc;
+  }
+
+  .ord-financial-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .ord-financial-status--paid { background: #dcfce7; color: #16a34a; }
+  .ord-financial-status--pending { background: #fef3c7; color: #d97706; }
+  .ord-financial-status--refunded { background: #ede9fe; color: #7c3aed; }
+  .ord-financial-status--cancelled { background: #fee2e2; color: #dc2626; }
+  .ord-financial-status svg { width: 12px; height: 12px; }
+
+  /* Address blocks */
+  .ord-address {
+    background: linear-gradient(135deg, #fafaf6 0%, #f5f1e8 100%);
+    border: 1px solid #ece5d4;
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .ord-address h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #1B4332;
+    font-size: 1.02rem;
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ord-address h4 svg { width: 16px; height: 16px; color: var(--ord-gold); }
+  .ord-address p { color: #4b5563; line-height: 1.6; margin: 0; font-size: 0.92rem; }
+
+  .ord-address-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  /* Sidebar */
+  .ord-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: sticky;
+    top: 24px;
+  }
+  .ord-meta {
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 18px 50px -20px rgba(27, 67, 50, 0.15);
+  }
+  .ord-meta__title {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #1B4332;
+    margin: 0 0 16px;
+    font-size: 1.05rem;
+  }
+  .ord-meta__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f5efde;
+    font-size: 0.92rem;
+  }
+  .ord-meta__row:last-child { border-bottom: none; }
+  .ord-meta__row span:first-child { color: #6b7280; }
+  .ord-meta__row span:last-child { color: #1B4332; font-weight: 600; text-align: right; }
+
+  .ord-help {
+    background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+    color: #fff;
+    border-radius: 18px;
+    padding: 24px;
+  }
+  .ord-help h4 {
+    font-family: 'Playfair Display', Georgia, serif;
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+  }
+  .ord-help p {
+    color: rgba(255,255,255,0.82);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin: 0 0 14px;
+  }
+  .ord-help a {
+    color: var(--ord-gold);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .ord-help a:hover { text-decoration: underline; }
+
+  .ord-tip {
+    background: linear-gradient(135deg, #f3faf5 0%, #e8f4ec 100%);
+    border-left: 3px solid var(--ord-green);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 18px;
+    color: #1B4332;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+  .ord-tip strong { display: block; margin-bottom: 4px; color: var(--ord-green); }
+
+  @media (max-width: 992px) {
+    .ord-shell { grid-template-columns: 1fr; }
+    .ord-aside { position: static; }
+    .ord-banner__inner { grid-template-columns: 1fr; }
+    .ord-banner__back { justify-self: flex-start; }
+  }
+  @media (max-width: 576px) {
+    .ord-banner { padding: 40px 0 70px; }
+    .ord-banner__title { font-size: 1.5rem; }
+    .ord-card { padding: 22px; }
+    .ord-timeline { grid-template-columns: 1fr 1fr; gap: 18px; }
+    .ord-timeline::before { display: none; }
+    .ord-line { grid-template-columns: 64px 1fr; }
+    .ord-line__price { grid-column: 2; text-align: left; }
+    .ord-line__img { width: 64px; height: 64px; }
+    .ord-address-grid { grid-template-columns: 1fr; }
+  }
+{%- endstyle -%}
+
+<section class="ord-page" aria-labelledby="ord-title">
+  <div class="ord-banner">
+    <div class="container">
+      <div class="ord-banner__inner">
+        <div class="ord-banner__logo">
+          {%- if settings.logo != blank -%}
+            <img src="{{ settings.logo | image_url: width: 240 }}" alt="{{ shop.name }} logo">
+          {%- else -%}
+            <span class="ord-banner__logo-text">Herbo<span>Villa</span></span>
+          {%- endif -%}
+        </div>
+        <div class="ord-banner__heading">
+          <p class="ord-banner__eyebrow">Order Detail</p>
+          <h1 class="ord-banner__title" id="ord-title">{{ order.name }}</h1>
+          <p class="ord-banner__sub">Placed on {{ order.created_at | date: '%B %d, %Y at %I:%M %p' }}</p>
+        </div>
+        <a href="{{ routes.account_url }}" class="ord-banner__back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="ord-shell">
+      <main>
+        <div class="ord-card">
+          <div class="ord-card__head">
+            <h2 class="ord-card__title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Order Status
+            </h2>
+            {%- assign fs = order.fulfillment_status | default: 'unfulfilled' -%}
+            {%- assign payment = order.financial_status | default: 'pending' -%}
+            <span class="ord-financial-status ord-financial-status--{{ payment }}">
+              {%- if payment == 'paid' -%}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              {%- endif -%}
+              {{ order.financial_status_label | default: 'Pending' }}
+            </span>
+          </div>
+
+          <div class="ord-timeline">
+            <div class="ord-step ord-step--done">
+              <div class="ord-step__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="ord-step__label">Placed</div>
+              <div class="ord-step__sub">{{ order.created_at | date: '%b %d' }}</div>
+            </div>
+            <div class="ord-step {% if payment == 'paid' or payment == 'partially_paid' %}ord-step--done{% elsif payment == 'pending' %}ord-step--current{% endif %}">
+              <div class="ord-step__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 10h20"/></svg></div>
+              <div class="ord-step__label">Payment</div>
+              <div class="ord-step__sub">{{ order.financial_status_label | default: 'Pending' }}</div>
+            </div>
+            <div class="ord-step {% if fs == 'fulfilled' %}ord-step--done{% elsif fs == 'partial' %}ord-step--current{% endif %}">
+              <div class="ord-step__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+              <div class="ord-step__label">Shipped</div>
+              <div class="ord-step__sub">{% if fs == 'fulfilled' %}On the way{% else %}Awaiting{% endif %}</div>
+            </div>
+            <div class="ord-step {% if fs == 'fulfilled' and order.cancelled? != true %}ord-step--current{% endif %}">
+              <div class="ord-step__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <div class="ord-step__label">Delivered</div>
+              <div class="ord-step__sub">Coming soon</div>
+            </div>
+          </div>
+
+          {%- if order.cancelled -%}
+            <div style="margin-top:22px;padding:14px 16px;background:#fee2e2;border-left:3px solid #dc2626;border-radius:8px;color:#991b1b;font-size:0.9rem;">
+              <strong>This order was cancelled</strong> on {{ order.cancelled_at | date: '%B %d, %Y' }}.
+              {% if order.cancel_reason_label %}Reason: {{ order.cancel_reason_label }}.{% endif %}
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="ord-card">
+          <div class="ord-card__head">
+            <h2 class="ord-card__title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Items in this order
+            </h2>
+            <span style="color:#6b7280;font-size:0.88rem;">{{ order.item_count }} item{% if order.item_count != 1 %}s{% endif %}</span>
+          </div>
+
+          {%- for line_item in order.line_items -%}
+            <div class="ord-line">
+              <div class="ord-line__img {% unless line_item.image %}ord-line__img--ph{% endunless %}">
+                {%- if line_item.image -%}
+                  <img src="{{ line_item.image | image_url: width: 160 }}" alt="{{ line_item.title }}">
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>
+                {%- endif -%}
+              </div>
+              <div>
+                <a href="{{ line_item.url | default: line_item.product.url }}" class="ord-line__title">{{ line_item.title }}</a>
+                {%- if line_item.variant.title and line_item.variant.title != 'Default Title' -%}
+                  <p class="ord-line__variant">{{ line_item.variant.title }}</p>
+                {%- endif -%}
+                {%- if line_item.sku != blank -%}
+                  <p class="ord-line__variant" style="font-size:0.78rem;">SKU: {{ line_item.sku }}</p>
+                {%- endif -%}
+                <span class="ord-line__qty">Qty: {{ line_item.quantity }}</span>
+              </div>
+              <div class="ord-line__price">
+                {{ line_item.final_line_price | money }}
+              </div>
+            </div>
+          {%- endfor -%}
+
+          <div class="ord-totals">
+            <div class="ord-totals__row">
+              <span>Subtotal</span>
+              <span>{{ order.subtotal_price | money }}</span>
+            </div>
+            {%- for discount_application in order.cart_level_discount_applications -%}
+              <div class="ord-totals__row" style="color:var(--ord-green);">
+                <span>Discount ({{ discount_application.title }})</span>
+                <span>-{{ discount_application.total_allocated_amount | money }}</span>
+              </div>
+            {%- endfor -%}
+            {%- for shipping_method in order.shipping_methods -%}
+              <div class="ord-totals__row">
+                <span>Shipping ({{ shipping_method.title }})</span>
+                <span>{{ shipping_method.price | money }}</span>
+              </div>
+            {%- endfor -%}
+            {%- for tax_line in order.tax_lines -%}
+              <div class="ord-totals__row">
+                <span>{{ tax_line.title }} ({{ tax_line.rate | times: 100 }}%)</span>
+                <span>{{ tax_line.price | money }}</span>
+              </div>
+            {%- endfor -%}
+            <div class="ord-totals__row ord-totals__row--grand">
+              <span>Total</span>
+              <span>{{ order.total_price | money }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ord-card">
+          <div class="ord-card__head">
+            <h2 class="ord-card__title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Shipping &amp; Billing
+            </h2>
+          </div>
+          <div class="ord-address-grid">
+            <div class="ord-address">
+              <h4>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                Shipping Address
+              </h4>
+              {%- if order.shipping_address -%}
+                <p>
+                  <strong>{{ order.shipping_address.name }}</strong><br>
+                  {%- if order.shipping_address.company != blank -%}{{ order.shipping_address.company }}<br>{%- endif -%}
+                  {{ order.shipping_address.street }}<br>
+                  {{ order.shipping_address.city }}{% if order.shipping_address.province_code %}, {{ order.shipping_address.province_code }}{% endif %} {{ order.shipping_address.zip }}<br>
+                  {{ order.shipping_address.country }}<br>
+                  {%- if order.shipping_address.phone != blank -%}{{ order.shipping_address.phone }}{%- endif -%}
+                </p>
+              {%- else -%}
+                <p>No shipping address on file.</p>
+              {%- endif -%}
+            </div>
+            <div class="ord-address">
+              <h4>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 10h20"/></svg>
+                Billing Address
+              </h4>
+              {%- if order.billing_address -%}
+                <p>
+                  <strong>{{ order.billing_address.name }}</strong><br>
+                  {%- if order.billing_address.company != blank -%}{{ order.billing_address.company }}<br>{%- endif -%}
+                  {{ order.billing_address.street }}<br>
+                  {{ order.billing_address.city }}{% if order.billing_address.province_code %}, {{ order.billing_address.province_code }}{% endif %} {{ order.billing_address.zip }}<br>
+                  {{ order.billing_address.country }}<br>
+                  {%- if order.billing_address.phone != blank -%}{{ order.billing_address.phone }}{%- endif -%}
+                </p>
+              {%- else -%}
+                <p>No billing address on file.</p>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="ord-aside">
+        <div class="ord-meta">
+          <h3 class="ord-meta__title">Order Summary</h3>
+          <div class="ord-meta__row">
+            <span>Order number</span>
+            <span>{{ order.name }}</span>
+          </div>
+          <div class="ord-meta__row">
+            <span>Placed on</span>
+            <span>{{ order.created_at | date: '%b %d, %Y' }}</span>
+          </div>
+          <div class="ord-meta__row">
+            <span>Items</span>
+            <span>{{ order.item_count }}</span>
+          </div>
+          <div class="ord-meta__row">
+            <span>Subtotal</span>
+            <span>{{ order.subtotal_price | money }}</span>
+          </div>
+          <div class="ord-meta__row">
+            <span>Shipping</span>
+            <span>{{ order.shipping_price | money }}</span>
+          </div>
+          <div class="ord-meta__row" style="font-size:1.05rem;">
+            <span style="color:#1B4332;font-weight:600;">Total Paid</span>
+            <span style="color:var(--ord-green);">{{ order.total_price | money }}</span>
+          </div>
+        </div>
+
+        <div class="ord-tip">
+          <strong>Storage tip from our pharmacist</strong>
+          Keep your Ayurvedic remedies in a cool, dry place away from direct sunlight. Tightly close caps after each use to preserve potency.
+        </div>
+
+        <div class="ord-help">
+          <h4>Need help with this order?</h4>
+          <p>Reach out to our wellness desk for tracking updates, returns, or product guidance — we usually reply within one business day.</p>
+          <a href="mailto:contact@prmpharmaceuticals.com">contact@prmpharmaceuticals.com</a><br>
+          <a href="tel:+912782448087">+91 0278 244 8087</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Customer Order",
+  "settings": []
+}
+{% endschema %}
