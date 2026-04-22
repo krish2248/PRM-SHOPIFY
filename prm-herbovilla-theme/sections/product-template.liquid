@@ -19,25 +19,30 @@
   }
   .product-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     gap: 60px;
     align-items: flex-start;
   }
   .product-gallery {
     position: sticky;
     top: 120px;
+    max-width: 460px;
+    width: 100%;
+    margin: 0 auto;
   }
   .product-main-image {
     width: 100%;
+    max-width: 460px;
+    max-height: 460px;
     aspect-ratio: 1;
-    border-radius: 20px;
+    border-radius: 18px;
     overflow: hidden;
     background: #FDF8F0;
-    margin-bottom: 15px;
+    margin: 0 auto 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 24px;
     box-sizing: border-box;
     border: 1px solid #EFE7D9;
   }
