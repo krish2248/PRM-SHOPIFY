@@ -1,181 +1,629 @@
+{%- assign hero_image = section.settings.background_image -%}
+{%- assign brand_tagline = section.settings.tagline | default: 'Pure Ayurveda. Trusted by Generations.' -%}
+{%- assign brand_quote = section.settings.quote | default: 'Begin your herbal journey with us. Members enjoy curated wellness guides, early access to new formulations and personalised Ayurvedic care.' -%}
+
 {%- style -%}
-  .customer-section {
-    padding: 60px 0;
-    min-height: 60vh;
+  .auth-shell {
+    --auth-green: #2D6A4F;
+    --auth-green-deep: #1B4332;
+    --auth-cream: #FDF8F0;
+    --auth-gold: #C9A55C;
+    --auth-leaf: #95C28C;
+    min-height: calc(100vh - 80px);
+    background: var(--auth-cream);
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    position: relative;
+    overflow: hidden;
   }
-  .customer-container {
-    max-width: 500px;
+  .auth-shell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 88% 18%, rgba(149, 194, 140, 0.18) 0, transparent 40%),
+                      radial-gradient(circle at 12% 82%, rgba(201, 165, 92, 0.12) 0, transparent 45%);
+    pointer-events: none;
+  }
+
+  /* ---------- Form Side (left on register) ---------- */
+  .auth-form-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 50px;
+    position: relative;
+    order: 1;
+  }
+  .auth-form-card {
+    width: 100%;
+    max-width: 480px;
+    background: #fff;
+    border-radius: 22px;
+    padding: 44px 40px;
+    box-shadow: 0 30px 80px -30px rgba(27, 67, 50, 0.25), 0 6px 22px -8px rgba(27, 67, 50, 0.08);
+    position: relative;
+  }
+  .auth-form-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(45, 106, 79, 0.18) 0%, transparent 50%, rgba(201, 165, 92, 0.18) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .auth-logo {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .auth-logo img {
+    max-width: 150px;
+    height: auto;
     margin: 0 auto;
   }
-  .customer-header {
+  .auth-logo__text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--auth-green-deep);
+    letter-spacing: -0.01em;
+  }
+  .auth-logo__text span { color: var(--auth-gold); }
+
+  .auth-eyebrow {
     text-align: center;
-    margin-bottom: 40px;
-  }
-  .customer-title {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    color: var(--color-text);
-    margin-bottom: 10px;
-  }
-  .customer-subtitle {
-    color: var(--color-text-light);
-  }
-  .customer-form {
-    background: #fff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 2px 30px rgba(0,0,0,0.05);
-  }
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-  }
-  .form-group {
-    margin-bottom: 20px;
-  }
-  .form-group label {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--color-text);
+    font-size: 0.74rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--auth-gold);
+    font-weight: 600;
     margin-bottom: 8px;
   }
-  .form-group input {
-    width: 100%;
-    padding: 14px 18px;
-    border: 1px solid #e5e5e5;
-    border-radius: 10px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+  .auth-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.85rem;
+    text-align: center;
+    color: #1B4332;
+    margin: 0 0 8px;
+    font-weight: 600;
   }
-  .form-group input:focus {
+  .auth-subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .auth-form { display: flex; flex-direction: column; gap: 18px; }
+  .auth-row-double {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .auth-field { position: relative; }
+  .auth-field__label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .auth-field__input-wrap { position: relative; }
+  .auth-field__icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: #9ca3af;
+    pointer-events: none;
+  }
+  .auth-field input {
+    width: 100%;
+    padding: 14px 16px 14px 46px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 0.97rem;
+    background: #fafafa;
+    transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    font-family: inherit;
+  }
+  .auth-field input:focus {
     outline: none;
-    border-color: var(--color-primary);
+    border-color: var(--auth-green);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
   }
-  .customer-submit {
+
+  .auth-strength {
+    margin-top: 8px;
+    height: 4px;
+    background: #f1f1f1;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .auth-strength__bar {
+    height: 100%;
+    width: 0%;
+    background: #ef4444;
+    transition: width 0.3s ease, background 0.3s ease;
+    border-radius: 4px;
+  }
+  .auth-strength__hint {
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: #9ca3af;
+  }
+
+  .auth-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: #6b7280;
+    line-height: 1.55;
+    cursor: pointer;
+  }
+  .auth-consent input {
+    margin-top: 3px;
+    accent-color: var(--auth-green);
+    flex: none;
+  }
+  .auth-consent a { color: var(--auth-green); text-decoration: underline; }
+
+  .auth-submit {
     width: 100%;
-    padding: 16px;
-    background: var(--color-primary);
+    padding: 15px;
+    background: linear-gradient(135deg, var(--auth-green) 0%, var(--auth-green-deep) 100%);
     color: #fff;
     border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
+    border-radius: 12px;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 22px -10px rgba(45, 106, 79, 0.55);
+    margin-top: 4px;
   }
-  .customer-submit:hover {
-    background: var(--color-primary-dark);
+  .auth-submit:hover { transform: translateY(-1px); box-shadow: 0 14px 30px -12px rgba(45, 106, 79, 0.65); }
+  .auth-submit svg { width: 18px; height: 18px; transition: transform 0.2s ease; }
+  .auth-submit:hover svg { transform: translateX(3px); }
+
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0 18px;
+    color: #c5c5c5;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
   }
-  .customer-links {
+  .auth-divider::before, .auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e5e5e5, transparent);
+  }
+
+  .auth-footer {
     text-align: center;
-    margin-top: 25px;
+    color: #6b7280;
+    font-size: 0.93rem;
   }
-  .customer-links a {
-    color: var(--color-primary);
+  .auth-footer a {
+    color: var(--auth-green);
+    font-weight: 600;
     text-decoration: none;
-    font-size: 0.95rem;
+    margin-left: 4px;
   }
-  .customer-links a:hover {
-    text-decoration: underline;
-  }
-  .form-errors {
-    background: #fee2e2;
-    color: #dc2626;
-    padding: 15px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+  .auth-footer a:hover { text-decoration: underline; }
+
+  .auth-errors {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 18px;
     font-size: 0.9rem;
   }
+  .auth-errors ul { margin: 0; padding-left: 18px; }
+
+  /* ---------- Brand Side (right on register) ---------- */
+  .auth-brand {
+    position: relative;
+    background: linear-gradient(140deg, var(--auth-green-deep) 0%, var(--auth-green) 55%, #3A8462 100%);
+    color: #fff;
+    padding: 70px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    isolation: isolate;
+    order: 2;
+  }
+  {%- if hero_image != blank -%}
+  .auth-brand::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('{{ hero_image | image_url: width: 1600 }}');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.32;
+    z-index: -2;
+    filter: saturate(1.1);
+  }
+  .auth-brand::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(27, 67, 50, 0.85) 0%, rgba(45, 106, 79, 0.78) 60%, rgba(58, 132, 98, 0.72) 100%);
+    z-index: -1;
+  }
+  {%- else -%}
+  .auth-brand::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 22% 32%, rgba(255,255,255,0.15) 50%, transparent 50%),
+      radial-gradient(2px 2px at 68% 28%, rgba(255,255,255,0.1) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 42% 65%, rgba(255,255,255,0.18) 50%, transparent 50%),
+      radial-gradient(1px 1px at 75% 78%, rgba(255,255,255,0.12) 50%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  {%- endif -%}
+
+  .auth-leaf-decor {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.18;
+    color: #fff;
+    pointer-events: none;
+  }
+  .auth-leaf-decor--tr { top: -40px; right: -40px; width: 280px; transform: rotate(15deg); }
+  .auth-leaf-decor--bl { bottom: -50px; left: -50px; width: 320px; transform: rotate(-165deg); }
+
+  .auth-brand__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 480px;
+  }
+  .auth-brand__seal {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    backdrop-filter: blur(6px);
+  }
+  .auth-brand__seal svg { width: 16px; height: 16px; color: var(--auth-gold); }
+
+  .auth-brand__heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.2rem, 3.2vw, 3rem);
+    line-height: 1.12;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+  .auth-brand__heading em {
+    font-style: italic;
+    color: var(--auth-gold);
+    font-weight: 500;
+  }
+  .auth-brand__quote {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.86);
+    margin-bottom: 32px;
+    max-width: 440px;
+  }
+
+  .auth-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .auth-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    backdrop-filter: blur(6px);
+  }
+  .auth-benefit__icon {
+    flex: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(201, 165, 92, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--auth-gold);
+  }
+  .auth-benefit__icon svg { width: 20px; height: 20px; }
+  .auth-benefit__title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 0.98rem;
+  }
+  .auth-benefit__desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.5;
+  }
+
+  .auth-testimonial {
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    padding: 22px 24px;
+    background: rgba(0,0,0,0.18);
+    border-left: 3px solid var(--auth-gold);
+    border-radius: 0 14px 14px 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+    font-style: italic;
+  }
+  .auth-testimonial cite {
+    display: block;
+    margin-top: 10px;
+    font-style: normal;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.05em;
+  }
+  .auth-testimonial cite strong { color: var(--auth-gold); font-weight: 600; }
+
+  @media (max-width: 992px) {
+    .auth-shell { grid-template-columns: 1fr; min-height: auto; }
+    .auth-brand { padding: 50px 40px; min-height: 380px; order: 1; }
+    .auth-brand__inner { max-width: 100%; }
+    .auth-form-wrap { padding: 50px 30px; order: 2; }
+  }
   @media (max-width: 576px) {
-    .form-row {
-      grid-template-columns: 1fr;
-    }
+    .auth-brand { padding: 40px 24px; min-height: 320px; }
+    .auth-brand__heading { font-size: 1.85rem; }
+    .auth-brand__quote { font-size: 0.95rem; margin-bottom: 24px; }
+    .auth-benefits { margin-bottom: 24px; gap: 10px; }
+    .auth-benefit { padding: 12px; }
+    .auth-form-wrap { padding: 36px 18px; }
+    .auth-form-card { padding: 32px 24px; border-radius: 18px; }
+    .auth-title { font-size: 1.55rem; }
+    .auth-row-double { grid-template-columns: 1fr; gap: 0; }
   }
 {%- endstyle -%}
 
-<section class="customer-section">
-  <div class="container">
-    <div class="customer-container">
-      <div class="customer-header">
-        <h1 class="customer-title">{{ 'customer.register.title' | t }}</h1>
-        <p class="customer-subtitle">Create an account to track orders and save favorites.</p>
+<section class="auth-shell" aria-labelledby="auth-register-title">
+  <div class="auth-form-wrap">
+    <div class="auth-form-card">
+      <div class="auth-logo">
+        {%- if settings.logo != blank -%}
+          <a href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+            <img
+              src="{{ settings.logo | image_url: width: 320 }}"
+              alt="{{ shop.name }} logo"
+              width="150"
+              height="auto"
+              loading="eager"
+            >
+          </a>
+        {%- else -%}
+          <a href="{{ routes.root_url }}" class="auth-logo__text" aria-label="{{ shop.name }} home">
+            Herbo<span>Villa</span>
+          </a>
+        {%- endif -%}
       </div>
-      
-      {%- form 'create_customer', class: 'customer-form' -%}
+
+      <p class="auth-eyebrow">Become a Member</p>
+      <h1 class="auth-title" id="auth-register-title">Create Your HerboVilla Account</h1>
+      <p class="auth-subtitle">Join 3,00,000+ households who trust authentic, classically formulated Ayurvedic remedies.</p>
+
+      {%- form 'create_customer', class: 'auth-form' -%}
         {%- if form.errors -%}
-          <div class="form-errors">
+          <div class="auth-errors">
             {{ form.errors | default_errors }}
           </div>
         {%- endif -%}
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label for="customer-first-name">{{ 'customer.register.first_name' | t }}</label>
-            <input
-              type="text"
-              id="customer-first-name"
-              name="customer[first_name]"
-              autocomplete="given-name"
-              required
-              placeholder="First name"
-            >
+
+        <div class="auth-row-double">
+          <div class="auth-field">
+            <label class="auth-field__label" for="customer-first-name">First Name</label>
+            <div class="auth-field__input-wrap">
+              <svg class="auth-field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input type="text" id="customer-first-name" name="customer[first_name]" autocomplete="given-name" required placeholder="First name">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="customer-last-name">{{ 'customer.register.last_name' | t }}</label>
-            <input
-              type="text"
-              id="customer-last-name"
-              name="customer[last_name]"
-              autocomplete="family-name"
-              required
-              placeholder="Last name"
-            >
+          <div class="auth-field">
+            <label class="auth-field__label" for="customer-last-name">Last Name</label>
+            <div class="auth-field__input-wrap">
+              <svg class="auth-field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input type="text" id="customer-last-name" name="customer[last_name]" autocomplete="family-name" required placeholder="Last name">
+            </div>
           </div>
         </div>
-        
-        <div class="form-group">
-          <label for="customer-email">{{ 'customer.register.email' | t }}</label>
-          <input
-            type="email"
-            id="customer-email"
-            name="customer[email]"
-            autocomplete="email"
-            required
-            placeholder="your@email.com"
-          >
+
+        <div class="auth-field">
+          <label class="auth-field__label" for="customer-email">Email Address</label>
+          <div class="auth-field__input-wrap">
+            <svg class="auth-field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <input type="email" id="customer-email" name="customer[email]" autocomplete="email" required placeholder="you@example.com">
+          </div>
         </div>
-        
-        <div class="form-group">
-          <label for="customer-password">{{ 'customer.register.password' | t }}</label>
-          <input
-            type="password"
-            id="customer-password"
-            name="customer[password]"
-            autocomplete="new-password"
-            required
-            placeholder="••••••••"
-          >
+
+        <div class="auth-field">
+          <label class="auth-field__label" for="customer-password">Password</label>
+          <div class="auth-field__input-wrap">
+            <svg class="auth-field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="customer-password" name="customer[password]" autocomplete="new-password" required placeholder="At least 8 characters" minlength="5" data-pw-input>
+          </div>
+          <div class="auth-strength"><div class="auth-strength__bar" data-pw-bar></div></div>
+          <div class="auth-strength__hint" data-pw-hint>Use 8+ characters with a mix of letters, numbers and symbols.</div>
         </div>
-        
-        <button type="submit" class="customer-submit">
-          {{ 'customer.register.submit' | t }}
+
+        <label class="auth-consent">
+          <input type="checkbox" required>
+          I agree to the <a href="/policies/terms-of-service">Terms of Service</a> and <a href="/policies/privacy-policy">Privacy Policy</a>, and to receive occasional Ayurvedic wellness tips.
+        </label>
+
+        <button type="submit" class="auth-submit">
+          Create My Account
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
-        
-        <div class="customer-links">
-          <span style="color: var(--color-text-light);">Already have an account?</span>
-          <a href="{{ routes.account_login_url }}">{{ 'customer.login.sign_in' | t }}</a>
-        </div>
       {%- endform -%}
+
+      <div class="auth-divider">Already a member?</div>
+
+      <div class="auth-footer">
+        Sign in to continue your wellness journey.
+        <a href="{{ routes.account_login_url }}">Sign in instead</a>
+      </div>
     </div>
   </div>
+
+  <aside class="auth-brand">
+    <svg class="auth-leaf-decor auth-leaf-decor--tr" viewBox="0 0 200 200" fill="currentColor" aria-hidden="true">
+      <path d="M100 10c-50 0-90 40-90 90 0 30 15 55 40 70-5-30 5-60 25-80s50-30 80-25c-15-25-40-40-70-40-5 0 10-15 15-15z"/>
+    </svg>
+    <svg class="auth-leaf-decor auth-leaf-decor--bl" viewBox="0 0 200 200" fill="currentColor" aria-hidden="true">
+      <path d="M100 10c-50 0-90 40-90 90 0 30 15 55 40 70-5-30 5-60 25-80s50-30 80-25c-15-25-40-40-70-40-5 0 10-15 15-15z"/>
+    </svg>
+
+    <div class="auth-brand__inner">
+      <span class="auth-brand__seal">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.39 4.84L20 8l-4 3.9L17.27 18 12 15.27 6.73 18 8 11.9 4 8l5.61-1.16z"/></svg>
+        {{ brand_tagline }}
+      </span>
+      <h2 class="auth-brand__heading">
+        Step into a <em>healing</em><br>
+        rooted in 25+ years of Ayurveda.
+      </h2>
+      <p class="auth-brand__quote">{{ brand_quote }}</p>
+
+      <div class="auth-benefits">
+        <div class="auth-benefit">
+          <div class="auth-benefit__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <div>
+            <div class="auth-benefit__title">Faster Order Tracking</div>
+            <div class="auth-benefit__desc">Save your address book and re-order your favourite remedies in one tap.</div>
+          </div>
+        </div>
+        <div class="auth-benefit">
+          <div class="auth-benefit__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>
+          </div>
+          <div>
+            <div class="auth-benefit__title">Personalised Wellness Guides</div>
+            <div class="auth-benefit__desc">Member-only Ayurvedic dosha articles, seasonal routines and herb pairings.</div>
+          </div>
+        </div>
+        <div class="auth-benefit">
+          <div class="auth-benefit__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+          </div>
+          <div>
+            <div class="auth-benefit__title">Early Access &amp; Member Pricing</div>
+            <div class="auth-benefit__desc">First to know about new launches like VedaCold-CV 675 and members-only offers.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="auth-testimonial">
+      "HerboVilla's Ashwagandha and Triphala routine has been part of my clinic recommendations for the past five years. The pharmaceutical-grade purity is remarkable for an Ayurvedic brand."
+      <cite><strong>Vaidya Anjali Mehta</strong> · BAMS, Ayurvedic Practitioner</cite>
+    </blockquote>
+  </aside>
 </section>
+
+<script>
+  (function() {
+    var input = document.querySelector('[data-pw-input]');
+    var bar = document.querySelector('[data-pw-bar]');
+    var hint = document.querySelector('[data-pw-hint]');
+    if (!input || !bar) return;
+    function score(pw) {
+      var s = 0;
+      if (pw.length >= 8) s++;
+      if (/[A-Z]/.test(pw)) s++;
+      if (/[0-9]/.test(pw)) s++;
+      if (/[^A-Za-z0-9]/.test(pw)) s++;
+      if (pw.length >= 12) s++;
+      return s;
+    }
+    var levels = [
+      { w: '0%',   c: '#ef4444', t: 'Use 8+ characters with a mix of letters, numbers and symbols.' },
+      { w: '20%',  c: '#ef4444', t: 'Too weak — add more characters.' },
+      { w: '40%',  c: '#f97316', t: 'Weak — add a number or symbol.' },
+      { w: '60%',  c: '#eab308', t: 'Fair — try mixing case.' },
+      { w: '80%',  c: '#22c55e', t: 'Strong password.' },
+      { w: '100%', c: '#16a34a', t: 'Excellent — your account is well protected.' }
+    ];
+    input.addEventListener('input', function() {
+      var s = score(input.value);
+      var lvl = levels[s];
+      bar.style.width = lvl.w;
+      bar.style.background = lvl.c;
+      if (hint) hint.textContent = lvl.t;
+    });
+  })();
+</script>
 
 {% schema %}
 {
   "name": "Customer Register",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand Panel"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image (right panel)",
+      "info": "Recommended: a calming herbal / Ayurvedic photo (1600x1200). A green gradient is used by default."
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Top seal tagline",
+      "default": "Pure Ayurveda. Trusted by Generations."
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Welcome quote",
+      "default": "Begin your herbal journey with us. Members enjoy curated wellness guides, early access to new formulations and personalised Ayurvedic care."
+    }
+  ]
 }
 {% endschema %}
