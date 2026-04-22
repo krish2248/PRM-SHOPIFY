@@ -1,23 +1,82 @@
 {%- style -%}
   .customer-account {
-    padding: 60px 0;
-    background: var(--color-background-alt);
+    padding: 0 0 80px;
+    background: #FDF8F0;
     min-height: 80vh;
   }
-  .account-header {
-    margin-bottom: 40px;
-    text-align: center;
+  .acct-banner {
+    background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+    color: #fff;
+    padding: 50px 0 90px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: -60px;
   }
-  .account-title {
+  .acct-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 18% 28%, rgba(255,255,255,0.14) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 72% 68%, rgba(255,255,255,0.1) 50%, transparent 50%),
+      radial-gradient(2px 2px at 42% 82%, rgba(255,255,255,0.12) 50%, transparent 50%);
+    pointer-events: none;
+  }
+  .acct-banner__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    z-index: 2;
+  }
+  .acct-banner__logo img { max-height: 48px; width: auto; filter: brightness(0) invert(1); }
+  .acct-banner__logo-text {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
-    color: var(--color-text);
-    margin-bottom: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
   }
-  .account-welcome {
-    color: var(--color-text-light);
-    font-size: 1.1rem;
+  .acct-banner__logo-text span { color: #C9A55C; }
+  .acct-banner__heading h1 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin: 0 0 6px;
+    color: #fff;
+    font-weight: 600;
   }
+  .acct-banner__eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #C9A55C;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .acct-banner__welcome {
+    color: rgba(255,255,255,0.78);
+    font-size: 0.92rem;
+    margin: 0;
+  }
+  .acct-banner__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    font-size: 0.92rem;
+    padding: 9px 18px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    transition: background 0.2s ease;
+  }
+  .acct-banner__cta:hover { background: rgba(255,255,255,0.12); }
+  .acct-banner__cta svg { width: 16px; height: 16px; }
+  .acct-grid-wrap {
+    position: relative;
+    z-index: 3;
+  }
+  .account-header { display: none; }
   .account-grid {
     display: grid;
     grid-template-columns: 280px 1fr;
@@ -360,10 +419,18 @@
       grid-template-columns: 1fr;
     }
   }
+  @media (max-width: 768px) {
+    .acct-banner__inner { grid-template-columns: 1fr; gap: 14px; }
+    .acct-banner__cta { justify-self: flex-start; }
+    .acct-banner__heading h1 { font-size: 1.65rem; }
+  }
   @media (max-width: 576px) {
     .customer-account {
-      padding: 40px 0;
+      padding: 0 0 60px;
     }
+    .acct-banner { padding: 36px 0 80px; margin-bottom: -50px; }
+    .acct-banner__heading h1 { font-size: 1.45rem; }
+    .acct-banner__welcome { font-size: 0.85rem; }
     .account-title {
       font-size: 2rem;
     }
@@ -377,13 +444,31 @@
   }
 {%- endstyle -%}
 
-<section class="customer-account">
+<div class="acct-banner">
   <div class="container">
-    <header class="account-header">
-      <h1 class="account-title">My Account</h1>
-      <p class="account-welcome">Welcome back, {{ customer.first_name | default: customer.email }}! Manage your wellness journey here.</p>
-    </header>
-    
+    <div class="acct-banner__inner">
+      <div class="acct-banner__logo">
+        {%- if settings.logo != blank -%}
+          <img src="{{ settings.logo | image_url: width: 240 }}" alt="{{ shop.name }} logo">
+        {%- else -%}
+          <span class="acct-banner__logo-text">Herbo<span>Villa</span></span>
+        {%- endif -%}
+      </div>
+      <div class="acct-banner__heading">
+        <p class="acct-banner__eyebrow">My Account</p>
+        <h1>Namaste, {{ customer.first_name | default: customer.email }}</h1>
+        <p class="acct-banner__welcome">Welcome back to your wellness journey — track orders, manage addresses and stay rooted in Ayurveda.</p>
+      </div>
+      <a href="/collections/all" class="acct-banner__cta">
+        Shop Remedies
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<section class="customer-account">
+  <div class="container acct-grid-wrap">
     <div class="account-grid">
       <aside class="account-sidebar">
         <div class="account-profile">
