@@ -1,151 +1,678 @@
+{%- assign hero_image = section.settings.background_image -%}
+{%- assign brand_tagline = section.settings.tagline | default: 'Pure Ayurveda. Trusted by Generations.' -%}
+{%- assign brand_quote = section.settings.quote | default: 'Welcome back to your wellness journey. Your herbal companions are waiting.' -%}
+
 {%- style -%}
-  .customer-section {
-    padding: 60px 0;
-    min-height: 60vh;
+  .auth-shell {
+    --auth-green: #2D6A4F;
+    --auth-green-deep: #1B4332;
+    --auth-cream: #FDF8F0;
+    --auth-gold: #C9A55C;
+    --auth-leaf: #95C28C;
+    min-height: calc(100vh - 80px);
+    background: var(--auth-cream);
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    position: relative;
+    overflow: hidden;
   }
-  .customer-container {
-    max-width: 500px;
-    margin: 0 auto;
+  .auth-shell::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 12% 18%, rgba(149, 194, 140, 0.18) 0, transparent 40%),
+                      radial-gradient(circle at 88% 82%, rgba(201, 165, 92, 0.12) 0, transparent 45%);
+    pointer-events: none;
   }
-  .customer-header {
-    text-align: center;
+
+  /* ---------- Brand Side ---------- */
+  .auth-brand {
+    position: relative;
+    background: linear-gradient(140deg, var(--auth-green-deep) 0%, var(--auth-green) 55%, #3A8462 100%);
+    color: #fff;
+    padding: 70px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  {%- if hero_image != blank -%}
+  .auth-brand::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('{{ hero_image | image_url: width: 1600 }}');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.32;
+    z-index: -2;
+    filter: saturate(1.1);
+  }
+  .auth-brand::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(27, 67, 50, 0.85) 0%, rgba(45, 106, 79, 0.78) 60%, rgba(58, 132, 98, 0.72) 100%);
+    z-index: -1;
+  }
+  {%- else -%}
+  .auth-brand::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(2px 2px at 12% 22%, rgba(255,255,255,0.15) 50%, transparent 50%),
+      radial-gradient(2px 2px at 78% 38%, rgba(255,255,255,0.1) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 32% 75%, rgba(255,255,255,0.18) 50%, transparent 50%),
+      radial-gradient(1px 1px at 65% 88%, rgba(255,255,255,0.12) 50%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  {%- endif -%}
+
+  .auth-leaf-decor {
+    position: absolute;
+    z-index: 0;
+    opacity: 0.18;
+    color: #fff;
+    pointer-events: none;
+  }
+  .auth-leaf-decor--tl { top: -40px; left: -40px; width: 280px; transform: rotate(-15deg); }
+  .auth-leaf-decor--br { bottom: -50px; right: -50px; width: 320px; transform: rotate(165deg); }
+
+  .auth-brand__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 480px;
+  }
+  .auth-brand__seal {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    backdrop-filter: blur(6px);
+  }
+  .auth-brand__seal svg { width: 16px; height: 16px; color: var(--auth-gold); }
+
+  .auth-brand__heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.2rem, 3.2vw, 3rem);
+    line-height: 1.12;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+  .auth-brand__heading em {
+    font-style: italic;
+    color: var(--auth-gold);
+    font-weight: 500;
+  }
+  .auth-brand__quote {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.86);
+    margin-bottom: 40px;
+    max-width: 420px;
+  }
+
+  .auth-pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
     margin-bottom: 40px;
   }
-  .customer-title {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    color: var(--color-text);
-    margin-bottom: 10px;
+  .auth-pillar {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    padding: 16px 14px;
+    text-align: center;
+    backdrop-filter: blur(6px);
   }
-  .customer-subtitle {
-    color: var(--color-text-light);
+  .auth-pillar__num {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.7rem;
+    color: var(--auth-gold);
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 6px;
   }
-  .customer-form {
+  .auth-pillar__lbl {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.3;
+  }
+
+  .auth-trust {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+    margin-top: auto;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .auth-trust__row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.85);
+  }
+  .auth-trust__row svg { width: 18px; height: 18px; color: var(--auth-leaf); flex: none; }
+
+  /* ---------- Form Side ---------- */
+  .auth-form-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 50px;
+    position: relative;
+  }
+  .auth-form-card {
+    width: 100%;
+    max-width: 460px;
     background: #fff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 2px 30px rgba(0,0,0,0.05);
+    border-radius: 22px;
+    padding: 44px 40px;
+    box-shadow: 0 30px 80px -30px rgba(27, 67, 50, 0.25), 0 6px 22px -8px rgba(27, 67, 50, 0.08);
+    position: relative;
   }
-  .form-group {
-    margin-bottom: 20px;
+  .auth-form-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(45, 106, 79, 0.18) 0%, transparent 50%, rgba(201, 165, 92, 0.18) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
-  .form-group label {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--color-text);
+
+  .auth-logo {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .auth-logo img {
+    max-width: 150px;
+    height: auto;
+    margin: 0 auto;
+  }
+  .auth-logo__text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--auth-green-deep);
+    letter-spacing: -0.01em;
+  }
+  .auth-logo__text span { color: var(--auth-gold); }
+
+  .auth-eyebrow {
+    text-align: center;
+    font-size: 0.74rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--auth-gold);
+    font-weight: 600;
     margin-bottom: 8px;
   }
-  .form-group input {
-    width: 100%;
-    padding: 14px 18px;
-    border: 1px solid #e5e5e5;
-    border-radius: 10px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+  .auth-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.85rem;
+    text-align: center;
+    color: #1B4332;
+    margin: 0 0 8px;
+    font-weight: 600;
   }
-  .form-group input:focus {
+  .auth-subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 18px 0 22px;
+    color: #c5c5c5;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .auth-divider::before, .auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e5e5e5, transparent);
+  }
+
+  .auth-form { display: flex; flex-direction: column; gap: 18px; }
+  .auth-field { position: relative; }
+  .auth-field__label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .auth-field__input-wrap { position: relative; }
+  .auth-field__icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: #9ca3af;
+    pointer-events: none;
+  }
+  .auth-field input {
+    width: 100%;
+    padding: 14px 16px 14px 46px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 0.97rem;
+    background: #fafafa;
+    transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    font-family: inherit;
+  }
+  .auth-field input:focus {
     outline: none;
-    border-color: var(--color-primary);
+    border-color: var(--auth-green);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
   }
-  .customer-submit {
+
+  .auth-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    margin-top: -4px;
+  }
+  .auth-row label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #4b5563;
+    cursor: pointer;
+  }
+  .auth-row label input { accent-color: var(--auth-green); }
+  .auth-row a { color: var(--auth-green); text-decoration: none; font-weight: 500; }
+  .auth-row a:hover { text-decoration: underline; }
+
+  .auth-submit {
     width: 100%;
-    padding: 16px;
-    background: var(--color-primary);
+    padding: 15px;
+    background: linear-gradient(135deg, var(--auth-green) 0%, var(--auth-green-deep) 100%);
     color: #fff;
     border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
+    border-radius: 12px;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
+    transition: transform 0.2s ease, box-shadow 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 22px -10px rgba(45, 106, 79, 0.55);
+    margin-top: 4px;
   }
-  .customer-submit:hover {
-    background: var(--color-primary-dark);
-  }
-  .customer-links {
+  .auth-submit:hover { transform: translateY(-1px); box-shadow: 0 14px 30px -12px rgba(45, 106, 79, 0.65); }
+  .auth-submit svg { width: 18px; height: 18px; transition: transform 0.2s ease; }
+  .auth-submit:hover svg { transform: translateX(3px); }
+
+  .auth-footer {
     text-align: center;
-    margin-top: 25px;
+    margin-top: 26px;
+    color: #6b7280;
+    font-size: 0.93rem;
   }
-  .customer-links a {
-    color: var(--color-primary);
+  .auth-footer a {
+    color: var(--auth-green);
+    font-weight: 600;
     text-decoration: none;
-    font-size: 0.95rem;
+    margin-left: 4px;
   }
-  .customer-links a:hover {
-    text-decoration: underline;
+  .auth-footer a:hover { text-decoration: underline; }
+
+  .auth-mini-trust {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px dashed #e5e7eb;
+    flex-wrap: wrap;
   }
-  .form-errors {
-    background: #fee2e2;
-    color: #dc2626;
-    padding: 15px 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+  .auth-mini-trust__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.74rem;
+    color: #6b7280;
+    letter-spacing: 0.04em;
+  }
+  .auth-mini-trust__item svg { width: 14px; height: 14px; color: var(--auth-green); }
+
+  .auth-errors {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 18px;
     font-size: 0.9rem;
   }
-  .form-errors ul {
-    margin: 0;
-    padding-left: 20px;
+  .auth-errors ul { margin: 0; padding-left: 18px; }
+
+  .auth-recover {
+    display: none;
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px dashed #e5e7eb;
+  }
+  .auth-recover.is-active { display: block; }
+  .auth-recover h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem;
+    color: #1B4332;
+    margin: 0 0 6px;
+  }
+  .auth-recover p {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 16px;
+  }
+  .auth-recover-toggle {
+    background: none;
+    border: none;
+    color: var(--auth-green);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0;
+    margin-top: 10px;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 992px) {
+    .auth-shell { grid-template-columns: 1fr; min-height: auto; }
+    .auth-brand { padding: 50px 40px; min-height: 380px; }
+    .auth-brand__inner { max-width: 100%; }
+    .auth-form-wrap { padding: 50px 30px; }
+  }
+  @media (max-width: 576px) {
+    .auth-brand { padding: 40px 24px; min-height: 320px; }
+    .auth-brand__heading { font-size: 1.85rem; }
+    .auth-brand__quote { font-size: 0.95rem; margin-bottom: 28px; }
+    .auth-pillars { gap: 8px; }
+    .auth-pillar { padding: 12px 8px; }
+    .auth-pillar__num { font-size: 1.35rem; }
+    .auth-pillar__lbl { font-size: 0.62rem; }
+    .auth-form-wrap { padding: 36px 18px; }
+    .auth-form-card { padding: 32px 24px; border-radius: 18px; }
+    .auth-title { font-size: 1.55rem; }
+    .auth-mini-trust { gap: 12px; }
   }
 {%- endstyle -%}
 
-<section class="customer-section">
-  <div class="container">
-    <div class="customer-container">
-      <div class="customer-header">
-        <h1 class="customer-title">{{ 'customer.login.title' | t }}</h1>
-        <p class="customer-subtitle">Welcome back! Please sign in to your account.</p>
+<section class="auth-shell" aria-labelledby="auth-login-title">
+  <aside class="auth-brand">
+    <svg class="auth-leaf-decor auth-leaf-decor--tl" viewBox="0 0 200 200" fill="currentColor" aria-hidden="true">
+      <path d="M100 10c-50 0-90 40-90 90 0 30 15 55 40 70-5-30 5-60 25-80s50-30 80-25c-15-25-40-40-70-40-5 0 10-15 15-15z"/>
+    </svg>
+    <svg class="auth-leaf-decor auth-leaf-decor--br" viewBox="0 0 200 200" fill="currentColor" aria-hidden="true">
+      <path d="M100 10c-50 0-90 40-90 90 0 30 15 55 40 70-5-30 5-60 25-80s50-30 80-25c-15-25-40-40-70-40-5 0 10-15 15-15z"/>
+    </svg>
+
+    <div class="auth-brand__inner">
+      <span class="auth-brand__seal">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.39 4.84L20 8l-4 3.9L17.27 18 12 15.27 6.73 18 8 11.9 4 8l5.61-1.16z"/></svg>
+        {{ brand_tagline }}
+      </span>
+      <h2 class="auth-brand__heading">
+        Welcome back to <em>HerboVilla</em><br>
+        — your daily ritual of balance.
+      </h2>
+      <p class="auth-brand__quote">{{ brand_quote }}</p>
+
+      <div class="auth-pillars">
+        <div class="auth-pillar">
+          <div class="auth-pillar__num">{{ section.settings.pillar_1_value | default: '25+' }}</div>
+          <div class="auth-pillar__lbl">{{ section.settings.pillar_1_label | default: 'Years of healing' }}</div>
+        </div>
+        <div class="auth-pillar">
+          <div class="auth-pillar__num">{{ section.settings.pillar_2_value | default: '22' }}</div>
+          <div class="auth-pillar__lbl">{{ section.settings.pillar_2_label | default: 'Classical herbs' }}</div>
+        </div>
+        <div class="auth-pillar">
+          <div class="auth-pillar__num">{{ section.settings.pillar_3_value | default: 'WHO-GMP' }}</div>
+          <div class="auth-pillar__lbl">{{ section.settings.pillar_3_label | default: 'Certified facility' }}</div>
+        </div>
       </div>
-      
-      {%- form 'customer_login', class: 'customer-form' -%}
+    </div>
+
+    <div class="auth-trust">
+      <div class="auth-trust__row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Trusted by 3,00,000+ Ayurvedic households
+      </div>
+      <div class="auth-trust__row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+        Crafted in Bhavnagar, Gujarat — since 1999
+      </div>
+      <div class="auth-trust__row">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Heavy-metal tested · AYUSH compliant
+      </div>
+    </div>
+  </aside>
+
+  <div class="auth-form-wrap">
+    <div class="auth-form-card">
+      <div class="auth-logo">
+        {%- if settings.logo != blank -%}
+          <a href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+            <img
+              src="{{ settings.logo | image_url: width: 320 }}"
+              alt="{{ shop.name }} logo"
+              width="150"
+              height="auto"
+              loading="eager"
+            >
+          </a>
+        {%- else -%}
+          <a href="{{ routes.root_url }}" class="auth-logo__text" aria-label="{{ shop.name }} home">
+            Herbo<span>Villa</span>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <p class="auth-eyebrow">Member Sign In</p>
+      <h1 class="auth-title" id="auth-login-title">Continue Your Wellness Journey</h1>
+      <p class="auth-subtitle">Track orders, manage your herbal routine, and unlock member-only Ayurvedic guides.</p>
+
+      {%- form 'customer_login', class: 'auth-form' -%}
         {%- if form.errors -%}
-          <div class="form-errors">
+          <div class="auth-errors">
             {{ form.errors | default_errors }}
           </div>
         {%- endif -%}
-        
-        <div class="form-group">
-          <label for="customer-email">{{ 'customer.login.email' | t }}</label>
-          <input
-            type="email"
-            id="customer-email"
-            name="customer[email]"
-            autocomplete="email"
-            required
-            placeholder="your@email.com"
-          >
+
+        <div class="auth-field">
+          <label class="auth-field__label" for="customer-email">Email Address</label>
+          <div class="auth-field__input-wrap">
+            <svg class="auth-field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <input type="email" id="customer-email" name="customer[email]" autocomplete="email" required placeholder="you@example.com">
+          </div>
         </div>
-        
-        <div class="form-group">
-          <label for="customer-password">{{ 'customer.login.password' | t }}</label>
-          <input
-            type="password"
-            id="customer-password"
-            name="customer[password]"
-            autocomplete="current-password"
-            required
-            placeholder="••••••••"
-          >
+
+        <div class="auth-field">
+          <label class="auth-field__label" for="customer-password">Password</label>
+          <div class="auth-field__input-wrap">
+            <svg class="auth-field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="customer-password" name="customer[password]" autocomplete="current-password" required placeholder="Enter your password">
+          </div>
         </div>
-        
-        <button type="submit" class="customer-submit">
-          {{ 'customer.login.sign_in' | t }}
+
+        <div class="auth-row">
+          <label>
+            <input type="checkbox" name="remember"> Keep me signed in
+          </label>
+          <button type="button" class="auth-recover-toggle" data-recover-toggle>Forgot password?</button>
+        </div>
+
+        <button type="submit" class="auth-submit">
+          Sign In to HerboVilla
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
-        
-        <div class="customer-links">
-          <a href="{{ routes.account_recover_url }}">{{ 'customer.login.forgot_password' | t }}</a>
-          <span style="margin: 0 10px; color: #ccc;">|</span>
-          <a href="{{ routes.account_register_url }}">{{ 'customer.login.create_account' | t }}</a>
-        </div>
       {%- endform -%}
+
+      <div class="auth-divider">New here?</div>
+
+      <div class="auth-footer">
+        Become a member and join thousands on their wellness journey.
+        <a href="{{ routes.account_register_url }}">Create an account</a>
+      </div>
+
+      <div class="auth-mini-trust">
+        <span class="auth-mini-trust__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Secure
+        </span>
+        <span class="auth-mini-trust__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          AYUSH Certified
+        </span>
+        <span class="auth-mini-trust__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          24/7 Support
+        </span>
+      </div>
+
+      <div class="auth-recover" data-recover>
+        {%- form 'recover_customer_password' -%}
+          <h3>Reset your password</h3>
+          <p>Enter the email associated with your HerboVilla account and we'll send you a recovery link.</p>
+          <div class="auth-field">
+            <label class="auth-field__label" for="recover-email">Email Address</label>
+            <div class="auth-field__input-wrap">
+              <svg class="auth-field__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" id="recover-email" name="email" required placeholder="you@example.com">
+            </div>
+          </div>
+          <button type="submit" class="auth-submit" style="margin-top:14px;">
+            Send Recovery Link
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        {%- endform -%}
+      </div>
     </div>
   </div>
 </section>
 
+<script>
+  (function() {
+    var toggle = document.querySelector('[data-recover-toggle]');
+    var panel = document.querySelector('[data-recover]');
+    if (!toggle || !panel) return;
+    toggle.addEventListener('click', function() {
+      var isActive = panel.classList.toggle('is-active');
+      toggle.textContent = isActive ? 'Hide recovery form' : 'Forgot password?';
+      if (isActive) panel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    });
+    {%- if recover_password == 'true' -%}
+      panel.classList.add('is-active');
+      toggle.textContent = 'Hide recovery form';
+    {%- endif -%}
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Customer Login",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand Panel"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image (left panel)",
+      "info": "Recommended: a calming herbal / Ayurvedic photo (1600x1200). A green gradient is used by default."
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Top seal tagline",
+      "default": "Pure Ayurveda. Trusted by Generations."
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Welcome quote",
+      "default": "Welcome back to your wellness journey. Your herbal companions are waiting."
+    },
+    {
+      "type": "header",
+      "content": "Brand Pillars"
+    },
+    {
+      "type": "text",
+      "id": "pillar_1_value",
+      "label": "Pillar 1 number",
+      "default": "25+"
+    },
+    {
+      "type": "text",
+      "id": "pillar_1_label",
+      "label": "Pillar 1 label",
+      "default": "Years of healing"
+    },
+    {
+      "type": "text",
+      "id": "pillar_2_value",
+      "label": "Pillar 2 number",
+      "default": "22"
+    },
+    {
+      "type": "text",
+      "id": "pillar_2_label",
+      "label": "Pillar 2 label",
+      "default": "Classical herbs"
+    },
+    {
+      "type": "text",
+      "id": "pillar_3_value",
+      "label": "Pillar 3 number",
+      "default": "WHO-GMP"
+    },
+    {
+      "type": "text",
+      "id": "pillar_3_label",
+      "label": "Pillar 3 label",
+      "default": "Certified facility"
+    }
+  ]
 }
 {% endschema %}
