@@ -35,6 +35,19 @@
         "show_stats": false
       }
     },
+    "qualifications-strip": {
+      "type": "qualifications-strip",
+      "blocks": {
+        "q-1": { "type": "qual", "settings": { "icon": "who",   "title": "WHO-GMP",     "sub": "Certified facility" } },
+        "q-2": { "type": "qual", "settings": { "icon": "gmp",   "title": "Global GMP",  "sub": "Schedule T/M" } },
+        "q-3": { "type": "qual", "settings": { "icon": "iso",   "title": "ISO 9001:2015", "sub": "Quality systems" } },
+        "q-4": { "type": "qual", "settings": { "icon": "ayush", "title": "AYUSH",       "sub": "Govt. of India" } },
+        "q-5": { "type": "qual", "settings": { "icon": "fssai", "title": "FSSAI",       "sub": "Food safety" } },
+        "q-6": { "type": "qual", "settings": { "icon": "fda",   "title": "FDA",         "sub": "Regulatory approved" } }
+      },
+      "block_order": ["q-1", "q-2", "q-3", "q-4", "q-5", "q-6"],
+      "settings": {}
+    },
     "shop-by-goal": {
       "type": "shop-by-goal",
       "blocks": {
@@ -352,8 +365,9 @@
   },
   "order": [
     "hero",
-    "shop-by-goal",
+    "qualifications-strip",
     "certifications",
+    "shop-by-goal",
     "featured-collection",
     "vedacold-featured",
     "new-arrivals",
