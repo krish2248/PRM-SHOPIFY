@@ -1046,8 +1046,10 @@ p:last-child {
 
 .collections-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-lg);
+  max-width: 1120px;
+  margin: 0 auto;
 }
 
 .collection-card {
