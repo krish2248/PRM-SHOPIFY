@@ -74,24 +74,45 @@
   .contact-item a:hover {
     color: var(--color-primary);
   }
-  .contact-social {
+  /* Contact "Connect" stack: Follow Us / Also available on / Brand websites */
+  .contact-connect {
     margin-top: 40px;
-    padding-top: 30px;
-    border-top: 1px solid rgba(45, 106, 79, 0.1);
+    padding-top: 32px;
+    border-top: 1px solid rgba(45, 106, 79, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
   }
-  .contact-social h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 15px;
+  .contact-connect__block h4 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #2D6A4F;
+    margin: 0 0 14px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  .contact-connect__block h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 32px;
+    height: 2px;
+    background: #2D6A4F;
+    border-radius: 2px;
   }
   .contact-social-links {
     display: flex;
     gap: 12px;
+    flex-wrap: wrap;
   }
   .contact-social-links a {
-    width: 45px;
-    height: 45px;
+    width: 46px;
+    height: 46px;
     background: #fff;
+    border: 1px solid #dce5da;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -103,52 +124,41 @@
   .contact-social-links a:hover {
     background: var(--color-primary);
     color: #fff;
+    border-color: var(--color-primary);
     transform: translateY(-3px);
   }
   .contact-social-links svg {
     width: 20px;
     height: 20px;
   }
-  .contact-marketplaces,
-  .contact-brandsites {
-    margin-top: 28px;
-    padding-top: 22px;
-    border-top: 1px solid rgba(45, 106, 79, 0.1);
-  }
-  .contact-marketplaces h4,
-  .contact-brandsites h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 14px;
-  }
+
   .contact-mp-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 12px;
   }
   .contact-mp-chip {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 10px;
-    background: #fff;
-    border: 1px solid #e8ebe0;
+    padding: 14px 12px;
+    background: var(--color-primary, #2D6A4F);
+    color: #fff;
+    border: 1px solid var(--color-primary, #2D6A4F);
     border-radius: 10px;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 0.95rem;
+    letter-spacing: 0.2px;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
   .contact-mp-chip:hover {
+    background: #1B4332;
+    border-color: #1B4332;
+    color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    border-color: rgba(45, 106, 79, 0.3);
+    box-shadow: 0 8px 18px rgba(27, 67, 50, 0.2);
   }
-  .contact-mp-chip--tata     { color: #e23744; }
-  .contact-mp-chip--amazon   { color: #131921; text-transform: lowercase; }
-  .contact-mp-chip--amazon span { color: #FF9900; }
-  .contact-mp-chip--flipkart { color: #2874F0; font-style: italic; }
-  .contact-mp-chip--meesho   { color: #F43397; }
 
   .contact-brandsites-list {
     display: flex;
@@ -158,25 +168,27 @@
   .contact-brandsite {
     display: flex;
     flex-direction: column;
-    padding: 12px 16px;
+    padding: 14px 16px;
     background: #fff;
-    border: 1px solid #e8ebe0;
+    border: 1px solid #dce5da;
+    border-left: 3px solid var(--color-primary, #2D6A4F);
     border-radius: 10px;
     text-decoration: none;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
   }
   .contact-brandsite:hover {
     transform: translateX(3px);
-    border-color: rgba(45, 106, 79, 0.35);
+    background: #f5faf5;
   }
   .contact-brandsite strong {
     font-size: 0.95rem;
     color: #1a1a1a;
   }
   .contact-brandsite span {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: #2D6A4F;
-    margin-top: 2px;
+    font-weight: 500;
+    margin-top: 3px;
   }
   .contact-form-wrapper {
     background: #fff;
@@ -335,65 +347,67 @@
           </div>
         </div>
         
-        <div class="contact-social">
-          <h4>Follow Us</h4>
-          <div class="contact-social-links">
-            {%- if settings.social_linkedin != blank -%}
-              <a href="{{ settings.social_linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              </a>
-            {%- endif -%}
-            {%- if settings.social_instagram != blank -%}
-              <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-              </a>
-            {%- endif -%}
-            {%- if settings.social_facebook != blank -%}
-              <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              </a>
-            {%- endif -%}
-            {%- if settings.social_youtube != blank -%}
-              <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#fff"/></svg>
-              </a>
-            {%- endif -%}
+        <div class="contact-connect">
+          <div class="contact-connect__block">
+            <h4>Follow Us</h4>
+            <div class="contact-social-links">
+              {%- if settings.social_linkedin != blank -%}
+                <a href="{{ settings.social_linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_instagram != blank -%}
+                <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_facebook != blank -%}
+                <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+              {%- endif -%}
+              {%- if settings.social_youtube != blank -%}
+                <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#fff"/></svg>
+                </a>
+              {%- endif -%}
+            </div>
           </div>
-        </div>
 
-        <div class="contact-marketplaces">
-          <h4>Also available on</h4>
-          <div class="contact-mp-grid">
-            {%- if settings.marketplace_tata1mg != blank -%}
-              <a href="{{ settings.marketplace_tata1mg }}" target="_blank" rel="noopener" class="contact-mp-chip contact-mp-chip--tata">Tata 1mg</a>
-            {%- endif -%}
-            {%- if settings.marketplace_amazon != blank -%}
-              <a href="{{ settings.marketplace_amazon }}" target="_blank" rel="noopener" class="contact-mp-chip contact-mp-chip--amazon">amazon<span>.in</span></a>
-            {%- endif -%}
-            {%- if settings.marketplace_flipkart != blank -%}
-              <a href="{{ settings.marketplace_flipkart }}" target="_blank" rel="noopener" class="contact-mp-chip contact-mp-chip--flipkart">Flipkart</a>
-            {%- endif -%}
-            {%- if settings.marketplace_meesho != blank -%}
-              <a href="{{ settings.marketplace_meesho }}" target="_blank" rel="noopener" class="contact-mp-chip contact-mp-chip--meesho">Meesho</a>
-            {%- endif -%}
+          <div class="contact-connect__block">
+            <h4>Also Shop Us On</h4>
+            <div class="contact-mp-grid">
+              {%- if settings.marketplace_tata1mg != blank -%}
+                <a href="{{ settings.marketplace_tata1mg }}" target="_blank" rel="noopener" class="contact-mp-chip">Tata 1mg</a>
+              {%- endif -%}
+              {%- if settings.marketplace_amazon != blank -%}
+                <a href="{{ settings.marketplace_amazon }}" target="_blank" rel="noopener" class="contact-mp-chip">Amazon</a>
+              {%- endif -%}
+              {%- if settings.marketplace_flipkart != blank -%}
+                <a href="{{ settings.marketplace_flipkart }}" target="_blank" rel="noopener" class="contact-mp-chip">Flipkart</a>
+              {%- endif -%}
+              {%- if settings.marketplace_meesho != blank -%}
+                <a href="{{ settings.marketplace_meesho }}" target="_blank" rel="noopener" class="contact-mp-chip">Meesho</a>
+              {%- endif -%}
+            </div>
           </div>
-        </div>
 
-        <div class="contact-brandsites">
-          <h4>Brand websites</h4>
-          <div class="contact-brandsites-list">
-            {%- if settings.brand_prm_pharma_url != blank -%}
-              <a href="{{ settings.brand_prm_pharma_url }}" target="_blank" rel="noopener" class="contact-brandsite">
-                <strong>PRM Pharmaceuticals</strong>
-                <span>prmpharmaceuticals.com &rsaquo;</span>
-              </a>
-            {%- endif -%}
-            {%- if settings.brand_herbovilla_url != blank -%}
-              <a href="{{ settings.brand_herbovilla_url }}" target="_blank" rel="noopener" class="contact-brandsite">
-                <strong>HerboVilla Store</strong>
-                <span>prm-herbovilla.myshopify.com &rsaquo;</span>
-              </a>
-            {%- endif -%}
+          <div class="contact-connect__block">
+            <h4>Brand Websites</h4>
+            <div class="contact-brandsites-list">
+              {%- if settings.brand_prm_pharma_url != blank -%}
+                <a href="{{ settings.brand_prm_pharma_url }}" target="_blank" rel="noopener" class="contact-brandsite">
+                  <strong>PRM Pharmaceuticals</strong>
+                  <span>prmpharmaceuticals.com &rsaquo;</span>
+                </a>
+              {%- endif -%}
+              {%- if settings.brand_herbovilla_url != blank -%}
+                <a href="{{ settings.brand_herbovilla_url }}" target="_blank" rel="noopener" class="contact-brandsite">
+                  <strong>HerboVilla Store</strong>
+                  <span>prm-herbovilla.myshopify.com &rsaquo;</span>
+                </a>
+              {%- endif -%}
+            </div>
           </div>
         </div>
       </div>
