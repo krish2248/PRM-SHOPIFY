@@ -390,6 +390,17 @@
   .product-tabs {
     margin-top: 60px;
   }
+  .product-description-block {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 2px solid #eee;
+  }
+  .product-description-heading {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 24px;
+  }
   .tabs-nav {
     display: flex;
     border-bottom: 2px solid #eee;
@@ -872,169 +883,55 @@
       </div>
     </div>
     
-    <!-- Product Tabs -->
-    <div class="product-tabs">
-      <div class="tabs-nav">
-        <button type="button" class="tab-btn active" data-tab="description">Description</button>
-        <button type="button" class="tab-btn" data-tab="ingredients">Ingredients</button>
-        <button type="button" class="tab-btn" data-tab="usage">How to Use</button>
-        <button type="button" class="tab-btn" data-tab="shipping">Shipping</button>
-      </div>
-      
-      <div class="tab-content active" id="tab-description">
-        <div class="product-description-structured">
-          {%- if product.description != blank -%}
-            <div class="rte">
-              {{ product.description }}
-            </div>
-          {%- endif -%}
-
-          {%- if section.settings.show_highlights -%}
-            {%- assign highlight_count = 0 -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'highlight' -%}{%- assign highlight_count = highlight_count | plus: 1 -%}{%- endif -%}
-            {%- endfor -%}
-            {%- if highlight_count > 0 -%}
-              <div class="desc-section">
-                <h4 class="desc-heading">Key Benefits</h4>
-                <ul class="desc-benefits">
-                  {%- for block in section.blocks -%}
-                    {%- if block.type == 'highlight' -%}
-                      <li {{ block.shopify_attributes }}>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        <span>{{ block.settings.text }}</span>
-                      </li>
-                    {%- endif -%}
-                  {%- endfor -%}
-                </ul>
-              </div>
-            {%- endif -%}
-          {%- endif -%}
-
-          {%- if product.vendor != blank or product.type != blank -%}
-            <div class="desc-section desc-specs">
-              <h4 class="desc-heading">Product Details</h4>
-              <dl class="desc-spec-list">
-                {%- if product.vendor != blank -%}
-                  <dt>Brand</dt><dd>{{ product.vendor }}</dd>
-                {%- endif -%}
-                {%- if product.type != blank -%}
-                  <dt>Category</dt><dd>{{ product.type }}</dd>
-                {%- endif -%}
-                <dt>Format</dt><dd>Ayurvedic formulation</dd>
-                <dt>Suitable For</dt><dd>Adults as directed</dd>
-              </dl>
-            </div>
-          {%- endif -%}
-        </div>
-      </div>
-
-      <div class="tab-content" id="tab-ingredients">
-        <h3>Complete Ingredient List</h3>
-        {%- capture ingredients_raw -%}{%- render 'product-ingredients-data', product: product -%}{%- endcapture -%}
-        {%- assign ingredients_raw = ingredients_raw | strip -%}
-        {%- if ingredients_raw != blank -%}
-          {%- assign ingredients_array = ingredients_raw | split: '|' -%}
-          <p class="ingredients-intro">Formulated with {{ ingredients_array.size }} premium Ayurvedic ingredients, sourced and processed under strict quality standards.</p>
-          <div class="ingredients-list">
-            {%- for raw_item in ingredients_array -%}
-              {%- assign item = raw_item | strip -%}
-              {%- if item != blank -%}
-                {%- assign parts = item | split: ' - ' -%}
-                {%- assign ing_name = parts[0] | strip -%}
-                {%- assign ing_dose = '' -%}
-                {%- if parts.size > 1 -%}
-                  {%- assign ing_dose = parts | slice: 1, 10 | join: ' - ' | strip -%}
-                {%- endif -%}
-                <div class="ingredient-item">
-                  <div class="ingredient-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
-                    </svg>
-                  </div>
-                  <div class="ingredient-text">
-                    <strong>{{ ing_name }}</strong>
-                    {%- if ing_dose != blank -%}
-                      <p class="ingredient-dose">{{ ing_dose }}</p>
-                    {%- endif -%}
-                  </div>
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
-          <p class="ingredients-footnote">All ingredients verified against Ayurvedic Pharmacopoeia (A.B. / BHP standards). For the use of registered medical practitioner only.</p>
-        {%- else -%}
-          <div class="ingredients-list">
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'ingredient' -%}
-                <div class="ingredient-item" {{ block.shopify_attributes }}>
-                  <div class="ingredient-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
-                    </svg>
-                  </div>
-                  <div class="ingredient-text">
-                    <strong>{{ block.settings.name }}</strong>
-                    <p class="ingredient-dose">{{ block.settings.benefit }}</p>
-                  </div>
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
+    <!-- Product Description -->
+    <div class="product-description-block">
+      <h2 class="product-description-heading">Description</h2>
+      <div class="product-description-structured">
+        {%- if product.description != blank -%}
+          <div class="rte">
+            {{ product.description }}
           </div>
         {%- endif -%}
-      </div>
-      
-      <div class="tab-content" id="tab-usage">
-        <h3>How to Use</h3>
-        {%- assign usage_count = 0 -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'usage_step' -%}{%- assign usage_count = usage_count | plus: 1 -%}{%- endif -%}
-        {%- endfor -%}
-        <ol class="usage-steps">
-          {%- if usage_count > 0 -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'usage_step' -%}
-                <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-              {%- endif -%}
-            {%- endfor -%}
-          {%- else -%}
-            <li>Shake well before use. Take 1-2 tablets/teaspoons twice daily, preferably after meals.</li>
-            <li>Swallow with a glass of lukewarm water or milk for better absorption.</li>
-            <li>Maintain a consistent routine — take at the same time every day for best results.</li>
-            <li>For chronic conditions, continue for at least 8-12 weeks or as directed by your Ayurvedic physician.</li>
-            <li>Pair with a balanced diet, adequate hydration and regular sleep for optimal wellness outcomes.</li>
+
+        {%- if section.settings.show_highlights -%}
+          {%- assign highlight_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'highlight' -%}{%- assign highlight_count = highlight_count | plus: 1 -%}{%- endif -%}
+          {%- endfor -%}
+          {%- if highlight_count > 0 -%}
+            <div class="desc-section">
+              <h4 class="desc-heading">Key Benefits</h4>
+              <ul class="desc-benefits">
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'highlight' -%}
+                    <li {{ block.shopify_attributes }}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                      <span>{{ block.settings.text }}</span>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
           {%- endif -%}
-        </ol>
-        <p style="margin-top: 20px; font-size: 0.85rem; color: var(--color-text-light); font-style: italic; padding: 14px 16px; background: #f8fdf8; border-radius: 8px; border-left: 3px solid var(--color-primary);">
-          <strong>Note:</strong> Individual results may vary. Consult your healthcare provider before starting any new wellness regimen, especially if you are pregnant, nursing, or on medication.
-        </p>
-      </div>
-      
-      <div class="tab-content" id="tab-shipping">
-        <h3>Shipping & Returns</h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 28px;">
-          <div style="padding: 18px; background: #f8fdf8; border: 1px solid rgba(45,106,79,0.12); border-radius: 10px;">
-            <h4 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 8px;">Free Shipping</h4>
-            <p style="margin: 0;">On all prepaid orders above <strong>₹400</strong>. A flat ₹50 shipping fee applies on orders below ₹400.</p>
+        {%- endif -%}
+
+        {%- if product.vendor != blank or product.type != blank -%}
+          <div class="desc-section desc-specs">
+            <h4 class="desc-heading">Product Details</h4>
+            <dl class="desc-spec-list">
+              {%- if product.vendor != blank -%}
+                <dt>Brand</dt><dd>{{ product.vendor }}</dd>
+              {%- endif -%}
+              {%- if product.type != blank -%}
+                <dt>Category</dt><dd>{{ product.type }}</dd>
+              {%- endif -%}
+              <dt>Format</dt><dd>Ayurvedic formulation</dd>
+              <dt>Suitable For</dt><dd>Adults as directed</dd>
+            </dl>
           </div>
-          <div style="padding: 18px; background: #f8fdf8; border: 1px solid rgba(45,106,79,0.12); border-radius: 10px;">
-            <h4 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 8px;">Delivery Timeline</h4>
-            <p style="margin: 0;"><strong>Metro cities:</strong> 3-5 business days<br><strong>Other locations:</strong> 5-7 business days<br><strong>Remote areas:</strong> Up to 10 days</p>
-          </div>
-          <div style="padding: 18px; background: #f8fdf8; border: 1px solid rgba(45,106,79,0.12); border-radius: 10px;">
-            <h4 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 8px;">Cash on Delivery</h4>
-            <p style="margin: 0;">COD is available across India (serviceable PIN codes). A small handling fee of ₹40 applies on COD orders.</p>
-          </div>
-          <div style="padding: 18px; background: #f8fdf8; border: 1px solid rgba(45,106,79,0.12); border-radius: 10px;">
-            <h4 style="font-size: 1rem; color: var(--color-primary); margin-bottom: 8px;">Returns & Refunds</h4>
-            <p style="margin: 0;">7-day return window on unopened, factory-sealed items. Refunds are processed within 5-7 business days of return approval.</p>
-          </div>
-        </div>
-        <p style="font-size: 0.9rem;"><strong>Tracking:</strong> Once dispatched, a tracking link is sent to your registered email and phone. You can also track shipments from your account page.</p>
-        <p style="font-size: 0.9rem;"><strong>Quality Guarantee:</strong> Every PRM HerboVilla batch is tested for identity, potency and safety at our in-house WHO-GMP certified QC lab before dispatch.</p>
-        <p style="margin-top: 18px; font-size: 0.85rem; color: var(--color-text-light); font-style: italic;">For any shipping queries, please reach us at <a href="mailto:contact@prmpharmaceuticals.com" style="color: var(--color-primary);">contact@prmpharmaceuticals.com</a> or call <strong>0278 244 8087</strong> (Mon-Sat, 9:30 AM - 6:30 PM).</p>
+        {%- endif -%}
       </div>
     </div>
   </div>
