@@ -1536,6 +1536,101 @@
     </div>
   </section>
 
+  {%- comment -%} Connect — social + brand sites + marketplaces {%- endcomment -%}
+  <section class="about-connect section" data-animate>
+    <div class="container">
+      <div class="about-connect__head">
+        <span class="about-connect__label">Stay in Touch</span>
+        <h2 class="about-connect__title">Connect with PRM &amp; HerboVilla</h2>
+        <p class="about-connect__text">Follow our journey across social platforms, read our parent company's story, or shop HerboVilla on your favourite marketplace — we meet you where you are.</p>
+      </div>
+
+      <div class="about-connect__block">
+        <h3 class="about-connect__sub">Follow us on social</h3>
+        <div class="about-connect__socials">
+          {%- if settings.social_linkedin != blank -%}
+            <a href="{{ settings.social_linkedin }}" target="_blank" rel="noopener" class="about-connect__social about-connect__social--linkedin" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" class="about-connect__social about-connect__social--instagram" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              <span>Instagram</span>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" class="about-connect__social about-connect__social--facebook" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              <span>Facebook</span>
+            </a>
+          {%- endif -%}
+          {%- if settings.social_youtube != blank -%}
+            <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" class="about-connect__social about-connect__social--youtube" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#fff"/></svg>
+              <span>YouTube</span>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="about-connect__block">
+        <h3 class="about-connect__sub">Visit our brand sites</h3>
+        <div class="about-connect__brands">
+          {%- if settings.brand_prm_pharma_url != blank -%}
+            <a href="{{ settings.brand_prm_pharma_url }}" target="_blank" rel="noopener" class="about-connect__brand">
+              <div class="about-connect__brand-mark">PRM</div>
+              <div class="about-connect__brand-body">
+                <strong>PRM Pharmaceuticals</strong>
+                <span>Parent company — 25 years, three lakh+ doctors, 28 states</span>
+              </div>
+              <svg class="about-connect__brand-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+          {%- endif -%}
+          {%- if settings.brand_herbovilla_url != blank -%}
+            <a href="{{ settings.brand_herbovilla_url }}" target="_blank" rel="noopener" class="about-connect__brand">
+              <div class="about-connect__brand-mark about-connect__brand-mark--leaf">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/></svg>
+              </div>
+              <div class="about-connect__brand-body">
+                <strong>HerboVilla Store</strong>
+                <span>Shop classical Ayurveda direct — D2C from Bhavnagar, ships across India</span>
+              </div>
+              <svg class="about-connect__brand-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="about-connect__block">
+        <h3 class="about-connect__sub">Also available on</h3>
+        <div class="about-connect__marketplaces">
+          {%- if settings.marketplace_tata1mg != blank -%}
+            <a href="{{ settings.marketplace_tata1mg }}" target="_blank" rel="noopener" class="about-connect__marketplace">
+              <span class="about-connect__mp-logo about-connect__mp-logo--tata">Tata 1mg</span>
+            </a>
+          {%- endif -%}
+          {%- if settings.marketplace_amazon != blank -%}
+            <a href="{{ settings.marketplace_amazon }}" target="_blank" rel="noopener" class="about-connect__marketplace">
+              <span class="about-connect__mp-logo about-connect__mp-logo--amazon">amazon<span>.in</span></span>
+            </a>
+          {%- endif -%}
+          {%- if settings.marketplace_flipkart != blank -%}
+            <a href="{{ settings.marketplace_flipkart }}" target="_blank" rel="noopener" class="about-connect__marketplace">
+              <span class="about-connect__mp-logo about-connect__mp-logo--flipkart">Flipkart</span>
+            </a>
+          {%- endif -%}
+          {%- if settings.marketplace_meesho != blank -%}
+            <a href="{{ settings.marketplace_meesho }}" target="_blank" rel="noopener" class="about-connect__marketplace">
+              <span class="about-connect__mp-logo about-connect__mp-logo--meesho">Meesho</span>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+
   {%- comment -%} CTA {%- endcomment -%}
   <section class="about-cta section">
     <div class="container">
@@ -2651,6 +2746,227 @@
     font-size: 0.88rem;
     line-height: 1.6;
     margin: 0;
+  }
+
+  /* Connect — social / brand sites / marketplaces */
+  .about-connect {
+    background: #fdf8f0;
+    padding: clamp(48px, 7vw, 80px) 20px;
+  }
+  .about-connect__head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 48px;
+  }
+  .about-connect__label {
+    display: inline-block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #2D6A4F;
+    background: rgba(45, 106, 79, 0.1);
+    padding: 6px 14px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+  }
+  .about-connect__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+    color: #1a1a1a;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+  .about-connect__text {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+  .about-connect__block {
+    max-width: 1080px;
+    margin: 0 auto 40px;
+  }
+  .about-connect__block:last-child { margin-bottom: 0; }
+  .about-connect__sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(45, 106, 79, 0.18);
+  }
+  .about-connect__socials {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .about-connect__social {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: #fff;
+    border: 1px solid #e8ebe0;
+    border-radius: 12px;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .about-connect__social svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: #2D6A4F;
+  }
+  .about-connect__social:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(45, 106, 79, 0.12);
+    border-color: rgba(45, 106, 79, 0.35);
+  }
+  .about-connect__social--linkedin:hover  { border-color: #0a66c2; }
+  .about-connect__social--linkedin:hover svg { color: #0a66c2; }
+  .about-connect__social--instagram:hover { border-color: #E1306C; }
+  .about-connect__social--instagram:hover svg { color: #E1306C; }
+  .about-connect__social--facebook:hover  { border-color: #1877F2; }
+  .about-connect__social--facebook:hover svg { color: #1877F2; }
+  .about-connect__social--youtube:hover   { border-color: #FF0000; }
+  .about-connect__social--youtube:hover svg { color: #FF0000; }
+
+  .about-connect__brands {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .about-connect__brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e8ebe0;
+    border-radius: 14px;
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .about-connect__brand:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(45, 106, 79, 0.14);
+    border-color: rgba(45, 106, 79, 0.4);
+  }
+  .about-connect__brand-mark {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .about-connect__brand-mark--leaf svg {
+    width: 26px;
+    height: 26px;
+    color: #fff;
+  }
+  .about-connect__brand-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .about-connect__brand-body strong {
+    font-size: 1rem;
+    color: #1a1a1a;
+  }
+  .about-connect__brand-body span {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  .about-connect__brand-arrow {
+    width: 20px;
+    height: 20px;
+    color: #2D6A4F;
+    flex-shrink: 0;
+    opacity: 0.55;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .about-connect__brand:hover .about-connect__brand-arrow {
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+
+  .about-connect__marketplaces {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .about-connect__marketplace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 18px;
+    background: #fff;
+    border: 1px solid #e8ebe0;
+    border-radius: 12px;
+    text-decoration: none;
+    min-height: 84px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .about-connect__marketplace:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+    border-color: rgba(45, 106, 79, 0.35);
+  }
+  .about-connect__mp-logo {
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
+  }
+  .about-connect__mp-logo--tata {
+    color: #e23744;
+    font-family: 'Inter', sans-serif;
+  }
+  .about-connect__mp-logo--amazon {
+    color: #131921;
+    font-family: 'Inter', sans-serif;
+    text-transform: lowercase;
+  }
+  .about-connect__mp-logo--amazon span { color: #FF9900; }
+  .about-connect__mp-logo--flipkart {
+    color: #2874F0;
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+  }
+  .about-connect__mp-logo--meesho {
+    color: #F43397;
+    font-family: 'Inter', sans-serif;
+  }
+
+  @media (max-width: 900px) {
+    .about-connect__socials,
+    .about-connect__marketplaces {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .about-connect__brands {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .about-connect__social {
+      padding: 12px 14px;
+      font-size: 0.88rem;
+    }
+    .about-connect__marketplace { min-height: 68px; padding: 16px 12px; }
+    .about-connect__mp-logo { font-size: 1rem; }
+    .about-connect__brand { padding: 16px; gap: 12px; }
+    .about-connect__brand-mark { width: 46px; height: 46px; }
   }
 
   /* CTA */
