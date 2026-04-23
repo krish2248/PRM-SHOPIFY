@@ -793,13 +793,17 @@ p:last-child {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 88%;
+  max-width: 360px;
   height: 100%;
-  background-color: var(--color-background);
-  z-index: 2000;
+  background-color: #ffffff;
+  z-index: 2600;
   transform: translateX(-100%);
   transition: transform var(--transition-base);
   overflow-y: auto;
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
 }
 
 .mobile-menu--open {
@@ -810,38 +814,81 @@ p:last-child {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-bottom: 1px solid var(--color-border);
+  padding: 18px 22px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border-bottom: 0;
+}
+
+.mobile-menu__header .header__logo span,
+.mobile-menu__header .header__logo a {
+  color: #ffffff;
 }
 
 .mobile-menu__close {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border: 0;
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.mobile-menu__close:hover {
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .mobile-menu__close svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  stroke: #ffffff;
 }
 
 .mobile-menu__nav {
-  padding: var(--spacing-lg);
+  padding: 14px 0 24px;
+  flex: 1;
 }
 
 .mobile-menu__link {
-  display: block;
-  padding: var(--spacing-md) 0;
-  font-size: var(--font-size-lg);
-  font-weight: 500;
-  color: var(--color-text);
-  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  background: #ffffff;
+  border-bottom: 1px solid #f0eee8;
+  text-decoration: none;
+  position: relative;
+  transition: background 0.18s ease, color 0.18s ease, padding-left 0.18s ease;
 }
 
-.mobile-menu__link:hover {
+.mobile-menu__link::after {
+  content: '›';
+  margin-left: auto;
+  color: #b9beb1;
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.mobile-menu__link:hover,
+.mobile-menu__link:active,
+.mobile-menu__link:focus {
+  background: rgba(45, 106, 79, 0.06);
   color: var(--color-primary);
+  padding-left: 28px;
+}
+
+.mobile-menu__link:hover::after,
+.mobile-menu__link:active::after {
+  color: var(--color-primary);
+  transform: translateX(2px);
 }
 
 /* ============================================
