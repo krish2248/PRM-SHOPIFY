@@ -293,6 +293,100 @@
     .hero__product-image,
     .hero__floating-badge { animation: none; }
   }
+
+  /* ============================================
+     QUALIFICATIONS STRIP — pinned at hero bottom
+     ============================================ */
+  .hero { padding-bottom: 110px; }
+  .hero__quali-strip {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    background: #ffffff;
+    border-top: 1px solid #eef0ea;
+    padding: 14px 0;
+    box-shadow: 0 -8px 24px rgba(45, 106, 79, 0.05);
+  }
+  .hero__quali-track {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+    align-items: stretch;
+  }
+  .hero__quali-chip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #fdfdfb;
+    border: 1px solid #e8ebe0;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .hero__quali-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(45, 106, 79, 0.10);
+    border-color: rgba(45, 106, 79, 0.25);
+  }
+  .hero__quali-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(45, 106, 79, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+  }
+  .hero__quali-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+  .hero__quali-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .hero__quali-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+  }
+  .hero__quali-sub {
+    font-size: 0.68rem;
+    color: var(--color-text-light);
+    line-height: 1.25;
+    margin-top: 2px;
+  }
+  @media (max-width: 1100px) {
+    .hero__quali-track { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 992px) {
+    .hero { padding-bottom: 24px; }
+    .hero__quali-strip {
+      position: static;
+      margin-top: 32px;
+      padding: 14px 0;
+      box-shadow: none;
+    }
+  }
+  @media (max-width: 640px) {
+    .hero__quali-strip { padding: 12px 0; }
+    .hero__quali-track {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    .hero__quali-chip { padding: 8px 10px; gap: 8px; }
+    .hero__quali-icon { width: 28px; height: 28px; }
+    .hero__quali-icon svg { width: 14px; height: 14px; }
+    .hero__quali-title { font-size: 0.72rem; }
+    .hero__quali-sub { font-size: 0.62rem; }
+  }
 {%- endstyle -%}
 
 <section class="hero section">
@@ -469,6 +563,86 @@
       </div>
     </div>
   </div>
+
+  {%- if section.settings.show_quali_strip -%}
+    <div class="hero__quali-strip" data-animate>
+      <div class="container">
+        <div class="hero__quali-track">
+          <div class="hero__quali-chip">
+            <div class="hero__quali-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div class="hero__quali-text">
+              <span class="hero__quali-title">{{ section.settings.q1_title | default: 'WHO-GMP' }}</span>
+              <span class="hero__quali-sub">{{ section.settings.q1_sub | default: 'Certified facility' }}</span>
+            </div>
+          </div>
+
+          <div class="hero__quali-chip">
+            <div class="hero__quali-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="hero__quali-text">
+              <span class="hero__quali-title">{{ section.settings.q2_title | default: 'Global GMP' }}</span>
+              <span class="hero__quali-sub">{{ section.settings.q2_sub | default: 'Schedule T/M' }}</span>
+            </div>
+          </div>
+
+          <div class="hero__quali-chip">
+            <div class="hero__quali-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <div class="hero__quali-text">
+              <span class="hero__quali-title">{{ section.settings.q3_title | default: 'ISO 9001:2015' }}</span>
+              <span class="hero__quali-sub">{{ section.settings.q3_sub | default: 'Quality systems' }}</span>
+            </div>
+          </div>
+
+          <div class="hero__quali-chip">
+            <div class="hero__quali-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+              </svg>
+            </div>
+            <div class="hero__quali-text">
+              <span class="hero__quali-title">{{ section.settings.q4_title | default: 'AYUSH' }}</span>
+              <span class="hero__quali-sub">{{ section.settings.q4_sub | default: 'Govt. of India' }}</span>
+            </div>
+          </div>
+
+          <div class="hero__quali-chip">
+            <div class="hero__quali-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="hero__quali-text">
+              <span class="hero__quali-title">{{ section.settings.q5_title | default: 'FSSAI' }}</span>
+              <span class="hero__quali-sub">{{ section.settings.q5_sub | default: 'Food safety' }}</span>
+            </div>
+          </div>
+
+          <div class="hero__quali-chip">
+            <div class="hero__quali-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+              </svg>
+            </div>
+            <div class="hero__quali-text">
+              <span class="hero__quali-title">{{ section.settings.q6_title | default: 'FDA' }}</span>
+              <span class="hero__quali-sub">{{ section.settings.q6_sub | default: 'Regulatory approved' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -579,7 +753,29 @@
       "id": "stat_3_label",
       "label": "Stat 3 Label",
       "default": "Years Experience"
-    }
+    },
+    {
+      "type": "header",
+      "content": "Qualifications Strip (Hero Bottom)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quali_strip",
+      "label": "Show qualifications strip at hero bottom",
+      "default": true
+    },
+    { "type": "text", "id": "q1_title", "label": "Chip 1 Title", "default": "WHO-GMP" },
+    { "type": "text", "id": "q1_sub",   "label": "Chip 1 Subtitle", "default": "Certified facility" },
+    { "type": "text", "id": "q2_title", "label": "Chip 2 Title", "default": "Global GMP" },
+    { "type": "text", "id": "q2_sub",   "label": "Chip 2 Subtitle", "default": "Schedule T/M" },
+    { "type": "text", "id": "q3_title", "label": "Chip 3 Title", "default": "ISO 9001:2015" },
+    { "type": "text", "id": "q3_sub",   "label": "Chip 3 Subtitle", "default": "Quality systems" },
+    { "type": "text", "id": "q4_title", "label": "Chip 4 Title", "default": "AYUSH" },
+    { "type": "text", "id": "q4_sub",   "label": "Chip 4 Subtitle", "default": "Govt. of India" },
+    { "type": "text", "id": "q5_title", "label": "Chip 5 Title", "default": "FSSAI" },
+    { "type": "text", "id": "q5_sub",   "label": "Chip 5 Subtitle", "default": "Food safety" },
+    { "type": "text", "id": "q6_title", "label": "Chip 6 Title", "default": "FDA" },
+    { "type": "text", "id": "q6_sub",   "label": "Chip 6 Subtitle", "default": "Regulatory approved" }
   ],
   "blocks": [
     {
