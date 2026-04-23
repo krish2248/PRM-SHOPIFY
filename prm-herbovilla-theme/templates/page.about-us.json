@@ -1,0 +1,96 @@
+{
+  "sections": {
+    "about": {
+      "type": "about-page",
+      "blocks": {
+        "value-1": {
+          "type": "value",
+          "settings": {
+            "icon": "leaf",
+            "title": "Purity First",
+            "text": "Every herb is tested for identity, potency, heavy metals, and microbial safety before it enters production."
+          }
+        },
+        "value-2": {
+          "type": "value",
+          "settings": {
+            "icon": "shield",
+            "title": "Pharmaceutical-Grade",
+            "text": "Manufactured in the same WHO-GMP certified facility as our allopathic PRM Pharma portfolio."
+          }
+        },
+        "value-3": {
+          "type": "value",
+          "settings": {
+            "icon": "heart",
+            "title": "Classical & Clinical",
+            "text": "Formulations rooted in Ayurvedic texts, validated by modern quality and safety standards."
+          }
+        },
+        "value-4": {
+          "type": "value",
+          "settings": {
+            "icon": "award",
+            "title": "Trusted by Professionals",
+            "text": "Over 3,00,000 healthcare professionals across India choose products from the PRM group."
+          }
+        },
+        "feature-1": {
+          "type": "feature",
+          "settings": {
+            "text": "WHO-GMP Certified Facility"
+          }
+        },
+        "feature-2": {
+          "type": "feature",
+          "settings": {
+            "text": "ISO 9001:2015 Quality System"
+          }
+        },
+        "feature-3": {
+          "type": "feature",
+          "settings": {
+            "text": "AYUSH Ministry Licensed"
+          }
+        },
+        "feature-4": {
+          "type": "feature",
+          "settings": {
+            "text": "FSSAI Compliant Nutraceuticals"
+          }
+        },
+        "feature-5": {
+          "type": "feature",
+          "settings": {
+            "text": "State FDA Inspected Plant"
+          }
+        },
+        "feature-6": {
+          "type": "feature",
+          "settings": {
+            "text": "Heavy-Metal & Microbial Tested"
+          }
+        },
+        "feature-7": {
+          "type": "feature",
+          "settings": {
+            "text": "Contract-Farmed Organic Herbs"
+          }
+        },
+        "feature-8": {
+          "type": "feature",
+          "settings": {
+            "text": "Batch-Wise Analytical QC"
+          }
+        }
+      },
+      "block_order": ["value-1", "value-2", "value-3", "value-4", "feature-1", "feature-2", "feature-3", "feature-4", "feature-5", "feature-6", "feature-7", "feature-8"],
+      "settings": {
+        "hero_label": "Our Story",
+        "hero_title": "Rooted in Tradition, Driven by Wellness",
+        "hero_text": "HerboVilla is the Ayurvedic and herbal wellness division of PRM Pharmaceuticals — a 25-year-old Indian pharmaceutical house serving more than three lakh healthcare professionals across 28 states."
+      }
+    }
+  },
+  "order": ["about"]
+}
