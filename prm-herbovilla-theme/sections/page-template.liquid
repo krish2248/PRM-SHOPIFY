@@ -373,13 +373,15 @@
     </div>
   </section>
 
+{%- elsif page.handle == 'about-us' or page.handle == 'about' -%}
+  {%- comment -%} About Us page - rendered by about-page section (see templates/page.json) {%- endcomment -%}
 {%- else -%}
   <section class="page-template" data-section-id="{{ section.id }}">
     <div class="container">
       <header class="page-header">
         <h1 class="page-title">{{ page.title }}</h1>
       </header>
-      
+
       <div class="page-content">
         <div class="rte">
           {{ page.content }}
