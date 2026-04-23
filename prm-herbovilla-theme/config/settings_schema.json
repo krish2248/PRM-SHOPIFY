@@ -172,12 +172,57 @@
       {
         "type": "text",
         "id": "social_youtube",
-        "label": "YouTube URL"
+        "label": "YouTube URL",
+        "default": "https://www.youtube.com/@PRMPHARMACEUTICALS"
       },
       {
         "type": "text",
         "id": "social_pinterest",
         "label": "Pinterest URL"
+      },
+      {
+        "type": "header",
+        "content": "Brand Sites"
+      },
+      {
+        "type": "text",
+        "id": "brand_prm_pharma_url",
+        "label": "PRM Pharmaceuticals website",
+        "default": "https://www.prmpharmaceuticals.com/"
+      },
+      {
+        "type": "text",
+        "id": "brand_herbovilla_url",
+        "label": "HerboVilla store URL",
+        "default": "https://prm-herbovilla.myshopify.com/"
+      },
+      {
+        "type": "header",
+        "content": "Marketplace Listings"
+      },
+      {
+        "type": "text",
+        "id": "marketplace_tata1mg",
+        "label": "Tata 1mg store URL",
+        "default": "https://www.1mg.com/search/all?name=herbovilla"
+      },
+      {
+        "type": "text",
+        "id": "marketplace_amazon",
+        "label": "Amazon store URL",
+        "default": "https://www.amazon.in/s?k=herbovilla"
+      },
+      {
+        "type": "text",
+        "id": "marketplace_flipkart",
+        "label": "Flipkart store URL",
+        "default": "https://www.flipkart.com/search?q=herbovilla"
+      },
+      {
+        "type": "text",
+        "id": "marketplace_meesho",
+        "label": "Meesho store URL",
+        "default": "https://www.meesho.com/search?q=herbovilla"
       }
     ]
   },
