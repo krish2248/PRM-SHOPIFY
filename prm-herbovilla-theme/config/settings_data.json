@@ -41,29 +41,11 @@
       "footer": {
         "type": "footer",
         "settings": {
+          "show_certifications": false,
           "description": "PRM HerboVilla brings you authentic Ayurvedic products crafted with pure natural ingredients. Experience the ancient wisdom of herbal wellness."
         },
-        "blocks": {
-          "cert-1": {
-            "type": "certification",
-            "settings": {
-              "text": "GMP Certified"
-            }
-          },
-          "cert-2": {
-            "type": "certification",
-            "settings": {
-              "text": "ISO 9001:2015"
-            }
-          },
-          "cert-3": {
-            "type": "certification",
-            "settings": {
-              "text": "AYUSH Approved"
-            }
-          }
-        },
-        "block_order": ["cert-1", "cert-2", "cert-3"]
+        "blocks": {},
+        "block_order": []
       }
     }
   },
