@@ -297,29 +297,30 @@
   /* ============================================
      QUALIFICATIONS STRIP — pinned at hero bottom
      ============================================ */
-  .hero { padding-bottom: 110px; }
+  .hero { padding-bottom: 150px; }
   .hero__quali-strip {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 28px;
     z-index: 3;
     background: #ffffff;
     border-top: 1px solid #eef0ea;
-    padding: 14px 0;
+    border-bottom: 1px solid #eef0ea;
+    padding: 18px 0;
     box-shadow: 0 -8px 24px rgba(45, 106, 79, 0.05);
   }
   .hero__quali-track {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 12px;
+    gap: 13px;
     align-items: stretch;
   }
   .hero__quali-chip {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
+    gap: 11px;
+    padding: 12px 14px;
     background: #fdfdfb;
     border: 1px solid #e8ebe0;
     border-radius: 10px;
@@ -331,8 +332,8 @@
     border-color: rgba(45, 106, 79, 0.25);
   }
   .hero__quali-icon {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     flex-shrink: 0;
     border-radius: 8px;
     background: rgba(45, 106, 79, 0.08);
@@ -342,8 +343,8 @@
     color: var(--color-primary);
   }
   .hero__quali-icon svg {
-    width: 17px;
-    height: 17px;
+    width: 19px;
+    height: 19px;
   }
   .hero__quali-text {
     display: flex;
@@ -351,14 +352,14 @@
     min-width: 0;
   }
   .hero__quali-title {
-    font-size: 0.78rem;
+    font-size: 0.86rem;
     font-weight: 700;
     color: var(--color-text);
     line-height: 1.2;
     letter-spacing: 0.2px;
   }
   .hero__quali-sub {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     color: var(--color-text-light);
     line-height: 1.25;
     margin-top: 2px;
@@ -370,22 +371,22 @@
     .hero { padding-bottom: 24px; }
     .hero__quali-strip {
       position: static;
-      margin-top: 32px;
-      padding: 14px 0;
+      margin-top: 40px;
+      padding: 18px 0;
       box-shadow: none;
     }
   }
   @media (max-width: 640px) {
-    .hero__quali-strip { padding: 12px 0; }
+    .hero__quali-strip { padding: 14px 0; }
     .hero__quali-track {
       grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
+      gap: 10px;
     }
-    .hero__quali-chip { padding: 8px 10px; gap: 8px; }
-    .hero__quali-icon { width: 28px; height: 28px; }
-    .hero__quali-icon svg { width: 14px; height: 14px; }
-    .hero__quali-title { font-size: 0.72rem; }
-    .hero__quali-sub { font-size: 0.62rem; }
+    .hero__quali-chip { padding: 10px 12px; gap: 9px; }
+    .hero__quali-icon { width: 32px; height: 32px; }
+    .hero__quali-icon svg { width: 16px; height: 16px; }
+    .hero__quali-title { font-size: 0.78rem; }
+    .hero__quali-sub { font-size: 0.68rem; }
   }
 {%- endstyle -%}
 
