@@ -2,7 +2,7 @@
   .footer {
     background: {{ section.settings.bg_color }};
     color: {{ section.settings.text_color }};
-    padding-top: 80px;
+    padding-top: 44px;
   }
   .footer a {
     color: {{ section.settings.text_color }};
@@ -15,30 +15,30 @@
   .footer-main {
     display: grid;
     grid-template-columns: 2fr 1.1fr 1.3fr;
-    gap: 50px;
-    padding-bottom: 50px;
+    gap: 36px;
+    padding-bottom: 28px;
     border-bottom: 1px solid rgba(255,255,255,0.12);
   }
   .footer-brand {
     max-width: 360px;
   }
   .footer-logo {
-    max-width: 180px;
+    max-width: 160px;
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
   .footer-logo-text {
     font-family: var(--font-heading);
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
   .footer-description {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 0.9rem;
+    line-height: 1.6;
     opacity: 0.85;
-    margin-bottom: 22px;
+    margin-bottom: 14px;
   }
   .footer-certifications {
     display: flex;
@@ -55,19 +55,19 @@
   }
   .footer-column h4 {
     font-family: var(--font-heading);
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #fff;
-    margin-bottom: 25px;
+    margin-bottom: 18px;
     position: relative;
     letter-spacing: 0.3px;
   }
   .footer-column h4::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -7px;
     left: 0;
-    width: 28px;
+    width: 24px;
     height: 2px;
     background: var(--color-primary-light, #40916C);
   }
@@ -77,10 +77,10 @@
     margin: 0;
   }
   .footer-links li {
-    margin-bottom: 11px;
+    margin-bottom: 7px;
   }
   .footer-links a {
-    font-size: 0.93rem;
+    font-size: 0.88rem;
     opacity: 0.85;
     display: inline-flex;
     align-items: center;
@@ -91,28 +91,28 @@
     opacity: 1;
   }
   .footer-links-icon {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     opacity: 0.8;
     flex-shrink: 0;
   }
   .footer-contact-item {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 10px;
+    margin-bottom: 10px;
   }
   .footer-contact-icon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     opacity: 0.9;
     flex-shrink: 0;
     margin-top: 2px;
   }
   .footer-contact-text {
-    font-size: 0.93rem;
+    font-size: 0.88rem;
     opacity: 0.88;
-    line-height: 1.55;
+    line-height: 1.5;
     word-break: break-word;
   }
   a.footer-contact-text:hover {
@@ -120,12 +120,12 @@
   }
   .footer-social {
     display: flex;
-    gap: 10px;
-    margin-top: 22px;
+    gap: 8px;
+    margin-top: 14px;
   }
   .footer-social a {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
     background: rgba(255,255,255,0.10);
     border-radius: 50%;
     display: flex;
@@ -142,11 +142,11 @@
     height: 16px;
   }
   .footer-brandsites {
-    margin-top: 22px;
+    margin-top: 14px;
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
-    font-size: 0.85rem;
+    gap: 14px;
+    font-size: 0.82rem;
   }
   .footer-brandsite {
     opacity: 0.82;
@@ -158,73 +158,9 @@
     display: inline-block;
     margin-right: 6px;
   }
-  /* Full-width connect / marketplace bands — placed below main footer grid */
-  .footer-connect {
-    padding: 32px 0 30px;
-    border-top: 1px solid rgba(255,255,255,0.10);
-  }
-  .footer-connect__inner {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 28px;
-  }
-  .footer-connect__title {
-    font-size: 0.78rem;
-    font-weight: 700;
-    opacity: 0.78;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    line-height: 1.4;
-    max-width: 160px;
-    color: #fff;
-  }
-  .footer-connect__grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-  }
-  .footer-connect-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px 16px;
-    background: var(--color-primary, #2D6A4F);
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 0.2px;
-    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .footer-connect-btn:hover {
-    background: #1B4332;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
-    color: #fff;
-  }
-  .footer-connect-btn svg {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-  }
-  @media (max-width: 900px) {
-    .footer-connect__inner {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    .footer-connect__title {
-      max-width: none;
-    }
-  }
-  @media (max-width: 640px) {
-    .footer-connect__grid { grid-template-columns: repeat(2, 1fr); }
-  }
+  /* Full-width marketplace band — placed below main footer grid */
   .footer-marketplaces {
-    padding: 32px 0 30px;
+    padding: 18px 0 18px;
     border-top: 1px solid rgba(255,255,255,0.10);
     border-bottom: 1px solid rgba(255,255,255,0.10);
   }
@@ -232,36 +168,36 @@
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
-    gap: 28px;
+    gap: 22px;
   }
   .footer-marketplaces__title {
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 700;
     opacity: 0.78;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     line-height: 1.4;
-    max-width: 160px;
+    max-width: 150px;
     color: #fff;
   }
   .footer-marketplaces__grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
+    gap: 10px;
   }
   .footer-marketplace {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 14px 16px;
+    padding: 10px 12px;
     background: var(--color-primary, #2D6A4F);
     color: #fff;
     border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 10px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     letter-spacing: 0.2px;
     transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
@@ -284,15 +220,15 @@
     .footer-marketplaces__grid { grid-template-columns: repeat(2, 1fr); }
   }
   .footer-bottom {
-    padding: 26px 0;
+    padding: 16px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 14px;
   }
   .footer-copyright {
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     opacity: 0.72;
   }
   .footer-payments {
@@ -408,16 +344,6 @@
           {%- endif -%}
         </div>
 
-        {%- if section.settings.show_certifications -%}
-          <div class="footer-certifications" style="margin-top: 24px;">
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'certification' -%}
-                <span class="certification-badge" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
-
         {%- if settings.brand_prm_pharma_url != blank or settings.brand_herbovilla_url != blank -%}
           <div class="footer-brandsites">
             {%- if settings.brand_prm_pharma_url != blank -%}
@@ -505,40 +431,6 @@
         {%- endif -%}
       </div>
     </div>
-
-    {%- if settings.social_linkedin != blank or settings.social_instagram != blank or settings.social_facebook != blank or settings.social_youtube != blank -%}
-      <div class="footer-connect">
-        <div class="footer-connect__inner">
-          <div class="footer-connect__title">Connect with us on</div>
-          <div class="footer-connect__grid">
-            {%- if settings.social_linkedin != blank -%}
-              <a href="{{ settings.social_linkedin }}" target="_blank" rel="noopener" class="footer-connect-btn" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                <span>LinkedIn</span>
-              </a>
-            {%- endif -%}
-            {%- if settings.social_instagram != blank -%}
-              <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" class="footer-connect-btn" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                <span>Instagram</span>
-              </a>
-            {%- endif -%}
-            {%- if settings.social_facebook != blank -%}
-              <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" class="footer-connect-btn" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                <span>Facebook</span>
-              </a>
-            {%- endif -%}
-            {%- if settings.social_youtube != blank -%}
-              <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" class="footer-connect-btn" aria-label="YouTube">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#1B4332"/></svg>
-                <span>YouTube</span>
-              </a>
-            {%- endif -%}
-          </div>
-        </div>
-      </div>
-    {%- endif -%}
 
     {%- if settings.marketplace_tata1mg != blank or settings.marketplace_amazon != blank or settings.marketplace_flipkart != blank or settings.marketplace_meesho != blank -%}
       <div class="footer-marketplaces">
