@@ -115,14 +115,16 @@
   .herbs-uses__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 18px;
+    max-width: 1150px;
+    margin: 0 auto;
   }
 
   .herb-card {
     background: #ffffff;
     border: 1px solid #EFE7D9;
-    border-radius: 18px;
-    padding: 30px 32px 32px;
+    border-radius: 16px;
+    padding: 18px 28px 19px;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -130,23 +132,23 @@
 
   .herb-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 14px 32px rgba(27, 67, 50, 0.08);
+    box-shadow: 0 12px 28px rgba(27, 67, 50, 0.08);
     border-color: #d8c9a8;
   }
 
   .herb-card__head {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 22px;
-    padding-bottom: 18px;
+    gap: 13px;
+    margin-bottom: 13px;
+    padding-bottom: 11px;
     border-bottom: 1px solid #F0E6D2;
   }
 
   .herb-card__icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,13 +156,13 @@
   }
 
   .herb-card__icon svg {
-    width: 24px;
-    height: 24px;
+    width: 21px;
+    height: 21px;
   }
 
   .herb-card__title {
     font-family: 'Playfair Display', serif;
-    font-size: 24px;
+    font-size: 21px;
     font-weight: 700;
     color: #1B4332;
     margin: 0;
@@ -175,15 +177,15 @@
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px 24px;
+    gap: 7px 20px;
   }
 
   .herb-card__list li {
     position: relative;
-    padding-left: 18px;
-    font-size: 15px;
+    padding-left: 15px;
+    font-size: 13.5px;
     color: #2c3e35;
-    line-height: 1.45;
+    line-height: 1.4;
     font-weight: 400;
     letter-spacing: 0.1px;
   }
@@ -192,9 +194,9 @@
     content: '';
     position: absolute;
     left: 0;
-    top: 8px;
-    width: 7px;
-    height: 7px;
+    top: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: #2D6A4F;
   }
@@ -208,10 +210,10 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-top: 22px;
-    padding-top: 18px;
+    margin-top: 13px;
+    padding-top: 11px;
     color: #2D6A4F;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     text-decoration: none;
     border-top: 1px dashed #E0D5C7;
@@ -219,8 +221,8 @@
   }
 
   .herb-card__link svg {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     transition: transform 0.25s ease;
   }
 
@@ -242,19 +244,19 @@
   @media (max-width: 640px) {
     .herbs-uses__grid {
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 14px;
     }
     .herb-card {
-      padding: 24px 22px 26px;
+      padding: 16px 20px 17px;
     }
     .herb-card__title {
-      font-size: 21px;
+      font-size: 19px;
     }
     .herb-card__list {
-      gap: 10px 18px;
+      gap: 6px 16px;
     }
     .herb-card__list li {
-      font-size: 14.5px;
+      font-size: 13px;
     }
   }
 
