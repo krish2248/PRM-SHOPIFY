@@ -141,50 +141,8 @@
     width: 16px;
     height: 16px;
   }
-  .footer-marketplaces {
-    margin-top: 32px;
-    padding: 22px 0 20px;
-    border-top: 1px solid rgba(255,255,255,0.10);
-    border-bottom: 1px solid rgba(255,255,255,0.10);
-  }
-  .footer-marketplaces__title {
-    font-size: 0.82rem;
-    font-weight: 600;
-    opacity: 0.72;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 14px;
-  }
-  .footer-marketplaces__grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 10px;
-  }
-  .footer-marketplace {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 10px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 0.92rem;
-    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-  }
-  .footer-marketplace:hover {
-    background: rgba(255,255,255,0.14);
-    transform: translateY(-2px);
-    border-color: rgba(255,255,255,0.28);
-  }
-  .footer-marketplace--tata     { color: #ff7685; }
-  .footer-marketplace--amazon   { color: #fff; text-transform: lowercase; }
-  .footer-marketplace--amazon span { color: #FF9900; }
-  .footer-marketplace--flipkart { color: #7aaaf7; font-style: italic; }
-  .footer-marketplace--meesho   { color: #ff78bd; }
   .footer-brandsites {
-    margin-top: 18px;
+    margin-top: 22px;
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
@@ -199,6 +157,64 @@
   .footer-brandsite strong {
     display: inline-block;
     margin-right: 6px;
+  }
+  /* Full-width marketplace band — placed below main footer grid */
+  .footer-marketplaces {
+    padding: 32px 0 30px;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+  }
+  .footer-marketplaces__inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 28px;
+  }
+  .footer-marketplaces__title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    opacity: 0.78;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    max-width: 160px;
+    color: #fff;
+  }
+  .footer-marketplaces__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .footer-marketplace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 14px 16px;
+    background: var(--color-primary, #2D6A4F);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .footer-marketplace:hover {
+    background: #1B4332;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    color: #fff;
+  }
+  @media (max-width: 900px) {
+    .footer-marketplaces__inner {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .footer-marketplaces__title {
+      max-width: none;
+    }
   }
   @media (max-width: 640px) {
     .footer-marketplaces__grid { grid-template-columns: repeat(2, 1fr); }
@@ -338,26 +354,6 @@
           </div>
         {%- endif -%}
 
-        {%- if settings.marketplace_tata1mg != blank or settings.marketplace_amazon != blank or settings.marketplace_flipkart != blank or settings.marketplace_meesho != blank -%}
-          <div class="footer-marketplaces">
-            <div class="footer-marketplaces__title">Also shop us on</div>
-            <div class="footer-marketplaces__grid">
-              {%- if settings.marketplace_tata1mg != blank -%}
-                <a href="{{ settings.marketplace_tata1mg }}" target="_blank" rel="noopener" class="footer-marketplace footer-marketplace--tata">Tata 1mg</a>
-              {%- endif -%}
-              {%- if settings.marketplace_amazon != blank -%}
-                <a href="{{ settings.marketplace_amazon }}" target="_blank" rel="noopener" class="footer-marketplace footer-marketplace--amazon">amazon<span>.in</span></a>
-              {%- endif -%}
-              {%- if settings.marketplace_flipkart != blank -%}
-                <a href="{{ settings.marketplace_flipkart }}" target="_blank" rel="noopener" class="footer-marketplace footer-marketplace--flipkart">Flipkart</a>
-              {%- endif -%}
-              {%- if settings.marketplace_meesho != blank -%}
-                <a href="{{ settings.marketplace_meesho }}" target="_blank" rel="noopener" class="footer-marketplace footer-marketplace--meesho">Meesho</a>
-              {%- endif -%}
-            </div>
-          </div>
-        {%- endif -%}
-
         {%- if settings.brand_prm_pharma_url != blank or settings.brand_herbovilla_url != blank -%}
           <div class="footer-brandsites">
             {%- if settings.brand_prm_pharma_url != blank -%}
@@ -445,6 +441,28 @@
         {%- endif -%}
       </div>
     </div>
+
+    {%- if settings.marketplace_tata1mg != blank or settings.marketplace_amazon != blank or settings.marketplace_flipkart != blank or settings.marketplace_meesho != blank -%}
+      <div class="footer-marketplaces">
+        <div class="footer-marketplaces__inner">
+          <div class="footer-marketplaces__title">Also shop us on</div>
+          <div class="footer-marketplaces__grid">
+            {%- if settings.marketplace_tata1mg != blank -%}
+              <a href="{{ settings.marketplace_tata1mg }}" target="_blank" rel="noopener" class="footer-marketplace">Tata 1mg</a>
+            {%- endif -%}
+            {%- if settings.marketplace_amazon != blank -%}
+              <a href="{{ settings.marketplace_amazon }}" target="_blank" rel="noopener" class="footer-marketplace">Amazon</a>
+            {%- endif -%}
+            {%- if settings.marketplace_flipkart != blank -%}
+              <a href="{{ settings.marketplace_flipkart }}" target="_blank" rel="noopener" class="footer-marketplace">Flipkart</a>
+            {%- endif -%}
+            {%- if settings.marketplace_meesho != blank -%}
+              <a href="{{ settings.marketplace_meesho }}" target="_blank" rel="noopener" class="footer-marketplace">Meesho</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
 
     <div class="footer-bottom">
       <div class="footer-copyright">
