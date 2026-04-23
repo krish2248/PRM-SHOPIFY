@@ -60,6 +60,26 @@
       if (this.menuToggle && this.mobileMenu) {
         this.menuToggle.addEventListener('click', () => this.openMobileMenu());
         this.mobileMenuClose?.addEventListener('click', () => this.closeMobileMenu());
+
+        // Close menu when any link is tapped (lets the browser navigate cleanly)
+        this.mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => this.closeMobileMenu());
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.mobileMenu.classList.contains('mobile-menu--open')) {
+            this.closeMobileMenu();
+          }
+        });
+
+        // Close menu when tapping outside the panel (on the dimmed area)
+        document.addEventListener('click', (e) => {
+          if (!this.mobileMenu.classList.contains('mobile-menu--open')) return;
+          if (this.mobileMenu.contains(e.target)) return;
+          if (this.menuToggle.contains(e.target)) return;
+          this.closeMobileMenu();
+        });
       }
     }
 
@@ -74,13 +94,13 @@
     openMobileMenu() {
       this.mobileMenu.classList.add('mobile-menu--open');
       document.body.classList.add('no-scroll');
-      document.querySelector('.overlay')?.classList.add('overlay--visible');
+      // Note: we do NOT show .overlay here — its z-index (2500) sits above the menu
+      // and would intercept link taps. The menu has its own backdrop shadow.
     }
 
     closeMobileMenu() {
       this.mobileMenu.classList.remove('mobile-menu--open');
       document.body.classList.remove('no-scroll');
-      document.querySelector('.overlay')?.classList.remove('overlay--visible');
     }
   }
 
@@ -943,9 +963,8 @@
     // Scroll Animations
     initScrollAnimations();
 
-    // Overlay click to close everything
+    // Overlay click to close cart drawer
     document.querySelector('.overlay')?.addEventListener('click', () => {
-      document.querySelector('.mobile-menu')?.classList.remove('mobile-menu--open');
       document.querySelector('.cart-drawer')?.classList.remove('cart-drawer--open');
       document.querySelector('.overlay')?.classList.remove('overlay--visible');
       document.body.classList.remove('no-scroll');
