@@ -580,6 +580,147 @@
       text-align: center;
       margin-bottom: 1rem;
     }
+
+    /* Connect with PRM: socials + marketplaces + brand sites */
+    .about-connect {
+      padding: 4.5rem 0;
+      background: linear-gradient(180deg, #ffffff 0%, #f5faf5 100%);
+    }
+    .about-connect__head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 3rem;
+    }
+    .about-connect__kicker {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #2D6A4F;
+      margin-bottom: 0.6rem;
+    }
+    .about-connect__title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 3.6vw, 2.3rem);
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+    }
+    .about-connect__sub {
+      color: var(--color-text-light);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+    .about-connect__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .about-connect__card {
+      background: #fff;
+      border: 1px solid #e8ebe0;
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      box-shadow: 0 2px 18px rgba(27, 67, 50, 0.04);
+    }
+    .about-connect__card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--color-text);
+      margin: 0 0 1.1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(45, 106, 79, 0.12);
+    }
+    .about-social-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .about-social-row a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid #dce5da;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #2D6A4F;
+      transition: all 0.25s ease;
+    }
+    .about-social-row a:hover {
+      background: #2D6A4F;
+      color: #fff;
+      border-color: #2D6A4F;
+      transform: translateY(-2px);
+    }
+    .about-social-row svg {
+      width: 18px;
+      height: 18px;
+    }
+    .about-mp-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .about-mp-chip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 10px;
+      background: #2D6A4F;
+      color: #fff;
+      border: 1px solid #2D6A4F;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      letter-spacing: 0.2px;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .about-mp-chip:hover {
+      background: #1B4332;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(27, 67, 50, 0.22);
+      color: #fff;
+    }
+    .about-brand-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .about-brand-link {
+      display: block;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid #dce5da;
+      border-left: 3px solid #2D6A4F;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .about-brand-link:hover {
+      background: #f5faf5;
+      transform: translateX(3px);
+    }
+    .about-brand-link strong {
+      display: block;
+      color: var(--color-text);
+      font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+    .about-brand-link span {
+      color: #2D6A4F;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+    @media (max-width: 900px) {
+      .about-connect__grid {
+        grid-template-columns: 1fr;
+        gap: 1.1rem;
+      }
+    }
+
     @media (max-width: 768px) {
       .about-auto-grid {
         grid-template-columns: 1fr;
@@ -721,6 +862,84 @@
             <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
             <path d="M17 18h1M12 18h1M7 18h1"/>
           </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Connect with PRM & HerboVilla {%- endcomment -%}
+  <section class="about-connect">
+    <div class="container">
+      <div class="about-connect__head">
+        <span class="about-connect__kicker">Stay Connected</span>
+        <h2 class="about-connect__title">Connect with PRM &amp; HerboVilla</h2>
+        <p class="about-connect__sub">Follow our journey, explore our brands, and shop HerboVilla on your favourite marketplace.</p>
+      </div>
+
+      <div class="about-connect__grid">
+        <!-- Follow us -->
+        <div class="about-connect__card">
+          <h3>Follow Us</h3>
+          <div class="about-social-row">
+            {%- if settings.social_linkedin != blank -%}
+              <a href="{{ settings.social_linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if settings.social_instagram != blank -%}
+              <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if settings.social_facebook != blank -%}
+              <a href="{{ settings.social_facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+            {%- endif -%}
+            {%- if settings.social_youtube != blank -%}
+              <a href="{{ settings.social_youtube }}" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#fff"/></svg>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <!-- Brand websites -->
+        <div class="about-connect__card">
+          <h3>Brand Websites</h3>
+          <div class="about-brand-list">
+            {%- if settings.brand_prm_pharma_url != blank -%}
+              <a href="{{ settings.brand_prm_pharma_url }}" target="_blank" rel="noopener" class="about-brand-link">
+                <strong>PRM Pharmaceuticals</strong>
+                <span>prmpharmaceuticals.com &rsaquo;</span>
+              </a>
+            {%- endif -%}
+            {%- if settings.brand_herbovilla_url != blank -%}
+              <a href="{{ settings.brand_herbovilla_url }}" target="_blank" rel="noopener" class="about-brand-link">
+                <strong>HerboVilla Store</strong>
+                <span>prm-herbovilla.myshopify.com &rsaquo;</span>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <!-- Marketplaces -->
+        <div class="about-connect__card">
+          <h3>Also Shop Us On</h3>
+          <div class="about-mp-grid">
+            {%- if settings.marketplace_tata1mg != blank -%}
+              <a href="{{ settings.marketplace_tata1mg }}" target="_blank" rel="noopener" class="about-mp-chip">Tata 1mg</a>
+            {%- endif -%}
+            {%- if settings.marketplace_amazon != blank -%}
+              <a href="{{ settings.marketplace_amazon }}" target="_blank" rel="noopener" class="about-mp-chip">Amazon</a>
+            {%- endif -%}
+            {%- if settings.marketplace_flipkart != blank -%}
+              <a href="{{ settings.marketplace_flipkart }}" target="_blank" rel="noopener" class="about-mp-chip">Flipkart</a>
+            {%- endif -%}
+            {%- if settings.marketplace_meesho != blank -%}
+              <a href="{{ settings.marketplace_meesho }}" target="_blank" rel="noopener" class="about-mp-chip">Meesho</a>
+            {%- endif -%}
+          </div>
         </div>
       </div>
     </div>
