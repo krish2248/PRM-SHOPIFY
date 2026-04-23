@@ -1,8 +1,10 @@
 {%- comment -%}
   About Us Page Template
   HerboVilla — the Ayurvedic & herbal wellness division of PRM Pharmaceuticals
+  Only renders on About pages so it can safely co-exist in the default page template.
 {%- endcomment -%}
 
+{%- if page.handle == 'about-us' or page.handle == 'about' -%}
 <div class="about-page">
   {%- comment -%} Hero {%- endcomment -%}
   <section class="about-hero">
@@ -1649,6 +1651,7 @@
     </div>
   </section>
 </div>
+{%- endif -%}
 
 <style>
   .about-page {
