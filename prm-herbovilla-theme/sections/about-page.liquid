@@ -9,15 +9,42 @@
   {%- comment -%} Hero {%- endcomment -%}
   <section class="about-hero">
     <div class="container">
-      <div class="about-hero__content">
-        <span class="about-hero__label">{{ section.settings.hero_label | default: 'Extending Healthy Horizons' }}</span>
-        <h1 class="about-hero__title">{{ section.settings.hero_title | default: 'Rooted in Tradition, Driven by Wellness' }}</h1>
-        <p class="about-hero__tagline">— Extending Healthy Horizons —</p>
-        <p class="about-hero__text">{{ section.settings.hero_text | default: "HerboVilla is the Ayurveda and herbal wellness division of PRM Pharmaceuticals — a 25-year-old Indian pharmaceutical house founded in Bhavnagar, Gujarat by Mr. Hemang Soni in 1999, today serving 35,000+ satisfied customers across 28+ states and 3 international markets through 300+ distributor channels." }}</p>
-        <div class="about-hero__badges">
-          <span class="about-hero__badge">Founded 1999 · Bhavnagar</span>
-          <span class="about-hero__badge">HerboVilla Division · 2013</span>
-          <span class="about-hero__badge">WHO-GMP · ISO · AYUSH · FDA</span>
+      <div class="about-hero__layout">
+        <div class="about-hero__content">
+          <span class="about-hero__label">{{ section.settings.hero_label | default: 'Our Story' }}</span>
+          <h1 class="about-hero__title">{{ section.settings.hero_title | default: 'Rooted in Tradition, Driven by Wellness' }}</h1>
+          <p class="about-hero__tagline">— Extending Healthy Horizons —</p>
+          <p class="about-hero__text">{{ section.settings.hero_text | default: "HerboVilla is the Ayurvedic and herbal wellness division of PRM Pharmaceuticals — a 25-year-old Indian pharmaceutical house serving more than three lakh healthcare professionals across 28 states." }}</p>
+          <div class="about-hero__badges">
+            <span class="about-hero__badge">Founded 1999 · Bhavnagar</span>
+            <span class="about-hero__badge">HerboVilla Division · 2013</span>
+          </div>
+        </div>
+        <div class="about-hero__media">
+          <img src="{{ 'herbovilla-transparent.png' | asset_url }}" alt="PRM HerboVilla — the ayurveda ethics" class="about-hero__logo" loading="eager" width="520" height="420">
+        </div>
+      </div>
+
+      <div class="about-hero__cards">
+        <div class="hero-card">
+          <div class="hero-card__num">25<span>+</span></div>
+          <div class="hero-card__label">Years of Excellence</div>
+          <div class="hero-card__sub">Pharma heritage since 1999</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card__num">3 Lakh<span>+</span></div>
+          <div class="hero-card__label">Healthcare Professionals</div>
+          <div class="hero-card__sub">Trust the PRM group</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card__num">28<span>+</span></div>
+          <div class="hero-card__label">Indian States</div>
+          <div class="hero-card__sub">Plus 3 international markets</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card__num">250<span>+</span></div>
+          <div class="hero-card__label">Formulations</div>
+          <div class="hero-card__sub">Ayurvedic + allopathic combined</div>
         </div>
       </div>
     </div>
@@ -827,8 +854,19 @@
   .about-hero {
     background: linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%);
     color: #fff;
-    padding: clamp(56px, 8vw, 96px) 20px;
-    text-align: center;
+    padding: clamp(56px, 7vw, 96px) 20px;
+  }
+
+  .about-hero__layout {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: center;
+  }
+
+  .about-hero__content {
+    text-align: left;
+    max-width: 640px;
   }
 
   .about-hero__label {
@@ -836,6 +874,7 @@
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.18em;
+    color: #fff;
     opacity: 0.9;
     margin-bottom: 0.9rem;
   }
@@ -844,37 +883,132 @@
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.9rem, 5vw, 3.4rem);
     font-weight: 600;
-    margin-bottom: 1.2rem;
-    max-width: 820px;
-    margin-left: auto;
-    margin-right: auto;
+    color: #1A1A1A;
+    margin: 0 0 1.1rem;
     line-height: 1.2;
+  }
+
+  .about-hero__tagline {
+    color: #000;
+    font-style: italic;
+    letter-spacing: 0.04em;
+    margin: 0 0 1.2rem;
+    font-weight: 500;
   }
 
   .about-hero__text {
     font-size: clamp(1rem, 1.4vw, 1.15rem);
-    opacity: 0.92;
-    max-width: 680px;
-    margin: 0 auto 1.75rem;
+    color: #fff;
+    opacity: 0.94;
+    margin: 0 0 1.75rem;
     line-height: 1.7;
   }
 
   .about-hero__badges {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 10px;
   }
 
   .about-hero__badge {
     background: rgba(255, 255, 255, 0.14);
-    border: 1px solid rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.28);
     color: #fff;
     font-size: 0.78rem;
     letter-spacing: 0.04em;
     padding: 7px 14px;
     border-radius: 30px;
     backdrop-filter: blur(3px);
+  }
+
+  .about-hero__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-hero__logo {
+    max-width: 100%;
+    width: clamp(260px, 32vw, 460px);
+    height: auto;
+    filter: drop-shadow(0 14px 36px rgba(0, 0, 0, 0.35));
+  }
+
+  .about-hero__cards {
+    margin-top: clamp(36px, 5vw, 56px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .hero-card {
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 14px;
+    padding: 20px 18px;
+    text-align: left;
+    color: #fff;
+    backdrop-filter: blur(6px);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .hero-card:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.36);
+    transform: translateY(-3px);
+  }
+
+  .hero-card__num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 2.6vw, 2.1rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .hero-card__num span {
+    font-size: 0.65em;
+    margin-left: 2px;
+    opacity: 0.85;
+  }
+
+  .hero-card__label {
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+  }
+
+  .hero-card__sub {
+    color: #fff;
+    opacity: 0.78;
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 900px) {
+    .about-hero__cards { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .about-hero__layout {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .about-hero__content {
+      text-align: center;
+      margin: 0 auto;
+    }
+    .about-hero__badges { justify-content: center; }
+    .about-hero__media { order: -1; }
+    .about-hero__logo { width: clamp(220px, 60vw, 320px); }
+    .hero-card { text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .about-hero__cards { grid-template-columns: 1fr; }
   }
 
   /* Customer Stats Bar */
