@@ -175,9 +175,8 @@
     padding: 0;
     margin: 0;
     flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 7px 20px;
+    column-count: 2;
+    column-gap: 22px;
   }
 
   .herb-card__list li {
@@ -188,6 +187,14 @@
     line-height: 1.4;
     font-weight: 400;
     letter-spacing: 0.1px;
+    margin-bottom: 7px;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .herb-card__list li:last-child {
+    margin-bottom: 0;
   }
 
   .herb-card__list li::before {
@@ -253,16 +260,17 @@
       font-size: 19px;
     }
     .herb-card__list {
-      gap: 6px 16px;
+      column-gap: 18px;
     }
     .herb-card__list li {
       font-size: 13px;
+      margin-bottom: 6px;
     }
   }
 
   @media (max-width: 420px) {
     .herb-card__list {
-      grid-template-columns: 1fr;
+      column-count: 1;
     }
   }
 </style>
