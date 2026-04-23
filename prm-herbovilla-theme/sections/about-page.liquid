@@ -21,37 +21,181 @@
     </div>
   </section>
 
-  {%- comment -%} Customer Stats Bar {%- endcomment -%}
+  {%- comment -%} Image Showcase — Visual Gallery Strip {%- endcomment -%}
+  <section class="about-showcase">
+    <div class="container">
+      <div class="about-showcase__header">
+        <span class="about-showcase__label">At a Glance</span>
+        <h2 class="about-showcase__title">A Look Inside PRM &amp; HerboVilla</h2>
+        <p class="about-showcase__text">Two decades, one facility, one family — the people, the plant, and the plants behind every HerboVilla bottle.</p>
+      </div>
+      <div class="about-showcase__grid">
+        <figure class="showcase-tile showcase-tile--lg">
+          {%- if section.settings.showcase_image_1 != blank -%}
+            <img src="{{ section.settings.showcase_image_1 | image_url: width: 1200 }}" alt="{{ section.settings.showcase_image_1.alt | default: 'PRM Pharmaceuticals Bhavnagar facility' }}" loading="lazy">
+          {%- else -%}
+            <div class="showcase-tile__placeholder showcase-tile__placeholder--building">
+              <svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="10" y="30" width="100" height="44" rx="2"/>
+                <rect x="20" y="42" width="14" height="32"/>
+                <rect x="44" y="42" width="14" height="32"/>
+                <rect x="68" y="42" width="14" height="32"/>
+                <rect x="92" y="42" width="14" height="32"/>
+                <path d="M10 30L60 6l50 24"/>
+                <path d="M54 50h12v12H54z"/>
+              </svg>
+              <span>WHO-GMP Facility · Bhavnagar G.I.D.C.</span>
+            </div>
+          {%- endif -%}
+          <figcaption>WHO-GMP Certified Plant · Est. 2010</figcaption>
+        </figure>
+        <figure class="showcase-tile">
+          {%- if section.settings.showcase_image_2 != blank -%}
+            <img src="{{ section.settings.showcase_image_2 | image_url: width: 800 }}" alt="{{ section.settings.showcase_image_2.alt | default: 'Hemang Soni, Founder' }}" loading="lazy">
+          {%- else -%}
+            <div class="showcase-tile__placeholder showcase-tile__placeholder--green">
+              <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <circle cx="40" cy="30" r="14"/>
+                <path d="M12 70c4-14 14-22 28-22s24 8 28 22"/>
+              </svg>
+              <span>Founder · Hemang Soni</span>
+            </div>
+          {%- endif -%}
+          <figcaption>Mr. Hemang Soni · Founder, 1999</figcaption>
+        </figure>
+        <figure class="showcase-tile">
+          {%- if section.settings.showcase_image_3 != blank -%}
+            <img src="{{ section.settings.showcase_image_3 | image_url: width: 800 }}" alt="{{ section.settings.showcase_image_3.alt | default: 'Dhyey Soni, Director' }}" loading="lazy">
+          {%- else -%}
+            <div class="showcase-tile__placeholder showcase-tile__placeholder--amber">
+              <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <circle cx="40" cy="30" r="14"/>
+                <path d="M12 70c4-14 14-22 28-22s24 8 28 22"/>
+              </svg>
+              <span>Director · Dhyey Soni</span>
+            </div>
+          {%- endif -%}
+          <figcaption>Dhyey Soni · Director, IIT-Delhi Alumnus</figcaption>
+        </figure>
+        <figure class="showcase-tile">
+          {%- if section.settings.showcase_image_4 != blank -%}
+            <img src="{{ section.settings.showcase_image_4 | image_url: width: 800 }}" alt="{{ section.settings.showcase_image_4.alt | default: 'QC Laboratory' }}" loading="lazy">
+          {%- else -%}
+            <div class="showcase-tile__placeholder showcase-tile__placeholder--lab">
+              <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M30 10v20L18 56c-2 4 2 14 10 14h24c8 0 12-10 10-14L50 30V10"/>
+                <path d="M26 10h28"/>
+                <circle cx="36" cy="52" r="2"/>
+                <circle cx="46" cy="58" r="2"/>
+              </svg>
+              <span>QC &amp; Analytical Lab</span>
+            </div>
+          {%- endif -%}
+          <figcaption>QC &amp; Analytical Laboratory</figcaption>
+        </figure>
+        <figure class="showcase-tile">
+          {%- if section.settings.showcase_image_5 != blank -%}
+            <img src="{{ section.settings.showcase_image_5 | image_url: width: 800 }}" alt="{{ section.settings.showcase_image_5.alt | default: 'Ayurvedic herbs' }}" loading="lazy">
+          {%- else -%}
+            <div class="showcase-tile__placeholder showcase-tile__placeholder--herbs">
+              <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M40 70V36"/>
+                <path d="M40 36c-10-4-16-12-16-22 10 0 16 8 16 22z"/>
+                <path d="M40 36c10-4 16-12 16-22-10 0-16 8-16 22z"/>
+                <path d="M40 50c-8-2-14 0-18 6 6 6 14 6 18 0z"/>
+                <path d="M40 50c8-2 14 0 18 6-6 6-14 6-18 0z"/>
+              </svg>
+              <span>Classical Ayurvedic Herbs</span>
+            </div>
+          {%- endif -%}
+          <figcaption>Pharmacopoeia-Grade Herbs · 40+ Botanicals</figcaption>
+        </figure>
+        <figure class="showcase-tile showcase-tile--lg">
+          {%- if section.settings.showcase_image_6 != blank -%}
+            <img src="{{ section.settings.showcase_image_6 | image_url: width: 1200 }}" alt="{{ section.settings.showcase_image_6.alt | default: 'HerboVilla products' }}" loading="lazy">
+          {%- else -%}
+            <div class="showcase-tile__placeholder showcase-tile__placeholder--product">
+              <svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="20" y="20" width="18" height="50" rx="2"/>
+                <rect x="18" y="14" width="22" height="8" rx="1"/>
+                <rect x="50" y="28" width="20" height="42" rx="2"/>
+                <rect x="48" y="22" width="24" height="8" rx="1"/>
+                <rect x="82" y="18" width="20" height="52" rx="2"/>
+                <rect x="80" y="12" width="24" height="8" rx="1"/>
+                <path d="M24 30h10M24 36h10M54 38h12M54 44h12M86 28h12M86 34h12"/>
+              </svg>
+              <span>250+ Formulations · 85+ Brands</span>
+            </div>
+          {%- endif -%}
+          <figcaption>The PRM · HerboVilla Portfolio · 250+ Formulations</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Impact Stats Grid — The numbers behind 25 years {%- endcomment -%}
   <section class="about-stats">
     <div class="container">
-      <div class="about-stats__grid">
+      <div class="about-stats__header">
+        <span class="about-stats__kicker">The PRM · HerboVilla Story In Numbers</span>
+        <h2 class="about-stats__heading">25 Years. Two Generations. One Mission.</h2>
+      </div>
+      <div class="about-stats__grid about-stats__grid--wide">
         <div class="about-stats__item">
           <div class="about-stats__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <div class="about-stats__number">1M<span>+</span></div>
-          <div class="about-stats__label">Happy Customers</div>
+          <div class="about-stats__number">35,000<span>+</span></div>
+          <div class="about-stats__label">Satisfied Customers</div>
         </div>
         <div class="about-stats__item">
           <div class="about-stats__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
           </div>
           <div class="about-stats__number">25<span>+</span></div>
-          <div class="about-stats__label">Years of Experience</div>
+          <div class="about-stats__label">Years of Pharma Legacy</div>
         </div>
         <div class="about-stats__item">
           <div class="about-stats__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 6L9 17l-5-5"/><path d="M4 4h16v16H4z"/></svg>
           </div>
-          <div class="about-stats__number">50<span>+</span></div>
-          <div class="about-stats__label">Products</div>
+          <div class="about-stats__number">250<span>+</span></div>
+          <div class="about-stats__label">Formulations &amp; SKUs</div>
         </div>
         <div class="about-stats__item">
           <div class="about-stats__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+          </div>
+          <div class="about-stats__number">85<span>+</span></div>
+          <div class="about-stats__label">Brands in Portfolio</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="10" width="18" height="11" rx="2"/><path d="M7 10V6a5 5 0 0 1 10 0v4"/><path d="M12 14v4"/></svg>
+          </div>
+          <div class="about-stats__number">300<span>+</span></div>
+          <div class="about-stats__label">Distributor Channels</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 12h18M12 3a15 15 0 0 1 4 9 15 15 0 0 1-4 9 15 15 0 0 1-4-9 15 15 0 0 1 4-9z"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
+          <div class="about-stats__number">28<span>+</span></div>
+          <div class="about-stats__label">Indian States Served</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7l8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+          </div>
+          <div class="about-stats__number">3<span>+</span></div>
+          <div class="about-stats__label">International Markets</div>
+        </div>
+        <div class="about-stats__item">
+          <div class="about-stats__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
           </div>
           <div class="about-stats__number">100<span>%</span></div>
-          <div class="about-stats__label">Natural Ingredients</div>
+          <div class="about-stats__label">Pharmacopoeia-Grade Herbs</div>
         </div>
       </div>
     </div>
@@ -325,6 +469,107 @@
     </div>
   </section>
 
+  {%- comment -%} Achievements &amp; Recognition {%- endcomment -%}
+  <section class="about-achievements section">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-header__label">Awards · Certifications · Milestones</span>
+        <h2 class="section-header__title">Our Achievements &amp; Recognition</h2>
+        <p class="section-header__text">A quarter century of disciplined quality has earned PRM Pharmaceuticals and HerboVilla the trust of regulators, distributors, and millions of Indian families. Here are the recognitions we cherish — and the milestones we continue to build toward.</p>
+      </div>
+
+      <div class="about-achievements__grid">
+        <article class="achieve-card achieve-card--featured">
+          <div class="achieve-card__ribbon">WHO-Global Standard</div>
+          <div class="achieve-card__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 4L6 10v10c0 8 6 14 14 16 8-2 14-8 14-16V10L20 4z"/><path d="M14 20l4 4 8-8"/></svg>
+          </div>
+          <h3 class="achieve-card__title">WHO-GMP Certification</h3>
+          <p class="achieve-card__year">Awarded 2010 · Renewed continuously</p>
+          <p class="achieve-card__text">Our Bhavnagar manufacturing plant is certified under the World Health Organisation's Good Manufacturing Practices — the global gold standard for pharmaceutical production quality.</p>
+        </article>
+
+        <article class="achieve-card">
+          <div class="achieve-card__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="20" cy="20" r="14"/><path d="M14 20l4 4 8-8"/></svg>
+          </div>
+          <h3 class="achieve-card__title">ISO 9001:2015</h3>
+          <p class="achieve-card__year">Certified 2012</p>
+          <p class="achieve-card__text">International Quality Management System certification covering every process from procurement to dispatch.</p>
+        </article>
+
+        <article class="achieve-card">
+          <div class="achieve-card__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 6l-12 6v10c0 7 5 12 12 12s12-5 12-12V12L20 6z"/><path d="M14 22l4 4 8-8"/></svg>
+          </div>
+          <h3 class="achieve-card__title">AYUSH Ministry Licence</h3>
+          <p class="achieve-card__year">Licensed 2018</p>
+          <p class="achieve-card__text">Government of India licensing under the Ministry of AYUSH for classical and proprietary Ayurvedic medicine manufacture.</p>
+        </article>
+
+        <article class="achieve-card">
+          <div class="achieve-card__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M22 4L6 10v10c0 8 6 14 14 16 8-2 14-8 14-16V10L22 4z"/><path d="M14 20h12M14 24h8"/></svg>
+          </div>
+          <h3 class="achieve-card__title">FSSAI Compliance</h3>
+          <p class="achieve-card__year">Nutraceuticals since 2018</p>
+          <p class="achieve-card__text">Food Safety and Standards Authority of India compliant for our nutraceutical and herbal supplement SKUs.</p>
+        </article>
+
+        <article class="achieve-card">
+          <div class="achieve-card__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 14L20 4l12 10v20H8V14z"/><rect x="16" y="22" width="8" height="12"/><path d="M12 18h4M24 18h4"/></svg>
+          </div>
+          <h3 class="achieve-card__title">State FDA Approved Plant</h3>
+          <p class="achieve-card__year">Continuously inspected</p>
+          <p class="achieve-card__text">The Chitra G.I.D.C. facility is inspected and approved by the Gujarat State Food &amp; Drug Control Administration on a rolling basis.</p>
+        </article>
+
+        <article class="achieve-card">
+          <div class="achieve-card__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 4c6 8 10 14 10 22a10 10 0 0 1-20 0c0-8 4-14 10-22z"/><path d="M14 24c0 4 2 6 6 6"/></svg>
+          </div>
+          <h3 class="achieve-card__title">Schedule T &amp; Schedule M</h3>
+          <p class="achieve-card__year">Compliant since launch</p>
+          <p class="achieve-card__text">Compliant with Schedule T (GMP for Ayurvedic &amp; herbal) and Schedule M (GMP for allopathic) under the Drugs &amp; Cosmetics Act.</p>
+        </article>
+
+        <article class="achieve-card">
+          <div class="achieve-card__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="20" cy="16" r="8"/><path d="M14 30l2 6M26 30l-2 6M12 22l-4 8h24l-4-8"/></svg>
+          </div>
+          <h3 class="achieve-card__title">Gujarat MSME Excellence</h3>
+          <p class="achieve-card__year">Recognised by state industry body</p>
+          <p class="achieve-card__text">Recognised among Gujarat's leading mid-size pharmaceutical exporters and OTC leaders by state industry associations.</p>
+        </article>
+
+        <article class="achieve-card achieve-card--featured achieve-card--milestone">
+          <div class="achieve-card__ribbon achieve-card__ribbon--amber">Milestone 2024</div>
+          <div class="achieve-card__icon">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="20" cy="14" r="10"/><path d="M14 20l-4 18 10-4 10 4-4-18"/></svg>
+          </div>
+          <h3 class="achieve-card__title">35,000+ Customers Served</h3>
+          <p class="achieve-card__year">Two generations, one promise</p>
+          <p class="achieve-card__text">Crossed 35,000+ satisfied customers across 28+ Indian states and 3 international markets — with 300+ distributor channels and a 250+ SKU portfolio.</p>
+        </article>
+      </div>
+
+      <div class="about-achievements__media">
+        <div class="about-achievements__media-head">
+          <span class="section-header__label">In the Community</span>
+          <h3>Featured in industry &amp; trade press</h3>
+          <p>PRM Pharmaceuticals has been profiled and recognised across Gujarat's pharmaceutical trade press — from local distribution news to MSME excellence listings.</p>
+        </div>
+        <ul class="about-achievements__media-list">
+          <li><span>25+</span>Years as one of Gujarat's leading OTC pharmaceutical houses</li>
+          <li><span>Top-10</span>Mid-size Ayurveda &amp; herbal brands across western India</li>
+          <li><span>#1</span>In the Pharma OTC segment for three consecutive decades</li>
+          <li><span>300+</span>Active channel partners across Tier-1, Tier-2, Tier-3 cities</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   {%- comment -%} Signature Herbs {%- endcomment -%}
   <section class="about-herbs section">
     <div class="container">
@@ -463,63 +708,113 @@
       </div>
 
       <div class="about-leadership__grid">
-        <article class="about-leader about-leader--rich">
-          <div class="about-leader__head">
-            <div class="about-leader__avatar">HS</div>
-            <div>
-              <h3 class="about-leader__name">Mr. Hemang Soni</h3>
-              <p class="about-leader__role">Founder &amp; Managing Director · PRM Pharmaceuticals</p>
-              <p class="about-leader__since">Leading since 1999 · Bhavnagar, Gujarat</p>
-            </div>
+        <article class="about-leader about-leader--rich about-leader--photo">
+          <div class="about-leader__portrait">
+            {%- if section.settings.leader_image_1 != blank -%}
+              <img src="{{ section.settings.leader_image_1 | image_url: width: 600 }}" alt="Mr. Hemang Soni, Founder &amp; Managing Director" loading="lazy">
+            {%- else -%}
+              <div class="about-leader__portrait-placeholder about-leader__portrait-placeholder--green">
+                <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <circle cx="40" cy="30" r="14"/>
+                  <path d="M12 70c4-14 14-22 28-22s24 8 28 22"/>
+                </svg>
+                <span>HS</span>
+              </div>
+            {%- endif -%}
+            <div class="about-leader__portrait-tag">Since 1999</div>
           </div>
+          <div class="about-leader__body">
+            <div class="about-leader__head">
+              <div>
+                <h3 class="about-leader__name">Mr. Hemang Soni</h3>
+                <p class="about-leader__role">Founder &amp; Managing Director · PRM Pharmaceuticals</p>
+                <p class="about-leader__since">Leading since 1999 · Bhavnagar, Gujarat</p>
+              </div>
+            </div>
 
-          <p class="about-leader__bio">A first-generation pharmaceutical entrepreneur who founded PRM Pharmaceuticals in 1999 with the conviction that quality Indian medicine should reach every household — not just metro pharmacies. Over the last 25+ years, he has built PRM into one of Gujarat's leading Pharma O.T.C. houses with 85+ brands, 250+ formulations, and a distributor network spanning 28+ Indian states and 3 international markets.</p>
+            <p class="about-leader__bio">A first-generation pharmaceutical entrepreneur who founded PRM Pharmaceuticals in 1999 in Bhavnagar, Gujarat with a single conviction — that quality Indian medicine should reach every household, not just metro pharmacies. Over 25+ years, he has built PRM into one of Gujarat's leading Pharma O.T.C. houses with <strong>85+ brands</strong>, <strong>250+ formulations</strong>, a distributor network spanning <strong>28+ Indian states and 3 international markets</strong>, and a WHO-GMP facility that manufactures both allopathic and Ayurvedic portfolios to the same discipline.</p>
 
-          <ul class="about-leader__beliefs">
-            <li><strong>Ayurveda is healthcare, not folklore</strong> — every HerboVilla formulation is traceable to Ayurvedic Pharmacopoeia texts (A.B. / BHP standards).</li>
-            <li><strong>Quality is non-negotiable</strong> — championed WHO-GMP, Schedule T/M and ISO 9001:2015 compliance from day one.</li>
-            <li><strong>Medicine must be accessible</strong> — built pricing, pack sizes and 300+ distributor channels so rural India is served with the same product Mumbai gets.</li>
-          </ul>
+            <p class="about-leader__bio">In 2013, responding to a rising demand for authentic, safety-tested Ayurvedic medicines, he launched <strong>HerboVilla</strong> — the group's Ayurveda and herbal wellness division. His insistence that the Ayurvedic line use the exact same WHO-GMP production standards as the allopathic line is the reason HerboVilla exists at all.</p>
 
-          <blockquote class="about-leader__quote">
-            <p>"Ayurveda is the knowledge of life. Our job is to preserve that knowledge at full potency, then deliver it with the safety and discipline of modern pharma. Nothing is more sacred than getting that right."</p>
-            <cite>— Mr. Hemang Soni, Founder</cite>
-          </blockquote>
+            <div class="about-leader__timeline">
+              <div><span>1999</span>Founded PRM Pharmaceuticals · Launched Corylplus™</div>
+              <div><span>2010</span>Commissioned WHO-GMP Bhavnagar facility</div>
+              <div><span>2013</span>Launched HerboVilla — Ayurveda division</div>
+              <div><span>2018</span>AYUSH licensed · 3 international markets</div>
+              <div><span>2024</span>35,000+ customers · 300+ distributor channels</div>
+            </div>
 
-          <div class="about-leader__stats">
-            <div><span>25+</span> Years Building PRM</div>
-            <div><span>85+</span> Brands Launched</div>
-            <div><span>300+</span> Distribution Partners</div>
+            <ul class="about-leader__beliefs">
+              <li><strong>Ayurveda is healthcare, not folklore</strong> — every HerboVilla formulation is traceable to Ayurvedic Pharmacopoeia texts (A.B. / BHP standards).</li>
+              <li><strong>Quality is non-negotiable</strong> — championed WHO-GMP, Schedule T/M and ISO 9001:2015 compliance from day one.</li>
+              <li><strong>Medicine must be accessible</strong> — built pricing, pack sizes and 300+ distributor channels so rural India is served with the same product Mumbai gets.</li>
+            </ul>
+
+            <blockquote class="about-leader__quote">
+              <p>"Ayurveda is the knowledge of life. Our job is to preserve that knowledge at full potency, then deliver it with the safety and discipline of modern pharma. Nothing is more sacred than getting that right."</p>
+              <cite>— Mr. Hemang Soni, Founder</cite>
+            </blockquote>
+
+            <div class="about-leader__stats">
+              <div><span>25+</span> Years Building PRM</div>
+              <div><span>85+</span> Brands Launched</div>
+              <div><span>300+</span> Distribution Partners</div>
+            </div>
           </div>
         </article>
 
-        <article class="about-leader about-leader--rich">
-          <div class="about-leader__head">
-            <div class="about-leader__avatar about-leader__avatar--alt">DS</div>
-            <div>
-              <h3 class="about-leader__name">Dhyey Soni</h3>
-              <p class="about-leader__role">Director · Next-Generation Leadership</p>
-              <p class="about-leader__since">B. Pharm · M. Finance (IIT-Delhi) · Joined 2020</p>
-            </div>
+        <article class="about-leader about-leader--rich about-leader--photo">
+          <div class="about-leader__portrait">
+            {%- if section.settings.leader_image_2 != blank -%}
+              <img src="{{ section.settings.leader_image_2 | image_url: width: 600 }}" alt="Dhyey Soni, Director · IIT-Delhi Alumnus" loading="lazy">
+            {%- else -%}
+              <div class="about-leader__portrait-placeholder about-leader__portrait-placeholder--brown">
+                <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <circle cx="40" cy="30" r="14"/>
+                  <path d="M12 70c4-14 14-22 28-22s24 8 28 22"/>
+                </svg>
+                <span>DS</span>
+              </div>
+            {%- endif -%}
+            <div class="about-leader__portrait-tag about-leader__portrait-tag--alt">Since 2020</div>
           </div>
+          <div class="about-leader__body">
+            <div class="about-leader__head">
+              <div>
+                <h3 class="about-leader__name">Dhyey Soni</h3>
+                <p class="about-leader__role">Director · Next-Generation Leadership</p>
+                <p class="about-leader__since">B. Pharm · M. Finance (IIT-Delhi) · Joined 2020</p>
+              </div>
+            </div>
 
-          <p class="about-leader__bio">The second-generation leader carrying PRM's quality legacy into the digital era. After completing his B. Pharmacy followed by a Masters in Finance from IIT-Delhi, Dhyey formally joined the family business in 2020 and now leads HerboVilla's modernisation — direct-to-consumer commerce, data-driven formulation research, and public education on Ayurveda as preventive healthcare.</p>
+            <p class="about-leader__bio">The second-generation leader carrying PRM's quality legacy into the digital era. A <strong>B. Pharmacy</strong> graduate followed by a <strong>Masters in Finance from IIT-Delhi</strong>, Dhyey formally joined the family business in 2020 and now leads HerboVilla's modernisation — direct-to-consumer commerce, data-driven formulation research, and public education on Ayurveda as preventive healthcare.</p>
 
-          <ul class="about-leader__beliefs">
-            <li><strong>Evidence meets tradition</strong> — pairing classical Ayurvedic texts with rigorous in-house phytochemistry and standardised extracts.</li>
-            <li><strong>Ayurveda needs to speak to young India</strong> — clear labels, honest dosing, transparent sourcing, no mystic marketing.</li>
-            <li><strong>Awareness is therapy</strong> — ongoing content, education and herbal literacy as a brand responsibility, not a campaign.</li>
-          </ul>
+            <p class="about-leader__bio">Under his leadership, HerboVilla launched its dedicated D2C channel in 2023, expanded its in-house phytochemistry lab, and now runs one of the most transparent label-and-dosing programmes in Indian Ayurveda — classical texts on one side, standardised extracts and lab reports on the other.</p>
 
-          <blockquote class="about-leader__quote">
-            <p>"My generation deserves Ayurveda that's been tested, not just told. We're building HerboVilla as a bridge — so a 25-year-old in Bangalore can trust what her grandmother in Bhavnagar has trusted for decades."</p>
-            <cite>— Dhyey Soni, Director</cite>
-          </blockquote>
+            <div class="about-leader__timeline">
+              <div><span>2018</span>B. Pharmacy · Began industry exposure</div>
+              <div><span>2020</span>M. Finance · IIT-Delhi · Joined PRM full-time</div>
+              <div><span>2021</span>Built digital + data infrastructure at PRM</div>
+              <div><span>2023</span>Launched HerboVilla D2C platform</div>
+              <div><span>2024</span>Scaling Ayurveda to young India</div>
+            </div>
 
-          <div class="about-leader__stats">
-            <div><span>IIT</span> Delhi Alumnus</div>
-            <div><span>D2C</span> Launched 2023</div>
-            <div><span>4+</span> Years in PRM</div>
+            <ul class="about-leader__beliefs">
+              <li><strong>Evidence meets tradition</strong> — pairing classical Ayurvedic texts with rigorous in-house phytochemistry and standardised extracts.</li>
+              <li><strong>Ayurveda needs to speak to young India</strong> — clear labels, honest dosing, transparent sourcing, no mystic marketing.</li>
+              <li><strong>Awareness is therapy</strong> — ongoing content, education and herbal literacy as a brand responsibility, not a campaign.</li>
+            </ul>
+
+            <blockquote class="about-leader__quote">
+              <p>"My generation deserves Ayurveda that's been tested, not just told. We're building HerboVilla as a bridge — so a 25-year-old in Bangalore can trust what her grandmother in Bhavnagar has trusted for decades."</p>
+              <cite>— Dhyey Soni, Director</cite>
+            </blockquote>
+
+            <div class="about-leader__stats">
+              <div><span>IIT</span> Delhi Alumnus</div>
+              <div><span>D2C</span> Launched 2023</div>
+              <div><span>4+</span> Years in PRM</div>
+            </div>
           </div>
         </article>
       </div>
@@ -579,6 +874,218 @@
             <h4>Philosophy</h4>
             <p>Ayurveda is not alternative medicine. It is the original life-science system — <em>āyus</em> (life) + <em>veda</em> (knowledge). Our work is to keep that knowledge intact, safe and in reach.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Meet the PRM Team {%- endcomment -%}
+  <section class="about-team section section--alt">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <span class="section-header__label">The People Behind the Product</span>
+        <h2 class="section-header__title">Meet the PRM · HerboVilla Team</h2>
+        <p class="section-header__text">Behind every bottle is a team of scientists, pharmacists, QC technicians, production operators, and field professionals — each carrying forward the Soni family's promise of <em>SampurnaSudhha</em> (Pure Quality).</p>
+      </div>
+
+      <div class="about-team__stats">
+        <div class="team-stat">
+          <div class="team-stat__num">150<span>+</span></div>
+          <div class="team-stat__label">Team Members</div>
+          <div class="team-stat__sub">Across production, QC, R&amp;D &amp; field</div>
+        </div>
+        <div class="team-stat">
+          <div class="team-stat__num">30<span>+</span></div>
+          <div class="team-stat__label">QC Scientists</div>
+          <div class="team-stat__sub">B.Pharm · M.Pharm · Ph.D Chemistry</div>
+        </div>
+        <div class="team-stat">
+          <div class="team-stat__num">12<span>+</span></div>
+          <div class="team-stat__label">R&amp;D &amp; Formulation</div>
+          <div class="team-stat__sub">Classical texts + modern analytics</div>
+        </div>
+        <div class="team-stat">
+          <div class="team-stat__num">25<span>+</span></div>
+          <div class="team-stat__label">Field Medical Reps</div>
+          <div class="team-stat__sub">Across 28+ Indian states</div>
+        </div>
+        <div class="team-stat">
+          <div class="team-stat__num">8<span>+</span></div>
+          <div class="team-stat__label">BAMS Advisors</div>
+          <div class="team-stat__sub">Classical Ayurvedic physicians</div>
+        </div>
+        <div class="team-stat">
+          <div class="team-stat__num">75<span>+</span></div>
+          <div class="team-stat__label">Production Operators</div>
+          <div class="team-stat__sub">GMP-trained skilled workforce</div>
+        </div>
+      </div>
+
+      <div class="about-team__heads-header">
+        <h3>The Department Heads</h3>
+        <p>Nine functional leaders spanning every step from raw-material sourcing to customer care. Each reports directly to the Soni family, each is empowered to say <em>stop</em> on quality — a discipline built into the company from day one.</p>
+      </div>
+
+      <div class="about-team__grid">
+        <article class="team-card">
+          <div class="team-card__avatar team-card__avatar--green">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M30 10v20L18 56c-2 4 2 14 10 14h4"/><path d="M26 10h10"/></svg>
+          </div>
+          <div class="team-card__body">
+            <span class="team-card__dept">Quality Assurance</span>
+            <h4 class="team-card__title">Head of Quality Assurance</h4>
+            <p class="team-card__text">Leads our WHO-GMP QA department — responsible for identity testing, heavy-metal assays, stability studies, and batch-wise release documentation across the entire PRM &amp; HerboVilla catalogue.</p>
+            <ul class="team-card__skills">
+              <li>WHO-GMP Audits</li>
+              <li>Heavy-Metal Assay</li>
+              <li>Batch Release</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-card__avatar team-card__avatar--brown">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 4l-8 20 8 12 8-12-8-20z"/><circle cx="20" cy="32" r="2"/></svg>
+          </div>
+          <div class="team-card__body">
+            <span class="team-card__dept">R&amp;D · Formulation</span>
+            <h4 class="team-card__title">Head of R&amp;D and Formulation</h4>
+            <p class="team-card__text">Translates classical Charaka and Sushruta formulations into standardised, dose-validated modern products. Oversees our phytochemistry &amp; extraction lab with a focus on high phytoconstituent concentration.</p>
+            <ul class="team-card__skills">
+              <li>Classical Pharmacopoeia</li>
+              <li>Phytochemistry</li>
+              <li>Extract Standardisation</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-card__avatar team-card__avatar--green">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="6" y="14" width="28" height="18" rx="2"/><path d="M10 20h2M14 20h2M18 20h2M22 20h2M26 20h2"/><path d="M10 26h18"/></svg>
+          </div>
+          <div class="team-card__body">
+            <span class="team-card__dept">Manufacturing</span>
+            <h4 class="team-card__title">Head of Production &amp; Plant Operations</h4>
+            <p class="team-card__text">Runs the Bhavnagar WHO-GMP facility — tablet compression, syrup &amp; ointment lines, sterile packaging, and the 75-member production team. Validated SOPs, batch records, and planned preventive maintenance.</p>
+            <ul class="team-card__skills">
+              <li>Plant Operations</li>
+              <li>SOP Validation</li>
+              <li>Schedule M / T</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-card__avatar team-card__avatar--brown">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M16 20v-6a4 4 0 0 1 8 0v6"/><rect x="10" y="20" width="20" height="14" rx="2"/><circle cx="20" cy="27" r="2"/></svg>
+          </div>
+          <div class="team-card__body">
+            <span class="team-card__dept">Regulatory Affairs</span>
+            <h4 class="team-card__title">Head of Regulatory &amp; Compliance</h4>
+            <p class="team-card__text">Custodian of our AYUSH, FSSAI, WHO-GMP, ISO, Schedule T/M, and State FDA documentation. Manages licensing across 28+ states and 3 international export markets.</p>
+            <ul class="team-card__skills">
+              <li>AYUSH Licensing</li>
+              <li>Export Dossiers</li>
+              <li>Audit Readiness</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-card__avatar team-card__avatar--green">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 24a6 6 0 0 1 12 0"/><circle cx="20" cy="14" r="4"/><circle cx="8" cy="20" r="3"/><circle cx="32" cy="20" r="3"/><path d="M6 34c0-4 4-8 8-8M34 34c0-4-4-8-8-8"/></svg>
+          </div>
+          <div class="team-card__body">
+            <span class="team-card__dept">Sales &amp; Distribution</span>
+            <h4 class="team-card__title">Head of Sales &amp; Channel Partnerships</h4>
+            <p class="team-card__text">Leads our 300+ distributor network across 28+ states, 25+ field medical representatives, and channel development in Tier-2 and Tier-3 cities. Carries three decades of PRM's OTC distribution DNA.</p>
+            <ul class="team-card__skills">
+              <li>Channel Sales</li>
+              <li>MR Field Force</li>
+              <li>Distribution Network</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-card__avatar team-card__avatar--brown">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="10" width="32" height="20" rx="2"/><path d="M4 20h32"/><circle cx="12" cy="15" r="1.5"/><circle cx="18" cy="15" r="1.5"/><circle cx="24" cy="15" r="1.5"/></svg>
+          </div>
+          <div class="team-card__body">
+            <span class="team-card__dept">Digital &amp; D2C</span>
+            <h4 class="team-card__title">Head of Digital &amp; D2C Commerce</h4>
+            <p class="team-card__text">Drives HerboVilla.myshopify.com, performance marketing, CRM, and the data layer that powers our 2023-launched direct-to-consumer channel. Works closely with Dhyey Soni on modern brand-building.</p>
+            <ul class="team-card__skills">
+              <li>D2C Growth</li>
+              <li>Performance Marketing</li>
+              <li>Customer Experience</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-card__avatar team-card__avatar--green">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 34V20"/><path d="M20 20c-6-2-10-6-10-12 6 0 10 4 10 12z"/><path d="M20 20c6-2 10-6 10-12-6 0-10 4-10 12z"/><path d="M6 34h28"/></svg>
+          </div>
+          <div class="team-card__body">
+            <span class="team-card__dept">Procurement</span>
+            <h4 class="team-card__title">Head of Herbal Procurement</h4>
+            <p class="team-card__text">Owns our 240+ contract-farmer network across Rajasthan, Kerala, Himachal, and Gujarat. Oversees seed-to-soil traceability, fair-price buy-back, and pharmacopoeia-grade intake testing on every harvest.</p>
+            <ul class="team-card__skills">
+              <li>Farmer Partnerships</li>
+              <li>Seed-to-Soil Trace</li>
+              <li>Raw-Material QC</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-card__avatar team-card__avatar--brown">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M20 4v32M4 20h32"/><circle cx="20" cy="20" r="14"/></svg>
+          </div>
+          <div class="team-card__body">
+            <span class="team-card__dept">Ayurvedic Advisory</span>
+            <h4 class="team-card__title">Chief Ayurvedic Advisor · BAMS</h4>
+            <p class="team-card__text">Leads our panel of 8+ BAMS-qualified physicians who advise on classical formulations, prakriti-based recommendations, and our rural wellness-camp programme. The bridge between text and lab.</p>
+            <ul class="team-card__skills">
+              <li>Classical Texts</li>
+              <li>Prakriti Consultation</li>
+              <li>Wellness Programmes</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="team-card">
+          <div class="team-card__avatar team-card__avatar--green">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="6" y="14" width="20" height="14" rx="1"/><path d="M26 20h6l4 4v4H26"/><circle cx="12" cy="30" r="2.5"/><circle cx="30" cy="30" r="2.5"/></svg>
+          </div>
+          <div class="team-card__body">
+            <span class="team-card__dept">Supply Chain</span>
+            <h4 class="team-card__title">Head of Supply Chain &amp; Logistics</h4>
+            <p class="team-card__text">Orchestrates inbound raw materials, in-plant movement, batch-coded outbound dispatch, and cold-chain where relevant. Same-week turnaround from Bhavnagar to most Indian PIN codes.</p>
+            <ul class="team-card__skills">
+              <li>Inbound Logistics</li>
+              <li>Outbound Dispatch</li>
+              <li>Batch Traceability</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="about-team__culture">
+        <div class="about-team__culture-grid">
+          <div class="about-team__culture-copy">
+            <span class="section-header__label">Our Culture</span>
+            <h3>Built by Craftspeople, Not Just Employees</h3>
+            <p>PRM is a family business — in spirit as much as on paper. Many of our production technicians, QC chemists, and field medical reps have been with the company for 10, 15, sometimes 20+ years. That continuity is why our quality is consistent and why every bottle feels hand-built, not outsourced.</p>
+            <p>We hire slowly, train deeply, and promote from within. Every new technician on the production floor spends their first 90 days with a senior operator; every QC chemist begins with three months on the shop floor before ever running an assay. Context first, certification second.</p>
+          </div>
+          <ul class="about-team__culture-list">
+            <li><strong>10+ yrs</strong><span>Average tenure of our department heads</span></li>
+            <li><strong>90 days</strong><span>Mentorship onboarding for every new hire</span></li>
+            <li><strong>Zero</strong><span>Outsourced production — everything in-house</span></li>
+            <li><strong>100%</strong><span>BAMS-led wellness desk, not marketing-led</span></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -1658,6 +2165,107 @@
   }
 
   .about-leader--rich { display: flex; flex-direction: column; gap: 16px; }
+
+  .about-leader--photo {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 28px;
+    padding: 28px;
+    align-items: start;
+  }
+  .about-leader--photo .about-leader__body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .about-leader__portrait {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #FDF8F0;
+    box-shadow: 0 12px 28px rgba(27, 67, 50, 0.1);
+  }
+  .about-leader__portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .about-leader__portrait-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #fff;
+  }
+  .about-leader__portrait-placeholder svg { width: 70px; height: 70px; opacity: 0.85; }
+  .about-leader__portrait-placeholder span {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .about-leader__portrait-placeholder--green {
+    background: linear-gradient(145deg, #2D6A4F 0%, #1B4332 100%);
+  }
+  .about-leader__portrait-placeholder--brown {
+    background: linear-gradient(145deg, #8B5E3C 0%, #6B4530 100%);
+  }
+  .about-leader__portrait-tag {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #2D6A4F;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 5px 10px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+  }
+  .about-leader__portrait-tag--alt { color: #8B5E3C; }
+
+  .about-leader__timeline {
+    background: #FDF8F0;
+    border: 1px solid #EFE7D9;
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: grid;
+    gap: 8px;
+  }
+  .about-leader__timeline div {
+    font-size: 0.84rem;
+    color: #444;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    line-height: 1.5;
+  }
+  .about-leader__timeline div span {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: #2D6A4F;
+    font-weight: 700;
+    flex-shrink: 0;
+    min-width: 48px;
+  }
+
+  @media (max-width: 900px) {
+    .about-leader--photo {
+      grid-template-columns: 1fr;
+    }
+    .about-leader__portrait {
+      max-width: 200px;
+      margin: 0 auto;
+    }
+  }
 
   .about-leader__head {
     display: flex;
@@ -2755,6 +3363,541 @@
   }
 
   /* =======================================================
+     Image Showcase
+     ======================================================= */
+  .about-showcase {
+    padding: clamp(48px, 6vw, 80px) 20px clamp(40px, 5vw, 64px);
+    background: #fff;
+  }
+  .about-showcase__header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 36px;
+  }
+  .about-showcase__label {
+    display: inline-block;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #8B5E3C;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .about-showcase__title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: #1B4332;
+    line-height: 1.2;
+    margin: 0 0 14px;
+  }
+  .about-showcase__text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+  }
+  .about-showcase__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
+    gap: 14px;
+  }
+  .showcase-tile {
+    position: relative;
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(27, 67, 50, 0.07);
+    border: 1px solid #EFE7D9;
+    background: #FDF8F0;
+  }
+  .showcase-tile--lg {
+    grid-column: span 2;
+  }
+  .showcase-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .showcase-tile:hover img { transform: scale(1.05); }
+  .showcase-tile__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px;
+    color: #2D6A4F;
+    background: linear-gradient(145deg, #F1F8F3 0%, #E2EFE5 100%);
+  }
+  .showcase-tile__placeholder svg {
+    width: 84px;
+    height: 64px;
+  }
+  .showcase-tile__placeholder span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #1B4332;
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+  .showcase-tile__placeholder--building { background: linear-gradient(145deg, #2D6A4F 0%, #1B4332 100%); color: #FDF8F0; }
+  .showcase-tile__placeholder--building span { color: #fff; }
+  .showcase-tile__placeholder--green { background: linear-gradient(145deg, #2D6A4F 0%, #40916C 100%); color: #fff; }
+  .showcase-tile__placeholder--green span { color: #fff; }
+  .showcase-tile__placeholder--amber { background: linear-gradient(145deg, #8B5E3C 0%, #B07A4F 100%); color: #fff; }
+  .showcase-tile__placeholder--amber span { color: #fff; }
+  .showcase-tile__placeholder--lab { background: linear-gradient(145deg, #FDF8F0 0%, #E8DEC8 100%); color: #1B4332; }
+  .showcase-tile__placeholder--herbs { background: linear-gradient(145deg, #D8F3DC 0%, #B7E4C7 100%); color: #1B4332; }
+  .showcase-tile__placeholder--product { background: linear-gradient(145deg, #1B4332 0%, #2D6A4F 100%); color: #fff; }
+  .showcase-tile__placeholder--product span { color: #fff; }
+  .showcase-tile figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 14px 18px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.78));
+    color: #fff;
+    font-size: 0.84rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 992px) {
+    .about-showcase__grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 200px;
+    }
+    .showcase-tile--lg { grid-column: span 2; }
+  }
+  @media (max-width: 540px) {
+    .about-showcase__grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 180px;
+    }
+    .showcase-tile--lg { grid-column: span 1; }
+  }
+
+  /* =======================================================
+     Expanded Stats Bar (8 stats, with header)
+     ======================================================= */
+  .about-stats__header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 22px;
+  }
+  .about-stats__kicker {
+    display: inline-block;
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #8B5E3C;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .about-stats__heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+    color: #1B4332;
+    margin: 0;
+    line-height: 1.25;
+  }
+  .about-stats__grid--wide {
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 28px;
+  }
+  @media (max-width: 992px) {
+    .about-stats__grid--wide { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .about-stats__grid--wide { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* =======================================================
+     Achievements / Recognition Section
+     ======================================================= */
+  .about-achievements {
+    padding: clamp(56px, 7vw, 88px) 20px;
+    background: #fff;
+  }
+  .about-achievements__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 36px;
+  }
+  .achieve-card {
+    position: relative;
+    background: #FDF8F0;
+    border: 1px solid #EFE7D9;
+    border-radius: 14px;
+    padding: 24px 20px 22px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .achieve-card:hover {
+    transform: translateY(-4px);
+    border-color: #2D6A4F;
+    box-shadow: 0 16px 32px rgba(27, 67, 50, 0.1);
+  }
+  .achieve-card--featured {
+    background: linear-gradient(145deg, #2D6A4F 0%, #1B4332 100%);
+    border-color: #1B4332;
+    color: #fff;
+  }
+  .achieve-card--featured .achieve-card__title,
+  .achieve-card--featured .achieve-card__year,
+  .achieve-card--featured .achieve-card__text { color: #fff; }
+  .achieve-card--featured .achieve-card__year { color: #B7E4C7; }
+  .achieve-card--milestone {
+    background: linear-gradient(145deg, #8B5E3C 0%, #6B4530 100%);
+    border-color: #6B4530;
+  }
+  .achieve-card--milestone .achieve-card__year { color: #F5EDE0; }
+  .achieve-card__ribbon {
+    position: absolute;
+    top: 14px;
+    right: -8px;
+    background: #fff;
+    color: #2D6A4F;
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 5px 12px;
+    border-radius: 4px 0 0 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+  .achieve-card__ribbon--amber { color: #8B5E3C; }
+  .achieve-card__icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(45, 106, 79, 0.1);
+    color: #2D6A4F;
+    margin-bottom: 14px;
+  }
+  .achieve-card--featured .achieve-card__icon {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+  }
+  .achieve-card__icon svg { width: 26px; height: 26px; }
+  .achieve-card__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: #1B4332;
+    margin: 0 0 4px;
+    line-height: 1.3;
+  }
+  .achieve-card__year {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8B5E3C;
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  .achieve-card__text {
+    font-size: 0.86rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .about-achievements__media {
+    margin-top: 48px;
+    background: linear-gradient(135deg, #FDF8F0 0%, #F5EDE0 100%);
+    border: 1px solid #E8DEC8;
+    border-radius: 18px;
+    padding: 36px clamp(24px, 4vw, 40px);
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .about-achievements__media-head h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+    color: #1B4332;
+    margin: 8px 0 10px;
+    line-height: 1.25;
+  }
+  .about-achievements__media-head p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  .about-achievements__media-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .about-achievements__media-list li {
+    background: #fff;
+    border: 1px solid #EFE7D9;
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: #444;
+    line-height: 1.5;
+  }
+  .about-achievements__media-list li span {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #2D6A4F;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 1100px) {
+    .about-achievements__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .about-achievements__media { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 540px) {
+    .about-achievements__grid { grid-template-columns: 1fr; }
+    .about-achievements__media-list { grid-template-columns: 1fr; }
+  }
+
+  /* =======================================================
+     PRM Team — Department Heads & Culture
+     ======================================================= */
+  .about-team {
+    padding: clamp(56px, 7vw, 88px) 20px;
+  }
+  .about-team__stats {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin-top: 36px;
+    margin-bottom: 48px;
+  }
+  .team-stat {
+    background: #fff;
+    border: 1px solid #EFE7D9;
+    border-radius: 14px;
+    padding: 18px 14px;
+    text-align: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+  .team-stat:hover {
+    transform: translateY(-3px);
+    border-color: #2D6A4F;
+  }
+  .team-stat__num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #2D6A4F;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .team-stat__num span {
+    color: #8B5E3C;
+    font-size: 0.7em;
+    margin-left: 1px;
+  }
+  .team-stat__label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #1B4332;
+    margin-bottom: 3px;
+    letter-spacing: 0.02em;
+  }
+  .team-stat__sub {
+    font-size: 0.7rem;
+    color: #777;
+    line-height: 1.4;
+  }
+
+  .about-team__heads-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 30px;
+  }
+  .about-team__heads-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 2.4vw, 1.7rem);
+    color: #1B4332;
+    margin: 0 0 10px;
+  }
+  .about-team__heads-header p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .about-team__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .team-card {
+    background: #fff;
+    border: 1px solid #EFE7D9;
+    border-radius: 16px;
+    padding: 22px 22px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .team-card:hover {
+    transform: translateY(-3px);
+    border-color: #2D6A4F;
+    box-shadow: 0 16px 36px rgba(27, 67, 50, 0.08);
+  }
+  .team-card__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+  .team-card__avatar svg { width: 28px; height: 28px; }
+  .team-card__avatar--green {
+    background: linear-gradient(145deg, #2D6A4F, #1B4332);
+  }
+  .team-card__avatar--brown {
+    background: linear-gradient(145deg, #8B5E3C, #6B4530);
+  }
+  .team-card__body {
+    flex: 1;
+    min-width: 0;
+  }
+  .team-card__dept {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #8B5E3C;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .team-card__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: #1B4332;
+    margin: 0 0 8px;
+    line-height: 1.3;
+  }
+  .team-card__text {
+    font-size: 0.86rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+  .team-card__skills {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .team-card__skills li {
+    background: #F1F8F3;
+    border: 1px solid #DCEBE0;
+    color: #2D6A4F;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+
+  .about-team__culture {
+    margin-top: 56px;
+    background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%);
+    border-radius: 22px;
+    padding: clamp(28px, 4vw, 44px);
+    color: #fff;
+  }
+  .about-team__culture-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .about-team__culture-copy .section-header__label {
+    color: #B7E4C7;
+  }
+  .about-team__culture-copy h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+    color: #fff;
+    margin: 8px 0 14px;
+    line-height: 1.25;
+  }
+  .about-team__culture-copy p {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.75;
+    font-size: 0.95rem;
+    margin: 0 0 14px;
+  }
+  .about-team__culture-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .about-team__culture-list li {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    backdrop-filter: blur(4px);
+  }
+  .about-team__culture-list li strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #fff;
+    flex-shrink: 0;
+    min-width: 90px;
+  }
+  .about-team__culture-list li span {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1100px) {
+    .about-team__stats { grid-template-columns: repeat(3, 1fr); }
+    .about-team__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .about-team__culture-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .about-team__stats { grid-template-columns: repeat(2, 1fr); }
+    .about-team__grid { grid-template-columns: 1fr; }
+    .team-card__avatar { width: 50px; height: 50px; }
+  }
+
+  /* =======================================================
      Responsive tweaks for new sections
      ======================================================= */
   @media (max-width: 992px) {
@@ -2831,6 +3974,58 @@
       "id": "hero_text",
       "label": "Hero Text",
       "default": "HerboVilla is the Ayurvedic and herbal wellness division of PRM Pharmaceuticals — a 25-year-old Indian pharmaceutical house serving more than three lakh healthcare professionals across 28 states."
+    },
+    {
+      "type": "header",
+      "content": "Image Showcase (At a Glance)"
+    },
+    {
+      "type": "image_picker",
+      "id": "showcase_image_1",
+      "label": "Showcase Image 1 — Facility (large)",
+      "info": "Wide image of WHO-GMP facility / exterior"
+    },
+    {
+      "type": "image_picker",
+      "id": "showcase_image_2",
+      "label": "Showcase Image 2 — Founder (Hemang Soni)"
+    },
+    {
+      "type": "image_picker",
+      "id": "showcase_image_3",
+      "label": "Showcase Image 3 — Director (Dhyey Soni)"
+    },
+    {
+      "type": "image_picker",
+      "id": "showcase_image_4",
+      "label": "Showcase Image 4 — QC Lab"
+    },
+    {
+      "type": "image_picker",
+      "id": "showcase_image_5",
+      "label": "Showcase Image 5 — Herbs / Botanicals"
+    },
+    {
+      "type": "image_picker",
+      "id": "showcase_image_6",
+      "label": "Showcase Image 6 — Products (large)",
+      "info": "Wide image of product line-up / packaging"
+    },
+    {
+      "type": "header",
+      "content": "Leadership Portraits (Soni Family)"
+    },
+    {
+      "type": "image_picker",
+      "id": "leader_image_1",
+      "label": "Hemang Soni — Founder Portrait",
+      "info": "Square portrait recommended (1:1 aspect ratio)"
+    },
+    {
+      "type": "image_picker",
+      "id": "leader_image_2",
+      "label": "Dhyey Soni — Director Portrait",
+      "info": "Square portrait recommended (1:1 aspect ratio)"
     },
     {
       "type": "header",
