@@ -1,0 +1,46 @@
+{
+  "_comment": "New MRP rollout. Source: 'NEW MRP (2).xls'. Rule: new listing price = per-unit MRP x pack count shown in the product title/handle. Verify 'pack' against the live title before applying.",
+  "store": "prm-herbovilla.myshopify.com",
+  "currency": "INR",
+
+  "confident": [
+    { "excel": "COFULA COUGH SYP 110ml",        "mrp": 100, "pack": 2, "new_price": 200, "current": 187.50, "handle": "prm-cofula-ayurvedic-syrup-110ml-pack-of-2-effective-relief-from-cough-cold-with-adulsa-jethimadh-bhimsenkapoor" },
+    { "excel": "CUT CARE OINTMENT 25gm",        "mrp": 90,  "pack": 2, "new_price": 180, "current": 168.00, "handle": "prm-cut-care-ayurvedic-foot-care-ointment-25g-pack-of-2-heals-cracked-heels-with-kokum-butter-sarjaras-manjishtha" },
+    { "excel": "HARRY CAPSULES 30cap",          "mrp": 150, "pack": 2, "new_price": 300, "current": 280.00, "handle": "prm-harry-ayurvedic-immunity-capsules-30-caps-pack-of-2-boosts-strength-stamina-with-ashwagandha-gokhru-shilajit" },
+    { "excel": "HARRY DROPS 30ml",              "mrp": 50,  "pack": 3, "new_price": 150, "current": 138.00, "handle": "prm-harry-herbal-drops-30ml-pack-of-3-ayurvedic-supplement-for-growth-immunity-in-children" },
+    { "excel": "HARRY FAMILY TONIC 450ml",      "mrp": 275, "pack": 1, "new_price": 275, "current": 257.00, "handle": "prm-harry-ayurvedic-immunity-syrup-450ml-pack-of-1-boosts-strength-immunity-with-ashwagandha-triphala-sharavari" },
+    { "excel": "HARRY G CAPSULES 30cap",        "mrp": 360, "pack": 1, "new_price": 360, "current": 337.00, "handle": "prm-harry-g-ayurvedic-capsules-30-caps-pack-of-1-boosts-vigour-vitality-stamina-with-suvarna-bhasma-safed-musli-ashwagandha" },
+    { "excel": "ICEE SYRUP Mango 170ml",        "mrp": 120, "pack": 2, "new_price": 240, "current": 224.00, "handle": "icee-mango-herbal-antacid-syrup-ayurvedic-relief-for-acidity-heartburn-indigestion-amla-guduchi-digestive-blend-pack-of-2" },
+    { "excel": "ICEE SYRUP Mint 170ml",         "mrp": 120, "pack": 2, "new_price": 240, "current": 224.00, "handle": "icee-mint-herbal-antacid-syrup-ayurvedic-relief-for-acidity-heartburn-indigestion-amla-guduchi-digestive-blend-pack-of-2" },
+    { "excel": "ICEE SYRUP Saunf 170ml",        "mrp": 120, "pack": 2, "new_price": 240, "current": 224.00, "handle": "icee-saunf-herbal-antacid-syrup-🍓-ayurvedic-relief-for-acidity-heartburn-indigestion-amla-guduchi-digestive-blend-pack-of-2" },
+    { "excel": "ICEE SYRUP Strawberry 170ml",   "mrp": 120, "pack": 2, "new_price": 240, "current": 224.00, "handle": "prm-icee-ayurvedic-antacid-syrup-170ml-strawberry-flavour-pack-of-2-relieves-acidity-gas-indigestion" },
+    { "excel": "ITCHI CARE CREAM 15gm",         "mrp": 60,  "pack": 3, "new_price": 180, "current": 168.00, "handle": "prm-itchi-care-ayurvedic-skin-care-cream-15g-pack-of-3-fungal-infection-remedy-with-sandal-oil-rose-water-berry-berry" },
+    { "excel": "PROLAX SYRUP 170ml",            "mrp": 120, "pack": 2, "new_price": 240, "current": 224.00, "handle": "prm-prolax-ayurvedic-laxative-care-syrup-170ml-pack-of-2-gentle-relief-from-chronic-constipation-with-sanchal-trivrut-senna" },
+    { "excel": "PROLAX TABLET 10tab",           "mrp": 50,  "pack": 3, "new_price": 150, "current": 138.00, "handle": "prm-prolax-ayurvedic-laxative-care-tablet-10-tabs-pack-of-3-promotes-healthy-bowel-movement-with-senna-shuddha-nepala-sanchal" },
+    { "excel": "VEDACOLD-CV 675 15tab",         "mrp": 120, "pack": 2, "new_price": 240, "current": 220.00, "handle": "vedacold-cv-675-ayurvedic-cold-cough-relief-tablets-22-herbal-immunity-formula-with-tulsi-trikatu-haldi-pushkarmool-supports-relief-from-nasal-congestion-sore-throat-fever-respiratory-discomfort-30-tablets-pack", "note": "Listing is '30 Tablets Pack' = 2 x 15tab units." },
+    { "excel": "ZYMO VILLA SYP 200ml",          "mrp": 150, "pack": 2, "new_price": 300, "current": 280.80, "handle": "prm-zymo-villa-ayurvedic-enzyme-syrup-200ml-pack-of-2-improves-digestion-appetite-with-ajwain-pudina-hing-jira-oil" },
+    { "excel": "ALOY CARE SOAP 75gm",           "mrp": 81,  "pack": 2, "new_price": 162, "current": 144.00, "handle": "prm-aloy-care-ayurvedic-moisturising-soap-75g-pack-of-2-nourishing-body-soap-with-aloe-vera-vitamin-e-glycerine" },
+    { "excel": "DERMO VILLA HERBAL SOAP 75gm",  "mrp": 81,  "pack": 2, "new_price": 162, "current": 162.00, "handle": "prm-dermo-villa-herbal-syrup-200ml-pack-of-2-blood-purifier-skin-cleanser-with-neem-manjistha-kalmegha", "note": "NO CHANGE - already 162. Handle says 'syrup' but the live title is 'Dermovilla Ayurvedic Herbal Soap (pack of 2)'." },
+    { "excel": "SAHELI SOAP 75gm",              "mrp": 81,  "pack": 2, "new_price": 162, "current": 144.00, "handle": "prm-saheli-anti-acne-soap-75g-zinc-oxide-tea-tree-jojoba-oil-pimple-control-skin-glow-anti-bacterial-bath-soap-pack-of-2" },
+    { "excel": "PRM KESAR BABY SOAP 75gm",      "mrp": 81,  "pack": 2, "new_price": 162, "current": 144.00, "handle": "prm-kesar-baby-soap-75g-pack-of-2-gentle-daily-bathing-soap-for-infants-with-kesar-coconut-oil-jojoba-oil", "note": "Title shows no pack count; handle + current price (144 = 72 x 2) confirm pack of 2. Variant is named '340'." },
+    { "excel": "ARTHO VILLA OIL 60ml",          "mrp": 120, "pack": 2, "new_price": 240, "current": 224.00, "handle": "arthovilla-ayurvedic-pain-reliever-oil-60ml-pack-of-2-for-joint-back-pain-relief-with-gandhpura-mahamash-mahanarayan", "variant": "60ml" },
+    { "excel": "ARTHO VILLA OIL 100ml",         "mrp": 180, "pack": 2, "new_price": 360, "current": 336.00, "handle": "arthovilla-ayurvedic-pain-reliever-oil-60ml-pack-of-2-for-joint-back-pain-relief-with-gandhpura-mahamash-mahanarayan", "variant": "100ml" },
+    { "excel": "PYNIL OINTMENT 30gm",           "mrp": 100, "pack": 2, "new_price": 200, "current": 168.00, "handle": "prm-pynil-ayurvedic-piles-care-ointment-30g-pack-of-2-soothes-pain-itching-with-haritaki-nimbu-pittapapdo" },
+    { "excel": "DERMO NEEM SOAP 75gm",          "mrp": 60,  "pack": 2, "new_price": 120, "current": 144.00, "handle": "prm-dermo-neem-soap-75g-neem-turmeric-olive-oil-anti-acne-ayurvedic-bath-soap-for-clear-smooth-healthy-skin-pack-of-2", "note": "CONFIRMED 2026-08-08: only downward move in the sheet (144 -> 120). Dermo Neem is intentionally the cheaper soap at MRP 60 vs 81 for the rest." }
+  ],
+
+  "needs_decision": [
+    { "excel": "PYNIL CAPSULES 30cap",  "mrp": 210, "pack": 2, "new_price": 420, "current": 168.00, "handle": "prm-pynil-ayurvedic-piles-care-capsules-30-caps-pack-of-2-gentle-hemorrhoid-relief-with-suran-aritha-mango-seeds-limbodi", "issue": "SKIPPED 2026-08-08 by decision. Current 168 is the OINTMENT price, not a capsule price - this listing looks mispriced today. Its live title also reads 'Pynil Piles Care Combo', not capsules. Fix the listing itself before repricing to 420." },
+    { "excel": "ARTHO VILLA OIL 100ml (duplicate listing)", "mrp": 180, "pack": 2, "new_price": 360, "current": 336.00, "handle": "prm-artho-villa-ayurvedic-pain-reliever-oil-60ml-pack-of-2-for-joint-back-pain-relief-with-gandhpura-mahamash-mahanarayan", "issue": "Second, duplicate oil listing ('Arthovilla Ayurvedic Joint & Muscle Relief Oil'), priced 336 = the 100ml pack-of-2 price. Reprice to 360 to match, or delete the duplicate." }
+  ],
+
+  "not_on_store": [
+    { "excel": "PREGONE CAPSULE 12cap",     "mrp": 140, "issue": "No matching product in the 66 live listings." },
+    { "excel": "SUMAN MEGA CAPSULE 6cap",   "mrp": 210, "issue": "No matching product in the 66 live listings." }
+  ],
+
+  "knock_on_effects": [
+    "COMBO listings are priced off their components and are NOT in the sheet. After this rollout they will be inconsistent: Cofula & Vedacold COMBO (293), Prolax Tablets & Syrup COMBO (160), Pynil Ointment & Capsules COMBO (252), Saheli Soap & Cream COMBO (156), ZymoVilla Syrup & Tablets COMBO (280), Harry Syrup & Tablets COMBO (280), Dermovilla Syrup & Tablets (280), Platigen Syrup & Tablets COMBO (570), Lee/Rome/ArthoVilla/Hair Marshal combos.",
+    "templates/product.json ships one global combo-pack block set (Pack of 3 = 500, Pack of 5 = 750) shown on EVERY product page. The new sheet has zero pack discount (packs are exact multiples), so these hardcoded figures are now wrong on all 66 products."
+  ]
+}

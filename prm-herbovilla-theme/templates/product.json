@@ -72,6 +72,90 @@
           "settings": {
             "text": "Continue for at least 3 months for best results"
           }
+        },
+        "combo-1": {
+          "type": "combo_pack",
+          "settings": {
+            "label": "Pack of 3",
+            "quantity": 3,
+            "price": "",
+            "mrp": "",
+            "best_value": false
+          }
+        },
+        "combo-2": {
+          "type": "combo_pack",
+          "settings": {
+            "label": "Pack of 5",
+            "quantity": 5,
+            "price": "",
+            "mrp": "",
+            "best_value": false
+          }
+        },
+        "research-1": {
+          "type": "research_ingredient",
+          "settings": {
+            "name": "Papaya Extract",
+            "scientific_name": "Carica papaya",
+            "description": "Rich in papain enzyme and antioxidants, supports platelet production and immune function.",
+            "badge": "Clinically Studied"
+          }
+        },
+        "research-2": {
+          "type": "research_ingredient",
+          "settings": {
+            "name": "Giloy",
+            "scientific_name": "Tinospora cordifolia",
+            "description": "Powerful immunomodulator that enhances white blood cell activity and overall immunity.",
+            "badge": "Ayurvedic Gold Standard"
+          }
+        },
+        "research-3": {
+          "type": "research_ingredient",
+          "settings": {
+            "name": "Tulsi",
+            "scientific_name": "Ocimum sanctum",
+            "description": "Adaptogenic herb with anti-inflammatory properties that supports stress response and vitality.",
+            "badge": "Traditional Medicine"
+          }
+        },
+        "research-4": {
+          "type": "research_ingredient",
+          "settings": {
+            "name": "Ashwagandha",
+            "scientific_name": "Withania somnifera",
+            "description": "Renowned adaptogen that reduces cortisol levels and enhances physical and mental performance.",
+            "badge": "Evidence-Based"
+          }
+        },
+        "video-1": {
+          "type": "video_testimonial",
+          "settings": {
+            "video_url": "",
+            "click_url": ""
+          }
+        },
+        "video-2": {
+          "type": "video_testimonial",
+          "settings": {
+            "video_url": "",
+            "click_url": ""
+          }
+        },
+        "video-3": {
+          "type": "video_testimonial",
+          "settings": {
+            "video_url": "",
+            "click_url": ""
+          }
+        },
+        "video-4": {
+          "type": "video_testimonial",
+          "settings": {
+            "video_url": "",
+            "click_url": ""
+          }
         }
       },
       "block_order": [
@@ -79,13 +163,23 @@
         "highlight-2",
         "highlight-3",
         "highlight-4",
+        "combo-1",
+        "combo-2",
         "ingredient-1",
         "ingredient-2",
         "ingredient-3",
         "ingredient-4",
         "step-1",
         "step-2",
-        "step-3"
+        "step-3",
+        "research-1",
+        "research-2",
+        "research-3",
+        "research-4",
+        "video-1",
+        "video-2",
+        "video-3",
+        "video-4"
       ],
       "settings": {
         "show_highlights": true,

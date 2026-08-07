@@ -1,657 +1,513 @@
 {%- style -%}
-  .product-template {
-    padding: 40px 0 80px;
-  }
-  .product-breadcrumbs {
-    margin-bottom: 30px;
-  }
-  .product-breadcrumbs a {
-    color: var(--color-text-light);
-    text-decoration: none;
-    font-size: 0.9rem;
-  }
-  .product-breadcrumbs a:hover {
-    color: var(--color-primary);
-  }
-  .product-breadcrumbs span {
-    color: var(--color-text-light);
-    margin: 0 8px;
-  }
+  /* ===== PRODUCT PAGE — FULL LAYOUT ===== */
+
+  .product-template { padding: 30px 0 0; background: #fff; }
+  .section-product { background: #fff; }
+
+  /* --- Breadcrumbs --- */
+  .product-breadcrumbs { margin-bottom: 24px; font-size: 0.88rem; }
+  .product-breadcrumbs a { color: var(--color-text-light); text-decoration: none; }
+  .product-breadcrumbs a:hover { color: var(--color-primary); }
+  .product-breadcrumbs span { color: var(--color-text-light); margin: 0 6px; }
+
+  /* --- Main Grid --- */
   .product-grid {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    gap: 60px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 50px;
     align-items: flex-start;
   }
-  .product-gallery {
-    position: sticky;
-    top: 120px;
-    max-width: 460px;
-    width: 100%;
-    margin: 0 auto;
-  }
+
+  /* --- Gallery --- */
+  .product-gallery { position: sticky; top: 90px; }
   .product-main-image {
-    width: 100%;
-    max-width: 460px;
-    max-height: 460px;
-    aspect-ratio: 1;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #FDF8F0;
-    margin: 0 auto 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    box-sizing: border-box;
-    border: 1px solid #EFE7D9;
+    width: 100%; aspect-ratio: 1; border-radius: 16px; overflow: hidden;
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    padding: 24px; box-sizing: border-box; border: 1px solid #eee; margin-bottom: 12px;
+    cursor: zoom-in; position: relative;
   }
-  .product-main-image img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-  }
-  .product-thumbnails {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-  }
+  .product-main-image img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform .3s ease; }
+  .product-main-image:hover img { transform: scale(1.05); }
+  .product-thumbnails { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
   .product-thumbnail {
-    width: 78px;
-    height: 78px;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 2px solid #EFE7D9;
-    background: #FDF8F0;
-    flex-shrink: 0;
-    transition: border-color 0.25s ease, transform 0.25s ease;
-    padding: 6px;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 72px; height: 72px; border-radius: 10px; overflow: hidden; cursor: pointer;
+    border: 2px solid #eee; background: #fff; flex-shrink: 0; transition: border-color .25s;
+    padding: 5px; box-sizing: border-box; display: flex; align-items: center; justify-content: center;
   }
-  .product-thumbnail.active,
-  .product-thumbnail:hover {
-    border-color: var(--color-primary);
-    transform: translateY(-1px);
+  .product-thumbnail.active, .product-thumbnail:hover { border-color: var(--color-primary); }
+  .product-thumbnail img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  /* --- Product Info --- */
+  .product-info { min-width: 0; max-width: 100%; }
+  .product-badges { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .product-badge { padding: 5px 14px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+  .product-badge--sale { background: #fee2e2; color: #dc2626; }
+  .product-badge--new { background: #dbeafe; color: #2563eb; }
+  .product-badge--bestseller { background: #fef3c7; color: #d97706; }
+  .product-badge--ayurvedic { background: #dcfce7; color: #16a34a; }
+
+  .product-vendor { color: var(--color-primary); font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .8px; }
+  .product-title { font-family: var(--font-heading); font-size: 2rem; color: var(--color-text); margin-bottom: 12px; line-height: 1.25; word-wrap: break-word; overflow-wrap: break-word; }
+
+  .product-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .product-rating-stars { display: flex; gap: 2px; }
+  .product-rating-stars svg { width: 18px; height: 18px; }
+  .product-rating-count { color: var(--color-text-light); font-size: 0.85rem; }
+  .product-rating-count a { color: var(--color-primary); text-decoration: underline; cursor: pointer; }
+
+  .product-price-wrapper { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+  .product-price { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; color: var(--color-primary); }
+  .product-compare-price { font-size: 1.15rem; color: var(--color-text-light); text-decoration: line-through; }
+  .product-save-badge { background: #dcfce7; color: #16a34a; padding: 3px 10px; border-radius: 14px; font-size: 0.8rem; font-weight: 600; }
+  .product-tax-note { width: 100%; font-size: 0.78rem; color: var(--color-text-light); margin-top: -4px; }
+
+  /* Short description */
+  .product-description-short { color: var(--color-text-light); font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; }
+
+  /* Feature pills (horizontal) */
+  .product-feature-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .product-feature-pill {
+    display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px;
+    background: #f0faf4; border: 1px solid #d4ecdd; border-radius: 20px; font-size: 0.82rem; color: #1B4332; font-weight: 500;
   }
-  .product-thumbnail img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-  }
-  .product-badges {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-  }
-  .product-badge {
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .product-badge--sale {
-    background: #fee2e2;
-    color: #dc2626;
-  }
-  .product-badge--new {
-    background: #dbeafe;
-    color: #2563eb;
-  }
-  .product-badge--bestseller {
-    background: #fef3c7;
-    color: #d97706;
-  }
-  .product-vendor {
-    color: var(--color-primary);
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .product-title {
-    font-family: var(--font-heading);
-    font-size: 2.25rem;
-    color: var(--color-text);
-    margin-bottom: 15px;
-    line-height: 1.2;
-  }
-  .product-rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  .product-rating-count {
-    color: var(--color-text-light);
-    font-size: 0.9rem;
-  }
-  .product-price-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
-  }
-  .product-price {
-    font-family: var(--font-heading);
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--color-primary);
-  }
-  .product-compare-price {
-    font-size: 1.25rem;
-    color: var(--color-text-light);
-    text-decoration: line-through;
-  }
-  .product-save-badge {
-    background: #dcfce7;
-    color: #16a34a;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
-  .product-description-short {
-    color: var(--color-text-light);
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 25px;
-  }
-  .product-highlights {
-    background: #f8fdf8;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 25px;
-  }
-  .product-highlights h4 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: 12px;
-  }
-  .product-highlights ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .product-highlights li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    font-size: 0.9rem;
-    color: var(--color-text-light);
-  }
-  .product-highlights li svg {
-    width: 16px;
-    height: 16px;
-    color: var(--color-primary);
-    flex-shrink: 0;
-  }
-  .product-form {
-    margin-bottom: 25px;
-  }
-  .product-variants {
-    margin-bottom: 20px;
-  }
-  .variant-label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: 10px;
-    display: block;
-  }
-  .variant-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .variant-option {
-    padding: 10px 20px;
-    border: 2px solid #e5e5e5;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: #fff;
-  }
-  .variant-option:hover {
-    border-color: var(--color-primary);
-  }
-  .variant-option.selected {
-    border-color: var(--color-primary);
-    background: rgba(45, 106, 79, 0.05);
-  }
-  .variant-option[disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  .product-quantity-row {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  .quantity-selector {
-    display: flex;
-    align-items: center;
-    border: 2px solid #e5e5e5;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .quantity-btn {
-    width: 45px;
-    height: 50px;
-    background: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 1.25rem;
-    color: var(--color-text);
-    transition: background 0.3s ease;
-  }
-  .quantity-btn:hover {
-    background: #f5f5f5;
-  }
-  .quantity-input {
-    width: 60px;
-    height: 50px;
-    border: none;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 600;
-  }
+  .product-feature-pill svg { width: 14px; height: 14px; color: var(--color-primary); flex-shrink: 0; }
+
+  /* Key highlights box */
+  .product-highlights { background: #f8fdf8; border: 1px solid #e6f4ea; border-radius: 14px; padding: 18px 20px; margin-bottom: 20px; }
+  .product-highlights h4 { font-size: 0.88rem; font-weight: 700; color: var(--color-text); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .product-highlights h4 svg { width: 16px; height: 16px; color: var(--color-primary); }
+  .product-highlights ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .product-highlights li { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 0.85rem; color: var(--color-text); }
+  .product-highlights li svg { width: 15px; height: 15px; color: var(--color-primary); flex-shrink: 0; }
+
+  /* Form */
+  .product-form { margin-bottom: 16px; }
+  .product-variants { margin-bottom: 16px; }
+  .variant-label { font-size: 0.88rem; font-weight: 600; color: var(--color-text); margin-bottom: 8px; display: block; }
+  .variant-options { display: flex; flex-wrap: wrap; gap: 8px; }
+  .variant-option { padding: 9px 18px; border: 2px solid #e5e5e5; border-radius: 8px; font-size: 0.88rem; cursor: pointer; transition: all .2s; background: #fff; }
+  .variant-option:hover { border-color: var(--color-primary); }
+  .variant-option.selected { border-color: var(--color-primary); background: rgba(45,106,79,.06); font-weight: 600; }
+
+  /* Combo pack selector */
+  .combo-packs { margin-bottom: 16px; }
+  .combo-packs__label { font-size: 0.88rem; font-weight: 600; color: var(--color-text); margin-bottom: 10px; display: block; }
+  .combo-packs__grid { display: flex; flex-direction: column; gap: 8px; }
+  .combo-pack-card { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 2px solid #e5e5e5; border-radius: 10px; cursor: pointer; transition: all .2s; background: #fff; position: relative; }
+  .combo-pack-card:hover { border-color: var(--color-primary); }
+  .combo-pack-card.selected { border-color: var(--color-primary); background: rgba(45,106,79,.04); }
+  .combo-pack-card__radio { width: 20px; height: 20px; border: 2px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: border-color .2s; }
+  .combo-pack-card.selected .combo-pack-card__radio { border-color: var(--color-primary); }
+  .combo-pack-card__radio::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: transparent; transition: background .2s; }
+  .combo-pack-card.selected .combo-pack-card__radio::after { background: var(--color-primary); }
+  .combo-pack-card__info { flex: 1; }
+  .combo-pack-card__title { font-size: 0.9rem; font-weight: 600; color: var(--color-text); margin-bottom: 2px; }
+  .combo-pack-card__pricing { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .combo-pack-card__price { font-size: 1.1rem; font-weight: 700; color: var(--color-text); }
+  .combo-pack-card__mrp { font-size: 0.82rem; color: var(--color-text-light); }
+  .combo-pack-card__mrp s { text-decoration: line-through; }
+  .combo-pack-card__discount { font-size: 0.82rem; color: #16a34a; font-weight: 600; }
+  .combo-pack-card__best { position: absolute; top: -8px; right: 12px; padding: 2px 10px; background: #16a34a; color: #fff; font-size: 0.68rem; font-weight: 700; border-radius: 10px; text-transform: uppercase; letter-spacing: .5px; }
+
+  .product-quantity-row { display: flex; gap: 12px; margin-bottom: 14px; }
+  .quantity-selector { display: flex; align-items: center; border: 2px solid #e5e5e5; border-radius: 8px; overflow: hidden; }
+  .quantity-btn { width: 42px; height: 48px; background: #fff; border: none; cursor: pointer; font-size: 1.2rem; color: var(--color-text); transition: background .2s; }
+  .quantity-btn:hover { background: #f5f5f5; }
+  .quantity-input { width: 50px; height: 48px; border: none; text-align: center; font-size: 1rem; font-weight: 600; }
   .product-add-btn {
-    flex: 1;
-    padding: 16px 30px;
-    background: var(--color-primary);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    flex: 1; padding: 14px 24px; background: var(--color-primary); color: #fff; border: none; border-radius: 8px;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: all .25s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
   }
-  .product-add-btn:hover {
-    background: var(--color-primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(45, 106, 79, 0.3);
-  }
-  .product-add-btn:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-  }
-  .product-add-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-  .product-buy-now {
-    width: 100%;
-    padding: 16px 30px;
-    background: #fff;
-    color: var(--color-text);
-    border: 2px solid var(--color-text);
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-  }
-  .product-buy-now:hover {
-    background: var(--color-text);
-    color: #fff;
-  }
+  .product-add-btn:hover { background: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(45,106,79,.3); }
+  .product-add-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
+  .product-add-btn svg { width: 18px; height: 18px; }
+  .product-buy-now { width: 100%; padding: 14px 24px; background: #fff; color: var(--color-text); border: 2px solid var(--color-text); border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all .25s; margin-bottom: 14px; }
+  .product-buy-now:hover { background: var(--color-text); color: #fff; }
+
+  /* Download button */
   .product-download-btn {
-    width: 100%;
-    padding: 14px 30px;
-    background: linear-gradient(135deg, #8B5E3C 0%, #6B4423 100%);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-decoration: none;
+    width: 100%; padding: 13px 24px; background: linear-gradient(135deg,#8B5E3C,#6B4423); color: #fff;
+    border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    transition: all .25s; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
   }
-  .product-download-btn:hover {
-    background: linear-gradient(135deg, #6B4423 0%, #4A2F18 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(139, 94, 60, 0.3);
-    color: #fff;
+  .product-download-btn:hover { background: linear-gradient(135deg,#6B4423,#4A2F18); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(139,94,60,.3); color: #fff; }
+  .product-download-btn svg { width: 18px; height: 18px; }
+
+  /* Share row */
+  .product-share { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .product-share span { font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
+  .product-share-btn {
+    width: 36px; height: 36px; border-radius: 50%; border: 1px solid #e5e5e5; background: #fff;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s;
   }
-  .product-download-btn svg {
-    width: 20px;
-    height: 20px;
+  .product-share-btn:hover { border-color: var(--color-primary); background: #f0faf4; }
+  .product-share-btn svg { width: 16px; height: 16px; }
+
+  /* Trust badges */
+  .product-trust-badges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 18px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+  .trust-badge { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+  .trust-badge svg { width: 26px; height: 26px; color: var(--color-primary); }
+  .trust-badge span { font-size: 0.72rem; color: var(--color-text-light); line-height: 1.3; font-weight: 500; }
+
+  /* ===== DESCRIPTION SECTION ===== */
+  .product-description-section { margin-top: 40px; padding: 36px 32px; background: #FDF8F0; border-radius: 20px; border-top: none; }
+  .product-description-section > h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid #e6f4ea; }
+
+  /* Description content */
+  .tab-description { width: 100%; }
+  .tab-description .rte { font-size: 0.95rem; line-height: 1.8; color: var(--color-text-light); }
+  .tab-description .rte p { margin-bottom: 14px; }
+
+  /* Auto-structured blocks (JS wraps heading groups) */
+  .desc-block { background: #fff; border-radius: 16px; border: 1px solid #e6f4ea; padding: 24px 28px; margin-bottom: 20px; }
+  .desc-block h1, .desc-block h2, .desc-block h3, .desc-block h4, .desc-block h5, .desc-block h6 { font-family: var(--font-heading); color: var(--color-primary); font-size: 1.15rem; margin: 0 0 16px 0; padding-bottom: 10px; border-bottom: 2px solid #e6f4ea; }
+  .desc-block p { margin-bottom: 10px; }
+  .desc-block p:last-child { margin-bottom: 0; }
+
+  /* RTE headings fallback (before JS runs) */
+  .tab-description .rte > h1, .tab-description .rte > h2, .tab-description .rte > h3, .tab-description .rte > h4, .tab-description .rte > h5, .tab-description .rte > h6 { font-family: var(--font-heading); color: var(--color-primary); margin-top: 28px; margin-bottom: 14px; font-size: 1.15rem; }
+
+  /* RTE lists — styled as check items */
+  .tab-description .rte ul, .tab-description .rte ol { padding-left: 0; list-style: none; margin-bottom: 16px; }
+  .tab-description .rte li { position: relative; padding: 10px 14px 10px 32px; margin-bottom: 6px; background: #f8fdf8; border-radius: 10px; border: 1px solid #e6f4ea; font-size: 0.9rem; color: var(--color-text); line-height: 1.5; }
+  .tab-description .rte li::before { content: '\2713'; position: absolute; left: 12px; top: 10px; color: var(--color-primary); font-weight: 700; font-size: 0.85rem; }
+
+  /* Ingredient grid — auto-applied by JS for lists with 4+ items */
+  .ingredient-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+  .ingredient-grid li { text-align: center; padding: 10px 8px !important; font-weight: 500; }
+  .ingredient-grid li::before { display: none !important; }
+
+  /* Two-column desc layout — applied by JS when 2+ blocks */
+  .desc-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* RTE tables */
+  .tab-description .rte table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; border: 1px solid #e6f4ea; margin: 16px 0; }
+  .tab-description .rte table th, .tab-description .rte thead td { background: var(--color-primary); color: #fff; padding: 12px 16px; font-weight: 600; font-size: 0.9rem; text-align: left; }
+  .tab-description .rte table td { padding: 10px 16px; font-size: 0.88rem; border-bottom: 1px solid #f0f0f0; }
+  .tab-description .rte table tr:last-child td { border-bottom: none; }
+  .tab-description .rte table tr:nth-child(even) td { background: #faf9f6; }
+
+  /* RTE strong/bold */
+  .tab-description .rte strong, .tab-description .rte b { color: var(--color-text); font-weight: 700; }
+  /* RTE images */
+  .tab-description .rte img { border-radius: 12px; margin: 12px 0; max-width: 100%; height: auto; }
+
+  /* Benefits grid */
+  .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 24px; }
+  .benefit-card { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: #fff; border: 1px solid #e6f4ea; border-radius: 12px; transition: transform .2s, box-shadow .2s; }
+  .benefit-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(45,106,79,.1); }
+  .benefit-card-icon { width: 36px; height: 36px; background: rgba(45,106,79,.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .benefit-card-icon svg { width: 16px; height: 16px; color: var(--color-primary); }
+  .benefit-card-text { flex: 1; font-size: 0.88rem; color: var(--color-text); line-height: 1.45; font-weight: 500; }
+
+  /* Product specs */
+  .product-specs { margin-top: 24px; background: #fff; border-radius: 14px; padding: 24px 28px; border: 1px solid #e6f4ea; }
+  .product-specs h4 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 16px; color: var(--color-primary); padding-bottom: 10px; border-bottom: 2px solid #e6f4ea; }
+  .spec-table { width: 100%; border-collapse: collapse; }
+  .spec-table tr { border-bottom: 1px solid #f0f0f0; }
+  .spec-table tr:last-child { border-bottom: none; }
+  .spec-table td { padding: 12px 0; font-size: 0.9rem; vertical-align: top; }
+  .spec-table td:first-child { font-weight: 600; color: var(--color-text); width: 35%; padding-right: 16px; }
+  .spec-table td:last-child { color: var(--color-text-light); }
+
+  /* Description responsive */
+  @media (max-width: 992px) { .desc-columns { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) { .product-description-section { padding: 24px 18px; border-radius: 14px; } .desc-block { padding: 18px 16px; } .ingredient-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+  @media (max-width: 576px) { .benefits-grid { grid-template-columns: 1fr; } .ingredient-grid { grid-template-columns: 1fr !important; } .product-description-section { padding: 18px 14px; } }
+
+  /* ===== YOU MAY ALSO LIKE ===== */
+  .product-recommendations {
+    margin-top: 60px; padding: 40px 0; border-top: 2px solid #eee;
   }
-  .product-download-btn .download-icon {
-    animation: bounce-down 2s infinite;
+  .recommendations-header { text-align: center; margin-bottom: 30px; }
+  .recommendations-header h2 { font-family: var(--font-heading); font-size: 1.6rem; color: var(--color-text); margin-bottom: 6px; }
+  .recommendations-header p { color: var(--color-text-light); font-size: 0.92rem; }
+  .recommendations-scroll-wrapper { position: relative; }
+  .recommendations-grid {
+    display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; padding-bottom: 8px;
   }
-  @keyframes bounce-down {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(3px);
-    }
-    60% {
-      transform: translateY(2px);
-    }
+  .recommendations-grid::-webkit-scrollbar { display: none; }
+  .rec-card { flex: 0 0 220px; scroll-snap-align: start; border-radius: 14px; overflow: hidden; background: #fff; border: 1px solid #eee; transition: transform .25s, box-shadow .25s; }
+  .rec-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .rec-card__image { position: relative; aspect-ratio: 1; background: #FDF8F0; overflow: hidden; }
+  .rec-card__image img { width: 100%; height: 100%; object-fit: contain; padding: 16px; box-sizing: border-box; }
+  .rec-card__badge { position: absolute; top: 10px; left: 10px; padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; background: #fee2e2; color: #dc2626; }
+  .rec-card__body { padding: 14px 16px; }
+  .rec-card__vendor { font-size: 0.72rem; color: var(--color-primary); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+  .rec-card__title { font-size: 0.88rem; font-weight: 600; color: var(--color-text); margin-bottom: 8px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .rec-card__title a { color: inherit; text-decoration: none; }
+  .rec-card__title a:hover { color: var(--color-primary); }
+  .rec-card__price { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .rec-card__price-now { font-weight: 700; font-size: 1rem; color: var(--color-primary); }
+  .rec-card__price-was { font-size: 0.82rem; color: var(--color-text-light); text-decoration: line-through; }
+  .rec-card__btn {
+    width: 100%; padding: 10px; background: #fff; color: var(--color-primary); border: 2px solid var(--color-primary);
+    border-radius: 8px; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all .2s;
   }
-  .product-trust-badges {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    padding: 20px 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 25px;
+  .rec-card__btn:hover { background: var(--color-primary); color: #fff; }
+
+  /* ===== REVIEWS SECTION ===== */
+  .product-reviews-section {
+    margin-top: 50px; padding: 40px 0; border-top: 2px solid #eee;
   }
-  .trust-badge {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
+  .reviews-header { text-align: center; margin-bottom: 30px; }
+  .reviews-header h2 { font-family: var(--font-heading); font-size: 1.6rem; color: var(--color-text); margin-bottom: 6px; }
+  .reviews-header p { color: var(--color-text-light); font-size: 0.92rem; }
+
+  .reviews-summary { display: flex; gap: 40px; padding: 28px; background: #f8fdf8; border: 1px solid #e6f4ea; border-radius: 16px; margin-bottom: 30px; align-items: center; }
+  .reviews-avg { text-align: center; min-width: 140px; }
+  .reviews-avg-number { font-family: var(--font-heading); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1; }
+  .reviews-avg-stars { display: flex; justify-content: center; gap: 2px; margin: 8px 0 4px; }
+  .reviews-avg-stars svg { width: 18px; height: 18px; }
+  .reviews-avg-count { font-size: 0.82rem; color: var(--color-text-light); }
+  .reviews-bars { flex: 1; }
+  .review-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .review-bar-label { font-size: 0.82rem; font-weight: 600; color: var(--color-text); width: 14px; text-align: right; }
+  .review-bar-star svg { width: 13px; height: 13px; color: #f59e0b; }
+  .review-bar-track { flex: 1; height: 8px; background: #e5e5e5; border-radius: 4px; overflow: hidden; }
+  .review-bar-fill { height: 100%; background: #f59e0b; border-radius: 4px; transition: width .5s ease; }
+  .review-bar-count { font-size: 0.78rem; color: var(--color-text-light); width: 24px; }
+
+  /* Review cards */
+  .reviews-list { display: grid; gap: 16px; margin-bottom: 30px; }
+  .review-card { padding: 20px 24px; background: #fff; border: 1px solid #eee; border-radius: 14px; }
+  .review-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .review-card-avatar {
+    width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: #fff;
+    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;
   }
-  .trust-badge svg {
-    width: 28px;
-    height: 28px;
-    color: var(--color-primary);
+  .review-card-meta { flex: 1; }
+  .review-card-name { font-weight: 600; font-size: 0.92rem; color: var(--color-text); }
+  .review-card-loc { font-size: 0.78rem; color: var(--color-text-light); }
+  .review-card-stars { display: flex; gap: 1px; }
+  .review-card-stars svg { width: 14px; height: 14px; }
+  .review-card-date { font-size: 0.75rem; color: var(--color-text-light); }
+  .review-card-title { font-weight: 600; font-size: 0.95rem; color: var(--color-text); margin-bottom: 4px; }
+  .review-card-body { font-size: 0.88rem; color: var(--color-text-light); line-height: 1.65; }
+  .review-card-verified { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; color: #16a34a; font-weight: 500; margin-top: 8px; }
+  .review-card-verified svg { width: 13px; height: 13px; }
+
+  /* Review form */
+  .review-form-wrapper { background: #faf9f6; border-radius: 16px; padding: 28px; border: 1px solid #eee; }
+  .review-form-wrapper h3 { font-family: var(--font-heading); font-size: 1.15rem; color: var(--color-text); margin-bottom: 20px; }
+  .review-form { display: grid; gap: 16px; }
+  .review-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .review-field { display: flex; flex-direction: column; gap: 5px; }
+  .review-field label { font-size: 0.82rem; font-weight: 600; color: var(--color-text); }
+  .review-field input, .review-field textarea {
+    padding: 11px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem;
+    font-family: var(--font-body); transition: border-color .2s; background: #fff;
   }
-  .trust-badge span {
-    font-size: 0.8rem;
-    color: var(--color-text-light);
-    line-height: 1.3;
+  .review-field input:focus, .review-field textarea:focus { outline: none; border-color: var(--color-primary); }
+  .review-field textarea { resize: vertical; min-height: 90px; }
+  .review-star-input { display: flex; gap: 4px; cursor: pointer; }
+  .review-star-input svg { width: 24px; height: 24px; color: #ddd; transition: color .15s; cursor: pointer; }
+  .review-star-input svg.filled { color: #f59e0b; }
+  .review-submit-btn {
+    padding: 13px 28px; background: var(--color-primary); color: #fff; border: none; border-radius: 8px;
+    font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .25s; justify-self: start;
   }
-  .product-tabs {
-    margin-top: 60px;
+  .review-submit-btn:hover { background: var(--color-primary-dark); transform: translateY(-1px); }
+  .review-success { display: none; padding: 14px 18px; background: #dcfce7; border: 1px solid #bbf7d0; border-radius: 10px; color: #166534; font-size: 0.88rem; }
+
+  /* Review image upload */
+  .review-image-upload { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .review-image-label {
+    display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; background: #fff;
+    border: 2px dashed #ddd; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 500;
+    color: var(--color-text-light); transition: border-color .2s;
   }
-  .product-description-block {
-    margin-top: 60px;
-    padding-top: 30px;
-    border-top: 2px solid #eee;
+  .review-image-label:hover { border-color: var(--color-primary); color: var(--color-primary); }
+  .review-image-label svg { width: 18px; height: 18px; }
+  .review-image-previews { display: flex; gap: 8px; flex-wrap: wrap; }
+  .review-image-preview {
+    width: 60px; height: 60px; border-radius: 8px; overflow: hidden; position: relative; border: 1px solid #eee;
   }
-  .product-description-heading {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: var(--color-primary);
-    margin-bottom: 24px;
+  .review-image-preview img { width: 100%; height: 100%; object-fit: cover; }
+  .review-image-preview .remove-img {
+    position: absolute; top: 2px; right: 2px; width: 18px; height: 18px; background: rgba(0,0,0,.6);
+    color: #fff; border: none; border-radius: 50%; cursor: pointer; font-size: 11px; line-height: 18px; text-align: center; padding: 0;
   }
-  .tabs-nav {
-    display: flex;
-    border-bottom: 2px solid #eee;
-    gap: 30px;
-    margin-bottom: 30px;
+
+  /* Review card images */
+  .review-card-images { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .review-card-images img {
+    width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; cursor: pointer;
+    transition: transform .2s;
   }
-  .tab-btn {
-    padding: 15px 0;
-    background: none;
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-text-light);
-    cursor: pointer;
-    position: relative;
-    transition: color 0.3s ease;
+  .review-card-images img:hover { transform: scale(1.08); }
+
+  /* Scroll nav arrows for recommendations */
+  .rec-scroll-btn {
+    position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px;
+    background: #fff; border: 1px solid #ddd; border-radius: 50%; cursor: pointer; z-index: 2;
+    display: flex; align-items: center; justify-content: center; transition: all .2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
   }
-  .tab-btn::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-  }
-  .tab-btn.active {
-    color: var(--color-primary);
-  }
-  .tab-btn.active::after {
-    transform: scaleX(1);
-  }
-  .tab-content {
-    display: none;
-  }
-  .tab-content.active {
-    display: block;
-  }
-  .tab-content h3 {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-  .tab-content p,
-  .tab-content li {
-    color: var(--color-text-light);
-    line-height: 1.8;
-  }
-  .ingredients-intro {
-    color: var(--color-text-light);
-    font-size: 0.95rem;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  .ingredients-footnote {
-    margin-top: 22px;
-    font-size: 0.8rem;
-    color: var(--color-text-light);
-    font-style: italic;
-    border-top: 1px dashed #e5e5e5;
-    padding-top: 14px;
-  }
-  .ingredients-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .ingredient-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 14px 16px;
-    background: #f8fdf8;
-    border: 1px solid rgba(45, 106, 79, 0.12);
-    border-radius: 10px;
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
-  }
-  .ingredient-item:hover {
-    box-shadow: 0 4px 14px rgba(45, 106, 79, 0.12);
-    transform: translateY(-1px);
-  }
-  .ingredient-icon {
-    width: 36px;
-    height: 36px;
-    background: rgba(45, 106, 79, 0.12);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .ingredient-icon svg {
-    width: 18px;
-    height: 18px;
-    color: var(--color-primary);
-  }
-  .ingredient-text {
-    flex: 1;
-    min-width: 0;
-  }
-  .ingredient-text strong {
-    display: block;
-    color: var(--color-text);
-    font-size: 0.92rem;
-    line-height: 1.35;
-    word-break: break-word;
-  }
-  .ingredient-dose {
-    font-size: 0.8rem;
-    margin-top: 3px;
-    color: var(--color-primary);
-    font-weight: 500;
-  }
-  .product-description-structured .rte {
-    font-size: 1rem;
-    line-height: 1.75;
-    color: var(--color-text-light);
-  }
-  .product-description-structured .rte p {
-    margin-bottom: 14px;
-  }
-  .desc-section {
-    margin-top: 28px;
-  }
-  .desc-heading {
-    font-family: var(--font-heading);
-    font-size: 1.15rem;
-    color: var(--color-text);
-    margin-bottom: 12px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid rgba(45, 106, 79, 0.15);
-  }
-  .desc-benefits {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-  .desc-benefits li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    background: #f8fdf8;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    color: var(--color-text);
-  }
-  .desc-benefits li svg {
-    width: 16px;
-    height: 16px;
-    color: var(--color-primary);
-    flex-shrink: 0;
-  }
-  .desc-spec-list {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 8px 20px;
-    margin: 0;
-  }
-  .desc-spec-list dt {
-    font-weight: 600;
-    color: var(--color-text);
-    font-size: 0.9rem;
-  }
-  .desc-spec-list dd {
-    margin: 0;
-    color: var(--color-text-light);
-    font-size: 0.9rem;
-  }
-  .usage-steps {
-    counter-reset: step;
-    list-style: none;
-    padding: 0;
-  }
-  .usage-steps li {
-    counter-increment: step;
-    padding: 20px 20px 20px 70px;
-    position: relative;
-    margin-bottom: 15px;
-    background: #f8f8f8;
-    border-radius: 10px;
-  }
-  .usage-steps li::before {
-    content: counter(step);
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 35px;
-    height: 35px;
-    background: var(--color-primary);
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-  }
+  .rec-scroll-btn:hover { border-color: var(--color-primary); background: #f0faf4; }
+  .rec-scroll-btn svg { width: 18px; height: 18px; color: var(--color-text); }
+  .rec-scroll-btn--left { left: -12px; }
+  .rec-scroll-btn--right { right: -12px; }
+
+  /* ===== RESPONSIVE ===== */
   @media (max-width: 992px) {
-    .product-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-    .product-gallery {
-      position: relative;
-      top: 0;
-    }
+    .product-grid { grid-template-columns: 1fr; gap: 30px; }
+    .product-gallery { position: relative; top: 0; max-width: 500px; margin: 0 auto; }
+    .benefits-grid { grid-template-columns: 1fr 1fr; }
+    .rec-card { flex: 0 0 200px; }
+  }
+  @media (max-width: 768px) {
+    .product-title { font-size: 1.5rem; }
+    .product-price { font-size: 1.45rem; }
+    .product-main-image { padding: 16px; border-radius: 14px; }
+    .product-thumbnail { width: 60px; height: 60px; }
+    .product-trust-badges { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .trust-badge svg { width: 22px; height: 22px; }
+    .trust-badge span { font-size: 0.65rem; }
+    .reviews-summary { flex-direction: column; gap: 20px; }
+    .reviews-avg { min-width: auto; }
+    .review-form-row { grid-template-columns: 1fr; }
+    .rec-card { flex: 0 0 180px; }
+    .rec-scroll-btn { display: none; }
   }
   @media (max-width: 576px) {
-    .product-template {
-      padding: 20px 0 60px;
-    }
-    .product-title {
-      font-size: 1.75rem;
-    }
-    .product-trust-badges {
-      grid-template-columns: 1fr;
-    }
-    .ingredients-list {
-      grid-template-columns: 1fr;
-    }
-    .desc-benefits {
-      grid-template-columns: 1fr;
-    }
-    .desc-spec-list {
-      grid-template-columns: 1fr;
-      gap: 4px 0;
-    }
-    .desc-spec-list dt {
-      margin-top: 8px;
-    }
-    .tabs-nav {
-      gap: 15px;
-      overflow-x: auto;
-    }
-    .tab-btn {
-      font-size: 0.9rem;
-      white-space: nowrap;
-    }
+    .product-template { padding: 16px 0 0; }
+    .product-title { font-size: 1.3rem; }
+    .product-price { font-size: 1.3rem; }
+    .product-highlights ul { grid-template-columns: 1fr; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .rec-card { flex: 0 0 160px; }
+    .rec-card__body { padding: 10px 12px; }
+    .rec-card__title { font-size: 0.8rem; }
+    .rec-card__price-now { font-size: 0.9rem; }
+    .product-trust-badges { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .trust-badge span { font-size: 0.72rem; }
+    .product-quantity-row { gap: 8px; }
+    .quantity-btn { width: 36px; height: 44px; }
+    .quantity-input { width: 42px; height: 44px; }
+    .product-add-btn { padding: 13px 16px; font-size: 0.9rem; }
+    .product-feature-pills { gap: 6px; }
+    .product-feature-pill { padding: 5px 10px; font-size: 0.76rem; }
+  }
+  @media (max-width: 380px) {
+    .product-title { font-size: 1.15rem; }
+    .product-add-btn { font-size: 0.84rem; padding: 12px 10px; }
+    .rec-card { flex: 0 0 145px; }
+    .rec-card__body { padding: 8px 10px; }
+    .rec-card__title { font-size: 0.75rem; }
+    .rec-card__btn { font-size: 0.75rem; padding: 8px; }
+  }
+
+  /* ===== PRODUCT SHOWCASE ===== */
+  .product-showcase { margin-top: 50px; padding: 40px; background: #FDF8F0; border-radius: 20px; }
+  .product-showcase__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+  .product-showcase__image { background: #ece8e1; border-radius: 16px; padding: 40px; display: flex; align-items: center; justify-content: center; aspect-ratio: 1; overflow: hidden; }
+  .product-showcase__image img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .product-showcase__content h2 { font-family: var(--font-heading); font-size: 1.6rem; color: var(--color-primary); margin-bottom: 16px; line-height: 1.3; }
+  .product-showcase__content p { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.75; margin: 0; }
+
+  /* ===== KEY BENEFITS ICONS ===== */
+  .key-benefits-icons { margin-top: 50px; padding: 40px 0; text-align: center; }
+  .key-benefits-icons h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 36px; }
+  .key-benefits-icons__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .key-benefit-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .key-benefit-icon { width: 72px; height: 72px; background: #f0ebe3; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .key-benefit-icon svg { width: 28px; height: 28px; color: var(--color-primary); }
+  .key-benefit-item h4 { font-family: var(--font-heading); font-size: 0.95rem; color: var(--color-primary); margin: 0; }
+  .key-benefit-item p { font-size: 0.82rem; color: var(--color-text-light); margin: 0; line-height: 1.4; }
+
+  /* ===== RESEARCH-BACKED INGREDIENTS ===== */
+  .research-ingredients { margin-top: 50px; padding: 40px 20px; background: #FDF8F0; border-radius: 20px; }
+  .research-ingredients__header { text-align: center; margin-bottom: 36px; }
+  .research-ingredients__header h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 8px; }
+  .research-ingredients__header p { font-size: 0.92rem; color: var(--color-text-light); }
+  .research-ingredients__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .research-card { background: #fff; border-radius: 16px; border: 1px solid #eee; overflow: hidden; transition: transform .25s, box-shadow .25s; }
+  .research-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .research-card__image { aspect-ratio: 1; background: #f5f2ed; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .research-card__image img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
+  .research-card__image svg { width: 60px; height: 60px; color: var(--color-primary); opacity: .3; }
+  .research-card__body { padding: 18px 16px; }
+  .research-card__name { font-weight: 700; font-size: 1rem; color: var(--color-text); margin-bottom: 2px; }
+  .research-card__scientific { font-style: italic; font-size: 0.82rem; color: var(--color-text-light); margin-bottom: 10px; }
+  .research-card__desc { font-size: 0.85rem; color: var(--color-text-light); line-height: 1.55; margin-bottom: 14px; }
+  .research-card__badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px; background: var(--color-primary); color: #fff; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+  .research-card__badge svg { width: 13px; height: 13px; }
+
+  /* ===== KEY INGREDIENTS CARDS ===== */
+  .key-ingredients-section { margin-top: 50px; padding: 40px 0; text-align: center; }
+  .key-ingredients-section h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 30px; }
+  .key-ingredients__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .ingredient-card { background: #fff; border-radius: 16px; border: 1px solid #eee; overflow: hidden; text-align: center; transition: transform .25s, box-shadow .25s; }
+  .ingredient-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .ingredient-card__image { aspect-ratio: 4/3; background: #f5f2ed; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .ingredient-card__image img { max-width: 80%; max-height: 80%; object-fit: contain; }
+  .ingredient-card__image svg { width: 60px; height: 60px; color: var(--color-primary); opacity: .3; }
+  .ingredient-card__body { padding: 16px; }
+  .ingredient-card__name { font-family: var(--font-heading); font-size: 1rem; color: var(--color-primary); margin-bottom: 6px; }
+  .ingredient-card__benefit { font-size: 0.85rem; color: var(--color-text-light); line-height: 1.45; margin: 0; }
+
+  /* ===== PRODUCT COMPARISON ===== */
+  .product-comparison { margin-top: 50px; padding: 40px 0; text-align: center; }
+  .product-comparison h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 30px; }
+  .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 14px; overflow: hidden; border: 1px solid #e6f4ea; text-align: left; }
+  .comparison-table thead th { background: var(--color-primary); color: #fff; padding: 14px 20px; font-size: 0.95rem; font-weight: 600; }
+  .comparison-table tbody td { padding: 14px 20px; font-size: 0.9rem; border-bottom: 1px solid #f0f0f0; color: var(--color-text); }
+  .comparison-table tbody tr:last-child td { border-bottom: none; }
+  .comparison-check { color: #16a34a; font-weight: 600; }
+  .comparison-cross { color: #dc2626; font-weight: 600; }
+
+  /* ===== VIDEO TESTIMONIALS ===== */
+  .video-testimonials-section { margin-top: 40px; padding: 40px 32px; background: #FDF8F0; border-radius: 20px; border-top: none; }
+  .video-testimonials__header { text-align: center; margin-bottom: 28px; }
+  .video-testimonials__header h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 8px; font-style: italic; }
+  .video-testimonials__header p { font-size: 0.9rem; color: var(--color-text-light); margin: 0; }
+  .video-testimonials__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .video-card { position: relative; aspect-ratio: 9/16; border-radius: 14px; overflow: hidden; background: #fff; border: 2px dashed #d4ecdd; transition: border-color .2s, box-shadow .2s; }
+  .video-card:hover { border-color: var(--color-primary); box-shadow: 0 4px 16px rgba(45,106,79,.1); }
+  .video-card iframe { width: 100%; height: 100%; border: none; pointer-events: none; }
+  .video-card--has-video { border-style: solid; border-color: #e6f4ea; }
+  .video-card__overlay { position: absolute; inset: 0; z-index: 2; cursor: pointer; display: flex; align-items: center; justify-content: center; background: transparent; transition: background .2s; }
+  .video-card__overlay:hover { background: rgba(0,0,0,.12); }
+  .video-card__play { width: 50px; height: 50px; background: rgba(255,255,255,.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .25s; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+  .video-card__overlay:hover .video-card__play { opacity: 1; }
+  .video-card__play svg { width: 22px; height: 22px; margin-left: 3px; }
+  .video-card__placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 20px; box-sizing: border-box; }
+  .video-card__placeholder svg { width: 44px; height: 44px; color: var(--color-primary); opacity: .25; }
+  .video-card__placeholder span { font-size: 0.8rem; color: var(--color-text-light); opacity: .7; line-height: 1.4; }
+
+  /* New sections responsive */
+  @media (max-width: 992px) {
+    .product-showcase__grid { grid-template-columns: 1fr; gap: 24px; }
+    .product-showcase__image { max-width: 400px; margin: 0 auto; }
+    .research-ingredients__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .key-benefits-icons__grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .key-ingredients__grid { grid-template-columns: repeat(2, 1fr); }
+    .product-showcase { padding: 24px; }
+    .comparison-table thead th, .comparison-table tbody td { padding: 10px 14px; font-size: 0.85rem; }
+    .video-testimonials__grid { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
+    .video-testimonials__grid::-webkit-scrollbar { display: none; }
+    .video-card { flex: 0 0 42vw; scroll-snap-align: start; }
+  }
+  @media (max-width: 576px) {
+    .key-benefit-icon { width: 56px; height: 56px; }
+    .key-benefit-icon svg { width: 22px; height: 22px; }
+    .key-ingredients__grid { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+    .research-ingredients__grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+    .research-ingredients { padding: 24px 14px; }
+    .product-showcase__image { padding: 20px; }
+    .video-card { flex: 0 0 55vw; }
   }
 {%- endstyle -%}
 
 <section class="product-template" data-section-id="{{ section.id }}">
   <div class="container">
-    <!-- Breadcrumbs -->
+
+    <!-- ===== BREADCRUMBS ===== -->
     <nav class="product-breadcrumbs" aria-label="Breadcrumb">
       <a href="/">Home</a>
       <span>/</span>
@@ -661,19 +517,15 @@
       {%- endif -%}
       <span>{{ product.title }}</span>
     </nav>
-    
+
+    <!-- ===== MAIN PRODUCT GRID ===== -->
     <div class="product-grid">
-      <!-- Gallery -->
+
+      <!-- --- Gallery --- -->
       <div class="product-gallery">
         <div class="product-main-image" id="product-main-image">
           {%- if product.featured_image -%}
-            <img
-              src="{{ product.featured_image | image_url: width: 1200 }}"
-              alt="{{ product.featured_image.alt | default: product.title }}"
-              id="main-product-image"
-              width="600"
-              height="600"
-            >
+            <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | default: product.title }}" id="main-product-image" width="600" height="600">
           {%- else -%}
             {{ 'product-1' | placeholder_svg_tag }}
           {%- endif -%}
@@ -681,27 +533,17 @@
         {%- if product.images.size > 1 -%}
           <div class="product-thumbnails">
             {%- for image in product.images -%}
-              <button
-                type="button"
-                class="product-thumbnail {% if forloop.first %}active{% endif %}"
-                data-image-url="{{ image | image_url: width: 1200 }}"
-                data-index="{{ forloop.index0 }}"
-              >
-                <img
-                  src="{{ image | image_url: width: 200 }}"
-                  alt="{{ image.alt | default: product.title }}"
-                  width="80"
-                  height="80"
-                  loading="lazy"
-                >
+              <button type="button" class="product-thumbnail {% if forloop.first %}active{% endif %}" data-image-url="{{ image | image_url: width: 1200 }}" data-index="{{ forloop.index0 }}">
+                <img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | default: product.title }}" width="72" height="72" loading="lazy">
               </button>
             {%- endfor -%}
           </div>
         {%- endif -%}
       </div>
-      
-      <!-- Product Info -->
+
+      <!-- --- Product Info --- -->
       <div class="product-info">
+
         <!-- Badges -->
         <div class="product-badges">
           {%- if product.compare_at_price > product.price -%}
@@ -713,20 +555,29 @@
           {%- if product.tags contains 'bestseller' -%}
             <span class="product-badge product-badge--bestseller">Bestseller</span>
           {%- endif -%}
+          <span class="product-badge product-badge--ayurvedic">100% Ayurvedic</span>
         </div>
-        
+
         {%- if product.vendor != blank -%}
           <p class="product-vendor">{{ product.vendor }}</p>
         {%- endif -%}
-        
+
         <h1 class="product-title">{{ product.title }}</h1>
-        
+
         <!-- Rating -->
         <div class="product-rating">
-          {%- render 'star-rating', rating: 4.5 -%}
-          <span class="product-rating-count">({{ product.metafields.reviews.rating_count | default: '24' }} reviews)</span>
+          <div class="product-rating-stars">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            {%- endfor -%}
+          </div>
+          <span class="product-rating-count">
+            <a href="#reviews-section" onclick="document.getElementById('reviews-section').scrollIntoView({behavior:'smooth'});return false;">
+              (<span id="total-review-count">0</span> reviews)
+            </a>
+          </span>
         </div>
-        
+
         <!-- Price -->
         <div class="product-price-wrapper">
           <span class="product-price">{{ product.price | money }}</span>
@@ -735,39 +586,66 @@
             {%- assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
             <span class="product-save-badge">Save {{ savings }}%</span>
           {%- endif -%}
+          <span class="product-tax-note">Inclusive of all taxes</span>
         </div>
-        
+
         <!-- Short Description -->
         {%- if product.description != blank -%}
           <div class="product-description-short">
-            {{ product.description | strip_html | truncate: 200 }}
+            {{ product.description | strip_html | truncate: 180 }}
           </div>
         {%- endif -%}
-        
-        <!-- Highlights -->
-        {%- if section.settings.show_highlights -%}
+
+        <!-- Feature Pills -->
+        <div class="product-feature-pills">
+          <span class="product-feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            GMP Certified
+          </span>
+          <span class="product-feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Clinically Tested
+          </span>
+          <span class="product-feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            No Side Effects
+          </span>
+          <span class="product-feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+            State FDA Approved
+          </span>
+        </div>
+
+        <!-- Key Benefits / Highlights -->
+        {%- assign highlight_blocks = "" -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'highlight' -%}
+            {%- unless highlight_blocks == "" -%}{%- assign highlight_blocks = highlight_blocks | append: "|||" -%}{%- endunless -%}
+            {%- assign highlight_blocks = highlight_blocks | append: block.settings.text -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if highlight_blocks != "" -%}
+          {%- assign highlights_arr = highlight_blocks | split: "|||" -%}
           <div class="product-highlights">
-            <h4>Key Benefits</h4>
+            <h4>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Key Benefits
+            </h4>
             <ul>
-              {%- for block in section.blocks -%}
-                {%- if block.type == 'highlight' -%}
-                  <li {{ block.shopify_attributes }}>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    {{ block.settings.text }}
-                  </li>
-                {%- endif -%}
+              {%- for h in highlights_arr -%}
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                  {{ h }}
+                </li>
               {%- endfor -%}
             </ul>
           </div>
         {%- endif -%}
-        
+
         <!-- Product Form -->
         {%- form 'product', product, class: 'product-form', id: 'product-form', data-product-form: '' -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-          
-          <!-- Variants -->
+
           {%- unless product.has_only_default_variant -%}
             <div class="product-variants">
               {%- for option in product.options_with_values -%}
@@ -775,170 +653,825 @@
                   <label class="variant-label">{{ option.name }}: <strong id="selected-{{ option.name | handleize }}">{{ option.selected_value }}</strong></label>
                   <div class="variant-options">
                     {%- for value in option.values -%}
-                      <button
-                        type="button"
-                        class="variant-option {% if option.selected_value == value %}selected{% endif %}"
-                        data-option-name="{{ option.name }}"
-                        data-option-value="{{ value }}"
-                      >
-                        {{ value }}
-                      </button>
+                      <button type="button" class="variant-option {% if option.selected_value == value %}selected{% endif %}" data-option-name="{{ option.name }}" data-option-value="{{ value }}">{{ value }}</button>
                     {%- endfor -%}
                   </div>
                 </div>
               {%- endfor -%}
             </div>
           {%- endunless -%}
-          
-          <!-- Quantity & Add to Cart -->
+
+          <!-- Combo Pack Selector -->
+          {%- assign has_combos = false -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'combo_pack' -%}{%- assign has_combos = true -%}{%- break -%}{%- endif -%}
+          {%- endfor -%}
+          {%- if has_combos -%}
+            <div class="combo-packs">
+              <span class="combo-packs__label">Choose Pack Size:</span>
+              <div class="combo-packs__grid">
+                <div class="combo-pack-card selected" data-combo-qty="1" data-display-price="{{ product.price | money }}" data-display-mrp="{%- if product.compare_at_price > product.price -%}{{ product.compare_at_price | money }}{%- endif -%}" data-display-discount="{%- if product.compare_at_price > product.price -%}{%- assign cb_save = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}{{ cb_save }}%{%- endif -%}" onclick="selectCombo(this)">
+                  <div class="combo-pack-card__radio"></div>
+                  <div class="combo-pack-card__info">
+                    <div class="combo-pack-card__title">Single</div>
+                    <div class="combo-pack-card__pricing">
+                      <span class="combo-pack-card__price">{{ product.price | money }}</span>
+                      {%- if product.compare_at_price > product.price -%}
+                        <span class="combo-pack-card__mrp">M.R.P: <s>{{ product.compare_at_price | money }}</s></span>
+                        <span class="combo-pack-card__discount">({{ cb_save }}% off)</span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'combo_pack' -%}
+                    {%- comment -%}
+                      Pack pricing is derived from the product's own price so it stays
+                      correct after any MRP change. The "Combo price"/"M.R.P" block
+                      settings are optional overrides — fill them only to sell a pack
+                      below N x the unit price.
+                    {%- endcomment -%}
+                    {%- assign c_qty = block.settings.quantity | default: 1 -%}
+                    {%- if c_qty < 1 -%}{%- assign c_qty = 1 -%}{%- endif -%}
+
+                    {%- if block.settings.price != blank -%}
+                      {%- assign c_price_cents = block.settings.price | times: 100 -%}
+                    {%- else -%}
+                      {%- assign c_price_cents = product.price | times: c_qty -%}
+                    {%- endif -%}
+
+                    {%- if block.settings.mrp != blank -%}
+                      {%- assign c_mrp_cents = block.settings.mrp | times: 100 -%}
+                    {%- elsif product.compare_at_price > product.price -%}
+                      {%- assign c_mrp_cents = product.compare_at_price | times: c_qty -%}
+                    {%- else -%}
+                      {%- assign c_mrp_cents = 0 -%}
+                    {%- endif -%}
+
+                    {%- assign c_discount = 0 -%}
+                    {%- if c_mrp_cents > c_price_cents -%}
+                      {%- assign c_diff = c_mrp_cents | minus: c_price_cents | times: 100 -%}
+                      {%- assign c_discount = c_diff | divided_by: c_mrp_cents -%}
+                    {%- endif -%}
+                    <div class="combo-pack-card" data-combo-qty="{{ c_qty }}" data-display-price="{{ c_price_cents | money }}" data-display-mrp="{%- if c_discount > 0 -%}{{ c_mrp_cents | money }}{%- endif -%}" data-display-discount="{%- if c_discount > 0 -%}{{ c_discount }}%{%- endif -%}" {{ block.shopify_attributes }} onclick="selectCombo(this)">
+                      {%- if block.settings.best_value -%}<span class="combo-pack-card__best">Best Value</span>{%- endif -%}
+                      <div class="combo-pack-card__radio"></div>
+                      <div class="combo-pack-card__info">
+                        <div class="combo-pack-card__title">{{ block.settings.label | default: 'Combo Pack' }}</div>
+                        <div class="combo-pack-card__pricing">
+                          <span class="combo-pack-card__price">{{ c_price_cents | money }}</span>
+                          {%- if c_discount > 0 -%}
+                            <span class="combo-pack-card__mrp">M.R.P: <s>{{ c_mrp_cents | money }}</s></span>
+                            <span class="combo-pack-card__discount">({{ c_discount }}% off)</span>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+
           <div class="product-quantity-row">
             <div class="quantity-selector">
               <button type="button" class="quantity-btn" data-action="decrease">−</button>
               <input type="number" name="quantity" value="1" min="1" class="quantity-input" aria-label="Quantity">
               <button type="button" class="quantity-btn" data-action="increase">+</button>
             </div>
-            <button
-              type="submit"
-              class="product-add-btn"
-              {% unless product.available %}disabled{% endunless %}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-              </svg>
-              {%- if product.available -%}
-                Add to Cart
-              {%- else -%}
-                Sold Out
-              {%- endif -%}
+            <button type="submit" class="product-add-btn" {% unless product.available %}disabled{% endunless %}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              {%- if product.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
             </button>
           </div>
-          
-          {%- endform -%}
-        
+        {%- endform -%}
+
         <!-- Buy Now -->
         {%- if section.settings.show_buy_now and product.available -%}
-          <form action="/cart" method="post" class="buy-now-form">
+          <form action="/cart" method="post">
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
             <input type="hidden" name="quantity" value="1">
-            <button type="submit" name="checkout" class="product-buy-now">
-              Buy Now
-            </button>
+            <button type="submit" name="checkout" class="product-buy-now">Buy Now</button>
           </form>
         {%- endif -%}
-        
-        <!-- Product PDF/PPT Download Button -->
+
+        <!-- Download Presentation -->
         {%- capture resolved_pdf_url -%}{%- render 'product-pdf-url', product: product -%}{%- endcapture -%}
         {%- assign resolved_pdf_url = resolved_pdf_url | strip -%}
         {%- assign download_url = product.metafields.custom.product_presentation_url | default: resolved_pdf_url | default: section.settings.default_download_url -%}
-        {%- if download_url != blank or section.settings.show_download_placeholder -%}
-          {%- if download_url != blank -%}
-            <a href="{{ download_url }}" class="product-download-btn" target="_blank" rel="noopener" download>
-              <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-              {{ section.settings.download_button_text | default: 'Download Product Presentation' }}
-            </a>
-          {%- else -%}
-            <button type="button" class="product-download-btn" disabled style="opacity: 0.6; cursor: not-allowed;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-              Presentation Coming Soon
-            </button>
-          {%- endif -%}
+        {%- if download_url != blank -%}
+          <a href="{{ download_url }}" class="product-download-btn" target="_blank" rel="noopener" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            {{ section.settings.download_button_text | default: 'Download Product Presentation' }}
+          </a>
+        {%- elsif section.settings.show_download_placeholder -%}
+          <button type="button" class="product-download-btn" disabled style="opacity:.55;cursor:not-allowed;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Presentation Coming Soon
+          </button>
         {%- endif -%}
-        
+
+        <!-- Share -->
+        <div class="product-share">
+          <span>Share:</span>
+          <button type="button" class="product-share-btn" aria-label="Share on WhatsApp" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+window.location.href),'_blank')">
+            <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </button>
+          <button type="button" class="product-share-btn" aria-label="Share on Facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),'_blank','width=600,height=400')">
+            <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </button>
+          <button type="button" class="product-share-btn" aria-label="Copy Link" onclick="navigator.clipboard.writeText(window.location.href);this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;%2316a34a&quot; stroke-width=&quot;2&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},2000)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </button>
+        </div>
+
         <!-- Trust Badges -->
         <div class="product-trust-badges">
           <div class="trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="1" y="3" width="15" height="13" rx="2"></rect>
-              <path d="M16 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7"></path>
-              <circle cx="5.5" cy="18.5" r="2.5"></circle>
-              <circle cx="18.5" cy="18.5" r="2.5"></circle>
-            </svg>
-            <span>Free Shipping<br>Above ₹400</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <span>Free Shipping<br>Above &#8377;400</span>
           </div>
           <div class="trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              <polyline points="9 12 11 14 15 10"></polyline>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
             <span>100% Authentic<br>Products</span>
           </div>
           <div class="trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             <span>Secure<br>Checkout</span>
           </div>
+          <div class="trust-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+            <span>COD<br>Available</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== DESCRIPTION SECTION ===== -->
+    <div class="product-description-section">
+      <h2>Description</h2>
+      <div class="tab-description">
+        {%- if product.description != blank -%}
+          <div class="rte">{{ product.description }}</div>
+        {%- endif -%}
+
+        {%- if highlight_blocks != "" -%}
+          <div class="benefits-grid">
+            {%- for h in highlights_arr -%}
+              <div class="benefit-card">
+                <div class="benefit-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="benefit-card-text">{{ h }}</div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <div class="product-specs">
+          <h4>Product Details</h4>
+          <table class="spec-table">
+            {%- if product.vendor != blank -%}
+              <tr><td>Brand</td><td>{{ product.vendor }}</td></tr>
+            {%- endif -%}
+            {%- if product.type != blank -%}
+              <tr><td>Category</td><td>{{ product.type }}</td></tr>
+            {%- endif -%}
+            <tr><td>Format</td><td>Ayurvedic Formulation</td></tr>
+            <tr><td>Suitable For</td><td>Adults (or as directed by physician)</td></tr>
+            <tr><td>Manufacturer</td><td>PRM Pharmaceuticals</td></tr>
+            <tr><td>Country of Origin</td><td>India</td></tr>
+            {%- if product.tags.size > 0 -%}
+              <tr><td>Tags</td><td>{{ product.tags | join: ', ' }}</td></tr>
+            {%- endif -%}
+          </table>
         </div>
       </div>
     </div>
-    
-    <!-- Product Description -->
-    <div class="product-description-block">
-      <h2 class="product-description-heading">Description</h2>
-      <div class="product-description-structured">
-        {%- if product.description != blank -%}
-          <div class="rte">
-            {{ product.description }}
-          </div>
-        {%- endif -%}
 
-        {%- if section.settings.show_highlights -%}
-          {%- assign highlight_count = 0 -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'highlight' -%}{%- assign highlight_count = highlight_count | plus: 1 -%}{%- endif -%}
-          {%- endfor -%}
-          {%- if highlight_count > 0 -%}
-            <div class="desc-section">
-              <h4 class="desc-heading">Key Benefits</h4>
-              <ul class="desc-benefits">
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'highlight' -%}
-                    <li {{ block.shopify_attributes }}>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                      <span>{{ block.settings.text }}</span>
-                    </li>
-                  {%- endif -%}
-                {%- endfor -%}
-              </ul>
+    <!-- ===== VIDEO TESTIMONIALS ===== -->
+    {%- assign video_card_count = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'video_testimonial' -%}
+        {%- assign video_card_count = video_card_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if section.settings.youtube_product_url != blank -%}
+      {%- assign video_card_count = video_card_count | plus: 1 -%}
+    {%- endif -%}
+    {%- if video_card_count > 0 -%}
+    <div class="video-testimonials-section">
+      <div class="video-testimonials__header">
+        <h2>Real Users, Real Results</h2>
+        <p>Watch authentic testimonials from our satisfied customers</p>
+      </div>
+      <div class="video-testimonials__grid" style="grid-template-columns:repeat({{ video_card_count }},1fr);">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'video_testimonial' -%}
+            {%- assign vid_url = block.settings.video_url -%}
+            {%- assign vid_click = block.settings.click_url | default: vid_url -%}
+            {%- assign yt_id = '' -%}
+            {%- if vid_url contains 'youtu.be/' -%}
+              {%- assign yt_id = vid_url | split: 'youtu.be/' | last | split: '?' | first -%}
+            {%- elsif vid_url contains '/shorts/' -%}
+              {%- assign yt_id = vid_url | split: '/shorts/' | last | split: '?' | first -%}
+            {%- elsif vid_url contains 'v=' -%}
+              {%- assign yt_id = vid_url | split: 'v=' | last | split: '&' | first -%}
+            {%- elsif vid_url contains '/embed/' -%}
+              {%- assign yt_id = vid_url | split: '/embed/' | last | split: '?' | first -%}
+            {%- endif -%}
+            <div class="video-card" {{ block.shopify_attributes }}>
+              {%- if yt_id != '' -%}
+                <iframe src="https://www.youtube.com/embed/{{ yt_id }}?autoplay=1&mute=1&loop=1&playlist={{ yt_id }}&controls=0&playsinline=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" loading="lazy" title="Customer testimonial"></iframe>
+                <div class="video-card__overlay" onclick="window.open('{{ vid_click | escape }}','_blank')">
+                  <div class="video-card__play">
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                </div>
+              {%- else -%}
+                <div class="video-card__placeholder">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <span>Add a YouTube or<br>Vimeo video URL</span>
+                </div>
+              {%- endif -%}
             </div>
           {%- endif -%}
-        {%- endif -%}
+        {%- endfor -%}
 
-        {%- if product.vendor != blank or product.type != blank -%}
-          <div class="desc-section desc-specs">
-            <h4 class="desc-heading">Product Details</h4>
-            <dl class="desc-spec-list">
-              {%- if product.vendor != blank -%}
-                <dt>Brand</dt><dd>{{ product.vendor }}</dd>
-              {%- endif -%}
-              {%- if product.type != blank -%}
-                <dt>Category</dt><dd>{{ product.type }}</dd>
-              {%- endif -%}
-              <dt>Format</dt><dd>Ayurvedic formulation</dd>
-              <dt>Suitable For</dt><dd>Adults as directed</dd>
-            </dl>
-          </div>
+        {%- assign yt_p_url = section.settings.youtube_product_url -%}
+        {%- assign yt_p_click = section.settings.youtube_click_url | default: yt_p_url -%}
+        {%- assign yt_p_id = '' -%}
+        {%- if yt_p_url contains 'youtu.be/' -%}
+          {%- assign yt_p_id = yt_p_url | split: 'youtu.be/' | last | split: '?' | first -%}
+        {%- elsif yt_p_url contains '/shorts/' -%}
+          {%- assign yt_p_id = yt_p_url | split: '/shorts/' | last | split: '?' | first -%}
+        {%- elsif yt_p_url contains 'v=' -%}
+          {%- assign yt_p_id = yt_p_url | split: 'v=' | last | split: '&' | first -%}
+        {%- elsif yt_p_url contains '/embed/' -%}
+          {%- assign yt_p_id = yt_p_url | split: '/embed/' | last | split: '?' | first -%}
+        {%- endif -%}
+        {%- if yt_p_url != blank -%}
+        <div class="video-card">
+          {%- if yt_p_id != '' -%}
+            <iframe src="https://www.youtube.com/embed/{{ yt_p_id }}?autoplay=1&mute=1&loop=1&playlist={{ yt_p_id }}&controls=0&playsinline=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" loading="lazy" title="Product video"></iframe>
+            <div class="video-card__overlay" onclick="window.open('{{ yt_p_click | escape }}','_blank')">
+              <div class="video-card__play">
+                <svg viewBox="0 0 24 24" fill="#ff0000" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+            </div>
+          {%- else -%}
+            <div class="video-card__placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span>Add a YouTube or<br>Vimeo video URL</span>
+            </div>
+          {%- endif -%}
+        </div>
         {%- endif -%}
       </div>
     </div>
+    {%- endif -%}
+
+    <!-- ===== RESEARCH-BACKED INGREDIENTS ===== -->
+    {%- assign has_research = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'research_ingredient' -%}{%- assign has_research = true -%}{%- break -%}{%- endif -%}
+    {%- endfor -%}
+    {%- if has_research -%}
+    <div class="research-ingredients">
+      <div class="research-ingredients__header">
+        <h2>Research-Backed Ingredients</h2>
+        <p>Scientifically validated natural ingredients for optimal health benefits</p>
+      </div>
+      <div class="research-ingredients__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'research_ingredient' -%}
+            <div class="research-card" {{ block.shopify_attributes }}>
+              <div class="research-card__image">
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.name }}" loading="lazy">
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L9 9H2l6 4.5L5.5 21 12 16.5 18.5 21 16 13.5 22 9h-7z"/></svg>
+                {%- endif -%}
+              </div>
+              <div class="research-card__body">
+                <div class="research-card__name">{{ block.settings.name }}</div>
+                {%- if block.settings.scientific_name != blank -%}
+                  <div class="research-card__scientific">{{ block.settings.scientific_name }}</div>
+                {%- endif -%}
+                {%- if block.settings.description != blank -%}
+                  <div class="research-card__desc">{{ block.settings.description }}</div>
+                {%- endif -%}
+                {%- if block.settings.badge != blank -%}
+                  <span class="research-card__badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                    {{ block.settings.badge }}
+                  </span>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    {%- endif -%}
+
+    <!-- ===== PRODUCT COMPARISON ===== -->
+    <div class="product-comparison">
+      <h2>Product Comparison</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr><th>Feature</th><th>Our Product</th><th>Others</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Natural Ingredients</td><td class="comparison-check">&#10003; 100% Natural</td><td class="comparison-cross">&#10007; Synthetic</td></tr>
+          <tr><td>GMP Certified</td><td class="comparison-check">&#10003; Yes</td><td class="comparison-cross">&#10007; No</td></tr>
+          <tr><td>Side Effects</td><td class="comparison-check">&#10003; None</td><td class="comparison-cross">&#10007; Possible</td></tr>
+          <tr><td>Clinically Tested</td><td class="comparison-check">&#10003; Yes</td><td class="comparison-cross">&#10007; No</td></tr>
+          <tr><td>State FDA Approved</td><td class="comparison-check">&#10003; Yes</td><td class="comparison-cross">&#10007; Not Always</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ===== YOU MAY ALSO LIKE ===== -->
+    {%- if product.collections.size > 0 -%}
+      {%- assign rec_collection = product.collections.first -%}
+      {%- assign rec_products = rec_collection.products -%}
+      {%- assign rec_count = 0 -%}
+      {%- for p in rec_products -%}
+        {%- if p.id != product.id -%}
+          {%- assign rec_count = rec_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if rec_count > 0 -%}
+        <div class="product-recommendations">
+          <div class="recommendations-header">
+            <h2>You May Also Like</h2>
+            <p>Customers who viewed this also explored these products</p>
+          </div>
+          <div class="recommendations-scroll-wrapper">
+          <button type="button" class="rec-scroll-btn rec-scroll-btn--left" onclick="document.getElementById('rec-track').scrollBy({left:-240,behavior:'smooth'})" aria-label="Scroll left">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button type="button" class="rec-scroll-btn rec-scroll-btn--right" onclick="document.getElementById('rec-track').scrollBy({left:240,behavior:'smooth'})" aria-label="Scroll right">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div class="recommendations-grid" id="rec-track">
+            {%- assign shown = 0 -%}
+            {%- for p in rec_products -%}
+              {%- if p.id != product.id and shown < 8 -%}
+                {%- assign shown = shown | plus: 1 -%}
+                {%- assign p_variant = p.selected_or_first_available_variant -%}
+                {%- assign p_on_sale = false -%}
+                {%- if p_variant.compare_at_price > p_variant.price -%}
+                  {%- assign p_on_sale = true -%}
+                  {%- assign p_savings = p_variant.compare_at_price | minus: p_variant.price | times: 100 | divided_by: p_variant.compare_at_price -%}
+                {%- endif -%}
+                <div class="rec-card">
+                  <div class="rec-card__image">
+                    {%- if p.featured_image -%}
+                      <a href="{{ p.url }}"><img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ p.title | escape }}" loading="lazy"></a>
+                    {%- endif -%}
+                    {%- if p_on_sale -%}
+                      <span class="rec-card__badge">{{ p_savings }}% Off</span>
+                    {%- endif -%}
+                  </div>
+                  <div class="rec-card__body">
+                    {%- if p.vendor != blank -%}
+                      <p class="rec-card__vendor">{{ p.vendor }}</p>
+                    {%- endif -%}
+                    <h3 class="rec-card__title"><a href="{{ p.url }}">{{ p.title }}</a></h3>
+                    <div class="rec-card__price">
+                      <span class="rec-card__price-now">{{ p_variant.price | money }}</span>
+                      {%- if p_on_sale -%}
+                        <span class="rec-card__price-was">{{ p_variant.compare_at_price | money }}</span>
+                      {%- endif -%}
+                    </div>
+                    {%- if p.available -%}
+                      <button type="button" class="rec-card__btn" data-add-to-cart data-variant-id="{{ p_variant.id }}" data-quantity="1">Add to Cart</button>
+                    {%- else -%}
+                      <button type="button" class="rec-card__btn" disabled style="opacity:.5;cursor:not-allowed;">Sold Out</button>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    <!-- ===== CUSTOMER REVIEWS ===== -->
+    <div class="product-reviews-section" id="reviews-section">
+      <div class="reviews-header">
+        <h2>Customer Reviews</h2>
+        <p>Real feedback from our customers</p>
+      </div>
+
+      <!-- Rating Summary -->
+      <div class="reviews-summary">
+        <div class="reviews-avg">
+          <div class="reviews-avg-number" id="reviews-avg-num">0</div>
+          <div class="reviews-avg-stars">
+            {%- for i in (1..5) -%}
+              <svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            {%- endfor -%}
+          </div>
+          <div class="reviews-avg-count">Based on <span id="reviews-total-summary">0</span> reviews</div>
+        </div>
+        <div class="reviews-bars">
+          {%- for i in (1..5) -%}
+            {%- assign star_num = 6 | minus: i -%}
+            <div class="review-bar-row">
+              <span class="review-bar-label">{{ star_num }}</span>
+              <span class="review-bar-star"><svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+              <div class="review-bar-track"><div class="review-bar-fill" id="bar-{{ star_num }}" style="width:0%"></div></div>
+              <span class="review-bar-count" id="bar-count-{{ star_num }}">0</span>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <!-- Admin Reviews (from section blocks — only admin can add/remove) -->
+      <div class="reviews-list" id="reviews-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            <div class="review-card" data-admin-review {{ block.shopify_attributes }}>
+              <div class="review-card-top">
+                <div class="review-card-avatar">{{ block.settings.reviewer_name | slice: 0 }}</div>
+                <div class="review-card-meta">
+                  <div class="review-card-name">{{ block.settings.reviewer_name }}</div>
+                  {%- if block.settings.reviewer_location != blank -%}
+                    <div class="review-card-loc">{{ block.settings.reviewer_location }}</div>
+                  {%- endif -%}
+                </div>
+                <div style="margin-left:auto;text-align:right;">
+                  <div class="review-card-stars">
+                    {%- for s in (1..5) -%}
+                      {%- if s <= block.settings.rating -%}
+                        <svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                      {%- else -%}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                  {%- if block.settings.review_date != blank -%}
+                    <div class="review-card-date">{{ block.settings.review_date }}</div>
+                  {%- endif -%}
+                </div>
+              </div>
+              {%- if block.settings.review_title != blank -%}
+                <div class="review-card-title">{{ block.settings.review_title }}</div>
+              {%- endif -%}
+              <div class="review-card-body">{{ block.settings.review_body }}</div>
+              <div class="review-card-verified">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                Verified Purchase
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <!-- Review Form -->
+      <div class="review-form-wrapper">
+        <h3>Write a Review</h3>
+        <div class="review-success" id="review-success">Thank you! Your review has been submitted and will appear after approval.</div>
+        <form class="review-form" id="review-form" onsubmit="return submitReview(event)">
+          <div class="review-form-row">
+            <div class="review-field">
+              <label for="review-name">Your Name *</label>
+              <input type="text" id="review-name" required placeholder="Enter your name">
+            </div>
+            <div class="review-field">
+              <label for="review-location">Location</label>
+              <input type="text" id="review-location" placeholder="City, State">
+            </div>
+          </div>
+          <div class="review-field">
+            <label>Rating *</label>
+            <div class="review-star-input" id="star-input">
+              {%- for i in (1..5) -%}
+                <svg data-star="{{ i }}" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="1" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {%- endfor -%}
+            </div>
+          </div>
+          <div class="review-field">
+            <label for="review-title">Review Title</label>
+            <input type="text" id="review-title" placeholder="Summarize your experience">
+          </div>
+          <div class="review-field">
+            <label for="review-body">Your Review *</label>
+            <textarea id="review-body" required placeholder="Share your experience with this product..."></textarea>
+          </div>
+          <div class="review-field">
+            <label>Add Photos (optional)</label>
+            <div class="review-image-upload">
+              <label class="review-image-label" for="review-images">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                Upload Images
+              </label>
+              <input type="file" id="review-images" accept="image/*" multiple style="display:none" onchange="handleReviewImages(this)">
+              <div class="review-image-previews" id="review-img-previews"></div>
+            </div>
+          </div>
+          <button type="submit" class="review-submit-btn">Submit Review</button>
+        </form>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<script type="application/json" id="product-json">
-  {{ product | json }}
+<script type="application/json" id="product-json">{{ product | json }}</script>
+
+<script>
+(function(){
+  /* === IMAGE GALLERY === */
+  var thumbs = document.querySelectorAll('.product-thumbnail');
+  var mainImg = document.getElementById('main-product-image');
+  thumbs.forEach(function(t){
+    t.addEventListener('click', function(){
+      thumbs.forEach(function(th){ th.classList.remove('active'); });
+      t.classList.add('active');
+      if(mainImg) mainImg.src = t.getAttribute('data-image-url');
+    });
+  });
+
+  /* === QUANTITY === */
+  document.querySelectorAll('.quantity-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var input = this.parentElement.querySelector('.quantity-input');
+      var v = parseInt(input.value) || 1;
+      if(this.getAttribute('data-action')==='decrease'){ if(v>1) input.value = v-1; }
+      else { input.value = v+1; }
+    });
+  });
+
+  /* === VARIANT SELECTOR === */
+  var varBtns = document.querySelectorAll('.variant-option');
+  if(varBtns.length){
+    var productData = JSON.parse(document.getElementById('product-json').textContent);
+    varBtns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        this.parentElement.querySelectorAll('.variant-option').forEach(function(b){ b.classList.remove('selected'); });
+        this.classList.add('selected');
+        var lbl = document.getElementById('selected-'+this.getAttribute('data-option-name').toLowerCase().replace(/\s+/g,'-'));
+        if(lbl) lbl.textContent = this.getAttribute('data-option-value');
+        var selected = {};
+        document.querySelectorAll('.variant-option.selected').forEach(function(s){ selected[s.getAttribute('data-option-name')] = s.getAttribute('data-option-value'); });
+        var variant = productData.variants.find(function(v){
+          return v.options.every(function(o,i){ return o === selected[productData.options[i]]; });
+        });
+        if(variant){
+          document.querySelector('[name="id"]').value = variant.id;
+        }
+      });
+    });
+  }
+
+  /* === REVIEWS — localStorage + admin blocks === */
+  var PRODUCT_HANDLE = '{{ product.handle }}';
+  var STORAGE_KEY = 'hv_reviews_' + PRODUCT_HANDLE;
+
+  function getStoredReviews(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch(e){ return []; }
+  }
+
+  function renderStoredReviews(){
+    var reviews = getStoredReviews();
+    var list = document.getElementById('reviews-list');
+    reviews.forEach(function(r){
+      list.appendChild(buildReviewCard(r));
+    });
+    updateSummary();
+  }
+
+  function buildReviewCard(r){
+    var card = document.createElement('div');
+    card.className = 'review-card';
+    card.setAttribute('data-customer-review','true');
+    var stars = '';
+    for(var i=1;i<=5;i++){
+      if(i<=r.rating) stars += '<svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+      else stars += '<svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+    }
+    card.innerHTML =
+      '<div class="review-card-top">' +
+        '<div class="review-card-avatar">' + (r.name||'A').charAt(0).toUpperCase() + '</div>' +
+        '<div class="review-card-meta"><div class="review-card-name">' + escHTML(r.name) + '</div>' +
+        (r.location ? '<div class="review-card-loc">' + escHTML(r.location) + '</div>' : '') + '</div>' +
+        '<div style="margin-left:auto;text-align:right"><div class="review-card-stars">' + stars + '</div>' +
+        '<div class="review-card-date">' + escHTML(r.date) + '</div></div></div>' +
+      (r.title ? '<div class="review-card-title">' + escHTML(r.title) + '</div>' : '') +
+      '<div class="review-card-body">' + escHTML(r.body) + '</div>';
+    if(r.images && r.images.length){
+      var imgHtml = '<div class="review-card-images">';
+      r.images.forEach(function(src){ imgHtml += '<img src="'+src+'" alt="Review photo" loading="lazy">'; });
+      imgHtml += '</div>';
+      card.innerHTML += imgHtml;
+    }
+    return card;
+  }
+
+  function escHTML(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+  function updateSummary(){
+    var adminCards = document.querySelectorAll('[data-admin-review]');
+    var counts = {5:0,4:0,3:0,2:0,1:0};
+    var total = 0, sum = 0;
+
+    adminCards.forEach(function(c){
+      var filled = c.querySelectorAll('.review-card-stars svg[fill="#f59e0b"]').length;
+      if(filled>=1 && filled<=5){ counts[filled]++; total++; sum+=filled; }
+    });
+
+    var stored = getStoredReviews();
+    stored.forEach(function(r){
+      var rt = Math.max(1,Math.min(5,r.rating));
+      counts[rt]++; total++; sum+=rt;
+    });
+
+    var avg = total>0 ? (sum/total).toFixed(1) : '0';
+    document.getElementById('reviews-avg-num').textContent = avg;
+    document.getElementById('reviews-total-summary').textContent = total;
+    document.getElementById('total-review-count').textContent = total;
+
+    for(var s=1;s<=5;s++){
+      var pct = total>0 ? Math.round(counts[s]/total*100) : 0;
+      var bar = document.getElementById('bar-'+s);
+      var cnt = document.getElementById('bar-count-'+s);
+      if(bar) bar.style.width = pct+'%';
+      if(cnt) cnt.textContent = counts[s];
+    }
+  }
+
+  /* Star input interaction */
+  var selectedRating = 0;
+  var starInput = document.getElementById('star-input');
+  if(starInput){
+    var stars = starInput.querySelectorAll('svg');
+    stars.forEach(function(star){
+      star.addEventListener('mouseenter', function(){
+        var val = parseInt(this.getAttribute('data-star'));
+        stars.forEach(function(s){
+          var sv = parseInt(s.getAttribute('data-star'));
+          s.setAttribute('fill', sv<=val ? '#f59e0b' : 'none');
+          s.classList.toggle('filled', sv<=val);
+        });
+      });
+      star.addEventListener('click', function(){
+        selectedRating = parseInt(this.getAttribute('data-star'));
+      });
+    });
+    starInput.addEventListener('mouseleave', function(){
+      stars.forEach(function(s){
+        var sv = parseInt(s.getAttribute('data-star'));
+        s.setAttribute('fill', sv<=selectedRating ? '#f59e0b' : 'none');
+        s.classList.toggle('filled', sv<=selectedRating);
+      });
+    });
+  }
+
+  /* === IMAGE UPLOAD for reviews === */
+  var reviewImageData = [];
+
+  window.handleReviewImages = function(input){
+    var container = document.getElementById('review-img-previews');
+    var files = input.files;
+    for(var i=0; i<files.length && reviewImageData.length<5; i++){
+      (function(file){
+        var reader = new FileReader();
+        reader.onload = function(e){
+          reviewImageData.push(e.target.result);
+          var wrap = document.createElement('div');
+          wrap.className = 'review-image-preview';
+          wrap.innerHTML = '<img src="'+e.target.result+'" alt="Preview"><button type="button" class="remove-img" onclick="removeReviewImg(this,'+( reviewImageData.length-1)+')">&times;</button>';
+          container.appendChild(wrap);
+        };
+        reader.readAsDataURL(file);
+      })(files[i]);
+    }
+  };
+
+  window.removeReviewImg = function(btn, idx){
+    reviewImageData.splice(idx, 1);
+    btn.parentElement.remove();
+  };
+
+  window.submitReview = function(e){
+    e.preventDefault();
+    if(selectedRating < 1){ alert('Please select a star rating.'); return false; }
+    var name = document.getElementById('review-name').value.trim();
+    var loc = document.getElementById('review-location').value.trim();
+    var title = document.getElementById('review-title').value.trim();
+    var body = document.getElementById('review-body').value.trim();
+    if(!name || !body){ alert('Please fill in your name and review.'); return false; }
+
+    var review = {
+      name: name, location: loc, title: title, body: body,
+      rating: selectedRating,
+      images: reviewImageData.slice(),
+      date: new Date().toLocaleDateString('en-IN',{year:'numeric',month:'short',day:'numeric'})
+    };
+
+    var reviews = getStoredReviews();
+    reviews.push(review);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews)); } catch(ex){}
+
+    var list = document.getElementById('reviews-list');
+    list.appendChild(buildReviewCard(review));
+    updateSummary();
+
+    document.getElementById('review-form').reset();
+    selectedRating = 0;
+    reviewImageData = [];
+    document.getElementById('review-img-previews').innerHTML = '';
+    if(starInput){ starInput.querySelectorAll('svg').forEach(function(s){ s.setAttribute('fill','none'); s.classList.remove('filled'); }); }
+    var success = document.getElementById('review-success');
+    success.style.display = 'block';
+    setTimeout(function(){ success.style.display='none'; }, 4000);
+    return false;
+  };
+
+  /* === DESCRIPTION AUTO-STRUCTURE === */
+  (function(){
+    var rte = document.querySelector('.tab-description .rte');
+    if(!rte) return;
+    var headings = rte.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    if(headings.length === 0) return;
+    var blocks = [];
+    headings.forEach(function(h){
+      var block = document.createElement('div');
+      block.className = 'desc-block';
+      h.parentNode.insertBefore(block, h);
+      block.appendChild(h);
+      var next = block.nextSibling;
+      while(next){
+        if(next.nodeType === 1 && /^H[1-6]$/.test(next.nodeName)) break;
+        var toMove = next;
+        next = next.nextSibling;
+        block.appendChild(toMove);
+      }
+      blocks.push(block);
+    });
+    if(blocks.length === 2){
+      var wrap = document.createElement('div');
+      wrap.className = 'desc-columns';
+      blocks[0].parentNode.insertBefore(wrap, blocks[0]);
+      wrap.appendChild(blocks[0]);
+      wrap.appendChild(blocks[1]);
+    }
+    rte.querySelectorAll('ul, ol').forEach(function(list){
+      if(list.children.length >= 4) list.classList.add('ingredient-grid');
+    });
+  })();
+
+  /* === COMBO PACK SELECTOR === */
+  window.selectCombo = function(card){
+    document.querySelectorAll('.combo-pack-card').forEach(function(c){ c.classList.remove('selected'); });
+    card.classList.add('selected');
+    var qty = parseInt(card.getAttribute('data-combo-qty')) || 1;
+    var qtyInput = document.querySelector('.quantity-input');
+    if(qtyInput) qtyInput.value = qty;
+    var dp = card.getAttribute('data-display-price');
+    var dm = card.getAttribute('data-display-mrp');
+    var dd = card.getAttribute('data-display-discount');
+    var mainPrice = document.querySelector('.product-price');
+    var mainCompare = document.querySelector('.product-compare-price');
+    var mainSave = document.querySelector('.product-save-badge');
+    if(mainPrice && dp) mainPrice.textContent = dp;
+    if(mainCompare){ if(dm){ mainCompare.textContent = dm; mainCompare.style.display = ''; } else { mainCompare.style.display = 'none'; } }
+    if(mainSave){ if(dd){ mainSave.textContent = 'Save ' + dd.replace('%','') + '%'; mainSave.style.display = ''; } else { mainSave.style.display = 'none'; } }
+  };
+
+  renderStoredReviews();
+
+  /* === ADD TO CART for recommended products === */
+  document.querySelectorAll('[data-add-to-cart]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var vid = this.getAttribute('data-variant-id');
+      var qty = this.getAttribute('data-quantity') || 1;
+      if(!vid) return;
+      var self = this;
+      self.textContent = 'Adding...';
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({id: parseInt(vid), quantity: parseInt(qty)})
+      }).then(function(r){ return r.json(); }).then(function(){
+        self.textContent = 'Added!';
+        self.style.background = 'var(--color-primary)';
+        self.style.color = '#fff';
+        setTimeout(function(){ self.textContent='Add to Cart'; self.style.background=''; self.style.color=''; }, 2000);
+      }).catch(function(){ self.textContent = 'Add to Cart'; });
+    });
+  });
+
+})();
 </script>
 
 {% schema %}
@@ -950,7 +1483,7 @@
     {
       "type": "checkbox",
       "id": "show_highlights",
-      "label": "Show highlights",
+      "label": "Show key benefits",
       "default": true
     },
     {
@@ -986,18 +1519,50 @@
       "type": "url",
       "id": "default_download_url",
       "label": "Default presentation URL",
-      "info": "Fallback URL if product metafield is not set. Use product metafield 'custom.product_presentation_url' for per-product files."
+      "info": "Fallback URL if product metafield is not set"
+    },
+    {
+      "type": "header",
+      "content": "Product Showcase"
+    },
+    {
+      "type": "text",
+      "id": "showcase_heading",
+      "label": "Showcase heading",
+      "default": "Premium Ayurvedic Wellness"
+    },
+    {
+      "type": "textarea",
+      "id": "showcase_text",
+      "label": "Showcase description",
+      "default": "Experience the power of traditional Ayurvedic herbs combined with modern science for optimal health and wellness."
+    },
+    {
+      "type": "header",
+      "content": "Video Testimonials"
+    },
+    {
+      "type": "text",
+      "id": "youtube_product_url",
+      "label": "YouTube Product Video URL",
+      "info": "YouTube URL for the product overview video"
+    },
+    {
+      "type": "text",
+      "id": "youtube_click_url",
+      "label": "YouTube click-through URL",
+      "info": "URL to open when clicked (opens in YouTube app on mobile)"
     }
   ],
   "blocks": [
     {
       "type": "highlight",
-      "name": "Highlight",
+      "name": "Key Benefit",
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "Text",
+          "label": "Benefit text",
           "default": "100% Natural Ingredients"
         }
       ]
@@ -1007,6 +1572,11 @@
       "name": "Ingredient",
       "settings": [
         {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Ingredient image"
+        },
+        {
           "type": "text",
           "id": "name",
           "label": "Ingredient name",
@@ -1015,8 +1585,8 @@
         {
           "type": "text",
           "id": "benefit",
-          "label": "Benefit",
-          "default": "Reduces stress and anxiety"
+          "label": "Benefit / description",
+          "default": "Reduces stress and boosts immunity"
         }
       ]
     },
@@ -1031,6 +1601,139 @@
           "default": "Take 1-2 tablets twice daily"
         }
       ]
+    },
+    {
+      "type": "review",
+      "name": "Customer Review",
+      "settings": [
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Customer name",
+          "default": "Customer"
+        },
+        {
+          "type": "text",
+          "id": "reviewer_location",
+          "label": "Location",
+          "default": "India"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "review_title",
+          "label": "Review title"
+        },
+        {
+          "type": "textarea",
+          "id": "review_body",
+          "label": "Review text",
+          "default": "Great product!"
+        },
+        {
+          "type": "text",
+          "id": "review_date",
+          "label": "Date",
+          "default": "May 2026"
+        }
+      ]
+    },
+    {
+      "type": "research_ingredient",
+      "name": "Research Ingredient",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Ingredient image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Ashwagandha"
+        },
+        {
+          "type": "text",
+          "id": "scientific_name",
+          "label": "Scientific name",
+          "default": "Withania somnifera"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Renowned adaptogen that reduces cortisol levels and enhances physical and mental performance."
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Research badge",
+          "default": "Clinically Studied"
+        }
+      ]
+    },
+    {
+      "type": "combo_pack",
+      "name": "Combo Pack",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Pack of 3"
+        },
+        {
+          "type": "number",
+          "id": "quantity",
+          "label": "Quantity",
+          "default": 3
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Combo price (₹) — optional",
+          "info": "Leave blank to auto-calculate as Quantity × the product's own price. Fill in only to sell this pack at a discount."
+        },
+        {
+          "type": "text",
+          "id": "mrp",
+          "label": "M.R.P (₹) — optional",
+          "info": "Leave blank to auto-calculate from the product's compare-at price. Only shown when it is higher than the combo price."
+        },
+        {
+          "type": "checkbox",
+          "id": "best_value",
+          "label": "Show Best Value tag",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "video_testimonial",
+      "name": "Video Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "YouTube / Shorts URL",
+          "info": "Paste YouTube or YouTube Shorts URL for the video"
+        },
+        {
+          "type": "text",
+          "id": "click_url",
+          "label": "Click-through URL",
+          "info": "URL to open when clicked (e.g., original Instagram Reel URL)"
+        }
+      ]
     }
   ],
   "presets": [
@@ -1040,11 +1743,11 @@
         { "type": "highlight", "settings": { "text": "100% Natural Ingredients" } },
         { "type": "highlight", "settings": { "text": "No Side Effects" } },
         { "type": "highlight", "settings": { "text": "Clinically Tested" } },
-        { "type": "highlight", "settings": { "text": "GMP Certified" } },
+        { "type": "highlight", "settings": { "text": "GMP Certified Manufacturing" } },
         { "type": "ingredient", "settings": { "name": "Ashwagandha", "benefit": "Reduces stress and boosts immunity" } },
         { "type": "ingredient", "settings": { "name": "Tulsi", "benefit": "Natural antioxidant and adaptogen" } },
-        { "type": "ingredient", "settings": { "name": "Amla", "benefit": "Rich in Vitamin C" } },
-        { "type": "ingredient", "settings": { "name": "Giloy", "benefit": "Enhances immunity" } },
+        { "type": "ingredient", "settings": { "name": "Amla", "benefit": "Rich in Vitamin C for rejuvenation" } },
+        { "type": "ingredient", "settings": { "name": "Giloy", "benefit": "Enhances immunity naturally" } },
         { "type": "usage_step", "settings": { "text": "Take 1-2 tablets twice daily after meals" } },
         { "type": "usage_step", "settings": { "text": "Swallow with lukewarm water or milk" } },
         { "type": "usage_step", "settings": { "text": "Continue for at least 3 months for best results" } }
