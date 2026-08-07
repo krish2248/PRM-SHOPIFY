@@ -92,6 +92,43 @@
       <p class="text-center text-sm text-light mt-md">
         {{ 'cart.general.taxes_and_shipping_at_checkout' | t }}
       </p>
+
+      <div class="cart-drawer__trust">
+        <span class="cart-drawer__trust-badge cart-drawer__trust-badge--razorpay">Razorpay</span>
+        <span class="cart-drawer__trust-sep">secured</span>
+        <span class="cart-drawer__trust-sep">·</span>
+        <span class="cart-drawer__trust-badge cart-drawer__trust-badge--nimbus">Nimbus Post</span>
+        <span class="cart-drawer__trust-sep">delivery</span>
+      </div>
     </div>
   {%- endif -%}
 </div>
+
+<style>
+  .cart-drawer__trust {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+    font-size: 0.72rem;
+    color: var(--color-text-light, #777);
+  }
+  .cart-drawer__trust-badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+  }
+  .cart-drawer__trust-badge--razorpay {
+    background: linear-gradient(135deg, #0c2451 0%, #1d4ed8 100%);
+  }
+  .cart-drawer__trust-badge--nimbus {
+    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+  }
+</style>

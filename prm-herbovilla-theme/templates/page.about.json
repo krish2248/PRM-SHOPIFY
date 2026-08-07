@@ -16,7 +16,7 @@
           "settings": {
             "icon": "shield",
             "title": "Pharmaceutical-Grade",
-            "text": "Manufactured in the same WHO-GMP certified facility as our allopathic PRM Pharma portfolio."
+            "text": "Manufactured in the same WHO-GMP certified products as our allopathic PRM Pharma portfolio."
           }
         },
         "value-3": {
@@ -38,7 +38,7 @@
         "feature-1": {
           "type": "feature",
           "settings": {
-            "text": "WHO-GMP Certified Facility"
+            "text": "WHO-GMP Certified Products"
           }
         },
         "feature-2": {
@@ -50,7 +50,7 @@
         "feature-3": {
           "type": "feature",
           "settings": {
-            "text": "AYUSH Ministry Licensed"
+            "text": "State FDA Approved Product"
           }
         },
         "feature-4": {
@@ -88,7 +88,7 @@
       "settings": {
         "hero_label": "Our Story",
         "hero_title": "Rooted in Tradition, Driven by Wellness",
-        "hero_text": "HerboVilla is the Ayurvedic and herbal wellness division of PRM Pharmaceuticals — a 25-year-old Indian pharmaceutical house serving more than three lakh healthcare professionals across 28 states."
+        "hero_text": "HerboVilla is the Ayurvedic and herbal wellness division of PRM Pharmaceuticals — a 25-year-old Indian pharmaceutical house serving 3 Lakh+ customers across 22+ states."
       }
     }
   },

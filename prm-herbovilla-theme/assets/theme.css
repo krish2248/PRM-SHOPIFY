@@ -1635,6 +1635,14 @@ p:last-child {
   background-color: var(--color-white);
   border-radius: var(--border-radius-lg);
   padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+}
+.testimonial-card__text {
+  flex: 1;
+}
+.testimonial-card__author {
+  margin-top: auto;
 }
 
 .testimonial-card__rating {
@@ -4162,5 +4170,145 @@ p:last-child {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   MOBILE OPTIMIZATION — GLOBAL SAFEGUARDS
+   Keep all content within the viewport and tighten spacing
+   on phones without touching the desktop experience.
+   ============================================ */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img, video, svg, iframe, canvas {
+  max-width: 100%;
+}
+
+/* Long tokens (product SKUs, URLs, single-word titles) should break
+   instead of pushing the layout past the viewport edge. */
+h1, h2, h3, h4, h5, h6, p, li, a, span, dt, dd {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+@media (max-width: 768px) {
+  /* Prevent horizontal overflow on any top-level section */
+  main, section, .section, header, footer,
+  .container, .hero, .certifications, .testimonials,
+  .featured-collection, .shop-by-goal-section,
+  .why-us-section, .section-qualifications-strip {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* Grid cells should never force the track wider than its parent */
+  .grid,
+  .why-us__grid,
+  .certifications__grid,
+  .collections-grid,
+  .social-proof__grid,
+  .products-grid,
+  .products-grid--2,
+  .products-grid--3,
+  .products-grid--4,
+  .products-grid--5,
+  .product-trust-badges,
+  .hero__features-grid,
+  .hero__quali-track,
+  .quali-strip__track,
+  .hero__stats {
+    min-width: 0;
+  }
+
+  .grid > *,
+  .why-us__grid > *,
+  .certifications__grid > *,
+  .collections-grid > *,
+  .social-proof__grid > *,
+  .products-grid > *,
+  .hero__features-grid > *,
+  .hero__quali-track > *,
+  .quali-strip__track > *,
+  .hero__grid > * {
+    min-width: 0;
+  }
+
+  /* Featured products — always 2-up on phones, never 1-up */
+  .products-grid--2,
+  .products-grid--3,
+  .products-grid--4,
+  .products-grid--5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .product-card__content { padding: 14px; }
+  .product-card__title {
+    font-size: 0.9rem;
+    min-height: auto;
+    -webkit-line-clamp: 2;
+  }
+  .product-card__vendor { font-size: 0.65rem; }
+  .product-card__price--current { font-size: 1rem; }
+  .product-card__price--compare { font-size: 0.78rem; }
+}
+
+@media (max-width: 640px) {
+  .why-us__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .why-us-card { padding: 20px 14px; }
+  .why-us-card__icon { width: 56px; height: 56px; margin-bottom: 12px; }
+  .why-us-card__icon svg { width: 26px; height: 26px; }
+  .why-us-card__title { font-size: 0.98rem; }
+  .why-us-card__text  { font-size: 0.82rem; }
+
+  .certifications__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .certifications__item { padding: 18px 12px; }
+  .certifications__item-title { font-size: 0.82rem; }
+  .certifications__item-text  { font-size: 0.68rem; }
+  .certifications__icon { width: 46px; height: 46px; margin-bottom: 8px; }
+  .certifications__icon svg { width: 22px; height: 22px; }
+}
+
+@media (max-width: 420px) {
+  .products-grid--2,
+  .products-grid--3,
+  .products-grid--4,
+  .products-grid--5 {
+    gap: 10px;
+  }
+
+  .product-card__content { padding: 12px; }
+  .product-card__title { font-size: 0.85rem; }
+  .product-card__price--current { font-size: 0.95rem; }
+
+  .why-us-card { padding: 16px 12px; }
+  .why-us-card__title { font-size: 0.9rem; }
+
+  .certifications__item { padding: 14px 10px; }
+  .certifications__item-title { font-size: 0.75rem; }
+  .certifications__item-text { font-size: 0.62rem; line-height: 1.35; }
+
+  .section-header__title {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+  .section-header__text { font-size: 0.88rem; }
+}
+
+/* Announcement bar must fit without awkward line breaks */
+@media (max-width: 420px) {
+  .announcement-bar {
+    padding: 7px 10px;
+    font-size: 0.72rem;
+    line-height: 1.4;
   }
 }

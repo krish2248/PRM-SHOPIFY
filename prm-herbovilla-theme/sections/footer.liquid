@@ -252,6 +252,26 @@
     border-radius: 4px;
     font-size: 0.72rem;
     font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .payment-icon--razorpay {
+    background: linear-gradient(135deg, #0c2451 0%, #1d4ed8 100%);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.18);
+  }
+  .payment-icon--nimbus {
+    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.18);
+  }
+  .footer-trust-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .footer-shipping span {
+    color: #74c69d;
   }
   .footer-legal {
     display: flex;
@@ -297,6 +317,13 @@
       gap: 14px;
     }
     .footer-payments {
+      justify-content: center;
+    }
+    .footer-trust-stack {
+      align-items: center;
+      width: 100%;
+    }
+    .footer-trust-stack .payment-icons {
       justify-content: center;
     }
   }
@@ -415,7 +442,7 @@
           </svg>
           <span class="footer-contact-text">
             <strong style="display:block; margin-bottom:2px;">Business Hours</strong>
-            Mon – Sat: 9:30 AM – 6:30 PM<br>
+            Mon – Sat: 10:00 AM – 7:00 PM<br>
             Sunday: Closed
           </span>
         </div>
@@ -605,7 +632,7 @@
       "blocks": [
         { "type": "certification", "settings": { "text": "GMP Certified" } },
         { "type": "certification", "settings": { "text": "ISO 9001:2015" } },
-        { "type": "certification", "settings": { "text": "AYUSH Approved" } },
+        { "type": "certification", "settings": { "text": "State FDA Approved" } },
         { "type": "certification", "settings": { "text": "FSSAI Licensed" } },
         { "type": "link_col2", "settings": { "text": "Contact Us", "link": "/pages/contact" } },
         { "type": "link_col2", "settings": { "text": "About Us", "link": "/pages/about-us" } },

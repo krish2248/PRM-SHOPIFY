@@ -102,9 +102,9 @@
         "cert-2": {
           "type": "certification",
           "settings": {
-            "icon": "ayush",
-            "title": "AYUSH Approved",
-            "text": "Government of India certified Ayurvedic"
+            "icon": "fda",
+            "title": "State FDA Approved",
+            "text": "Gujarat FDA inspected & approved product"
           }
         },
         "cert-3": {
@@ -138,7 +138,7 @@
         "title": "Certified for Excellence",
         "text": "Our products meet the highest standards of quality, purity, and safety",
         "show_trust_line": true,
-        "trust_text": "Trusted by over 10,000+ customers across India"
+        "trust_text": "Trusted by over 3lakh+ customers across India"
       }
     },
     "featured-collection": {
@@ -147,8 +147,8 @@
         "label": "Featured",
         "title": "Bestselling Products",
         "text": "Discover our most loved Ayurvedic products trusted by thousands",
-        "collection": "all",
-        "products_count": 12,
+        "collection": "best-sellers",
+        "products_count": 8,
         "columns": 4,
         "show_view_all": true,
         "show_secondary_image": true
@@ -161,13 +161,14 @@
     "new-arrivals": {
       "type": "new-arrivals-large",
       "settings": {
+        "collection": "new-arrivals",
         "label": "Just Launched",
         "title": "New Arrivals",
         "text": "Discover our latest Ayurvedic formulations crafted with ancient wisdom and modern science.",
         "products_count": 4,
         "show_vendor": true,
         "button_text": "View All New Products",
-        "button_link": "/collections/all",
+        "button_link": "/collections/new-arrivals",
         "alt_background": false
       }
     },
@@ -242,77 +243,32 @@
         "testimonial-1": {
           "type": "testimonial",
           "settings": {
-            "text": "I recommend PRM HerboVilla's immunity formulations to patients recovering from seasonal illnesses. The clinical response has been consistent and reliable.",
-            "name": "Dr. Priya Sharma",
-            "location": "Ayurveda Physician, Mumbai",
+            "text": "I have used PRM & COMPANY Herbal & Allopathic both products last many years and specially I have practice with PRM's major product like HARRY CAPSULES, SAHELI SYRUP, PRINCE MOUTH GEL and many more. This all products are excellent in quality and 100% result oriented. Once again Thanks PRM & COMPANY.",
+            "name": "Dr. Devang Patel",
+            "location": "Deesa, Gujarat",
             "rating": 5
           }
         },
         "testimonial-2": {
           "type": "testimonial",
           "settings": {
-            "text": "The sourcing and standardization of their herbal extracts is excellent. I trust their products for my patients with chronic respiratory concerns.",
-            "name": "Dr. Rahul Patel",
-            "location": "BAMS, Ahmedabad",
+            "text": "I have used your product in our hospital for the last 8 years and I use your most running products like Harry group, Liver Tonic and Rome group. All products have a good quality as well as 100% result oriented.",
+            "name": "Vaidh Dr. B.L. Parik",
+            "location": "Jodhpur, Rajasthan — Ayurved Gramudhyog Sansthan",
             "rating": 5
           }
         },
         "testimonial-3": {
           "type": "testimonial",
           "settings": {
-            "text": "Authentic classical formulations backed by modern quality control. HerboVilla has become my go-to for integrative wellness protocols.",
-            "name": "Dr. Sneha Reddy",
-            "location": "Integrative Medicine, Bangalore",
-            "rating": 5
-          }
-        },
-        "testimonial-4": {
-          "type": "testimonial",
-          "settings": {
-            "text": "As an Ayurvedic practitioner, I appreciate GMP-certified manufacturing combined with classical Ayurvedic texts. PRM HerboVilla delivers both.",
-            "name": "Dr. Amit Kumar",
-            "location": "Panchakarma Specialist, Delhi",
-            "rating": 5
-          }
-        },
-        "testimonial-5": {
-          "type": "testimonial",
-          "settings": {
-            "text": "Their digestive health range is remarkable. My patients with IBS and acidity have shown measurable improvement within weeks of use.",
-            "name": "Dr. Kavita Desai",
-            "location": "Gastro Wellness, Pune",
-            "rating": 5
-          }
-        },
-        "testimonial-6": {
-          "type": "testimonial",
-          "settings": {
-            "text": "The Chyawanprash formulation follows the classical text faithfully. I prescribe it for paediatric immunity with excellent outcomes.",
-            "name": "Dr. Vikram Singh",
-            "location": "Paediatric Ayurveda, Jaipur",
-            "rating": 5
-          }
-        },
-        "testimonial-7": {
-          "type": "testimonial",
-          "settings": {
-            "text": "Their joint care oils and Rasna-based formulations have given my arthritis patients meaningful relief. Highly trusted in my practice.",
-            "name": "Dr. Lakshmi Nair",
-            "location": "Ortho-Ayurveda, Chennai",
-            "rating": 5
-          }
-        },
-        "testimonial-8": {
-          "type": "testimonial",
-          "settings": {
-            "text": "Clean, chemical-free herbal skincare backed by dermatological screening. My patients with sensitive skin tolerate these products exceptionally well.",
-            "name": "Dr. Neha Gupta",
-            "location": "Dermatology, Kolkata",
+            "text": "I have used PRM & COMPANY Herbal products last many years and specially I have practice with PRM's major product like HARRY CAPSULES, PYNIL CAPSULES, COFULA, COFULA JUNIOR and many more. This all products are excellent in quality and 100% result oriented. Once again Thanks PRM & COMPANY.",
+            "name": "Vaidh Pankaj Kavre",
+            "location": "Amravati, Maharashtra",
             "rating": 5
           }
         }
       },
-      "block_order": ["testimonial-1", "testimonial-2", "testimonial-3", "testimonial-4", "testimonial-5", "testimonial-6", "testimonial-7", "testimonial-8"],
+      "block_order": ["testimonial-1", "testimonial-2", "testimonial-3"],
       "settings": {
         "label": "Doctor's Reviews",
         "title": "Trusted by Healthcare Professionals",

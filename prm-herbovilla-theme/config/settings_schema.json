@@ -204,13 +204,13 @@
         "type": "text",
         "id": "marketplace_tata1mg",
         "label": "Tata 1mg store URL",
-        "default": "https://www.1mg.com/search/all?name=herbovilla"
+        "default": "https://www.1mg.com/marketer/prm-85731"
       },
       {
         "type": "text",
         "id": "marketplace_amazon",
         "label": "Amazon store URL",
-        "default": "https://www.amazon.in/s?k=herbovilla"
+        "default": "https://www.amazon.in/l/27943762031?ie=UTF8&marketplaceID=A21TJRUUN4KGV&product=B0CS2Z3JWZ&me=ASQS5905XC63T"
       },
       {
         "type": "text",
@@ -222,7 +222,7 @@
         "type": "text",
         "id": "marketplace_meesho",
         "label": "Meesho store URL",
-        "default": "https://www.meesho.com/search?q=herbovilla"
+        "default": "https://www.meesho.com/PRMCOMPANY?ms=2"
       }
     ]
   },

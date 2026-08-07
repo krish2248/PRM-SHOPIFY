@@ -14,20 +14,15 @@
         </svg>
       </button>
       
-      {%- comment -%} Logo {%- endcomment -%}
-      <div class="header__logo">
-        <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
-          {%- if settings.logo != blank -%}
-            <img 
-              src="{{ settings.logo | image_url: width: settings.logo_width | times: 2 }}" 
-              alt="{{ shop.name }}"
-              width="{{ settings.logo_width }}"
-              height="auto"
-              loading="eager"
-            >
-          {%- else -%}
-            <span class="header__logo-text font-heading text-xl font-bold">{{ shop.name }}</span>
-          {%- endif -%}
+      {%- comment -%} Logo — HerboVilla mark on white rounded card {%- endcomment -%}
+      <div class="header__logo header__logo--mark">
+        <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}" class="header__logo-box">
+          <img
+            src="{{ 'herbovilla-transparent.png' | asset_url }}"
+            alt="{{ shop.name }}"
+            height="48"
+            loading="eager"
+          >
         </a>
       </div>
       
@@ -41,13 +36,10 @@
             <a href="/collections/all" class="header__nav-link {% if request.path == '/collections/all' %}header__nav-link--active{% endif %}">All Products</a>
           </li>
           <li class="header__nav-item">
-            <a href="/collections/child-care" class="header__nav-link {% if request.path contains '/collections/child-care' %}header__nav-link--active{% endif %}">Child-Care</a>
+            <a href="/collections/best-sellers" class="header__nav-link {% if request.path contains '/collections/best-sellers' %}header__nav-link--active{% endif %}">Bestsellers</a>
           </li>
           <li class="header__nav-item">
-            <a href="/collections/skin-care" class="header__nav-link {% if request.path contains '/collections/skin-care' %}header__nav-link--active{% endif %}">Skin-Care</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="/collections/supplements" class="header__nav-link {% if request.path contains '/collections/supplements' %}header__nav-link--active{% endif %}">Supplements</a>
+            <a href="/collections/new-arrivals" class="header__nav-link {% if request.path contains '/collections/new-arrivals' %}header__nav-link--active{% endif %}">New Arrivals</a>
           </li>
           <li class="header__nav-item">
             <a href="/pages/about-us" class="header__nav-link {% if request.path contains '/pages/about' %}header__nav-link--active{% endif %}">About Us</a>
@@ -101,12 +93,10 @@
 {%- comment -%} Mobile Menu {%- endcomment -%}
 <div class="mobile-menu" id="mobile-menu">
   <div class="mobile-menu__header">
-    <div class="header__logo">
-      {%- if settings.logo != blank -%}
-        <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" height="40">
-      {%- else -%}
-        <span class="font-heading text-lg font-bold">{{ shop.name }}</span>
-      {%- endif -%}
+    <div class="header__logo header__logo--mark">
+      <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}" class="header__logo-box header__logo-box--mobile">
+        <img src="{{ 'herbovilla-transparent.png' | asset_url }}" alt="{{ shop.name }}" height="40">
+      </a>
     </div>
     <button type="button" class="mobile-menu__close" aria-label="{{ 'accessibility.close' | t }}">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -118,9 +108,8 @@
   <nav class="mobile-menu__nav">
     <a href="/" class="mobile-menu__link">Home</a>
     <a href="/collections/all" class="mobile-menu__link">All Products</a>
-    <a href="/collections/child-care" class="mobile-menu__link">Child-Care</a>
-    <a href="/collections/skin-care" class="mobile-menu__link">Skin-Care</a>
-    <a href="/collections/supplements" class="mobile-menu__link">Supplements</a>
+    <a href="/collections/best-sellers" class="mobile-menu__link">Bestsellers</a>
+    <a href="/collections/new-arrivals" class="mobile-menu__link">New Arrivals</a>
     <a href="/pages/about-us" class="mobile-menu__link">About Us</a>
     <a href="/blogs/news" class="mobile-menu__link">Blog</a>
     <a href="/pages/contact" class="mobile-menu__link">Contact</a>
@@ -128,6 +117,57 @@
     <a href="/cart" class="mobile-menu__link">Cart ({{ cart.item_count }})</a>
   </nav>
 </div>
+
+<style>
+  /* HerboVilla logo on a white rounded card — matches the about-us hero treatment */
+  .header__logo--mark {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__logo-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 6px 28px;
+    box-shadow: 0 4px 14px rgba(27, 67, 50, 0.08);
+    border: 1px solid rgba(27, 67, 50, 0.06);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
+  }
+
+  .header__logo-box:hover {
+    box-shadow: 0 8px 22px rgba(27, 67, 50, 0.14);
+    transform: translateY(-1px);
+  }
+
+  .header__logo-box img {
+    display: block;
+    height: 48px;
+    width: auto;
+  }
+
+  .header__logo-box--mobile img {
+    height: 40px;
+  }
+
+  @media (max-width: 1024px) {
+    .header__logo-box {
+      padding: 6px 22px;
+    }
+    .header__logo-box img { height: 42px; }
+  }
+
+  @media (max-width: 640px) {
+    .header__logo-box {
+      padding: 5px 16px;
+      border-radius: 10px;
+    }
+    .header__logo-box img { height: 36px; }
+  }
+</style>
 
 {% schema %}
 {

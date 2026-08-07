@@ -1,6 +1,10 @@
 {%- style -%}
   .contact-template {
     padding: 40px 0 80px;
+    background: #FDF8F0;
+  }
+  .section-contact {
+    background: #FDF8F0;
   }
   .contact-header {
     text-align: center;
@@ -343,7 +347,7 @@
           </div>
           <div>
             <h4>Business Hours</h4>
-            <p>{{ section.settings.hours | default: 'Monday - Saturday: 9:00 AM - 6:00 PM' }}</p>
+            <p>{{ section.settings.hours | default: 'Monday - Saturday: 10:00 AM - 7:00 PM' }}</p>
           </div>
         </div>
         
@@ -496,7 +500,7 @@
       "type": "text",
       "id": "hours",
       "label": "Business hours",
-      "default": "Monday - Saturday: 9:00 AM - 6:00 PM"
+      "default": "Monday - Saturday: 10:00 AM - 7:00 PM"
     },
     {
       "type": "checkbox",

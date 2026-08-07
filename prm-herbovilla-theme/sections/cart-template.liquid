@@ -215,16 +215,53 @@
   }
   .cart-trust {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
     margin-top: 25px;
     padding-top: 20px;
     border-top: 1px solid #eee;
   }
+  .cart-trust__row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
   .cart-trust svg {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     color: var(--color-text-light);
+  }
+  .cart-trust__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--color-text-light);
+    font-weight: 500;
+  }
+  .cart-trust__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cart-trust__badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #fff;
+  }
+  .cart-trust__badge--razorpay {
+    background: linear-gradient(135deg, #0c2451 0%, #1d4ed8 100%);
+  }
+  .cart-trust__badge--nimbus {
+    background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
   }
   .cart-empty {
     text-align: center;
@@ -401,9 +438,27 @@
             <a href="/collections/all" class="cart-continue">Continue Shopping</a>
             
             <div class="cart-trust">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+              <div class="cart-trust__row">
+                <span class="cart-trust__item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  Secure
+                </span>
+                <span class="cart-trust__item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                  Authentic
+                </span>
+                <span class="cart-trust__item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                  All Cards
+                </span>
+              </div>
+              <div class="cart-trust__brand">
+                <span class="cart-trust__badge cart-trust__badge--razorpay">Razorpay</span>
+                <span class="cart-trust__item">payments</span>
+                <span class="cart-trust__item">·</span>
+                <span class="cart-trust__badge cart-trust__badge--nimbus">Nimbus Post</span>
+                <span class="cart-trust__item">delivery</span>
+              </div>
             </div>
           </div>
         </div>

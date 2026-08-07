@@ -1,0 +1,109 @@
+{
+  "_comment": "Maps each Shopify collection (by handle + ID) to the product handles that belong in it. Source: 42 product PDFs in prm-herbovilla-theme/assets + live products.json from prm-herbovilla.myshopify.com.",
+  "store": "prm-herbovilla.myshopify.com",
+  "collections": {
+    "immunity-boosters": {
+      "id": 345784746158,
+      "products": [
+        "vedacold-cv-675-ayurvedic-cold-cough-relief-tablets-22-herbal-immunity-formula-with-tulsi-trikatu-haldi-pushkarmool-supports-relief-from-nasal-congestion-sore-throat-fever-respiratory-discomfort-30-tablets-pack",
+        "prm-harry-g-ayurvedic-capsules-30-caps-pack-of-1-boosts-vigour-vitality-stamina-with-suvarna-bhasma-safed-musli-ashwagandha",
+        "prm-harry-ayurvedic-immunity-syrup-450ml-pack-of-1-boosts-strength-immunity-with-ashwagandha-triphala-sharavari",
+        "prm-harry-ayurvedic-immunity-syrup-225ml-pack-of-2-general-family-tonic-with-ashwagandha-triphala-sharavari",
+        "prm-harry-ayurvedic-immunity-capsules-30-caps-pack-of-2-boosts-strength-stamina-with-ashwagandha-gokhru-shilajit",
+        "prm-harry-herbal-drops-30ml-pack-of-3-ayurvedic-supplement-for-growth-immunity-in-children"
+      ]
+    },
+    "digestive-health": {
+      "id": 345784844462,
+      "products": [
+        "prm-castro-softgel-capsules-pack-of-2-ayurvedic-digestive-gastric-care-formula",
+        "prm-dyril-plus-ayurvedic-tablet-10-tabs-pack-of-2-helpful-for-dysentery-diarrhoea-ibs-with-kutaj-marorphali-anar-chal",
+        "prm-zymo-villa-ayurvedic-enzyme-tablet-30-tabs-pack-of-2-enhances-appetite-digestion-with-dhania-sunth-ajmo-pippali",
+        "prm-zymo-villa-ayurvedic-enzyme-syrup-200ml-pack-of-2-improves-digestion-appetite-with-ajwain-pudina-hing-jira-oil",
+        "prm-prolax-ayurvedic-laxative-care-tablet-10-tabs-pack-of-3-promotes-healthy-bowel-movement-with-senna-shuddha-nepala-sanchal",
+        "prm-prolax-ayurvedic-laxative-care-syrup-170ml-pack-of-2-gentle-relief-from-chronic-constipation-with-sanchal-trivrut-senna",
+        "prm-icee-ayurvedic-antacid-syrup-170ml-strawberry-flavour-pack-of-2-relieves-acidity-gas-indigestion",
+        "prm-pynil-ayurvedic-piles-care-capsules-30-caps-pack-of-2-gentle-hemorrhoid-relief-with-suran-aritha-mango-seeds-limbodi",
+        "prm-pynil-ayurvedic-piles-care-ointment-30g-pack-of-2-soothes-pain-itching-with-haritaki-nimbu-pittapapdo"
+      ]
+    },
+    "hair-skin-care": {
+      "id": 345784877230,
+      "products": [
+        "prm-dermo-villa-herbal-syrup-200ml-pack-of-2-blood-purifier-skin-cleanser-with-neem-manjistha-kalmegha",
+        "prm-dermo-villa-herbal-capsules-30-caps-pack-of-2-ayurvedic-blood-purifier-with-arogyavardhini-ras-neem-chirayata",
+        "prm-dermo-villa-ayurvedic-daily-bathing-soap-75g-pack-of-2-cleanses-protects-skin-with-haldi-tulsi-neem-karanj",
+        "prm-saheli-fairness-cream-25g-pack-of-2-glowing-supple-acne-free-skin-with-haldi-chandan-wheat-germ-oil",
+        "prm-itchi-care-ayurvedic-skin-care-cream-15g-pack-of-3-fungal-infection-remedy-with-sandal-oil-rose-water-berry-berry",
+        "prm-prolice-herbal-oil-30ml-pack-of-3-natural-lice-care-treatment-with-shikakai-oil-sitafal-oil-til-oil",
+        "prm-cut-care-ayurvedic-foot-care-ointment-25g-pack-of-2-heals-cracked-heels-with-kokum-butter-sarjaras-manjishtha",
+        "prm-aloy-care-ayurvedic-moisturising-soap-75g-pack-of-2-nourishing-body-soap-with-aloe-vera-vitamin-e-glycerine",
+        "prm-kesar-baby-soap-75g-pack-of-2-gentle-daily-bathing-soap-for-infants-with-kesar-coconut-oil-jojoba-oil"
+      ]
+    },
+    "joint-pain-relief": {
+      "id": 345784909998,
+      "products": [
+        "prm-artho-villa-ayurvedic-arthritis-tablet-30-tabs-pack-of-2-reduces-pain-promotes-flexibility-with-methi-sunth-ashwagandha",
+        "prm-artho-villa-ayurvedic-arthritis-syrup-200ml-pack-of-2-relieves-joint-stiffness-inflammation-with-hadsakal-daruharidra-sunthi",
+        "prm-artho-villa-ayurvedic-pain-reliever-oil-100ml-pack-of-2-soothes-joint-muscle-pain-with-gandhpura-mahamash-mahanarayan",
+        "prm-artho-villa-ayurvedic-pain-reliever-oil-60ml-pack-of-2-for-joint-back-pain-relief-with-gandhpura-mahamash-mahanarayan",
+        "prm-calcy-villa-ayurvedic-tablet-30-tabs-pack-of-2-supports-bone-strength-calcium-absorption-with-shankh-bhasma-shalaki-shatavari"
+      ]
+    },
+    "womens-health": {
+      "id": 345785073838,
+      "products": [
+        "prm-saheli-ayurvedic-female-tonic-200ml-pack-of-2-uterine-hormonal-health-support-for-women",
+        "prm-saheli-fairness-cream-25g-pack-of-2-glowing-supple-acne-free-skin-with-haldi-chandan-wheat-germ-oil"
+      ]
+    },
+    "mens-health": {
+      "id": 345785106606,
+      "products": [
+        "prm-harry-g-ayurvedic-capsules-30-caps-pack-of-1-boosts-vigour-vitality-stamina-with-suvarna-bhasma-safed-musli-ashwagandha",
+        "prm-harry-ayurvedic-immunity-capsules-30-caps-pack-of-2-boosts-strength-stamina-with-ashwagandha-gokhru-shilajit",
+        "prm-obee-villa-ayurvedic-capsule-30-caps-pack-of-2-supports-weight-management-with-shuddha-guggul-baheda-lasan"
+      ]
+    },
+    "general-wellness": {
+      "id": 345785172142,
+      "products": [
+        "prm-breno-villa-herbal-syrup-200ml-pack-of-2-calms-mind-promotes-relaxation-with-shankhpushpi-brahmi-gulabphool",
+        "prm-breno-villa-herbal-capsules-30-caps-pack-of-2-helps-relieve-stress-depression-with-gulabphool-brahmi-vidang",
+        "prm-lee-ayurvedic-liver-tonic-200ml-pack-of-2-supports-liver-health-detoxification",
+        "prm-steno-villa-ayurvedic-stone-care-tablet-30-tabs-pack-of-2-promotes-healthy-kidney-function-stone-dissolution",
+        "prm-steno-villa-ayurvedic-stone-care-syrup-200ml-pack-of-2-supports-kidney-health-stone-relief",
+        "prm-prince-mouth-liquid-12ml-pack-of-2-herbal-mouth-ulcer-relief-with-jethimadh-ilaichi-khadir",
+        "prm-prince-mouth-gel-10g-pack-of-2-ayurvedic-mouth-ulcer-remedy-with-jethimadh-khadir-irimed",
+        "prm-obee-villa-ayurvedic-capsule-30-caps-pack-of-2-supports-weight-management-with-shuddha-guggul-baheda-lasan",
+        "prm-calcy-villa-ayurvedic-tablet-30-tabs-pack-of-2-supports-bone-strength-calcium-absorption-with-shankh-bhasma-shalaki-shatavari"
+      ]
+    },
+    "respiratory-care": {
+      "id": 345785270446,
+      "products": [
+        "vedacold-cv-675-ayurvedic-cold-cough-relief-tablets-22-herbal-immunity-formula-with-tulsi-trikatu-haldi-pushkarmool-supports-relief-from-nasal-congestion-sore-throat-fever-respiratory-discomfort-30-tablets-pack",
+        "prm-cofula-ayurvedic-syrup-110ml-pack-of-2-effective-relief-from-cough-cold-with-adulsa-jethimadh-bhimsenkapoor",
+        "prm-cofula-junior-herbal-syrup-100ml-pack-of-2-gentle-cough-cold-relief-for-kids-with-nilgiri-oil-tulsi-oil-ativish-mool",
+        "prm-fenny-ayurvedic-syrup-100ml-pack-of-2-natural-cough-cold-remedy-with-honey-ardusi-haldi-tulsi"
+      ]
+    },
+    "diabetic-care": {
+      "id": 345785368750,
+      "products": [
+        "prm-gluco-villa-ayurvedic-tablet-30-tabs-pack-of-2-helps-regulate-blood-sugar-with-jamun-beej-karela-mahamejva"
+      ]
+    },
+    "new-arrivals": {
+      "id": 345785696430,
+      "products": [
+        "vedacold-cv-675-ayurvedic-cold-cough-relief-tablets-22-herbal-immunity-formula-with-tulsi-trikatu-haldi-pushkarmool-supports-relief-from-nasal-congestion-sore-throat-fever-respiratory-discomfort-30-tablets-pack",
+        "prm-fenny-ayurvedic-syrup-100ml-pack-of-2-natural-cough-cold-remedy-with-honey-ardusi-haldi-tulsi",
+        "prm-zymo-villa-ayurvedic-enzyme-tablet-30-tabs-pack-of-2-enhances-appetite-digestion-with-dhania-sunth-ajmo-pippali",
+        "prm-zymo-villa-ayurvedic-enzyme-syrup-200ml-pack-of-2-improves-digestion-appetite-with-ajwain-pudina-hing-jira-oil",
+        "prm-aloy-care-ayurvedic-moisturising-soap-75g-pack-of-2-nourishing-body-soap-with-aloe-vera-vitamin-e-glycerine"
+      ]
+    }
+  }
+}

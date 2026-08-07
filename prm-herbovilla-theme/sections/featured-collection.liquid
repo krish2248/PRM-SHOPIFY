@@ -180,20 +180,24 @@
     gap: 25px;
   }
 
+  .products-grid > * {
+    min-width: 0;
+  }
+
   .products-grid--2 {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .products-grid--3 {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .products-grid--4 {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .products-grid--5 {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
   .product-card {
@@ -396,39 +400,59 @@
   /* Responsive */
   @media (max-width: 1200px) {
     .products-grid--5 {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 992px) {
     .products-grid--4,
     .products-grid--5 {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 768px) {
     .featured-collection {
-      padding: 60px 0;
+      padding: 44px 0;
     }
 
+    .products-grid {
+      gap: 14px;
+    }
+
+    .products-grid--2,
     .products-grid--3,
     .products-grid--4,
     .products-grid--5 {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .product-card {
+      border-radius: 12px;
     }
 
     .product-card__content {
-      padding: 15px;
+      padding: 12px;
+    }
+
+    .product-card__vendor {
+      font-size: 10px;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
     }
 
     .product-card__title {
-      font-size: 14px;
-      min-height: 39px;
+      font-size: 13px;
+      min-height: 36px;
+      margin-bottom: 6px;
     }
 
     .product-card__price--current {
-      font-size: 16px;
+      font-size: 15px;
+    }
+
+    .product-card__price--compare {
+      font-size: 12px;
     }
 
     .product-card__quick-add {
@@ -438,13 +462,30 @@
   }
 
   @media (max-width: 480px) {
-    .products-grid--2 {
-      gap: 15px;
-    }
+    .featured-collection { padding: 36px 0; }
+    .products-grid { gap: 10px; }
 
     .product-card__image {
-      padding: 15px;
+      padding: 12px;
     }
+
+    .product-card__badge {
+      top: 8px;
+      left: 8px;
+      padding: 4px 8px;
+      font-size: 9px;
+    }
+
+    .product-card__title {
+      font-size: 12px;
+      min-height: 32px;
+    }
+
+    .product-card__price--current {
+      font-size: 14px;
+    }
+
+    .featured-collection__footer { margin-top: 28px; }
   }
 </style>
 

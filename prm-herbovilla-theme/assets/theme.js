@@ -254,7 +254,25 @@
         return;
       }
 
-      if (footerEl) footerEl.style.display = 'block';
+      if (footerEl) {
+        footerEl.style.display = 'block';
+        const subtotalInFooter = footerEl.querySelector('.cart-drawer__subtotal-amount');
+        if (subtotalInFooter) subtotalInFooter.textContent = formatMoney(cart.total_price);
+      } else {
+        const newFooter = document.createElement('div');
+        newFooter.className = 'cart-drawer__footer';
+        newFooter.innerHTML = `
+          <div class="cart-drawer__subtotal">
+            <span>Subtotal</span>
+            <span class="cart-drawer__subtotal-amount">${formatMoney(cart.total_price)}</span>
+          </div>
+          <form action="/cart" method="post">
+            <button type="submit" name="checkout" class="btn btn--primary btn--full cart-drawer__checkout">Checkout</button>
+          </form>
+          <p class="text-center text-sm text-light mt-md">Taxes and shipping calculated at checkout</p>
+        `;
+        this.drawer?.appendChild(newFooter);
+      }
 
       itemsContainer.innerHTML = cart.items.map(item => `
         <div class="cart-drawer__item" data-key="${item.key}">
@@ -307,6 +325,8 @@
         this.cartCount.textContent = count;
         this.cartCount.style.display = count > 0 ? 'flex' : 'none';
       }
+      const titleEl = this.drawer?.querySelector('.cart-drawer__title');
+      if (titleEl) titleEl.textContent = `Your Cart (${count})`;
     }
   }
 

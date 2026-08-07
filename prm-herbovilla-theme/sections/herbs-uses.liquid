@@ -48,10 +48,25 @@
 
             <ul class="herb-card__list">
               {%- assign herbs = block.settings.herbs | newline_to_br | split: '<br />' -%}
+              {%- assign clean_herbs = '' -%}
               {%- for herb in herbs -%}
                 {%- assign trimmed = herb | strip -%}
                 {%- if trimmed != blank -%}
-                  <li>{{ trimmed }}</li>
+                  {%- if clean_herbs == '' -%}
+                    {%- assign clean_herbs = trimmed -%}
+                  {%- else -%}
+                    {%- assign clean_herbs = clean_herbs | append: '|' | append: trimmed -%}
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- assign herbs_array = clean_herbs | split: '|' -%}
+              {%- assign total_herbs = herbs_array.size -%}
+              {%- assign half_herbs = total_herbs | divided_by: 2.0 | ceil -%}
+              {%- for herb in herbs_array -%}
+                {%- if forloop.index > half_herbs -%}
+                  <li class="herb-card__list-extra">{{ herb }}</li>
+                {%- else -%}
+                  <li>{{ herb }}</li>
                 {%- endif -%}
               {%- endfor -%}
             </ul>
@@ -209,8 +224,8 @@
   }
 
   .herb-card__list li:first-child {
-    font-weight: 600;
-    color: #1B4332;
+    font-weight: 400;
+    color: #2c3e35;
   }
 
   .herb-card__link {
@@ -245,6 +260,13 @@
   @media (max-width: 1024px) {
     .herbs-uses__grid {
       grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    /* Hide the second half of herbs on tablet/mobile/iPad to keep cards compact */
+    .herb-card__list-extra {
+      display: none;
     }
   }
 

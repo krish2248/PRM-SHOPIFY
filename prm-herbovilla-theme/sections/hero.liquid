@@ -237,42 +237,90 @@
   @media (max-width: 992px) {
     .hero {
       min-height: auto;
-      padding: 56px 0 48px;
+      padding: 40px 0 32px;
     }
     .hero__grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
     }
     /* Mobile: Ancient Wisdom content first, feature cards / product after */
-    .hero__content { order: 1; text-align: center; }
-    .hero__right   { order: 2; }
+    .hero__content { order: 1; text-align: center; min-width: 0; }
+    .hero__right   { order: 2; min-width: 0; }
     .hero__text    { margin-left: auto; margin-right: auto; }
-    .hero__actions,
-    .hero__features { justify-content: center; }
+    .hero__actions { justify-content: center; }
+    /* Hide the inline "100% Natural · GMP Certified · Free Shipping" checklist
+       on mobile/tablet — they duplicate the feature cards below and clutter
+       the hero on narrow screens. Desktop is untouched. */
+    .hero__features { display: none !important; }
     .hero__product-image { max-width: 280px; }
     .hero__floating-badge { display: none; }
     .hero__stats { justify-content: center; }
+    .hero__features-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .hero__feature-card { padding: 20px 16px; }
+    .hero__feature-card h3 { font-size: 1rem; }
+    .hero__feature-card p { font-size: 0.82rem; }
   }
-  @media (max-width: 576px) {
-    .hero { padding: 40px 0 36px; }
-    .hero__title { font-size: clamp(1.6rem, 7vw, 2.1rem); }
-    .hero__text  { font-size: 0.95rem; }
-    .hero__actions { flex-direction: column; gap: 12px; }
-    .hero__actions .btn { width: 100%; justify-content: center; }
-    .hero__features { flex-direction: column; gap: 12px; }
-    .hero__stats { flex-wrap: wrap; gap: 20px; justify-content: center; }
-    .hero__features-grid { grid-template-columns: 1fr; gap: 16px; }
-    .hero__feature-card { padding: 22px 20px; }
+  @media (max-width: 640px) {
+    .hero { padding: 28px 0 24px; }
+    .hero__label {
+      font-size: 0.68rem;
+      padding: 6px 14px;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
+    }
+    .hero__title {
+      font-size: clamp(1.55rem, 7vw, 2.1rem);
+      margin-bottom: 14px;
+    }
+    .hero__text {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      margin-bottom: 22px;
+    }
+    .hero__actions {
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .hero__actions .btn {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 20px;
+      font-size: 0.9rem;
+    }
+    .hero__features {
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+    .hero__features-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 12px;
+    }
+    .hero__feature-card {
+      padding: 18px 18px;
+      border-radius: 16px;
+    }
+    .hero__feature-card-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 10px;
+    }
+    .hero__feature-card-icon svg { width: 22px; height: 22px; }
+    .hero__stats { flex-wrap: wrap; gap: 18px; justify-content: center; }
   }
 
   /* Tiny phones (≤375px) — iPhone SE / small Androids */
-  @media (max-width: 375px) {
-    .hero { padding: 32px 0 28px; }
-    .hero__title { font-size: 1.45rem; line-height: 1.2; }
-    .hero__text  { font-size: 0.88rem; }
-    .hero__label { font-size: 0.7rem; padding: 6px 14px; }
-    .hero__stat-number { font-size: 1.5rem; }
-    .hero__stat-label  { font-size: 0.72rem; }
+  @media (max-width: 380px) {
+    .hero { padding: 24px 0 20px; }
+    .hero__title { font-size: 1.4rem; line-height: 1.22; }
+    .hero__text  { font-size: 0.85rem; }
+    .hero__label { font-size: 0.62rem; padding: 5px 12px; letter-spacing: 0.6px; }
+    .hero__stat-number { font-size: 1.4rem; }
+    .hero__stat-label  { font-size: 0.7rem; }
+    .hero__feature-card { padding: 16px 14px; }
+    .hero__feature-card h3 { font-size: 0.95rem; }
+    .hero__feature-card p { font-size: 0.78rem; }
   }
 
   /* Landscape phones — keep hero from dominating the viewport */
@@ -365,28 +413,16 @@
     margin-top: 2px;
   }
   @media (max-width: 1100px) {
-    .hero__quali-track { grid-template-columns: repeat(3, 1fr); }
+    .hero__quali-track { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
   @media (max-width: 992px) {
     .hero { padding-bottom: 24px; }
+    /* Hide the qualifications strip on mobile/tablet — the home page
+       already has a dedicated Certifications section below the hero,
+       so showing both clutters the mobile view. */
     .hero__quali-strip {
-      position: static;
-      margin-top: 40px;
-      padding: 18px 0;
-      box-shadow: none;
+      display: none !important;
     }
-  }
-  @media (max-width: 640px) {
-    .hero__quali-strip { padding: 14px 0; }
-    .hero__quali-track {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-    .hero__quali-chip { padding: 10px 12px; gap: 9px; }
-    .hero__quali-icon { width: 32px; height: 32px; }
-    .hero__quali-icon svg { width: 16px; height: 16px; }
-    .hero__quali-title { font-size: 0.78rem; }
-    .hero__quali-sub { font-size: 0.68rem; }
   }
 {%- endstyle -%}
 
@@ -527,7 +563,7 @@
                 </svg>
               </div>
               <h3>Pure Herbal</h3>
-              <p>All natural ingredients sourced from the Himalayas</p>
+              <p>High Quality organic herbs</p>
             </div>
             <div class="hero__feature-card">
               <div class="hero__feature-card-icon">
@@ -577,7 +613,7 @@
             </div>
             <div class="hero__quali-text">
               <span class="hero__quali-title">{{ section.settings.q1_title | default: 'WHO-GMP' }}</span>
-              <span class="hero__quali-sub">{{ section.settings.q1_sub | default: 'Certified facility' }}</span>
+              <span class="hero__quali-sub">{{ section.settings.q1_sub | default: 'Certified Products' }}</span>
             </div>
           </div>
 
@@ -588,8 +624,8 @@
               </svg>
             </div>
             <div class="hero__quali-text">
-              <span class="hero__quali-title">{{ section.settings.q2_title | default: 'Global GMP' }}</span>
-              <span class="hero__quali-sub">{{ section.settings.q2_sub | default: 'Schedule T/M' }}</span>
+              <span class="hero__quali-title">{{ section.settings.q2_title | default: 'State FDA' }}</span>
+              <span class="hero__quali-sub">{{ section.settings.q2_sub | default: 'Approved Product' }}</span>
             </div>
           </div>
 
@@ -612,8 +648,8 @@
               </svg>
             </div>
             <div class="hero__quali-text">
-              <span class="hero__quali-title">{{ section.settings.q4_title | default: 'AYUSH' }}</span>
-              <span class="hero__quali-sub">{{ section.settings.q4_sub | default: 'Govt. of India' }}</span>
+              <span class="hero__quali-title">{{ section.settings.q4_title | default: '25+ Years' }}</span>
+              <span class="hero__quali-sub">{{ section.settings.q4_sub | default: 'Trusted legacy' }}</span>
             </div>
           </div>
 
@@ -629,17 +665,6 @@
             </div>
           </div>
 
-          <div class="hero__quali-chip">
-            <div class="hero__quali-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
-              </svg>
-            </div>
-            <div class="hero__quali-text">
-              <span class="hero__quali-title">{{ section.settings.q6_title | default: 'FDA' }}</span>
-              <span class="hero__quali-sub">{{ section.settings.q6_sub | default: 'Regulatory approved' }}</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -766,13 +791,13 @@
       "default": true
     },
     { "type": "text", "id": "q1_title", "label": "Chip 1 Title", "default": "WHO-GMP" },
-    { "type": "text", "id": "q1_sub",   "label": "Chip 1 Subtitle", "default": "Certified facility" },
-    { "type": "text", "id": "q2_title", "label": "Chip 2 Title", "default": "Global GMP" },
-    { "type": "text", "id": "q2_sub",   "label": "Chip 2 Subtitle", "default": "Schedule T/M" },
+    { "type": "text", "id": "q1_sub",   "label": "Chip 1 Subtitle", "default": "Certified Products" },
+    { "type": "text", "id": "q2_title", "label": "Chip 2 Title", "default": "State FDA" },
+    { "type": "text", "id": "q2_sub",   "label": "Chip 2 Subtitle", "default": "Approved Product" },
     { "type": "text", "id": "q3_title", "label": "Chip 3 Title", "default": "ISO 9001:2015" },
     { "type": "text", "id": "q3_sub",   "label": "Chip 3 Subtitle", "default": "Quality systems" },
-    { "type": "text", "id": "q4_title", "label": "Chip 4 Title", "default": "AYUSH" },
-    { "type": "text", "id": "q4_sub",   "label": "Chip 4 Subtitle", "default": "Govt. of India" },
+    { "type": "text", "id": "q4_title", "label": "Chip 4 Title", "default": "25+ Years" },
+    { "type": "text", "id": "q4_sub",   "label": "Chip 4 Subtitle", "default": "Trusted legacy" },
     { "type": "text", "id": "q5_title", "label": "Chip 5 Title", "default": "FSSAI" },
     { "type": "text", "id": "q5_sub",   "label": "Chip 5 Subtitle", "default": "Food safety" },
     { "type": "text", "id": "q6_title", "label": "Chip 6 Title", "default": "FDA" },
