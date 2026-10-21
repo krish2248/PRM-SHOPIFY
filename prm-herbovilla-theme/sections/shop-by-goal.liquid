@@ -1,8 +1,128 @@
 {%- comment -%}
-  Shop by Goal / Collections Grid Section
+  Shop by Goal — light cards with a real product photo per health goal.
+  Photo = the collection's image, or its first product's photo.
+  Six across on desktop, a swipeable row on phones.
 {%- endcomment -%}
 
-<section class="section {% if section.settings.alt_background %}section--alt{% endif %}">
+{%- style -%}
+  .goal {
+    padding: 64px 0 44px;
+  }
+  .goal .section-header {
+    margin-bottom: 32px;
+  }
+  .goal .mt-2xl {
+    margin-top: 28px;
+  }
+  .goal__row {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .goal__card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 14px;
+    background: #fff;
+    border: 1px solid #EFE7D9;
+    border-radius: 18px;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .goal__card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(45, 106, 79, 0.35);
+    box-shadow: 0 14px 30px rgba(27, 67, 50, 0.10);
+    color: var(--color-text);
+  }
+  .goal__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 1;
+    background: #EEF5EF;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .goal__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 12%;
+    mix-blend-mode: multiply;
+    transition: transform 0.35s ease;
+  }
+  .goal__card:hover .goal__media img {
+    transform: scale(1.05);
+  }
+  .goal__media svg {
+    position: absolute;
+    inset: 30%;
+    width: 40%;
+    height: 40%;
+    color: var(--color-primary);
+  }
+  .goal__name {
+    margin: 12px 4px 2px;
+    font-family: var(--font-heading);
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+  .goal__cta {
+    margin: 0 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+  @media (max-width: 1100px) {
+    .goal__row {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 768px) {
+    .goal {
+      padding: 36px 0 20px;
+    }
+    .goal .section-header {
+      margin-bottom: 18px;
+    }
+    .goal .mt-2xl {
+      margin-top: 14px;
+    }
+    .goal__row {
+      display: flex;
+      gap: 10px;
+      margin: 0 calc(-1 * var(--spacing-md));
+      padding: 2px var(--spacing-md) 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-left: var(--spacing-md);
+      scrollbar-width: none;
+    }
+    .goal__row::-webkit-scrollbar {
+      display: none;
+    }
+    .goal__card {
+      flex: 0 0 38%;
+      max-width: 170px;
+      scroll-snap-align: start;
+      padding: 8px 8px 12px;
+      border-radius: 14px;
+    }
+    .goal__name {
+      font-size: 0.9rem;
+      margin-top: 9px;
+    }
+    .goal__cta {
+      font-size: 0.74rem;
+    }
+  }
+{%- endstyle -%}
+
+<section class="goal {% if section.settings.alt_background %}section--alt{% endif %}" id="shop-by-goal">
   <div class="container">
     <div class="section-header">
       {%- if section.settings.label != blank -%}
@@ -13,29 +133,40 @@
         <p class="section-header__text">{{ section.settings.text }}</p>
       {%- endif -%}
     </div>
-    
-    <div class="collections-grid">
+
+    <div class="goal__row">
       {%- for block in section.blocks -%}
-        {%- if block.type == 'collection' -%}
-          {%- assign collection = block.settings.collection -%}
-          {%- if collection != blank -%}
-            {%- render 'collection-card', collection: collection -%}
-          {%- else -%}
-            <div class="collection-card" {{ block.shopify_attributes }}>
-              <div class="collection-card__image">
-                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
-              </div>
-              <div class="collection-card__overlay"></div>
-              <div class="collection-card__content">
-                <h3 class="collection-card__title">{{ block.settings.title | default: 'Collection Name' }}</h3>
-                <p class="collection-card__count">0 products</p>
-              </div>
-            </div>
-          {%- endif -%}
+        {%- if block.type == 'collection' and block.settings.collection != blank -%}
+          {%- liquid
+            assign goal = block.settings.collection
+            assign goal_img = goal.image
+            if goal_img == blank
+              assign goal_img = goal.products.first.featured_image
+            endif
+          -%}
+          <a class="goal__card" href="{{ goal.url }}" {{ block.shopify_attributes }}>
+            <span class="goal__media">
+              {%- if goal_img != blank -%}
+                <img
+                  src="{{ goal_img | image_url: width: 400 }}"
+                  srcset="{{ goal_img | image_url: width: 220 }} 220w, {{ goal_img | image_url: width: 400 }} 400w"
+                  sizes="(max-width: 768px) 38vw, 200px"
+                  alt=""
+                  width="{{ goal_img.width }}"
+                  height="{{ goal_img.height }}"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {% render 'policy-icon', name: 'leaf' %}
+              {%- endif -%}
+            </span>
+            <span class="goal__name">{{ block.settings.title | default: goal.title }}</span>
+            <span class="goal__cta">Shop now &rarr;</span>
+          </a>
         {%- endif -%}
       {%- endfor -%}
     </div>
-    
+
     {%- if section.settings.button_text != blank -%}
       <div class="text-center mt-2xl">
         <a href="{{ section.settings.button_link | default: routes.collections_url }}" class="btn btn--secondary">
@@ -96,7 +227,8 @@
         {
           "type": "collection",
           "id": "collection",
-          "label": "Collection"
+          "label": "Collection",
+          "info": "The card shows the collection image, or its first product's photo."
         },
         {
           "type": "text",

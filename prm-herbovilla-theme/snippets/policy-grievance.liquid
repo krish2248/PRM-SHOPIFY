@@ -1,0 +1,60 @@
+{%- comment -%}
+  Customer care + Grievance Officer block, as required by the
+  Consumer Protection (E-Commerce) Rules, 2020 (legal name, address,
+  customer care and grievance officer details; 48h acknowledgement,
+  resolution within one month).
+
+  Params (all optional; pass the section's settings):
+    legal_name, officer_name, officer_designation, officer_email, officer_phone
+{%- endcomment -%}
+{%- liquid
+  assign care_email = settings.contact_email | default: 'contact@prmpharmaceuticals.com'
+  assign care_phone = settings.contact_phone | default: '+91-9227928075'
+  assign g_email = officer_email | default: care_email
+  assign g_phone = officer_phone | default: care_phone
+  assign entity = legal_name | default: 'PRM & Company'
+  assign address = settings.contact_address | default: 'Plot No.343, 1-A, Chitra Gujarat Industrial Development Corporation, Bhavnagar, Gujarat 364004'
+-%}
+<p>Most questions are resolved by our customer care team within 2 business days. If you are not satisfied with the resolution, you can write to our Grievance Officer.</p>
+
+<div class="policy-contact">
+  <div class="policy-contact-item">
+    <span class="policy-icon policy-icon--sm">{% render 'policy-icon', name: 'mail' %}</span>
+    <div>
+      <h4>Customer Care</h4>
+      <p>
+        <a href="mailto:{{ care_email }}">{{ care_email }}</a><br>
+        <a href="tel:{{ care_phone | remove: ' ' | remove: '-' }}">{{ care_phone }}</a> &middot; <a href="tel:+912782448087">0278 244 8087</a>
+      </p>
+    </div>
+  </div>
+  <div class="policy-contact-item">
+    <span class="policy-icon policy-icon--sm">{% render 'policy-icon', name: 'clock' %}</span>
+    <div>
+      <h4>Working Hours</h4>
+      <p>Monday – Saturday<br>10:00 AM – 7:00 PM (IST)</p>
+    </div>
+  </div>
+  <div class="policy-contact-item">
+    <span class="policy-icon policy-icon--sm">{% render 'policy-icon', name: 'user' %}</span>
+    <div>
+      <h4>Grievance Officer</h4>
+      <p>
+        {%- if officer_name != blank -%}
+          <strong>{{ officer_name }}</strong>{% if officer_designation != blank %}, {{ officer_designation }}{% endif %}<br>
+        {%- endif -%}
+        <a href="mailto:{{ g_email }}">{{ g_email }}</a><br>
+        <a href="tel:{{ g_phone | remove: ' ' | remove: '-' }}">{{ g_phone }}</a>
+      </p>
+    </div>
+  </div>
+  <div class="policy-contact-item">
+    <span class="policy-icon policy-icon--sm">{% render 'policy-icon', name: 'map' %}</span>
+    <div>
+      <h4>Registered Address</h4>
+      <p>{{ entity }}<br>{{ address }}</p>
+    </div>
+  </div>
+</div>
+
+<p class="policy-fine">The Grievance Officer acknowledges every complaint within 48 hours and resolves it within one month of receipt, as per the Consumer Protection (E-Commerce) Rules, 2020. Please mention your order number in all communication.</p>

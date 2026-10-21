@@ -85,58 +85,44 @@
     outline: none;
     border-color: var(--color-primary);
   }
-  .view-toggle {
-    display: flex;
-    gap: 5px;
-  }
-  .view-btn {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #ddd;
-    background: #fff;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-  .view-btn:hover,
-  .view-btn.active {
-    border-color: var(--color-primary);
-    background: rgba(45, 106, 79, 0.05);
-  }
-  .view-btn svg {
-    width: 18px;
-    height: 18px;
-    color: var(--color-text-light);
-  }
-  .view-btn.active svg {
-    color: var(--color-primary);
-  }
   .collection-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 20px;
   }
-  .collection-grid.list-view {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  .collection-grid.list-view .product-card {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 30px;
-    text-align: left;
-  }
-  .collection-grid.list-view .product-card__image {
-    aspect-ratio: 1;
-  }
-  .collection-grid.list-view .product-card__info {
-    padding: 20px 0;
+  /* Shop-by-concern chips */
+  .collection-chips {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 8px;
+    margin: 0 0 24px;
+    padding: 0;
+    list-style: none;
+  }
+  .collection-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: #fff;
+    border: 1px solid #E3DACB;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+  .collection-chip:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  .collection-chip--active,
+  .collection-chip--active:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
   }
   .collection-empty {
     text-align: center;
@@ -207,67 +193,9 @@
     padding: 0 20px;
     gap: 8px;
   }
-  .filter-sidebar {
-    display: none;
-  }
-  .filter-sidebar.active {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-  }
-  .filter-sidebar-content {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 320px;
-    height: 100%;
-    background: #fff;
-    padding: 30px;
-    overflow-y: auto;
-  }
-  .filter-sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-  }
-  .filter-sidebar-header h3 {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-  }
-  .filter-close {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-  }
-  .filter-close svg {
-    width: 24px;
-    height: 24px;
-  }
-  .mobile-filter-btn {
-    display: none;
-    padding: 12px 20px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    align-items: center;
-    gap: 8px;
-  }
-  .mobile-filter-btn svg {
-    width: 18px;
-    height: 18px;
-  }
   @media (max-width: 1200px) {
     .collection-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
   @media (max-width: 768px) {
@@ -275,8 +203,19 @@
       padding: 18px 0 40px;
     }
     .collection-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .collection-chips {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      margin: 0 calc(-1 * var(--spacing-md)) 18px;
+      padding: 0 var(--spacing-md) 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .collection-chips::-webkit-scrollbar {
+      display: none;
     }
     .collection-title {
       font-size: 1.5rem;
@@ -293,12 +232,6 @@
     }
     .collection-filters {
       justify-content: space-between;
-    }
-    .mobile-filter-btn {
-      display: flex;
-    }
-    .view-toggle {
-      display: none;
     }
   }
   @media (max-width: 480px) {
@@ -317,6 +250,14 @@
   }
 {%- endstyle -%}
 
+{%- liquid
+  assign collection_title = collection.title
+  if collection.handle == 'all'
+    assign collection_title = 'All Products'
+  endif
+  assign concern_handles = 'immunity-boosters,digestive-health,respiratory-care,joint-pain-relief,hair-skin-care,womens-health,mens-health,diabetic-care,general-wellness' | split: ','
+-%}
+
 <section class="collection-template" data-section-id="{{ section.id }}">
   <div class="container">
     <!-- Header -->
@@ -324,13 +265,23 @@
       <nav class="collection-breadcrumbs" aria-label="Breadcrumb">
         <a href="/">Home</a>
         <span>/</span>
-        <span>{{ collection.title }}</span>
+        <span>{{ collection_title }}</span>
       </nav>
-      <h1 class="collection-title">{{ collection.title }}</h1>
+      <h1 class="collection-title">{{ collection_title }}</h1>
       {%- if collection.description != blank -%}
         <p class="collection-description">{{ collection.description }}</p>
       {%- endif -%}
     </div>
+
+    <ul class="collection-chips" aria-label="Shop by concern">
+      <li><a href="/collections/all?sort_by=best-selling" class="collection-chip{% if collection.handle == 'all' %} collection-chip--active{% endif %}">All</a></li>
+      {%- for concern_handle in concern_handles -%}
+        {%- assign concern = collections[concern_handle] -%}
+        {%- if concern.products_count > 0 -%}
+          <li><a href="{{ concern.url }}" class="collection-chip{% if collection.handle == concern_handle %} collection-chip--active{% endif %}">{{ concern.title }}</a></li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
     
     {% paginate collection.products by section.settings.products_per_page %}
     {%- if collection.products.size > 0 -%}
@@ -339,21 +290,6 @@
         <span class="collection-count">{{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}</span>
         
         <div class="collection-filters">
-          <button type="button" class="mobile-filter-btn" id="filter-toggle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="4" y1="21" x2="4" y2="14"></line>
-              <line x1="4" y1="10" x2="4" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12" y2="3"></line>
-              <line x1="20" y1="21" x2="20" y2="16"></line>
-              <line x1="20" y1="12" x2="20" y2="3"></line>
-              <line x1="1" y1="14" x2="7" y2="14"></line>
-              <line x1="9" y1="8" x2="15" y2="8"></line>
-              <line x1="17" y1="16" x2="23" y2="16"></line>
-            </svg>
-            Filters
-          </button>
-          
           <div class="filter-group">
             <label class="filter-label" for="sort-by">Sort by:</label>
             <select id="sort-by" class="filter-select" onchange="window.location.href = this.value">
@@ -366,34 +302,22 @@
               {%- endfor -%}
             </select>
           </div>
-          
-          <div class="view-toggle">
-            <button type="button" class="view-btn active" data-view="grid" aria-label="Grid view">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
-              </svg>
-            </button>
-            <button type="button" class="view-btn" data-view="list" aria-label="List view">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="8" y1="6" x2="21" y2="6"></line>
-                <line x1="8" y1="12" x2="21" y2="12"></line>
-                <line x1="8" y1="18" x2="21" y2="18"></line>
-                <line x1="3" y1="6" x2="3.01" y2="6"></line>
-                <line x1="3" y1="12" x2="3.01" y2="12"></line>
-                <line x1="3" y1="18" x2="3.01" y2="18"></line>
-              </svg>
-            </button>
-          </div>
+
         </div>
       </div>
       
       <!-- Products Grid -->
       <div class="collection-grid" id="product-grid">
+        {%- comment -%} Products with photos first (within this page), so image-less listings never lead the grid {%- endcomment -%}
         {%- for product in collection.products -%}
-          {%- render 'product-card', product: product -%}
+          {%- if product.featured_image != blank -%}
+            {%- render 'product-card', product: product -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- for product in collection.products -%}
+          {%- if product.featured_image == blank -%}
+            {%- render 'product-card', product: product -%}
+          {%- endif -%}
         {%- endfor -%}
       </div>
       
@@ -448,25 +372,6 @@
     {% endpaginate %}
   </div>
 </section>
-
-<script>
-  // View toggle
-  document.querySelectorAll('.view-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      const view = this.dataset.view;
-      const grid = document.getElementById('product-grid');
-      
-      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      
-      if (view === 'list') {
-        grid.classList.add('list-view');
-      } else {
-        grid.classList.remove('list-view');
-      }
-    });
-  });
-</script>
 
 {% schema %}
 {

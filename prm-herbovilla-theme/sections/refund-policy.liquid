@@ -1,244 +1,361 @@
 {%- comment -%}
-  Refund Policy Page Template
+  Returns, Refund & Exchange Policy page (template: page.refund-policy).
+  Shared styling lives in snippets/policy-page-assets.liquid.
+  Refund credit times are Razorpay's published normal-refund timelines.
 {%- endcomment -%}
+{%- render 'policy-page-assets' -%}
+{%- liquid
+  assign legal_name = section.settings.legal_name | default: 'PRM & Company'
+  assign care_email = settings.contact_email | default: 'contact@prmpharmaceuticals.com'
+  assign care_phone = settings.contact_phone | default: '+91-9227928075'
+-%}
 
-<div class="policy-page">
-  <section class="policy-hero">
-    <div class="container">
-      <h1 class="policy-hero__title">{{ page.title | default: 'Refund Policy' }}</h1>
-      <p class="policy-hero__subtitle">{{ section.settings.subtitle | default: 'Our commitment to your satisfaction' }}</p>
+<div class="policy-page" data-section-id="{{ section.id }}">
+  <div class="container">
+    <header class="policy-header">
+      <span class="policy-eyebrow">{{ section.settings.eyebrow | default: 'Customer Care' }}</span>
+      <h1 class="policy-title">{{ page.title | default: 'Returns, Refund & Exchange Policy' }}</h1>
+      <p class="policy-subtitle">{{ section.settings.subtitle }}</p>
+      <div class="policy-meta">
+        <span class="policy-chip">{% render 'policy-icon', name: 'calendar' %}Last updated: {{ section.settings.last_updated }}</span>
+        <span class="policy-chip">{% render 'policy-icon', name: 'lock' %}Refunds via Razorpay</span>
+        <span class="policy-chip">{% render 'policy-icon', name: 'truck' %}Pickups via NimbusPost</span>
+      </div>
+    </header>
+
+    <div class="policy-highlights">
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'clock' %}</span>
+        <h3>Report Within 48 Hours</h3>
+        <p>Damaged, leaking, wrong, missing or expired items.</p>
+      </div>
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'box' %}</span>
+        <h3>7-Day Sealed Returns</h3>
+        <p>Unopened products with the seal intact, within 7 days of delivery.</p>
+      </div>
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'refresh' %}</span>
+        <h3>Free Replacement</h3>
+        <p>Transit damage, wrong or defective items are replaced at our cost.</p>
+      </div>
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'card' %}</span>
+        <h3>Quick Refunds</h3>
+        <p>Initiated within 2 business days of approval, to your original payment method.</p>
+      </div>
     </div>
-  </section>
 
-  <section class="policy-content section">
-    <div class="container">
-      <div class="policy-grid">
-        <aside class="policy-sidebar">
-          <nav class="policy-nav">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><a href="#returns">Returns</a></li>
-              <li><a href="#refunds">Refunds</a></li>
-              <li><a href="#exchanges">Exchanges</a></li>
-              <li><a href="#damaged">Damaged Products</a></li>
-              <li><a href="#process">How to Return</a></li>
-            </ul>
-          </nav>
-          
-          <div class="faq-contact">
-            <h4>Need Help?</h4>
-            <p>Contact our support team for assistance with returns.</p>
-            <a href="/pages/contact" class="btn btn--primary btn--small">Contact Us</a>
-          </div>
-        </aside>
+    <div class="policy-layout">
+      <aside class="policy-aside">
+        <nav class="policy-toc" aria-label="On this page">
+          <p class="policy-label">On this page</p>
+          <ol>
+            <li><a href="#overview">Our Promise</a></li>
+            <li><a href="#eligible">What You Can Return</a></li>
+            <li><a href="#not-eligible">What Can't Be Returned</a></li>
+            <li><a href="#how">How to Raise a Request</a></li>
+            <li><a href="#refunds">Refunds</a></li>
+            <li><a href="#exchanges">Exchanges &amp; Replacements</a></li>
+            <li><a href="#cancellations">Order Cancellations</a></li>
+            <li><a href="#contact">Contact &amp; Grievances</a></li>
+          </ol>
+        </nav>
+        {%- render 'policy-help' -%}
+      </aside>
 
-        <div class="policy-main">
-          <div class="policy-highlight">
-            <div class="policy-highlight__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M9 12l2 2 4-4"/>
-                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
-              </svg>
-            </div>
-            <div class="policy-highlight__content">
-              <h3>7-Day Return Window</h3>
-              <p>Hassle-free returns within 7 days of delivery</p>
-            </div>
-          </div>
+      <article class="policy-body">
+        <div class="policy-intro">
+          <p>Our products are Ayurvedic medicines and wellness products that you consume or apply, so for your safety we cannot take back products once they are opened. But if anything arrives <strong>damaged, incorrect, defective or expired</strong> — or doesn't reach you on time — we will replace it or refund you in full.</p>
+          <p>This policy applies to orders placed on {{ shop.domain }}. Orders placed on Amazon, Flipkart, Tata 1mg or Meesho follow that marketplace's return policy. Nothing here limits your rights under the Consumer Protection Act, 2019 and the Consumer Protection (E-Commerce) Rules, 2020.</p>
+        </div>
 
-          <div class="policy-section" id="returns">
-            <h2>Return Policy</h2>
-            <p>We want you to be completely satisfied with your purchase. If you're not happy with your order, you may return eligible products within 7 days of delivery.</p>
-            
-            <h3>Eligible for Return</h3>
-            <ul>
-              <li>Products in original, unopened packaging</li>
-              <li>Products with all tags and seals intact</li>
-              <li>Products that are unused and in resalable condition</li>
-              <li>Items returned within 7 days of delivery</li>
-            </ul>
+        <section class="policy-section" id="overview">
+          <span class="policy-num">01</span>
+          <h2>Our Promise</h2>
+          <ul class="policy-list">
+            <li>Every order is packed and checked at our facility in Bhavnagar, Gujarat before it leaves.</li>
+            <li>If we make a mistake, we pay for it: free reverse pickup, free replacement or a full refund, including any shipping charges.</li>
+            <li>We confirm every request within 2 business days, and you will always know the status of your return or refund.</li>
+          </ul>
+        </section>
 
-            <h3>Not Eligible for Return</h3>
-            <ul>
-              <li>Opened or used products (for hygiene reasons)</li>
-              <li>Products with broken seals or tampered packaging</li>
-              <li>Items returned after 7 days of delivery</li>
-              <li>Products marked as "Final Sale" or "Non-Returnable"</li>
-              <li>Free gifts or promotional items</li>
-            </ul>
-          </div>
-
-          <div class="policy-section" id="refunds">
-            <h2>Refund Process</h2>
-            
-            <h3>Refund Timeline</h3>
+        <section class="policy-section" id="eligible">
+          <span class="policy-num">02</span>
+          <h2>What You Can Return or Replace</h2>
+          <div class="policy-table-wrap">
             <table class="policy-table">
               <thead>
                 <tr>
-                  <th>Stage</th>
-                  <th>Timeline</th>
+                  <th scope="col">Situation</th>
+                  <th scope="col">Report within</th>
+                  <th scope="col">What we do</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Return request approval</td>
-                  <td>1-2 business days</td>
+                  <td data-label="Situation">Damaged, leaking or broken in transit</td>
+                  <td data-label="Report within">48 hours of delivery</td>
+                  <td data-label="What we do">Free replacement or full refund</td>
                 </tr>
                 <tr>
-                  <td>Product pickup/drop-off</td>
-                  <td>3-5 business days</td>
+                  <td data-label="Situation">Wrong product, variant or quantity</td>
+                  <td data-label="Report within">48 hours of delivery</td>
+                  <td data-label="What we do">Free replacement or full refund</td>
                 </tr>
                 <tr>
-                  <td>Quality check at warehouse</td>
-                  <td>2-3 business days</td>
+                  <td data-label="Situation">Item missing from the parcel</td>
+                  <td data-label="Report within">48 hours of delivery</td>
+                  <td data-label="What we do">We ship the missing item or refund it</td>
                 </tr>
                 <tr>
-                  <td>Refund processing</td>
-                  <td>5-7 business days</td>
+                  <td data-label="Situation">Expired, or less than 3 months of shelf life left on delivery</td>
+                  <td data-label="Report within">48 hours of delivery</td>
+                  <td data-label="What we do">Free replacement or full refund</td>
                 </tr>
                 <tr>
-                  <td><strong>Total estimated time</strong></td>
-                  <td><strong>10-15 business days</strong></td>
+                  <td data-label="Situation">Manufacturing defect — seal broken at source, unusual colour, smell or texture, foreign particles</td>
+                  <td data-label="Report within">7 days of delivery</td>
+                  <td data-label="What we do">Free replacement or full refund after verification</td>
+                </tr>
+                <tr>
+                  <td data-label="Situation">Delivered after the latest estimated delivery date (except force majeure)</td>
+                  <td data-label="Report within">At delivery or within 48 hours</td>
+                  <td data-label="What we do">Refuse the parcel, or return it unopened, for a full refund</td>
+                </tr>
+                <tr>
+                  <td data-label="Situation">Unopened, seal-intact product — changed your mind</td>
+                  <td data-label="Report within">7 days of delivery</td>
+                  <td data-label="What we do">Refund once the product is back with us (return shipping is borne by you)</td>
                 </tr>
               </tbody>
             </table>
-
-            <h3>Refund Methods</h3>
-            <ul>
-              <li><strong>Online Payments:</strong> Refund to original payment method (card, UPI, net banking)</li>
-              <li><strong>Cash on Delivery:</strong> Refund via bank transfer (NEFT/IMPS)</li>
-              <li><strong>Store Credit:</strong> Available as an alternative (valid for 1 year)</li>
-            </ul>
-
-            <div class="policy-info-box">
-              <h4>Please Note</h4>
-              <ul>
-                <li>Original shipping charges are non-refundable</li>
-                <li>Return shipping costs may be deducted from refund (if return is not due to our error)</li>
-                <li>Refunds for prepaid orders will be credited within 5-7 business days after approval</li>
-              </ul>
+          </div>
+          <div class="policy-callout">
+            {% render 'policy-icon', name: 'info' %}
+            <div>
+              <h4>Tip: record an unboxing video</h4>
+              <p>A short, continuous video of opening your parcel — showing the shipping label and the products — helps us resolve damage and missing-item claims much faster.</p>
             </div>
           </div>
+        </section>
 
-          <div class="policy-section" id="exchanges">
-            <h2>Exchanges</h2>
-            <p>We currently do not offer direct product exchanges. If you wish to exchange a product:</p>
-            <ol>
-              <li>Return the original product following our return process</li>
-              <li>Place a new order for the desired product</li>
-              <li>Receive refund for the returned item</li>
-            </ol>
-            <p>This ensures faster processing and availability of your preferred product.</p>
-          </div>
+        <section class="policy-section" id="not-eligible">
+          <span class="policy-num">03</span>
+          <h2>What Can't Be Returned</h2>
+          <ul class="policy-list policy-list--no">
+            <li>Opened, used or partly consumed products, unless they are defective</li>
+            <li>Products whose seal, cap band or tamper-evident packaging has been broken after delivery</li>
+            <li>Products damaged by misuse, improper storage or anything that happened after delivery</li>
+            <li>Requests based on taste, smell, texture or colour preference, or on perceived results — Ayurvedic products act gradually and results vary between individuals</li>
+            <li>Free gifts, samples and promotional items, unless returned along with the main product</li>
+            <li>Requests raised after the time limits above</li>
+            <li>Products bought from other sellers, marketplaces or offline stores</li>
+          </ul>
+        </section>
 
-          <div class="policy-section" id="damaged">
-            <h2>Damaged or Defective Products</h2>
-            <p>If you receive a damaged or defective product, we apologize for the inconvenience. Please follow these steps:</p>
-            
-            <div class="policy-steps">
-              <li>
-                <span class="step-number">1</span>
-                <div>
-                  <h4>Report Within 48 Hours</h4>
-                  <p>Contact us within 48 hours of delivery with photos of the damaged product and packaging</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-number">2</span>
-                <div>
-                  <h4>Provide Details</h4>
-                  <p>Include your order number, product name, and description of the damage</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-number">3</span>
-                <div>
-                  <h4>Receive Resolution</h4>
-                  <p>We'll arrange for pickup and send a replacement or process a full refund</p>
-                </div>
-              </li>
-            </div>
-
-            <div class="policy-info-box policy-info-box--warning">
-              <h4>Important</h4>
-              <p>Please do not accept delivery if the outer packaging appears damaged. Request the delivery partner to return the package.</p>
-            </div>
-          </div>
-
-          <div class="policy-section" id="process">
-            <h2>How to Initiate a Return</h2>
-            
-            <div class="policy-steps">
-              <li>
-                <span class="step-number">1</span>
-                <div>
-                  <h4>Contact Us</h4>
-                  <p>Email contact@prmpharmaceuticals.com with your order number and reason for return</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-number">2</span>
-                <div>
-                  <h4>Receive Confirmation</h4>
-                  <p>Our team will review your request and send return instructions within 1-2 business days</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-number">3</span>
-                <div>
-                  <h4>Pack the Product</h4>
-                  <p>Pack the product securely in its original packaging with all accessories</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-number">4</span>
-                <div>
-                  <h4>Ship or Schedule Pickup</h4>
-                  <p>Drop off at the nearest courier or schedule a pickup (as instructed)</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-number">5</span>
-                <div>
-                  <h4>Receive Refund</h4>
-                  <p>Once we receive and verify the product, your refund will be processed</p>
-                </div>
-              </li>
+        <section class="policy-section" id="how">
+          <span class="policy-num">04</span>
+          <h2>How to Raise a Request</h2>
+          <ol class="policy-steps">
+            <li>
+              <span class="policy-step-num">1</span>
+              <div>
+                <h4>Contact us within the time limit</h4>
+                <p>Email <a href="mailto:{{ care_email }}">{{ care_email }}</a> or call <a href="tel:{{ care_phone | remove: ' ' | remove: '-' }}">{{ care_phone }}</a> (Monday – Saturday, 10:00 AM – 7:00 PM) with your order number, the issue, and clear photos of the product, its batch number and expiry date, and the outer box.</p>
+              </div>
+            </li>
+            <li>
+              <span class="policy-step-num">2</span>
+              <div>
+                <h4>We review and confirm</h4>
+                <p>We acknowledge your request within 1 business day and confirm whether it is eligible within 2 business days. For some issues — such as a leaked bottle — photos are enough and we may send a replacement without a pickup.</p>
+              </div>
+            </li>
+            <li>
+              <span class="policy-step-num">3</span>
+              <div>
+                <h4>Free reverse pickup</h4>
+                <p>We arrange a pickup from your address through NimbusPost's courier partners. Pack the product securely, in its original packaging where possible. If your pincode is not covered for pickups, we will share our return address and reimburse your courier charges for returns caused by our error.</p>
+              </div>
+            </li>
+            <li>
+              <span class="policy-step-num">4</span>
+              <div>
+                <h4>Quality check</h4>
+                <p>Once the parcel reaches our Bhavnagar facility, we inspect it within 2 business days.</p>
+              </div>
+            </li>
+            <li>
+              <span class="policy-step-num">5</span>
+              <div>
+                <h4>Replacement or refund</h4>
+                <p>We dispatch your replacement, or initiate your refund, within 2 business days of approval and send you a confirmation.</p>
+              </div>
+            </li>
+          </ol>
+          <div class="policy-callout policy-callout--warning">
+            {% render 'policy-icon', name: 'alert' %}
+            <div>
+              <h4>Check your parcel before accepting it</h4>
+              <p>If the outer box is torn, wet, re-taped or looks tampered with, refuse the delivery or tell the delivery agent, and inform us within 48 hours. Please keep the original packaging until your request is resolved.</p>
             </div>
           </div>
+          <p>For change-of-mind returns of sealed products, you can ship the product to us yourself, or we can arrange a pickup and deduct the reverse-shipping cost from your refund.</p>
+        </section>
 
-          <div class="policy-section">
-            <h2>Contact Information</h2>
-            <p>For return and refund queries, please contact:</p>
-            <div class="policy-contact">
-              <p><strong>Email:</strong> contact@prmpharmaceuticals.com</p>
-              <p><strong>Phone:</strong> +91-9227928075</p>
-              <p><strong>Hours:</strong> Monday - Saturday, 10:00 AM - 7:00 PM IST</p>
-              <p><strong>Address:</strong> Plot No.343, 1-A, Chitra GIDC, Bhavnagar, Gujarat 364004</p>
-            </div>
+        <section class="policy-section" id="refunds">
+          <span class="policy-num">05</span>
+          <h2>Refunds</h2>
+          <p>Once a return or cancellation is approved, we initiate the refund within <strong>2 business days</strong>. Online payments are refunded through <strong>Razorpay</strong> to the original payment method; after that, the time taken to reach your account depends on your bank:</p>
+          <div class="policy-table-wrap">
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th scope="col">You paid by</th>
+                  <th scope="col">Refunded to</th>
+                  <th scope="col">Reaches you in</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="You paid by">UPI</td>
+                  <td data-label="Refunded to">The same UPI account</td>
+                  <td data-label="Reaches you in">2–7 business days</td>
+                </tr>
+                <tr>
+                  <td data-label="You paid by">Debit or credit card</td>
+                  <td data-label="Refunded to">The same card</td>
+                  <td data-label="Reaches you in">5–10 business days</td>
+                </tr>
+                <tr>
+                  <td data-label="You paid by">Net banking</td>
+                  <td data-label="Refunded to">The same bank account</td>
+                  <td data-label="Reaches you in">2–10 business days</td>
+                </tr>
+                <tr>
+                  <td data-label="You paid by">Wallet</td>
+                  <td data-label="Refunded to">The same wallet</td>
+                  <td data-label="Reaches you in">0–3 business days</td>
+                </tr>
+                <tr>
+                  <td data-label="You paid by">Cash on Delivery</td>
+                  <td data-label="Refunded to">Your UPI ID or bank account (IMPS / NEFT)</td>
+                  <td data-label="Reaches you in">3–5 business days after you share your details</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-      </div>
+          <ul class="policy-list">
+            <li>Refunds for online payments can only be made to the original payment method.</li>
+            <li>When the return is due to our error — damaged, wrong, defective, expired or late — we refund the shipping charges too, if any were paid.</li>
+            <li>For change-of-mind returns, the original shipping charges (if any) are not refunded, and the reverse-shipping cost is deducted if we arrange the pickup.</li>
+            <li>If only part of an order is affected, we refund or replace just those items.</li>
+            <li>If you haven't received your refund within the times above, contact us with your order number and we will share the refund reference (ARN/UTR) so you can check with your bank.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section" id="exchanges">
+          <span class="policy-num">06</span>
+          <h2>Exchanges &amp; Replacements</h2>
+          <h3>Replacement with the same product</h3>
+          <p>For any eligible issue in the table above, we replace the product free of cost, subject to stock. If it is out of stock, we refund you in full.</p>
+          <h3>Exchange for a different product</h3>
+          <p>Unopened products with the seal intact can be exchanged for a different product within 7 days of delivery. Once we receive the original in resaleable condition, we ship the new product; any price difference is paid by you or refunded to you, and the return shipping is borne by you.</p>
+          <p>Opened products cannot be exchanged, except when they are defective.</p>
+        </section>
+
+        <section class="policy-section" id="cancellations">
+          <span class="policy-num">07</span>
+          <h2>Order Cancellations</h2>
+          <ul class="policy-list">
+            <li><strong>Before dispatch:</strong> cancel free of charge by emailing or calling us with your order number. Prepaid orders are refunded in full, initiated within 2 business days.</li>
+            <li><strong>After dispatch:</strong> a shipped order cannot be cancelled, but you may refuse it at delivery. For prepaid orders, the product value is refunded once the parcel is returned to us; shipping charges, if any were paid, are not refunded.</li>
+            <li><strong>Cancelled by us:</strong> if we cancel an order — because of stock, a pricing error, an unserviceable pincode or failed payment verification — you get a full refund.</li>
+            <li>We never charge a cancellation fee. Repeatedly refusing Cash on Delivery orders may lead to COD being turned off for future orders.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section" id="contact">
+          <span class="policy-num">08</span>
+          <h2>Contact &amp; Grievance Redressal</h2>
+          {%- render 'policy-grievance',
+            legal_name: legal_name,
+            officer_name: section.settings.grievance_name,
+            officer_designation: section.settings.grievance_designation,
+            officer_email: section.settings.grievance_email,
+            officer_phone: section.settings.grievance_phone
+          -%}
+        </section>
+      </article>
     </div>
-  </section>
+
+    {%- render 'policy-related', current: 'returns' -%}
+  </div>
 </div>
 
 {% schema %}
 {
-  "name": "Refund Policy",
+  "name": "Returns & Refund Policy",
   "tag": "section",
   "class": "section-refund-policy",
   "settings": [
     {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small label above title",
+      "default": "Customer Care"
+    },
+    {
       "type": "textarea",
       "id": "subtitle",
-      "label": "Page Subtitle",
-      "default": "Our commitment to your satisfaction"
+      "label": "Subtitle",
+      "default": "Received something damaged, wrong or not quite right? Here's exactly how we'll make it right."
+    },
+    {
+      "type": "text",
+      "id": "last_updated",
+      "label": "Last updated date",
+      "default": "21 October 2026"
+    },
+    {
+      "type": "header",
+      "content": "Business & grievance details"
+    },
+    {
+      "type": "text",
+      "id": "legal_name",
+      "label": "Registered business name",
+      "info": "Must match your GST registration.",
+      "default": "PRM & Company"
+    },
+    {
+      "type": "text",
+      "id": "grievance_name",
+      "label": "Grievance Officer name",
+      "info": "Required by the Consumer Protection (E-Commerce) Rules, 2020."
+    },
+    {
+      "type": "text",
+      "id": "grievance_designation",
+      "label": "Grievance Officer designation"
+    },
+    {
+      "type": "text",
+      "id": "grievance_email",
+      "label": "Grievance Officer email",
+      "info": "Leave blank to use the store contact email."
+    },
+    {
+      "type": "text",
+      "id": "grievance_phone",
+      "label": "Grievance Officer phone",
+      "info": "Leave blank to use the store contact phone."
     }
   ],
   "presets": [
     {
-      "name": "Refund Policy"
+      "name": "Returns & Refund Policy"
     }
   ]
 }

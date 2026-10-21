@@ -1,674 +1,347 @@
 {%- comment -%}
-  Hero Section - Two Column Layout
+  Hero — product-led. Left: headline, CTAs and trust chips (the "feature"
+  blocks). Right: up to three product tiles picked in the theme editor
+  (falls back to the first products of the Bestsellers collection).
+  On phones the tiles sit in one compact row under the buttons so
+  products are visible on the first screen.
 {%- endcomment -%}
+{%- liquid
+  assign picks = ''
+  if section.settings.product_1 != blank
+    assign picks = picks | append: section.settings.product_1.handle | append: ','
+  endif
+  if section.settings.product_2 != blank
+    assign picks = picks | append: section.settings.product_2.handle | append: ','
+  endif
+  if section.settings.product_3 != blank
+    assign picks = picks | append: section.settings.product_3.handle | append: ','
+  endif
+  if picks == ''
+    for p in collections['best-sellers'].products limit: 3
+      assign picks = picks | append: p.handle | append: ','
+    endfor
+  endif
+  assign pick_handles = picks | split: ','
+-%}
 
 {%- style -%}
-  .hero {
+  .hero2 {
     position: relative;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
     overflow: hidden;
+    padding: 56px 0 64px;
+    background:
+      radial-gradient(1200px 600px at 85% 20%, rgba(216, 236, 223, 0.55), rgba(216, 236, 223, 0) 60%),
+      var(--color-background, #FDF8F0);
   }
-  .hero__background {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-  .hero__background img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(253, 248, 240, 0.95) 0%, rgba(253, 248, 240, 0.8) 50%, rgba(253, 248, 240, 0.6) 100%);
-    z-index: 1;
-  }
-  .hero .container {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-  }
-  .hero__grid {
+  .hero2__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 56px;
     align-items: center;
   }
-  .hero__label {
-    display: inline-block;
-    padding: 8px 20px;
-    background: rgba(45, 106, 79, 0.1);
-    border: 1px solid rgba(45, 106, 79, 0.2);
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-primary);
+  .hero2__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    background: rgba(45, 106, 79, 0.08);
+    border: 1px solid rgba(45, 106, 79, 0.18);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    color: var(--color-primary);
     margin-bottom: 20px;
   }
-  .hero__title {
+  .hero2__eyebrow svg {
+    width: 14px;
+    height: 14px;
+  }
+  .hero2__title {
     font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 5vw, 3.75rem);
-    line-height: 1.15;
+    font-size: clamp(2.3rem, 4.3vw, 3.5rem);
+    line-height: 1.12;
     color: var(--color-text);
-    margin-bottom: 25px;
+    margin: 0 0 20px;
   }
-  .hero__text {
-    font-size: 1.125rem;
-    line-height: 1.8;
-    color: var(--color-text-light);
-    margin-bottom: 35px;
-    max-width: 540px;
-  }
-  .hero__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 40px;
-  }
-  .hero__features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-  }
-  .hero__feature {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.95rem;
-    color: var(--color-text);
-    font-weight: 500;
-  }
-  .hero__feature-icon {
-    width: 22px;
-    height: 22px;
-    color: var(--color-primary);
-    background: rgba(45, 106, 79, 0.1);
-    border-radius: 50%;
-    padding: 4px;
-  }
-  /* Right Side - Product Showcase */
-  .hero__right {
-    position: relative;
-  }
-  .hero__product-showcase {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .hero__product-main {
-    position: relative;
-    z-index: 2;
-  }
-  .hero__product-image {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    filter: drop-shadow(0 30px 60px rgba(45, 106, 79, 0.2));
-    animation: float 6s ease-in-out infinite;
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-  }
-  .hero__floating-badge {
-    position: absolute;
-    background: #fff;
-    border-radius: 15px;
-    padding: 15px 20px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    animation: floatBadge 4s ease-in-out infinite;
-  }
-  .hero__floating-badge--1 {
-    top: 10%;
-    right: -10%;
-    animation-delay: 0s;
-  }
-  .hero__floating-badge--2 {
-    bottom: 20%;
-    left: -5%;
-    animation-delay: 1s;
-  }
-  .hero__floating-badge--3 {
-    bottom: 5%;
-    right: 5%;
-    animation-delay: 2s;
-  }
-  @keyframes floatBadge {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-  .hero__badge-icon {
-    width: 40px;
-    height: 40px;
-    background: rgba(45, 106, 79, 0.1);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 8px;
-  }
-  .hero__badge-icon svg {
-    width: 22px;
-    height: 22px;
+  .hero2__title em {
+    font-style: normal;
     color: var(--color-primary);
   }
-  .hero__badge-text {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-text);
-  }
-  .hero__badge-subtext {
-    font-size: 0.75rem;
-    color: var(--color-text-light);
-  }
-  /* Stats Row */
-  .hero__stats {
-    display: flex;
-    gap: 40px;
-    margin-top: 40px;
-    padding-top: 30px;
-    border-top: 1px solid rgba(45, 106, 79, 0.15);
-  }
-  .hero__stat {
-    text-align: center;
-  }
-  .hero__stat-number {
-    font-family: var(--font-heading);
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    line-height: 1;
-  }
-  .hero__stat-label {
-    font-size: 0.85rem;
-    color: var(--color-text-light);
-    margin-top: 5px;
-  }
-  /* No product image fallback */
-  .hero__features-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
-  .hero__feature-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .hero__feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
-  }
-  .hero__feature-card-icon {
-    width: 50px;
-    height: 50px;
-    background: rgba(45, 106, 79, 0.1);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 15px;
-  }
-  .hero__feature-card-icon svg {
-    width: 26px;
-    height: 26px;
-    color: var(--color-primary);
-  }
-  .hero__feature-card h3 {
-    font-family: var(--font-heading);
+  .hero2__text {
     font-size: 1.1rem;
-    color: var(--color-text);
-    margin-bottom: 8px;
-  }
-  .hero__feature-card p {
-    font-size: 0.9rem;
+    line-height: 1.75;
     color: var(--color-text-light);
-    line-height: 1.6;
+    max-width: 540px;
+    margin: 0 0 30px;
   }
-  /* Responsive */
-  @media (max-width: 992px) {
-    .hero {
-      min-height: auto;
-      padding: 40px 0 32px;
-    }
-    .hero__grid {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 32px;
-    }
-    /* Mobile: Ancient Wisdom content first, feature cards / product after */
-    .hero__content { order: 1; text-align: center; min-width: 0; }
-    .hero__right   { order: 2; min-width: 0; }
-    .hero__text    { margin-left: auto; margin-right: auto; }
-    .hero__actions { justify-content: center; }
-    /* Hide the inline "100% Natural · GMP Certified · Free Shipping" checklist
-       on mobile/tablet — they duplicate the feature cards below and clutter
-       the hero on narrow screens. Desktop is untouched. */
-    .hero__features { display: none !important; }
-    .hero__product-image { max-width: 280px; }
-    .hero__floating-badge { display: none; }
-    .hero__stats { justify-content: center; }
-    .hero__features-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-    .hero__feature-card { padding: 20px 16px; }
-    .hero__feature-card h3 { font-size: 1rem; }
-    .hero__feature-card p { font-size: 0.82rem; }
-  }
-  @media (max-width: 640px) {
-    .hero { padding: 28px 0 24px; }
-    .hero__label {
-      font-size: 0.68rem;
-      padding: 6px 14px;
-      letter-spacing: 0.8px;
-      margin-bottom: 14px;
-    }
-    .hero__title {
-      font-size: clamp(1.55rem, 7vw, 2.1rem);
-      margin-bottom: 14px;
-    }
-    .hero__text {
-      font-size: 0.92rem;
-      line-height: 1.65;
-      margin-bottom: 22px;
-    }
-    .hero__actions {
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-    .hero__actions .btn {
-      width: 100%;
-      justify-content: center;
-      padding: 14px 20px;
-      font-size: 0.9rem;
-    }
-    .hero__features {
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
-    }
-    .hero__features-grid {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 12px;
-    }
-    .hero__feature-card {
-      padding: 18px 18px;
-      border-radius: 16px;
-    }
-    .hero__feature-card-icon {
-      width: 44px;
-      height: 44px;
-      margin-bottom: 10px;
-    }
-    .hero__feature-card-icon svg { width: 22px; height: 22px; }
-    .hero__stats { flex-wrap: wrap; gap: 18px; justify-content: center; }
-  }
-
-  /* Tiny phones (≤375px) — iPhone SE / small Androids */
-  @media (max-width: 380px) {
-    .hero { padding: 24px 0 20px; }
-    .hero__title { font-size: 1.4rem; line-height: 1.22; }
-    .hero__text  { font-size: 0.85rem; }
-    .hero__label { font-size: 0.62rem; padding: 5px 12px; letter-spacing: 0.6px; }
-    .hero__stat-number { font-size: 1.4rem; }
-    .hero__stat-label  { font-size: 0.7rem; }
-    .hero__feature-card { padding: 16px 14px; }
-    .hero__feature-card h3 { font-size: 0.95rem; }
-    .hero__feature-card p { font-size: 0.78rem; }
-  }
-
-  /* Landscape phones — keep hero from dominating the viewport */
-  @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
-    .hero { padding: 28px 0 24px; min-height: auto; }
-    .hero__grid { grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
-    .hero__content { order: 0; text-align: left; }
-    .hero__right   { order: 0; }
-    .hero__text    { margin-left: 0; }
-    .hero__actions,
-    .hero__features { justify-content: flex-start; flex-direction: row; }
-    .hero__actions .btn { width: auto; }
-    .hero__product-image { max-width: 180px; }
-  }
-
-  /* Respect users who prefer reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .hero__product-image,
-    .hero__floating-badge { animation: none; }
-  }
-
-  /* ============================================
-     QUALIFICATIONS STRIP — pinned at hero bottom
-     ============================================ */
-  .hero { padding-bottom: 150px; }
-  .hero__quali-strip {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 28px;
-    z-index: 3;
-    background: #ffffff;
-    border-top: 1px solid #eef0ea;
-    border-bottom: 1px solid #eef0ea;
-    padding: 18px 0;
-    box-shadow: 0 -8px 24px rgba(45, 106, 79, 0.05);
-  }
-  .hero__quali-track {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 13px;
-    align-items: stretch;
-  }
-  .hero__quali-chip {
+  .hero2__actions {
     display: flex;
-    align-items: center;
-    gap: 11px;
-    padding: 12px 14px;
-    background: #fdfdfb;
-    border: 1px solid #e8ebe0;
-    border-radius: 10px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 30px;
   }
-  .hero__quali-chip:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(45, 106, 79, 0.10);
-    border-color: rgba(45, 106, 79, 0.25);
-  }
-  .hero__quali-icon {
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    background: rgba(45, 106, 79, 0.08);
+  .hero2__chips {
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .hero2__chip {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: #fff;
+    border: 1px solid #E5EDE4;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .hero2__chip svg {
+    width: 16px;
+    height: 16px;
     color: var(--color-primary);
+    flex-shrink: 0;
   }
-  .hero__quali-icon svg {
-    width: 19px;
-    height: 19px;
+
+  /* Product stage */
+  .hero2__stage {
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    aspect-ratio: 1 / 1;
+    margin-left: auto;
   }
-  .hero__quali-text {
+  .hero2__halo {
+    position: absolute;
+    inset: 4%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #EAF4EC 0%, #D6EADC 48%, rgba(214, 234, 220, 0) 72%);
+  }
+  .hero2__leaf {
+    position: absolute;
+    color: rgba(45, 106, 79, 0.18);
+  }
+  .hero2__leaf--a { width: 90px; top: 2%; left: 8%; transform: rotate(-25deg); }
+  .hero2__leaf--b { width: 70px; bottom: 4%; right: 10%; transform: rotate(140deg); }
+  .hero2__tile {
+    --tilt: 0deg;
+    position: absolute;
     display: flex;
     flex-direction: column;
-    min-width: 0;
-  }
-  .hero__quali-title {
-    font-size: 0.86rem;
-    font-weight: 700;
+    padding: 12px 12px 14px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 22px 48px rgba(27, 67, 50, 0.14);
+    text-decoration: none;
     color: var(--color-text);
-    line-height: 1.2;
-    letter-spacing: 0.2px;
+    transform: rotate(var(--tilt));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .hero__quali-sub {
-    font-size: 0.75rem;
-    color: var(--color-text-light);
-    line-height: 1.25;
-    margin-top: 2px;
+  .hero2__tile:hover {
+    transform: rotate(var(--tilt)) translateY(-6px);
+    box-shadow: 0 28px 56px rgba(27, 67, 50, 0.18);
+    color: var(--color-text);
   }
-  @media (max-width: 1100px) {
-    .hero__quali-track { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hero2__tile--1 { width: 48%; left: 18%; top: 12%; z-index: 3; }
+  .hero2__tile--2 { width: 34%; left: 0; bottom: 2%; z-index: 2; --tilt: -4deg; }
+  .hero2__tile--3 { width: 32%; right: 0; top: 2%; z-index: 4; --tilt: 4deg; }
+  .hero2__tile-img {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background: #F7F2EA;
+    border-radius: 14px;
+    overflow: hidden;
   }
+  .hero2__tile-img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 8%;
+    mix-blend-mode: multiply;
+  }
+  .hero2__tile-name {
+    margin-top: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .hero2__tile-price {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
   @media (max-width: 992px) {
-    .hero { padding-bottom: 24px; }
-    /* Hide the qualifications strip on mobile/tablet — the home page
-       already has a dedicated Certifications section below the hero,
-       so showing both clutters the mobile view. */
-    .hero__quali-strip {
-      display: none !important;
+    .hero2 {
+      padding: 32px 0 36px;
+    }
+    .hero2__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 26px;
+    }
+    .hero2__content {
+      text-align: center;
+    }
+    .hero2__text {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero2__actions,
+    .hero2__chips {
+      justify-content: center;
+    }
+    .hero2__stage {
+      aspect-ratio: auto;
+      max-width: 560px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .hero2__halo,
+    .hero2__leaf {
+      display: none;
+    }
+    .hero2__tile,
+    .hero2__tile:hover {
+      position: static;
+      width: auto;
+      transform: none;
+      padding: 8px 8px 10px;
+      border-radius: 16px;
+      box-shadow: 0 8px 22px rgba(27, 67, 50, 0.10);
+    }
+    .hero2__tile-name {
+      font-size: 0.74rem;
+      margin-top: 7px;
+    }
+    .hero2__tile-price {
+      font-size: 0.76rem;
+    }
+  }
+  @media (max-width: 640px) {
+    .hero2 {
+      padding: 22px 0 26px;
+    }
+    .hero2__eyebrow {
+      font-size: 0.66rem;
+      padding: 6px 12px;
+      margin-bottom: 14px;
+    }
+    .hero2__title {
+      font-size: clamp(1.75rem, 7.6vw, 2.2rem);
+      margin-bottom: 12px;
+    }
+    .hero2__text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .hero2__actions {
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .hero2__actions .btn {
+      flex: 1 1 0;
+      padding: 13px 14px;
+      font-size: 0.82rem;
+    }
+    .hero2__chips {
+      gap: 6px;
+    }
+    .hero2__chip {
+      padding: 6px 10px;
+      font-size: 0.74rem;
+    }
+    .hero2__chip svg {
+      width: 13px;
+      height: 13px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero2__tile,
+    .hero2__tile:hover {
+      transition: none;
     }
   }
 {%- endstyle -%}
 
-<section class="hero section">
-  {%- if section.settings.image != blank -%}
-    <div class="hero__background">
-      <img 
-        src="{{ section.settings.image | image_url: width: 1920 }}"
-        srcset="{{ section.settings.image | image_url: width: 800 }} 800w,
-                {{ section.settings.image | image_url: width: 1200 }} 1200w,
-                {{ section.settings.image | image_url: width: 1600 }} 1600w,
-                {{ section.settings.image | image_url: width: 1920 }} 1920w"
-        sizes="100vw"
-        alt="{{ section.settings.image.alt | default: section.settings.title | escape }}"
-        loading="eager"
-        fetchpriority="high"
-      >
-    </div>
-  {%- endif -%}
-  
-  <div class="hero__overlay"></div>
-  
+<section class="hero2" data-section-id="{{ section.id }}">
   <div class="container">
-    <div class="hero__grid">
-      <!-- Left Side - Content -->
-      <div class="hero__content" data-animate>
+    <div class="hero2__grid">
+      <div class="hero2__content">
         {%- if section.settings.label != blank -%}
-          <span class="hero__label">{{ section.settings.label }}</span>
+          <span class="hero2__eyebrow">{% render 'policy-icon', name: 'leaf' %}{{ section.settings.label }}</span>
         {%- endif -%}
-        
-        <h1 class="hero__title">
-          {{ section.settings.title | newline_to_br }}
-        </h1>
-        
+
+        <h1 class="hero2__title">{{ section.settings.title | newline_to_br }}</h1>
+
         {%- if section.settings.text != blank -%}
-          <p class="hero__text">{{ section.settings.text }}</p>
+          <p class="hero2__text">{{ section.settings.text }}</p>
         {%- endif -%}
-        
-        <div class="hero__actions">
+
+        <div class="hero2__actions">
           {%- if section.settings.button_text != blank -%}
-            <a href="{{ section.settings.button_link }}" class="btn btn--primary btn--lg">
-              {{ section.settings.button_text }}
-            </a>
+            <a href="{{ section.settings.button_link | default: '/collections/best-sellers' }}" class="btn btn--primary btn--lg">{{ section.settings.button_text }}</a>
           {%- endif -%}
-          
           {%- if section.settings.button_text_2 != blank -%}
-            <a href="{{ section.settings.button_link_2 }}" class="btn btn--secondary btn--lg">
-              {{ section.settings.button_text_2 }}
-            </a>
+            <a href="{{ section.settings.button_link_2 | default: '/pages/about-us' }}" class="btn btn--secondary btn--lg">{{ section.settings.button_text_2 }}</a>
           {%- endif -%}
         </div>
-        
-        {%- if section.settings.show_features -%}
-          <div class="hero__features">
+
+        {%- if section.settings.show_features and section.blocks.size > 0 -%}
+          <ul class="hero2__chips">
             {%- for block in section.blocks -%}
-              {%- if block.type == 'feature' -%}
-                <div class="hero__feature" {{ block.shopify_attributes }}>
-                  <svg class="hero__feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  <span>{{ block.settings.text }}</span>
-                </div>
+              {%- if block.type == 'feature' and block.settings.text != blank -%}
+                <li class="hero2__chip" {{ block.shopify_attributes }}>{% render 'policy-icon', name: 'shield' %}{{ block.settings.text }}</li>
               {%- endif -%}
             {%- endfor -%}
-          </div>
-        {%- endif -%}
-        
-        {%- if section.settings.show_stats -%}
-          <div class="hero__stats">
-            <div class="hero__stat">
-              <div class="hero__stat-number">{{ section.settings.stat_1_number | default: '50+' }}</div>
-              <div class="hero__stat-label">{{ section.settings.stat_1_label | default: 'Products' }}</div>
-            </div>
-            <div class="hero__stat">
-              <div class="hero__stat-number">{{ section.settings.stat_2_number | default: '10K+' }}</div>
-              <div class="hero__stat-label">{{ section.settings.stat_2_label | default: 'Happy Customers' }}</div>
-            </div>
-            <div class="hero__stat">
-              <div class="hero__stat-number">{{ section.settings.stat_3_number | default: '25+' }}</div>
-              <div class="hero__stat-label">{{ section.settings.stat_3_label | default: 'Years Experience' }}</div>
-            </div>
-          </div>
+          </ul>
         {%- endif -%}
       </div>
-      
-      <!-- Right Side - Product Showcase or Feature Cards -->
-      <div class="hero__right" data-animate>
-        {%- if section.settings.product_image != blank -%}
-          <div class="hero__product-showcase">
-            <div class="hero__product-main">
-              <img 
-                src="{{ section.settings.product_image | image_url: width: 800 }}"
-                alt="{{ section.settings.product_image.alt | default: 'Featured Product' }}"
-                class="hero__product-image"
-                loading="eager"
-              >
-            </div>
-            
-            <!-- Floating Badges -->
-            <div class="hero__floating-badge hero__floating-badge--1">
-              <div class="hero__badge-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-              </div>
-              <div class="hero__badge-text">100% Natural</div>
-              <div class="hero__badge-subtext">No Chemicals</div>
-            </div>
-            
-            <div class="hero__floating-badge hero__floating-badge--2">
-              <div class="hero__badge-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-              </div>
-              <div class="hero__badge-text">GMP Certified</div>
-              <div class="hero__badge-subtext">Quality Assured</div>
-            </div>
-            
-            <div class="hero__floating-badge hero__floating-badge--3">
-              <div class="hero__badge-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
-                </svg>
-              </div>
-              <div class="hero__badge-text">Ayurvedic</div>
-              <div class="hero__badge-subtext">Ancient Wisdom</div>
-            </div>
-          </div>
-        {%- else -%}
-          <!-- Feature Cards when no product image -->
-          <div class="hero__features-grid">
-            <div class="hero__feature-card">
-              <div class="hero__feature-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
-                </svg>
-              </div>
-              <h3>Pure Herbal</h3>
-              <p>High Quality organic herbs</p>
-            </div>
-            <div class="hero__feature-card">
-              <div class="hero__feature-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-              </div>
-              <h3>Clinically Tested</h3>
-              <p>Formulas backed by scientific research</p>
-            </div>
-            <div class="hero__feature-card">
-              <div class="hero__feature-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-              </div>
-              <h3>No Side Effects</h3>
-              <p>Safe for long-term wellness support</p>
-            </div>
-            <div class="hero__feature-card">
-              <div class="hero__feature-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="12"></line>
-                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-              </div>
-              <h3>Expert Formulated</h3>
-              <p>Created by Ayurvedic practitioners</p>
-            </div>
-          </div>
-        {%- endif -%}
+
+      <div class="hero2__stage">
+        <span class="hero2__halo" aria-hidden="true"></span>
+        <span class="hero2__leaf hero2__leaf--a" aria-hidden="true">{% render 'policy-icon', name: 'leaf' %}</span>
+        <span class="hero2__leaf hero2__leaf--b" aria-hidden="true">{% render 'policy-icon', name: 'leaf' %}</span>
+        {%- assign tile_index = 0 -%}
+        {%- for handle in pick_handles -%}
+          {%- assign p = all_products[handle] -%}
+          {%- if p != blank and p.featured_image != blank and tile_index < 3 -%}
+            {%- assign tile_index = tile_index | plus: 1 -%}
+            {%- capture tile_name -%}{%- render 'product-short-title', title: p.title -%}{%- endcapture -%}
+            <a href="{{ p.url }}" class="hero2__tile hero2__tile--{{ tile_index }}">
+              <span class="hero2__tile-img">
+                <img
+                  src="{{ p.featured_image | image_url: width: 520 }}"
+                  srcset="{{ p.featured_image | image_url: width: 260 }} 260w, {{ p.featured_image | image_url: width: 520 }} 520w"
+                  sizes="(max-width: 992px) 30vw, {% if tile_index == 1 %}280px{% else %}200px{% endif %}"
+                  alt="{{ tile_name | strip | escape }}"
+                  width="{{ p.featured_image.width }}"
+                  height="{{ p.featured_image.height }}"
+                  {% if tile_index == 1 %}fetchpriority="high"{% endif %}
+                  loading="eager"
+                >
+              </span>
+              <span class="hero2__tile-name">{{ tile_name | strip }}</span>
+              <span class="hero2__tile-price">{% render 'inr-price', cents: p.price %}</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     </div>
   </div>
-
-  {%- if section.settings.show_quali_strip -%}
-    <div class="hero__quali-strip" data-animate>
-      <div class="container">
-        <div class="hero__quali-track">
-          <div class="hero__quali-chip">
-            <div class="hero__quali-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 4 10 15 15 0 0 1-4 10 15 15 0 0 1-4-10 15 15 0 0 1 4-10z"/>
-              </svg>
-            </div>
-            <div class="hero__quali-text">
-              <span class="hero__quali-title">{{ section.settings.q1_title | default: 'WHO-GMP' }}</span>
-              <span class="hero__quali-sub">{{ section.settings.q1_sub | default: 'Certified Products' }}</span>
-            </div>
-          </div>
-
-          <div class="hero__quali-chip">
-            <div class="hero__quali-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
-              </svg>
-            </div>
-            <div class="hero__quali-text">
-              <span class="hero__quali-title">{{ section.settings.q2_title | default: 'State FDA' }}</span>
-              <span class="hero__quali-sub">{{ section.settings.q2_sub | default: 'Approved Product' }}</span>
-            </div>
-          </div>
-
-          <div class="hero__quali-chip">
-            <div class="hero__quali-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-              </svg>
-            </div>
-            <div class="hero__quali-text">
-              <span class="hero__quali-title">{{ section.settings.q3_title | default: 'ISO 9001:2015' }}</span>
-              <span class="hero__quali-sub">{{ section.settings.q3_sub | default: 'Quality systems' }}</span>
-            </div>
-          </div>
-
-          <div class="hero__quali-chip">
-            <div class="hero__quali-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-              </svg>
-            </div>
-            <div class="hero__quali-text">
-              <span class="hero__quali-title">{{ section.settings.q4_title | default: '25+ Years' }}</span>
-              <span class="hero__quali-sub">{{ section.settings.q4_sub | default: 'Trusted legacy' }}</span>
-            </div>
-          </div>
-
-          <div class="hero__quali-chip">
-            <div class="hero__quali-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-              </svg>
-            </div>
-            <div class="hero__quali-text">
-              <span class="hero__quali-title">{{ section.settings.q5_title | default: 'FSSAI' }}</span>
-              <span class="hero__quali-sub">{{ section.settings.q5_sub | default: 'Food safety' }}</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  {%- endif -%}
 </section>
 
 {% schema %}
@@ -678,39 +351,28 @@
   "class": "hero-section",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Background Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "product_image",
-      "label": "Product Image (Right Side)",
-      "info": "Featured product image for the right side of hero. If empty, feature cards will show."
-    },
-    {
       "type": "text",
       "id": "label",
       "label": "Label",
-      "default": "Trusted Ayurvedic Solutions"
+      "default": "Since 1999 · Bhavnagar, Gujarat"
     },
     {
       "type": "textarea",
       "id": "title",
       "label": "Title",
-      "default": "Ancient Ayurvedic Wisdom,\nModern Wellness Solutions"
+      "default": "Authentic Ayurveda,\nmade with pharmaceutical care"
     },
     {
       "type": "textarea",
       "id": "text",
       "label": "Description",
-      "default": "Discover our range of 100% natural, chemical-free Ayurvedic products crafted with ancient wisdom for modern health challenges."
+      "default": "84+ time-tested formulations — from Harry and Cofula to VedaCold — trusted by 3 Lakh+ customers across 22+ states."
     },
     {
       "type": "text",
       "id": "button_text",
       "label": "Primary Button Text",
-      "default": "Shop All Products"
+      "default": "Shop Bestsellers"
     },
     {
       "type": "url",
@@ -721,7 +383,7 @@
       "type": "text",
       "id": "button_text_2",
       "label": "Secondary Button Text",
-      "default": "Learn About Us"
+      "default": "Our Story"
     },
     {
       "type": "url",
@@ -731,88 +393,40 @@
     {
       "type": "checkbox",
       "id": "show_features",
-      "label": "Show Features",
+      "label": "Show trust chips",
       "default": true
     },
     {
       "type": "header",
-      "content": "Statistics"
+      "content": "Featured products",
+      "info": "Shown as product tiles. Leave blank to use the first products of the Bestsellers collection."
     },
     {
-      "type": "checkbox",
-      "id": "show_stats",
-      "label": "Show Statistics",
-      "default": true
+      "type": "product",
+      "id": "product_1",
+      "label": "Main product"
     },
     {
-      "type": "text",
-      "id": "stat_1_number",
-      "label": "Stat 1 Number",
-      "default": "50+"
+      "type": "product",
+      "id": "product_2",
+      "label": "Second product"
     },
     {
-      "type": "text",
-      "id": "stat_1_label",
-      "label": "Stat 1 Label",
-      "default": "Products"
-    },
-    {
-      "type": "text",
-      "id": "stat_2_number",
-      "label": "Stat 2 Number",
-      "default": "10K+"
-    },
-    {
-      "type": "text",
-      "id": "stat_2_label",
-      "label": "Stat 2 Label",
-      "default": "Happy Customers"
-    },
-    {
-      "type": "text",
-      "id": "stat_3_number",
-      "label": "Stat 3 Number",
-      "default": "25+"
-    },
-    {
-      "type": "text",
-      "id": "stat_3_label",
-      "label": "Stat 3 Label",
-      "default": "Years Experience"
-    },
-    {
-      "type": "header",
-      "content": "Qualifications Strip (Hero Bottom)"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_quali_strip",
-      "label": "Show qualifications strip at hero bottom",
-      "default": true
-    },
-    { "type": "text", "id": "q1_title", "label": "Chip 1 Title", "default": "WHO-GMP" },
-    { "type": "text", "id": "q1_sub",   "label": "Chip 1 Subtitle", "default": "Certified Products" },
-    { "type": "text", "id": "q2_title", "label": "Chip 2 Title", "default": "State FDA" },
-    { "type": "text", "id": "q2_sub",   "label": "Chip 2 Subtitle", "default": "Approved Product" },
-    { "type": "text", "id": "q3_title", "label": "Chip 3 Title", "default": "ISO 9001:2015" },
-    { "type": "text", "id": "q3_sub",   "label": "Chip 3 Subtitle", "default": "Quality systems" },
-    { "type": "text", "id": "q4_title", "label": "Chip 4 Title", "default": "25+ Years" },
-    { "type": "text", "id": "q4_sub",   "label": "Chip 4 Subtitle", "default": "Trusted legacy" },
-    { "type": "text", "id": "q5_title", "label": "Chip 5 Title", "default": "FSSAI" },
-    { "type": "text", "id": "q5_sub",   "label": "Chip 5 Subtitle", "default": "Food safety" },
-    { "type": "text", "id": "q6_title", "label": "Chip 6 Title", "default": "FDA" },
-    { "type": "text", "id": "q6_sub",   "label": "Chip 6 Subtitle", "default": "Regulatory approved" }
+      "type": "product",
+      "id": "product_3",
+      "label": "Third product"
+    }
   ],
   "blocks": [
     {
       "type": "feature",
-      "name": "Feature",
+      "name": "Trust chip",
       "settings": [
         {
           "type": "text",
           "id": "text",
-          "label": "Feature Text",
-          "default": "100% Natural"
+          "label": "Text",
+          "default": "GMP-certified manufacturing"
         }
       ]
     }
@@ -821,24 +435,9 @@
     {
       "name": "Hero",
       "blocks": [
-        {
-          "type": "feature",
-          "settings": {
-            "text": "100% Natural"
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "text": "GMP Certified"
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "text": "Free Shipping ₹400+"
-          }
-        }
+        { "type": "feature", "settings": { "text": "GMP-certified manufacturing" } },
+        { "type": "feature", "settings": { "text": "Free shipping above ₹400" } },
+        { "type": "feature", "settings": { "text": "Cash on Delivery" } }
       ]
     }
   ]

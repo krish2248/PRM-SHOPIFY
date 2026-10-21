@@ -1,0 +1,60 @@
+{%- comment -%}
+  Line illustrations for the featured herbs (shown when no photo is uploaded).
+  Usage: {% render 'herb-icon', name: 'root' %}
+  name: root | leaf | vine | fruit | flower | neem
+{%- endcomment -%}
+<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {%- case name -%}
+    {%- when 'root' -%}
+      <path d="M32 27v9"/>
+      <path d="M32 27c-6-2-10-8-9-15 6 1 10 6 9 15z"/>
+      <path d="M32 27c6-2 10-8 9-15-6 1-10 6-9 15z"/>
+      <path d="M16 36h32" stroke-dasharray="2 4"/>
+      <path d="M32 36v20"/>
+      <path d="M32 38c0 6-2 10-7 14"/>
+      <path d="M32 38c0 6 2 10 7 14"/>
+      <path d="M27 46c-3 1-6 0-8-3"/>
+      <path d="M37 46c3 1 6 0 8-3"/>
+    {%- when 'vine' -%}
+      <path d="M8 54C20 47 22 35 32 31s16-14 24-23"/>
+      <path d="M20 44c-6 1-10-2-11-7 5-1 10 1 11 7z"/>
+      <path d="M33 31c-1-6 2-10 7-11 1 5-1 10-7 11z"/>
+      <path d="M46 18c-5-2-7-6-6-10 5 0 8 4 6 10z"/>
+      <path d="M26 39c2 4 6 6 10 5"/>
+      <path d="M40 24c3 3 7 3 10 1"/>
+    {%- when 'fruit' -%}
+      <circle cx="23" cy="40" r="10"/>
+      <circle cx="41" cy="40" r="10"/>
+      <circle cx="32" cy="26" r="9"/>
+      <path d="M32 17c0-4 2-7 6-9"/>
+      <path d="M38 8c4 0 7 2 8 6-4 1-7-1-8-6z"/>
+      <path d="M23 31v18M41 31v18M32 18v16" opacity="0.45"/>
+    {%- when 'flower' -%}
+      <path d="M32 58V30"/>
+      <path d="M32 47c-6-1-10-5-11-10"/>
+      <path d="M32 41c6-1 10-5 11-10"/>
+      <g transform="translate(32 20)">
+        <ellipse cx="0" cy="-6" rx="3" ry="5.5"/>
+        <ellipse cx="0" cy="-6" rx="3" ry="5.5" transform="rotate(72)"/>
+        <ellipse cx="0" cy="-6" rx="3" ry="5.5" transform="rotate(144)"/>
+        <ellipse cx="0" cy="-6" rx="3" ry="5.5" transform="rotate(216)"/>
+        <ellipse cx="0" cy="-6" rx="3" ry="5.5" transform="rotate(288)"/>
+        <circle r="2.2" fill="currentColor" stroke="none"/>
+      </g>
+    {%- when 'neem' -%}
+      <path d="M13 55L51 9"/>
+      <path d="M21 45c-6-1-9-5-9-10 5 0 8 4 9 10z"/>
+      <path d="M21 45c1-6 5-9 10-9 0 5-4 8-10 9z"/>
+      <path d="M30 34c-6-1-9-5-9-10 5 0 8 4 9 10z"/>
+      <path d="M30 34c1-6 5-9 10-9 0 5-4 8-10 9z"/>
+      <path d="M39 23c-6-1-9-5-9-10 5 0 8 4 9 10z"/>
+      <path d="M39 23c1-6 5-9 10-9 0 5-4 8-10 9z"/>
+    {%- else -%}
+      <path d="M32 58V20"/>
+      <path d="M32 31c-8 0-13-5-14-11 7-1 13 3 14 11z"/>
+      <path d="M32 31c8 0 13-5 14-11-7-1-13 3-14 11z"/>
+      <path d="M32 45c-7 0-11-4-12-9 6-1 11 2 12 9z"/>
+      <path d="M32 45c7 0 11-4 12-9-6-1-11 2-12 9z"/>
+      <path d="M32 20c-3-3-3-8 0-12 3 4 3 9 0 12z"/>
+  {%- endcase -%}
+</svg>

@@ -33,7 +33,7 @@
             <a href="/" class="header__nav-link {% if request.path == '/' %}header__nav-link--active{% endif %}">Home</a>
           </li>
           <li class="header__nav-item">
-            <a href="/collections/all" class="header__nav-link {% if request.path == '/collections/all' %}header__nav-link--active{% endif %}">All Products</a>
+            <a href="/collections/all?sort_by=best-selling" class="header__nav-link {% if request.path == '/collections/all' %}header__nav-link--active{% endif %}">All Products</a>
           </li>
           <li class="header__nav-item">
             <a href="/collections/best-sellers" class="header__nav-link {% if request.path contains '/collections/best-sellers' %}header__nav-link--active{% endif %}">Bestsellers</a>
@@ -49,9 +49,6 @@
           </li>
           <li class="header__nav-item">
             <a href="/pages/contact" class="header__nav-link {% if request.path contains '/pages/contact' %}header__nav-link--active{% endif %}">Contact</a>
-          </li>
-          <li class="header__nav-item">
-            <a href="/cart" class="header__nav-link {% if request.path == '/cart' %}header__nav-link--active{% endif %}">Cart</a>
           </li>
         </ul>
       </nav>
@@ -107,7 +104,7 @@
   </div>
   <nav class="mobile-menu__nav">
     <a href="/" class="mobile-menu__link">Home</a>
-    <a href="/collections/all" class="mobile-menu__link">All Products</a>
+    <a href="/collections/all?sort_by=best-selling" class="mobile-menu__link">All Products</a>
     <a href="/collections/best-sellers" class="mobile-menu__link">Bestsellers</a>
     <a href="/collections/new-arrivals" class="mobile-menu__link">New Arrivals</a>
     <a href="/pages/about-us" class="mobile-menu__link">About Us</a>

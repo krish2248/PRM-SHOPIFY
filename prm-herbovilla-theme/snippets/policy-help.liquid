@@ -1,0 +1,18 @@
+{%- comment -%}
+  Sidebar "Need help?" card on the policy pages.
+{%- endcomment -%}
+{%- assign help_email = settings.contact_email | default: 'contact@prmpharmaceuticals.com' -%}
+{%- assign help_phone = settings.contact_phone | default: '+91-9227928075' -%}
+<div class="policy-help">
+  <h3>Need help?</h3>
+  <p>Our care team is available Monday – Saturday, 10:00 AM – 7:00 PM (IST).</p>
+  <a class="policy-help-item" href="mailto:{{ help_email }}">
+    <span class="policy-icon policy-icon--sm">{% render 'policy-icon', name: 'mail' %}</span>
+    {{ help_email }}
+  </a>
+  <a class="policy-help-item" href="tel:{{ help_phone | remove: ' ' | remove: '-' }}">
+    <span class="policy-icon policy-icon--sm">{% render 'policy-icon', name: 'phone' %}</span>
+    {{ help_phone }}
+  </a>
+  <a class="policy-btn" href="/pages/contact">Contact Us {% render 'policy-icon', name: 'arrow-right' %}</a>
+</div>

@@ -14,7 +14,40 @@
       {%- endif -%}
     </div>
 
-    <div class="herbs-uses__grid">
+    {%- if section.settings.layout == 'featured' -%}
+      <div class="herbs-featured">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'herb' -%}
+            <article class="herb-pick" {{ block.shopify_attributes }}>
+              <div class="herb-pick__art">
+                {%- if block.settings.image != blank -%}
+                  <img src="{{ block.settings.image | image_url: width: 240 }}" alt="{{ block.settings.name | escape }}" width="120" height="120" loading="lazy">
+                {%- else -%}
+                  {%- render 'herb-icon', name: block.settings.icon -%}
+                {%- endif -%}
+              </div>
+              <div class="herb-pick__body">
+                <h3 class="herb-pick__name">{{ block.settings.name }}</h3>
+                {%- if block.settings.botanical != blank -%}
+                  <p class="herb-pick__botanical">{{ block.settings.botanical }}</p>
+                {%- endif -%}
+                <p class="herb-pick__use">{{ block.settings.benefit }}</p>
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" class="herb-pick__link">{{ block.settings.link_text | default: 'Shop products' }} &rarr;</a>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- assign glossary = pages[section.settings.glossary_handle] -%}
+      {%- if glossary.url != blank -%}
+        <div class="herbs-uses__more">
+          <a href="{{ glossary.url }}" class="btn btn--secondary">Explore the full herb glossary</a>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+    <div class="herbs-uses__grid{% unless section.settings.compact_mobile %} herbs-uses__grid--full{% endunless %}">
       {%- for block in section.blocks -%}
         {%- if block.type == 'category' -%}
           <article class="herb-card" {{ block.shopify_attributes }}>
@@ -81,12 +114,13 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
+    {%- endif -%}
   </div>
 </section>
 
 <style>
   .herbs-uses {
-    padding: clamp(56px, 7vw, 96px) 20px;
+    padding: clamp(40px, 6vw, 80px) 20px;
     background: #FDF8F0;
   }
 
@@ -264,9 +298,128 @@
   }
 
   @media (max-width: 1024px) {
-    /* Hide the second half of herbs on tablet/mobile/iPad to keep cards compact */
+    /* Hide the second half of herbs on tablet/mobile/iPad to keep cards compact
+       (the glossary page shows everything: .herbs-uses__grid--full) */
     .herb-card__list-extra {
       display: none;
+    }
+    .herbs-uses__grid--full .herb-card__list-extra {
+      display: list-item;
+    }
+  }
+
+  /* Featured herbs (homepage) */
+  .herbs-featured {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 1150px;
+    margin: 0 auto;
+  }
+  .herb-pick {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 22px;
+    background: #fff;
+    border: 1px solid #EFE7D9;
+    border-radius: 18px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .herb-pick:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(27, 67, 50, 0.08);
+  }
+  .herb-pick__art {
+    width: 78px;
+    height: 78px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #F1F8F2, #DCEDE1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: #2D6A4F;
+  }
+  .herb-pick__art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .herb-pick__art svg {
+    width: 46px;
+    height: 46px;
+  }
+  .herb-pick__name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1B4332;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .herb-pick__botanical {
+    margin: 2px 0 8px;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #7A7A72;
+  }
+  .herb-pick__use {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #4A4A45;
+  }
+  .herb-pick__link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #2D6A4F;
+    text-decoration: none;
+  }
+  .herb-pick__link:hover {
+    color: #1B4332;
+  }
+  .herbs-uses__more {
+    margin-top: 32px;
+    text-align: center;
+  }
+  @media (max-width: 1024px) {
+    .herbs-featured {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .herbs-featured {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .herb-pick {
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 14px;
+    }
+    .herb-pick__art {
+      width: 58px;
+      height: 58px;
+    }
+    .herb-pick__art svg {
+      width: 34px;
+      height: 34px;
+    }
+    .herb-pick__name {
+      font-size: 1.05rem;
+    }
+    .herb-pick__botanical {
+      margin-bottom: 4px;
+    }
+    .herb-pick__use {
+      font-size: 0.85rem;
+    }
+    .herbs-uses__more {
+      margin-top: 20px;
     }
   }
 
@@ -320,9 +473,87 @@
       "id": "text",
       "label": "Description",
       "default": "Discover the classical Ayurvedic herbs behind every HerboVilla formulation — grouped by the wellness concern they traditionally support."
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "featured", "label": "Featured herbs (uses Herb blocks)" },
+        { "value": "full", "label": "Full lists by concern (uses Category blocks)" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "text",
+      "id": "glossary_handle",
+      "label": "Herb glossary page handle",
+      "info": "The featured layout shows an 'Explore the full herb glossary' button once this page exists.",
+      "default": "ayurvedic-herb-glossary"
+    },
+    {
+      "type": "checkbox",
+      "id": "compact_mobile",
+      "label": "Shorten long lists on mobile",
+      "default": true
     }
   ],
   "blocks": [
+    {
+      "type": "herb",
+      "name": "Herb",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo (optional)",
+          "info": "Square photo works best. Leave blank to show the illustration."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Illustration",
+          "options": [
+            { "value": "root", "label": "Root (Ashwagandha)" },
+            { "value": "leaf", "label": "Leaf (Tulsi)" },
+            { "value": "vine", "label": "Vine (Giloy)" },
+            { "value": "fruit", "label": "Fruit (Amla / Triphala)" },
+            { "value": "flower", "label": "Flower (Shatavari)" },
+            { "value": "neem", "label": "Leaflets (Neem)" }
+          ],
+          "default": "leaf"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Herb name",
+          "default": "Tulsi"
+        },
+        {
+          "type": "text",
+          "id": "botanical",
+          "label": "Botanical name",
+          "default": "Ocimum sanctum"
+        },
+        {
+          "type": "textarea",
+          "id": "benefit",
+          "label": "Traditional use (one line)",
+          "default": "A classic for seasonal immunity and respiratory comfort."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Shop link (optional)"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Shop link text",
+          "default": "Shop products"
+        }
+      ]
+    },
     {
       "type": "category",
       "name": "Category",

@@ -1,475 +1,217 @@
 {%- comment -%}
-  Shipping Policy Page Template
+  Shipping Policy page (template: page.shipping-policy).
+  Shared styling lives in snippets/policy-page-assets.liquid.
 {%- endcomment -%}
+{%- render 'policy-page-assets' -%}
+{%- liquid
+  assign legal_name = section.settings.legal_name | default: 'PRM & Company'
+  assign tracking_url = section.settings.tracking_url | default: 'https://ship.nimbuspost.com/tracking'
+  assign free_above = settings.free_shipping_threshold | default: 400
+-%}
 
-<div class="policy-page">
-  <section class="policy-hero">
-    <div class="container">
-      <h1 class="policy-hero__title">{{ page.title | default: 'Shipping Policy' }}</h1>
-      <p class="policy-hero__subtitle">{{ section.settings.subtitle | default: 'Everything you need to know about our shipping and delivery' }}</p>
-    </div>
-  </section>
+<div class="policy-page" data-section-id="{{ section.id }}">
+  <div class="container">
+    <header class="policy-header">
+      <span class="policy-eyebrow">{{ section.settings.eyebrow | default: 'Customer Care' }}</span>
+      <h1 class="policy-title">{{ page.title | default: 'Shipping Policy' }}</h1>
+      <p class="policy-subtitle">{{ section.settings.subtitle }}</p>
+      <div class="policy-meta">
+        <span class="policy-chip">{% render 'policy-icon', name: 'calendar' %}Last updated: {{ section.settings.last_updated }}</span>
+        <span class="policy-chip">{% render 'policy-icon', name: 'map' %}Ships from Bhavnagar, Gujarat</span>
+        <span class="policy-chip">{% render 'policy-icon', name: 'truck' %}Delivered via NimbusPost</span>
+      </div>
+    </header>
 
-  <section class="policy-content section">
-    <div class="container">
-      <div class="policy-grid">
-        <aside class="policy-sidebar">
-          <nav class="policy-nav">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><a href="#delivery-areas">Delivery Areas</a></li>
-              <li><a href="#shipping-charges">Shipping Charges</a></li>
-              <li><a href="#delivery-time">Delivery Time</a></li>
-              <li><a href="#tracking">Order Tracking</a></li>
-              <li><a href="#cod">Cash on Delivery</a></li>
-            </ul>
-          </nav>
-        </aside>
-
-        <div class="policy-main">
-          <div class="policy-highlight">
-            <div class="policy-highlight__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M5 8h14M5 8a2 2 0 1 1 0-4h14a2 2 0 1 1 0 4M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"/>
-                <path d="m9 14 2 2 4-4"/>
-              </svg>
-            </div>
-            <div class="policy-highlight__content">
-              <h3>Free Shipping on Orders Above ₹400</h3>
-              <p>Enjoy free delivery across India when you spend ₹400 or more</p>
-            </div>
-          </div>
-
-          <div class="policy-section" id="delivery-areas">
-            <h2>Delivery Areas</h2>
-            <p>We currently deliver to all serviceable pin codes across India. Our products are shipped from our facility in Bhavnagar, Gujarat to your doorstep via <strong>Nimbus Post</strong>, our shipping aggregator that gives us access to India's leading courier partners — <strong>Delhivery, Bluedart, DTDC, Ekart, XpressBees</strong> and more — so every pincode gets the fastest available carrier.</p>
-
-            <div class="policy-info-box">
-              <h4>Serviceable Locations</h4>
-              <ul>
-                <li>All major cities and metros</li>
-                <li>Tier 2 and Tier 3 cities</li>
-                <li>Most rural areas with courier access</li>
-                <li>27,000+ serviceable pincodes via Nimbus Post network</li>
-              </ul>
-              <p class="policy-note">Note: Some remote areas may have limited courier availability. Enter your pin code at checkout to verify delivery to your location.</p>
-            </div>
-          </div>
-
-          <div class="policy-section" id="shipping-charges">
-            <h2>Shipping Charges</h2>
-            <table class="policy-table">
-              <thead>
-                <tr>
-                  <th>Order Value</th>
-                  <th>Shipping Charge</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Above ₹400</td>
-                  <td><strong>FREE</strong></td>
-                </tr>
-                <tr>
-                  <td>Below ₹400</td>
-                  <td>₹50 flat rate</td>
-                </tr>
-              </tbody>
-            </table>
-            <p class="policy-note">Shipping charges are calculated at checkout based on your order total before applying any discounts.</p>
-          </div>
-
-          <div class="policy-section" id="delivery-time">
-            <h2>Delivery Time</h2>
-            <p>We process orders within 1-2 business days. Once shipped, delivery times vary based on your location:</p>
-            
-            <table class="policy-table">
-              <thead>
-                <tr>
-                  <th>Location</th>
-                  <th>Estimated Delivery</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Metro Cities (Mumbai, Delhi, Bangalore, etc.)</td>
-                  <td>3-5 business days</td>
-                </tr>
-                <tr>
-                  <td>Tier 2 Cities</td>
-                  <td>5-7 business days</td>
-                </tr>
-                <tr>
-                  <td>Tier 3 & Rural Areas</td>
-                  <td>7-10 business days</td>
-                </tr>
-                <tr>
-                  <td>Remote/Hilly Areas</td>
-                  <td>10-14 business days</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div class="policy-info-box policy-info-box--warning">
-              <h4>Please Note</h4>
-              <ul>
-                <li>Delivery times are estimates and may vary due to unforeseen circumstances</li>
-                <li>Delays may occur during festivals, sales, or extreme weather conditions</li>
-                <li>Business days exclude Sundays and public holidays</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="policy-section" id="tracking">
-            <h2>Order Tracking</h2>
-            <p>Stay updated on your order status with our tracking system:</p>
-            <ol class="policy-steps">
-              <li>
-                <span class="step-number">1</span>
-                <div>
-                  <h4>Order Confirmation</h4>
-                  <p>You'll receive an email and SMS confirming your order</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-number">2</span>
-                <div>
-                  <h4>Shipment Notification</h4>
-                  <p>Once shipped, you'll receive tracking details via email and SMS</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-number">3</span>
-                <div>
-                  <h4>Track Online</h4>
-                  <p>Use the tracking link or log into your account to check status</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-number">4</span>
-                <div>
-                  <h4>Delivery</h4>
-                  <p>Your order will be delivered to your doorstep</p>
-                </div>
-              </li>
-            </ol>
-          </div>
-
-          <div class="policy-section" id="cod">
-            <h2>Cash on Delivery (COD)</h2>
-            <p>We offer Cash on Delivery for your convenience:</p>
-            <ul>
-              <li>COD is available for orders up to ₹5,000</li>
-              <li>No additional charges for COD orders</li>
-              <li>Please keep exact change ready for the delivery person</li>
-              <li>COD may not be available for some remote pin codes</li>
-            </ul>
-
-            <div class="policy-info-box">
-              <h4>COD Verification</h4>
-              <p>For first-time COD orders, our team may call to verify your details. This helps us ensure smooth delivery and prevent fraud.</p>
-            </div>
-          </div>
-
-          <div class="policy-section">
-            <h2>Contact Us</h2>
-            <p>For any shipping-related queries, please reach out to us:</p>
-            <div class="policy-contact">
-              <p><strong>Email:</strong> contact@prmpharmaceuticals.com</p>
-              <p><strong>Phone:</strong> +91-9227928075</p>
-              <p><strong>Hours:</strong> Monday - Saturday, 10:00 AM - 6:00 PM IST</p>
-            </div>
-          </div>
-        </div>
+    <div class="policy-highlights">
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'truck' %}</span>
+        <h3>Free Shipping</h3>
+        <p>On all orders above ₹{{ free_above }}, anywhere in India.</p>
+      </div>
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'clock' %}</span>
+        <h3>Dispatch in 1–2 Days</h3>
+        <p>Orders are packed and handed to the courier within 1–2 business days.</p>
+      </div>
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'navigation' %}</span>
+        <h3>Live Tracking</h3>
+        <p>Tracking link by SMS &amp; email as soon as your order ships.</p>
+      </div>
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'card' %}</span>
+        <h3>Cash on Delivery</h3>
+        <p>Available on eligible pincodes — or pay securely online via Razorpay.</p>
       </div>
     </div>
-  </section>
+
+    <div class="policy-layout">
+      <aside class="policy-aside">
+        <nav class="policy-toc" aria-label="On this page">
+          <p class="policy-label">On this page</p>
+          <ol>
+            <li><a href="#delivery-areas">Where We Deliver</a></li>
+            <li><a href="#charges">Shipping Charges</a></li>
+            <li><a href="#timelines">Dispatch &amp; Delivery Times</a></li>
+            <li><a href="#tracking">Tracking Your Order</a></li>
+            <li><a href="#cod">Cash on Delivery</a></li>
+            <li><a href="#attempts">Failed Deliveries</a></li>
+            <li><a href="#delays">Delays &amp; Damaged Parcels</a></li>
+            <li><a href="#contact">Contact &amp; Grievances</a></li>
+          </ol>
+        </nav>
+        {%- render 'policy-help' -%}
+      </aside>
+
+      <article class="policy-body">
+        <div class="policy-intro">
+          <p>Every PRM HerboVilla order is packed at our facility in Bhavnagar, Gujarat and shipped through <strong>NimbusPost</strong>, our logistics partner. NimbusPost assigns each parcel to the most suitable courier for your pincode — such as Delhivery, Blue Dart, DTDC, Ekart or Xpressbees — so it reaches you as quickly as possible.</p>
+        </div>
+
+        <section class="policy-section" id="delivery-areas">
+          <span class="policy-num">01</span>
+          <h2>Where We Deliver</h2>
+          <p>We deliver to all serviceable pincodes across India — metros, tier 2 and tier 3 cities, and most rural areas with courier access. Enter your pincode at checkout to confirm delivery to your address.</p>
+          <p>We currently ship within India only.</p>
+        </section>
+
+        <section class="policy-section" id="charges">
+          <span class="policy-num">02</span>
+          <h2>Shipping Charges</h2>
+          <div class="policy-table-wrap">
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th scope="col">Order value</th>
+                  <th scope="col">Shipping</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Order value">₹{{ free_above }} and above</td>
+                  <td data-label="Shipping"><strong>FREE</strong></td>
+                </tr>
+                <tr>
+                  <td data-label="Order value">Below ₹{{ free_above }}</td>
+                  <td data-label="Shipping">A small delivery charge may apply — always shown at checkout before you pay</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>There are no hidden charges: the total you see at checkout, including GST and any shipping or Cash on Delivery charge, is the total you pay.</p>
+        </section>
+
+        <section class="policy-section" id="timelines">
+          <span class="policy-num">03</span>
+          <h2>Dispatch &amp; Delivery Times</h2>
+          <p>Orders are dispatched within <strong>1–2 business days</strong>. After dispatch, delivery usually takes:</p>
+          <div class="policy-table-wrap">
+            <table class="policy-table">
+              <thead>
+                <tr>
+                  <th scope="col">Destination</th>
+                  <th scope="col">Estimated delivery after dispatch</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Destination">Metro cities (Mumbai, Delhi, Bengaluru, Chennai, Kolkata, Hyderabad, Pune)</td>
+                  <td data-label="Estimated delivery after dispatch">3–5 business days</td>
+                </tr>
+                <tr>
+                  <td data-label="Destination">Tier 2 cities</td>
+                  <td data-label="Estimated delivery after dispatch">5–7 business days</td>
+                </tr>
+                <tr>
+                  <td data-label="Destination">Tier 3 towns and rural areas</td>
+                  <td data-label="Estimated delivery after dispatch">7–10 business days</td>
+                </tr>
+                <tr>
+                  <td data-label="Destination">Remote and hilly areas (including the North-East, J&amp;K and islands)</td>
+                  <td data-label="Estimated delivery after dispatch">10–14 business days</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="policy-fine">Business days are Monday to Saturday, excluding public holidays. Orders placed on Sundays or holidays are processed the next business day.</p>
+        </section>
+
+        <section class="policy-section" id="tracking">
+          <span class="policy-num">04</span>
+          <h2>Tracking Your Order</h2>
+          <ol class="policy-steps">
+            <li>
+              <span class="policy-step-num">1</span>
+              <div>
+                <h4>Order confirmation</h4>
+                <p>You receive an email (and SMS, where available) as soon as your order is placed.</p>
+              </div>
+            </li>
+            <li>
+              <span class="policy-step-num">2</span>
+              <div>
+                <h4>Shipment notification</h4>
+                <p>When your order ships, we send the courier name, AWB (tracking) number and tracking link.</p>
+              </div>
+            </li>
+            <li>
+              <span class="policy-step-num">3</span>
+              <div>
+                <h4>Track any time</h4>
+                <p>Use the tracking link in your message, check your order in your account, or enter your AWB number on NimbusPost's tracking page.</p>
+              </div>
+            </li>
+          </ol>
+          <a class="policy-btn policy-btn--inline" href="{{ tracking_url }}" target="_blank" rel="noopener">Track on NimbusPost {% render 'policy-icon', name: 'external' %}</a>
+        </section>
+
+        <section class="policy-section" id="cod">
+          <span class="policy-num">05</span>
+          <h2>Cash on Delivery (COD)</h2>
+          <ul class="policy-list">
+            <li>COD is available on eligible pincodes and order values; availability and any COD charge are shown at checkout.</li>
+            <li>Please keep the exact amount ready. Many of our courier partners also accept UPI at the doorstep.</li>
+            <li>We may call or message you to confirm a COD order before dispatch.</li>
+            <li>Repeatedly refusing COD orders may lead to COD being turned off for your future orders.</li>
+          </ul>
+          <p>Prefer to pay online? UPI, cards, net banking and wallets are processed securely by <strong>Razorpay</strong>.</p>
+        </section>
+
+        <section class="policy-section" id="attempts">
+          <span class="policy-num">06</span>
+          <h2>Failed Delivery Attempts</h2>
+          <p>Our courier partners usually make up to three delivery attempts and may call you before delivering. If a parcel can't be delivered — because the address is incomplete, the phone is unreachable or the delivery is refused — it is returned to us.</p>
+          <p>We will contact you to arrange re-delivery or a refund. Refunds for prepaid orders that come back to us follow our {% render 'policy-link', key: 'returns', label: 'Returns, Refund &amp; Exchange Policy' %}.</p>
+        </section>
+
+        <section class="policy-section" id="delays">
+          <span class="policy-num">07</span>
+          <h2>Delays &amp; Damaged Parcels</h2>
+          <ul class="policy-list">
+            <li>Delivery dates are estimates. Festivals, sale periods, extreme weather, strikes and local restrictions can cause delays; we will keep you informed.</li>
+            <li>If your order arrives after the latest estimated delivery date for reasons within our control, you may refuse it or return it unopened for a full refund.</li>
+            <li>If the outer packaging looks damaged or tampered with, please refuse the parcel or tell the delivery agent, and contact us within 48 hours.</li>
+          </ul>
+          <p>Damaged, wrong or missing items are always replaced or refunded — see our {% render 'policy-link', key: 'returns', label: 'Returns, Refund &amp; Exchange Policy' %}.</p>
+        </section>
+
+        <section class="policy-section" id="contact">
+          <span class="policy-num">08</span>
+          <h2>Contact &amp; Grievance Redressal</h2>
+          {%- render 'policy-grievance',
+            legal_name: legal_name,
+            officer_name: section.settings.grievance_name,
+            officer_designation: section.settings.grievance_designation,
+            officer_email: section.settings.grievance_email,
+            officer_phone: section.settings.grievance_phone
+          -%}
+        </section>
+      </article>
+    </div>
+
+    {%- render 'policy-related', current: 'shipping' -%}
+  </div>
 </div>
-
-<style>
-  .policy-page {
-    --policy-spacing: 2rem;
-  }
-
-  .policy-hero {
-    background: linear-gradient(135deg, var(--color-primary) 0%, #1e4d3a 100%);
-    color: var(--color-white);
-    padding: 3rem 0;
-    text-align: center;
-  }
-
-  .policy-hero__title {
-    font-family: var(--font-heading);
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    margin-bottom: 0.5rem;
-  }
-
-  .policy-hero__subtitle {
-    opacity: 0.9;
-    font-size: 1.0625rem;
-  }
-
-  .policy-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  @media (min-width: 1024px) {
-    .policy-grid {
-      grid-template-columns: 240px 1fr;
-    }
-  }
-
-  .policy-sidebar {
-    position: sticky;
-    top: 120px;
-    align-self: start;
-  }
-
-  @media (max-width: 1023px) {
-    .policy-sidebar {
-      position: static;
-    }
-  }
-
-  .policy-nav {
-    background: var(--color-white);
-    border-radius: var(--radius-lg);
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-
-  .policy-nav h3 {
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .policy-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .policy-nav a {
-    display: block;
-    padding: 0.5rem 0;
-    color: var(--color-text-light);
-    text-decoration: none;
-    font-size: 0.9375rem;
-    transition: color 0.2s;
-  }
-
-  .policy-nav a:hover {
-    color: var(--color-primary);
-  }
-
-  .policy-main {
-    max-width: 800px;
-  }
-
-  .policy-highlight {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    background: linear-gradient(135deg, var(--color-primary) 0%, #1e4d3a 100%);
-    color: var(--color-white);
-    padding: 1.5rem 2rem;
-    border-radius: var(--radius-lg);
-    margin-bottom: 3rem;
-  }
-
-  .policy-highlight__icon {
-    width: 60px;
-    height: 60px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .policy-highlight__icon svg {
-    width: 28px;
-    height: 28px;
-  }
-
-  .policy-highlight h3 {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .policy-highlight p {
-    opacity: 0.9;
-    font-size: 0.9375rem;
-    margin: 0;
-  }
-
-  .policy-section {
-    margin-bottom: 3rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .policy-section:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-  }
-
-  .policy-section h2 {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: var(--color-text);
-    margin-bottom: 1rem;
-  }
-
-  .policy-section p {
-    color: var(--color-text-light);
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
-
-  .policy-section ul,
-  .policy-section ol {
-    color: var(--color-text-light);
-    line-height: 1.8;
-    margin: 1rem 0;
-    padding-left: 1.5rem;
-  }
-
-  .policy-section li {
-    margin-bottom: 0.5rem;
-  }
-
-  .policy-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.5rem 0;
-    background: var(--color-white);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  }
-
-  .policy-table th,
-  .policy-table td {
-    padding: 1rem 1.25rem;
-    text-align: left;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .policy-table th {
-    background: var(--color-background-alt);
-    font-weight: 600;
-    color: var(--color-text);
-    font-size: 0.875rem;
-  }
-
-  .policy-table td {
-    color: var(--color-text-light);
-  }
-
-  .policy-table tr:last-child td {
-    border-bottom: none;
-  }
-
-  .policy-info-box {
-    background: var(--color-background-alt);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-  }
-
-  .policy-info-box--warning {
-    background: #fff8e6;
-    border-left: 4px solid #f0a500;
-  }
-
-  .policy-info-box h4 {
-    font-family: var(--font-heading);
-    font-size: 1rem;
-    color: var(--color-text);
-    margin-bottom: 0.75rem;
-  }
-
-  .policy-info-box ul {
-    margin: 0;
-    padding-left: 1.25rem;
-  }
-
-  .policy-info-box p {
-    margin: 0;
-  }
-
-  .policy-note {
-    font-size: 0.875rem;
-    font-style: italic;
-    color: var(--color-text-light);
-  }
-
-  .policy-steps {
-    list-style: none;
-    padding: 0;
-    margin: 1.5rem 0;
-  }
-
-  .policy-steps li {
-    display: flex;
-    gap: 1rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .policy-steps li:last-child {
-    border-bottom: none;
-  }
-
-  .step-number {
-    width: 32px;
-    height: 32px;
-    background: var(--color-primary);
-    color: var(--color-white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 0.875rem;
-    flex-shrink: 0;
-  }
-
-  .policy-steps h4 {
-    font-size: 1rem;
-    color: var(--color-text);
-    margin-bottom: 0.25rem;
-  }
-
-  .policy-steps p {
-    font-size: 0.9375rem;
-    margin: 0;
-  }
-
-  .policy-contact {
-    background: var(--color-white);
-    padding: 1.5rem;
-    border-radius: var(--radius-md);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  }
-
-  .policy-contact p {
-    margin-bottom: 0.5rem;
-  }
-
-  .policy-contact p:last-child {
-    margin-bottom: 0;
-  }
-</style>
 
 {% schema %}
 {
@@ -478,10 +220,62 @@
   "class": "section-shipping-policy",
   "settings": [
     {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small label above title",
+      "default": "Customer Care"
+    },
+    {
       "type": "textarea",
       "id": "subtitle",
-      "label": "Page Subtitle",
-      "default": "Everything you need to know about our shipping and delivery"
+      "label": "Subtitle",
+      "default": "How we pack, ship and deliver your Ayurvedic care — anywhere in India."
+    },
+    {
+      "type": "text",
+      "id": "last_updated",
+      "label": "Last updated date",
+      "default": "21 October 2026"
+    },
+    {
+      "type": "url",
+      "id": "tracking_url",
+      "label": "Order tracking page",
+      "info": "Defaults to NimbusPost's tracking page."
+    },
+    {
+      "type": "header",
+      "content": "Business & grievance details"
+    },
+    {
+      "type": "text",
+      "id": "legal_name",
+      "label": "Registered business name",
+      "info": "Must match your GST registration.",
+      "default": "PRM & Company"
+    },
+    {
+      "type": "text",
+      "id": "grievance_name",
+      "label": "Grievance Officer name",
+      "info": "Required by the Consumer Protection (E-Commerce) Rules, 2020."
+    },
+    {
+      "type": "text",
+      "id": "grievance_designation",
+      "label": "Grievance Officer designation"
+    },
+    {
+      "type": "text",
+      "id": "grievance_email",
+      "label": "Grievance Officer email",
+      "info": "Leave blank to use the store contact email."
+    },
+    {
+      "type": "text",
+      "id": "grievance_phone",
+      "label": "Grievance Officer phone",
+      "info": "Leave blank to use the store contact phone."
     }
   ],
   "presets": [

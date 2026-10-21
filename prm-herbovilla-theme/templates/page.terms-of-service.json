@@ -3,7 +3,14 @@
     "terms-of-service": {
       "type": "terms-of-service",
       "settings": {
-        "last_updated": "January 2024"
+        "eyebrow": "Legal",
+        "subtitle": "Please read these terms carefully before using our website or placing an order.",
+        "last_updated": "21 October 2026",
+        "legal_name": "PRM & Company",
+        "grievance_name": "",
+        "grievance_designation": "",
+        "grievance_email": "",
+        "grievance_phone": ""
       }
     }
   },

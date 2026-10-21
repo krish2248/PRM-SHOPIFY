@@ -564,25 +564,50 @@
 
         <h1 class="product-title">{{ product.title }}</h1>
 
-        <!-- Rating -->
+        <!-- Rating: stars reflect real review blocks only (was always 5 filled stars, even with 0 reviews) -->
+        {%- liquid
+          assign admin_review_count = 0
+          assign admin_rating_sum = 0
+          for review_block in section.blocks
+            if review_block.type == 'review'
+              assign admin_review_count = admin_review_count | plus: 1
+              assign admin_rating_sum = admin_rating_sum | plus: review_block.settings.rating
+            endif
+          endfor
+          assign admin_rating_avg = 0
+          if admin_review_count > 0
+            assign admin_rating_avg = admin_rating_sum | times: 1.0 | divided_by: admin_review_count | round
+          endif
+        -%}
         <div class="product-rating">
-          <div class="product-rating-stars">
-            {%- for i in (1..5) -%}
-              <svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            {%- endfor -%}
-          </div>
-          <span class="product-rating-count">
-            <a href="#reviews-section" onclick="document.getElementById('reviews-section').scrollIntoView({behavior:'smooth'});return false;">
-              (<span id="total-review-count">0</span> reviews)
-            </a>
-          </span>
+          {%- if admin_review_count > 0 -%}
+            <div class="product-rating-stars">
+              {%- for i in (1..5) -%}
+                {%- if i <= admin_rating_avg -%}
+                  <svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            <span class="product-rating-count">
+              <a href="#reviews-section" onclick="document.getElementById('reviews-section').scrollIntoView({behavior:'smooth'});return false;">
+                (<span id="total-review-count">{{ admin_review_count }}</span> reviews)
+              </a>
+            </span>
+          {%- else -%}
+            <span class="product-rating-count">
+              <a href="#reviews-section" onclick="document.getElementById('reviews-section').scrollIntoView({behavior:'smooth'});return false;">No reviews yet</a>
+              <span id="total-review-count" hidden>0</span>
+            </span>
+          {%- endif -%}
         </div>
 
         <!-- Price -->
         <div class="product-price-wrapper">
-          <span class="product-price">{{ product.price | money }}</span>
+          <span class="product-price">{% render 'inr-price', cents: product.price %}</span>
           {%- if product.compare_at_price > product.price -%}
-            <span class="product-compare-price">{{ product.compare_at_price | money }}</span>
+            <span class="product-compare-price">{% render 'inr-price', cents: product.compare_at_price %}</span>
             {%- assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
             <span class="product-save-badge">Save {{ savings }}%</span>
           {%- endif -%}
@@ -670,14 +695,14 @@
             <div class="combo-packs">
               <span class="combo-packs__label">Choose Pack Size:</span>
               <div class="combo-packs__grid">
-                <div class="combo-pack-card selected" data-combo-qty="1" data-display-price="{{ product.price | money }}" data-display-mrp="{%- if product.compare_at_price > product.price -%}{{ product.compare_at_price | money }}{%- endif -%}" data-display-discount="{%- if product.compare_at_price > product.price -%}{%- assign cb_save = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}{{ cb_save }}%{%- endif -%}" onclick="selectCombo(this)">
+                <div class="combo-pack-card selected" data-combo-qty="1" data-display-price="{% render 'inr-price', cents: product.price %}" data-display-mrp="{%- if product.compare_at_price > product.price -%}{% render 'inr-price', cents: product.compare_at_price %}{%- endif -%}" data-display-discount="{%- if product.compare_at_price > product.price -%}{%- assign cb_save = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}{{ cb_save }}%{%- endif -%}" onclick="selectCombo(this)">
                   <div class="combo-pack-card__radio"></div>
                   <div class="combo-pack-card__info">
                     <div class="combo-pack-card__title">Single</div>
                     <div class="combo-pack-card__pricing">
-                      <span class="combo-pack-card__price">{{ product.price | money }}</span>
+                      <span class="combo-pack-card__price">{% render 'inr-price', cents: product.price %}</span>
                       {%- if product.compare_at_price > product.price -%}
-                        <span class="combo-pack-card__mrp">M.R.P: <s>{{ product.compare_at_price | money }}</s></span>
+                        <span class="combo-pack-card__mrp">M.R.P: <s>{% render 'inr-price', cents: product.compare_at_price %}</s></span>
                         <span class="combo-pack-card__discount">({{ cb_save }}% off)</span>
                       {%- endif -%}
                     </div>
@@ -713,15 +738,15 @@
                       {%- assign c_diff = c_mrp_cents | minus: c_price_cents | times: 100 -%}
                       {%- assign c_discount = c_diff | divided_by: c_mrp_cents -%}
                     {%- endif -%}
-                    <div class="combo-pack-card" data-combo-qty="{{ c_qty }}" data-display-price="{{ c_price_cents | money }}" data-display-mrp="{%- if c_discount > 0 -%}{{ c_mrp_cents | money }}{%- endif -%}" data-display-discount="{%- if c_discount > 0 -%}{{ c_discount }}%{%- endif -%}" {{ block.shopify_attributes }} onclick="selectCombo(this)">
+                    <div class="combo-pack-card" data-combo-qty="{{ c_qty }}" data-display-price="{% render 'inr-price', cents: c_price_cents %}" data-display-mrp="{%- if c_discount > 0 -%}{% render 'inr-price', cents: c_mrp_cents %}{%- endif -%}" data-display-discount="{%- if c_discount > 0 -%}{{ c_discount }}%{%- endif -%}" {{ block.shopify_attributes }} onclick="selectCombo(this)">
                       {%- if block.settings.best_value -%}<span class="combo-pack-card__best">Best Value</span>{%- endif -%}
                       <div class="combo-pack-card__radio"></div>
                       <div class="combo-pack-card__info">
                         <div class="combo-pack-card__title">{{ block.settings.label | default: 'Combo Pack' }}</div>
                         <div class="combo-pack-card__pricing">
-                          <span class="combo-pack-card__price">{{ c_price_cents | money }}</span>
+                          <span class="combo-pack-card__price">{% render 'inr-price', cents: c_price_cents %}</span>
                           {%- if c_discount > 0 -%}
-                            <span class="combo-pack-card__mrp">M.R.P: <s>{{ c_mrp_cents | money }}</s></span>
+                            <span class="combo-pack-card__mrp">M.R.P: <s>{% render 'inr-price', cents: c_mrp_cents %}</s></span>
                             <span class="combo-pack-card__discount">({{ c_discount }}% off)</span>
                           {%- endif -%}
                         </div>
@@ -1043,9 +1068,9 @@
                     {%- endif -%}
                     <h3 class="rec-card__title"><a href="{{ p.url }}">{{ p.title }}</a></h3>
                     <div class="rec-card__price">
-                      <span class="rec-card__price-now">{{ p_variant.price | money }}</span>
+                      <span class="rec-card__price-now">{% render 'inr-price', cents: p_variant.price %}</span>
                       {%- if p_on_sale -%}
-                        <span class="rec-card__price-was">{{ p_variant.compare_at_price | money }}</span>
+                        <span class="rec-card__price-was">{% render 'inr-price', cents: p_variant.compare_at_price %}</span>
                       {%- endif -%}
                     </div>
                     {%- if p.available -%}

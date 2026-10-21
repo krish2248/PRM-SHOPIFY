@@ -3,7 +3,14 @@
     "refund-policy": {
       "type": "refund-policy",
       "settings": {
-        "subtitle": "Our commitment to your satisfaction"
+        "eyebrow": "Customer Care",
+        "subtitle": "Received something damaged, wrong or not quite right? Here's exactly how we'll make it right.",
+        "last_updated": "21 October 2026",
+        "legal_name": "PRM & Company",
+        "grievance_name": "",
+        "grievance_designation": "",
+        "grievance_email": "",
+        "grievance_phone": ""
       }
     }
   },

@@ -1,0 +1,7 @@
+{%- comment -%}
+  Inline link to another policy page; plain text if that page doesn't exist yet.
+  Usage: {% render 'policy-link', key: 'shipping', label: 'Shipping Policy' %}
+{%- endcomment -%}
+{%- capture policy_link_url -%}{%- render 'policy-url', key: key -%}{%- endcapture -%}
+{%- assign policy_link_url = policy_link_url | strip -%}
+{%- if policy_link_url != blank -%}<a href="{{ policy_link_url }}">{{ label }}</a>{%- else -%}{{ label }}{%- endif -%}

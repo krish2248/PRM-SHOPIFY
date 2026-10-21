@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "glossary": {
+      "type": "herbs-uses",
+      "blocks": {
+        "cat-1": {
+          "type": "category",
+          "settings": {
+            "icon": "immunity",
+            "title": "Immunity & Vitality",
+            "herbs": "Ashwagandha\nTulsi (Holy Basil)\nGiloy (Guduchi)\nAmla\nTriphala\nShilajit\nGokhru\nSafed Musli\nKaunch Beej\nVidari Kand\nYashtimadhu (Mulethi)\nChyawanprash herbs\nSuvarna Bhasma\nVidanga\nKalmegha\nChirayata\nSharavari\nPunarnava\nPippali\nSunthi (Dry Ginger)"
+          }
+        },
+        "cat-2": {
+          "type": "category",
+          "settings": {
+            "icon": "digestive",
+            "title": "Digestive & Liver",
+            "herbs": "Haritaki\nBaheda (Bibhitaki)\nAmla\nTriphala\nKutki\nBhumi Amla\nKalmegha\nBhringraj\nPunarnava\nPippali\nAjwain\nJeera\nSaunf (Fennel)\nSanchal (Black Salt)\nSenna\nSonamukhi\nIsabgol\nHing\nChitrak\nSuran\nBilva\nKutaja\nMusta\nDadim\nAnar Chal\nTrikatu\nTrivrut\nShuddha Nepala\nMakoy\nKasmard\nMarorphali\nAritha (Reetha)\nLimbodi\nKalmegha\nArogyavardhini Ras\nChirayata\nSharapunkha\nNimba"
+          }
+        },
+        "cat-3": {
+          "type": "category",
+          "settings": {
+            "icon": "respiratory",
+            "title": "Respiratory & Cold",
+            "herbs": "Tulsi\nVasaka (Adulsa)\nYashtimadhu (Mulethi)\nPippali\nSunthi (Dry Ginger)\nKantkari\nBharangi\nKalmegh\nArdusi\nJethimadh (Mulethi)\nBhimsenkapoor\nNilgiri (Eucalyptus)\nTulsi Oil\nAtivish Mool\nHoney\nHaldi\nTrikatu\nDalchini (Cinnamon)\nLaung (Clove)\nTejpatra\nMarich (Black Pepper)\nPudina\nKarpoor\nAjwain\nHing\nYashtimadhu\nKantakari Churna\nSitopaladi"
+          }
+        },
+        "cat-4": {
+          "type": "category",
+          "settings": {
+            "icon": "joint",
+            "title": "Joint & Pain Relief",
+            "herbs": "Gandhpura Oil (Wintergreen)\nMahanarayan Oil\nMahamash Oil\nShallaki (Boswellia)\nRasna\nNirgundi\nShuddha Guggul\nHadsakal\nDaruharidra\nTil Oil\nKarpoor\nSunthi\nPudina\nMethi (Fenugreek)\nArjuna\nAshwagandha\nHaridra (Turmeric)\nDashmool\nGuggul\nErand Tail\nJyotishmati\nNirgundi Oil\nPrasarani\nKupilu\nVisha Tinduka\nRakt Chandan\nJatamansi\nGandhaka Rasayan"
+          }
+        },
+        "cat-5": {
+          "type": "category",
+          "settings": {
+            "icon": "skin",
+            "title": "Skin & Hair Care",
+            "herbs": "Neem\nManjishtha\nKalmegha\nChandan (Sandalwood)\nHaldi\nKesar (Saffron)\nWheat Germ Oil\nJojoba Oil\nCoconut Oil\nKokum Butter\nSarjaras\nRose Water\nShikakai\nSitafal Oil\nBhringraj\nAloe Vera\nKaranj\nBerry Berry\nAmla\nBrahmi\nBhangra\nReetha (Aritha)\nNagarmotha\nAnantamool\nKhadir\nRakta Chandan\nYashtimadhu\nDaruharidra\nTil Oil\nSarshap (Mustard Oil)\nGulab (Rose)\nMulethi\nJatamansi\nTriphala\nGairik\nChandanadi Tail\nKumari (Aloe Vera)"
+          }
+        },
+        "cat-6": {
+          "type": "category",
+          "settings": {
+            "icon": "women",
+            "title": "Women's Wellness",
+            "herbs": "Shatavari\nAshok\nLodhra\nGulabphool (Rose)\nDashmool\nJatamansi\nKumari\nBrahmi\nShankhpushpi\nChandan\nAshwagandha\nMulethi\nYashtimadhu\nGokhru\nAmla\nHaritaki\nNagkesar\nMochras\nUdumbar\nDadim\nManjishtha\nPunarnava\nTriphala\nSharavari\nVacha\nGhrita\nAnupana\nChandana"
+          }
+        }
+      },
+      "block_order": [
+        "cat-1",
+        "cat-2",
+        "cat-3",
+        "cat-4",
+        "cat-5",
+        "cat-6"
+      ],
+      "settings": {
+        "label": "Herb Glossary",
+        "title": "The HerboVilla Herb Glossary",
+        "text": "The classical Ayurvedic herbs behind our formulations, grouped by the wellness concern they are traditionally used for.",
+        "layout": "full",
+        "compact_mobile": false
+      }
+    }
+  },
+  "order": [
+    "glossary"
+  ]
+}

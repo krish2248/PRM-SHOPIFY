@@ -128,7 +128,11 @@
       <!-- Price & CTA -->
       <div class="vedacold-purchase">
         <div class="vedacold-price">
-          <span class="price-amount">&#8377;180</span>
+          {%- comment -%} Live product price (was hardcoded ₹180 while the product sold at ₹220) {%- endcomment -%}
+          {%- assign vedacold_product = all_products['vedacold-cv-675-ayurvedic-cold-cough-relief-tablets-22-herbal-immunity-formula-with-tulsi-trikatu-haldi-pushkarmool-supports-relief-from-nasal-congestion-sore-throat-fever-respiratory-discomfort-30-tablets-pack'] -%}
+          {%- if vedacold_product.price != blank -%}
+            <span class="price-amount">{% render 'inr-price', cents: vedacold_product.price %}</span>
+          {%- endif -%}
           <span class="price-pack">Pack of 30 Tablets (2x15)</span>
         </div>
 

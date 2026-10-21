@@ -1,0 +1,18 @@
+{%- comment -%}
+  Short display title for product cards. Product titles carry a long SEO tail
+  ("Aloy Care Herbal Soap 🌿 | Aloe Vera, Tea Tree & ..."); cards show only the
+  name: cut at the first " | ", " – " or " - ", drop decorative emoji and a
+  leading "PRM " (the brand is shown separately). The full title stays on the
+  product page and in search results.
+
+  Usage: {% render 'product-short-title', title: product.title %}
+{%- endcomment -%}
+{%- liquid
+  assign short = title | split: '|' | first | split: ' – ' | first | split: ' - ' | first
+  assign short = short | remove: '🌸' | remove: '🌿' | remove: '🍯' | remove: '💧' | remove: '💪' | remove: '🧴' | strip
+  assign prefix = short | slice: 0, 4
+  if prefix == 'PRM '
+    assign short = short | remove_first: 'PRM '
+  endif
+  echo short
+-%}

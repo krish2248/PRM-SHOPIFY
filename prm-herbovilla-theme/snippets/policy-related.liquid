@@ -1,0 +1,27 @@
+{%- comment -%}
+  "Related policies" cards under each policy page. Only shows pages that exist.
+  Param: current - the key of the page being viewed ('terms' | 'returns' | 'shipping')
+{%- endcomment -%}
+{%- assign related_keys = 'terms,returns,shipping,privacy' | split: ',' -%}
+{%- capture related_cards -%}
+  {%- for key in related_keys -%}
+    {%- if key == current -%}{%- continue -%}{%- endif -%}
+    {%- capture related_url -%}{%- render 'policy-url', key: key -%}{%- endcapture -%}
+    {%- assign related_url = related_url | strip -%}
+    {%- if related_url != blank -%}
+      {%- case key -%}
+        {%- when 'terms' -%}{%- assign related_label = 'Terms & Conditions' -%}
+        {%- when 'returns' -%}{%- assign related_label = 'Returns, Refund & Exchange' -%}
+        {%- when 'shipping' -%}{%- assign related_label = 'Shipping Policy' -%}
+        {%- when 'privacy' -%}{%- assign related_label = 'Privacy Policy' -%}
+      {%- endcase -%}
+      <a class="policy-related__card" href="{{ related_url }}">{{ related_label }} {% render 'policy-icon', name: 'arrow-right' %}</a>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if related_cards != blank -%}
+  <div class="policy-related">
+    <p class="policy-label">Related policies</p>
+    <div class="policy-related__grid">{{ related_cards }}</div>
+  </div>
+{%- endif -%}

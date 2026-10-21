@@ -1,203 +1,318 @@
 {%- comment -%}
-  Terms of Service Page Template
+  Terms & Conditions page (template: page.terms-of-service).
+  Shared styling lives in snippets/policy-page-assets.liquid.
 {%- endcomment -%}
+{%- render 'policy-page-assets' -%}
+{%- liquid
+  assign legal_name = section.settings.legal_name | default: 'PRM & Company'
+  assign address = settings.contact_address | default: 'Plot No.343, 1-A, Chitra Gujarat Industrial Development Corporation, Bhavnagar, Gujarat 364004'
+-%}
 
-<div class="policy-page">
-  <section class="policy-hero">
-    <div class="container">
-      <h1 class="policy-hero__title">{{ page.title | default: 'Terms of Service' }}</h1>
-      <p class="policy-hero__subtitle">Last updated: {{ section.settings.last_updated | default: 'January 2024' }}</p>
-    </div>
-  </section>
+<div class="policy-page" data-section-id="{{ section.id }}">
+  <div class="container">
+    <header class="policy-header">
+      <span class="policy-eyebrow">{{ section.settings.eyebrow | default: 'Legal' }}</span>
+      <h1 class="policy-title">{{ page.title | default: 'Terms & Conditions' }}</h1>
+      <p class="policy-subtitle">{{ section.settings.subtitle }}</p>
+      <div class="policy-meta">
+        <span class="policy-chip">{% render 'policy-icon', name: 'calendar' %}Last updated: {{ section.settings.last_updated }}</span>
+        <span class="policy-chip">{% render 'policy-icon', name: 'file' %}Applies to orders on {{ shop.domain }}</span>
+      </div>
+    </header>
 
-  <section class="policy-content section">
-    <div class="container">
-      <div class="policy-grid">
-        <aside class="policy-sidebar">
-          <nav class="policy-nav">
-            <h3>Contents</h3>
-            <ul>
-              <li><a href="#acceptance">Acceptance of Terms</a></li>
-              <li><a href="#products">Products & Services</a></li>
-              <li><a href="#orders">Orders & Payment</a></li>
-              <li><a href="#shipping">Shipping & Delivery</a></li>
-              <li><a href="#returns">Returns & Refunds</a></li>
-              <li><a href="#accounts">User Accounts</a></li>
-              <li><a href="#intellectual">Intellectual Property</a></li>
-              <li><a href="#limitation">Limitation of Liability</a></li>
-            </ul>
-          </nav>
-        </aside>
-
-        <div class="policy-main">
-          <div class="policy-intro">
-            <p>Welcome to PRM HerboVilla. These Terms of Service ("Terms") govern your use of our website and purchase of products. By accessing our website or placing an order, you agree to be bound by these Terms.</p>
-          </div>
-
-          <div class="policy-section" id="acceptance">
-            <h2>1. Acceptance of Terms</h2>
-            <p>By using this website, you confirm that you:</p>
-            <ul>
-              <li>Are at least 18 years of age</li>
-              <li>Have the legal capacity to enter into binding contracts</li>
-              <li>Will use this website only for lawful purposes</li>
-              <li>Agree to comply with all applicable laws and regulations</li>
-            </ul>
-            <p>If you do not agree with these Terms, please do not use our website or services.</p>
-          </div>
-
-          <div class="policy-section" id="products">
-            <h2>2. Products & Services</h2>
-            
-            <h3>Product Information</h3>
-            <p>We make every effort to display products accurately. However:</p>
-            <ul>
-              <li>Colors may vary slightly due to monitor settings</li>
-              <li>Product packaging may differ from images shown</li>
-              <li>We reserve the right to modify product formulations</li>
-            </ul>
-
-            <h3>Medical Disclaimer</h3>
-            <div class="policy-info-box policy-info-box--warning">
-              <p>Our products are Ayurvedic supplements and are not intended to diagnose, treat, cure, or prevent any disease. The information provided is for educational purposes only. Please consult a healthcare professional before starting any new supplement, especially if you are pregnant, nursing, or taking medications.</p>
-            </div>
-
-            <h3>Product Availability</h3>
-            <p>All products are subject to availability. We reserve the right to limit quantities or discontinue products without notice.</p>
-          </div>
-
-          <div class="policy-section" id="orders">
-            <h2>3. Orders & Payment</h2>
-            
-            <h3>Order Acceptance</h3>
-            <p>An order is confirmed only after:</p>
-            <ul>
-              <li>You receive an order confirmation email</li>
-              <li>Payment has been successfully processed</li>
-              <li>Products are available for shipment</li>
-            </ul>
-            <p>We reserve the right to refuse or cancel any order for reasons including suspected fraud, pricing errors, or product unavailability.</p>
-
-            <h3>Pricing</h3>
-            <ul>
-              <li>All prices are listed in Indian Rupees (₹)</li>
-              <li>Prices include applicable taxes unless stated otherwise</li>
-              <li>We reserve the right to change prices without notice</li>
-              <li>Promotional prices are valid for limited periods only</li>
-            </ul>
-
-            <h3>Payment Methods</h3>
-            <p>We accept credit/debit cards, UPI, net banking, wallets, EMI and Cash on Delivery. All online payments are processed through <strong>Razorpay</strong>, a PCI-DSS Level 1 certified payment gateway, ensuring bank-grade security for every transaction.</p>
-          </div>
-
-          <div class="policy-section" id="shipping">
-            <h2>4. Shipping & Delivery</h2>
-            <ul>
-              <li>We ship across India to serviceable pin codes via <strong>Nimbus Post</strong> and its courier network (Delhivery, Bluedart, DTDC, Ekart, XpressBees)</li>
-              <li>Free shipping on orders above ₹400</li>
-              <li>Delivery times are estimates and not guaranteed</li>
-              <li>Risk of loss transfers to you upon delivery</li>
-            </ul>
-            <p>For detailed shipping information, please refer to our <a href="/pages/shipping-policy">Shipping Policy</a>.</p>
-          </div>
-
-          <div class="policy-section" id="returns">
-            <h2>5. Returns & Refunds</h2>
-            
-            <h3>Return Policy</h3>
-            <ul>
-              <li>Returns accepted within 7 days of delivery</li>
-              <li>Products must be unopened and in original packaging</li>
-              <li>Damaged or defective products can be reported within 48 hours</li>
-            </ul>
-
-            <h3>Refund Process</h3>
-            <ul>
-              <li>Refunds are processed within 7-10 business days after receiving returned items</li>
-              <li>Refunds will be credited to the original payment method</li>
-              <li>Shipping charges are non-refundable unless the return is due to our error</li>
-            </ul>
-
-            <p>For detailed information, please refer to our <a href="/pages/refund-policy">Refund Policy</a>.</p>
-          </div>
-
-          <div class="policy-section" id="accounts">
-            <h2>6. User Accounts</h2>
-            <p>When creating an account, you agree to:</p>
-            <ul>
-              <li>Provide accurate and complete information</li>
-              <li>Maintain the security of your account credentials</li>
-              <li>Notify us immediately of any unauthorized access</li>
-              <li>Accept responsibility for all activities under your account</li>
-            </ul>
-            <p>We reserve the right to suspend or terminate accounts that violate these Terms.</p>
-          </div>
-
-          <div class="policy-section" id="intellectual">
-            <h2>7. Intellectual Property</h2>
-            <p>All content on this website, including but not limited to:</p>
-            <ul>
-              <li>Text, graphics, logos, and images</li>
-              <li>Product descriptions and formulations</li>
-              <li>Website design and layout</li>
-              <li>Software and code</li>
-            </ul>
-            <p>is the property of PRM HerboVilla or its licensors and is protected by intellectual property laws. You may not reproduce, distribute, or create derivative works without our written permission.</p>
-          </div>
-
-          <div class="policy-section" id="limitation">
-            <h2>8. Limitation of Liability</h2>
-            <p>To the fullest extent permitted by law:</p>
-            <ul>
-              <li>We are not liable for any indirect, incidental, or consequential damages</li>
-              <li>Our total liability shall not exceed the amount you paid for the product</li>
-              <li>We are not responsible for delays or failures due to circumstances beyond our control</li>
-            </ul>
-          </div>
-
-          <div class="policy-section">
-            <h2>9. Governing Law</h2>
-            <p>These Terms are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts in Bhavnagar, Gujarat.</p>
-          </div>
-
-          <div class="policy-section">
-            <h2>10. Changes to Terms</h2>
-            <p>We may update these Terms at any time. Continued use of our website after changes constitutes acceptance of the new Terms.</p>
-          </div>
-
-          <div class="policy-section">
-            <h2>11. Contact Information</h2>
-            <p>For questions about these Terms, please contact us:</p>
-            <div class="policy-contact">
-              <p><strong>PRM HerboVilla</strong></p>
-              <p>Plot No.343, 1-A, Chitra Gujarat Industrial Development Corporation</p>
-              <p>Bhavnagar, Gujarat 364004</p>
-              <p><strong>Email:</strong> contact@prmpharmaceuticals.com</p>
-              <p><strong>Phone:</strong> +91-9227928075</p>
-            </div>
-          </div>
-        </div>
+    <div class="policy-highlights">
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'leaf' %}</span>
+        <h3>Authentic Ayurveda</h3>
+        <p>Formulations made in licensed, GMP-certified facilities.</p>
+      </div>
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'lock' %}</span>
+        <h3>Secure Payments</h3>
+        <p>UPI, cards, net banking &amp; wallets via Razorpay, plus Cash on Delivery.</p>
+      </div>
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'truck' %}</span>
+        <h3>Pan-India Delivery</h3>
+        <p>Shipped from Bhavnagar through NimbusPost's courier network.</p>
+      </div>
+      <div class="policy-highlight">
+        <span class="policy-icon">{% render 'policy-icon', name: 'refresh' %}</span>
+        <h3>Easy Returns</h3>
+        <p>Damaged, wrong or expired items are replaced or refunded.</p>
       </div>
     </div>
-  </section>
+
+    <div class="policy-layout">
+      <aside class="policy-aside">
+        <nav class="policy-toc" aria-label="On this page">
+          <p class="policy-label">On this page</p>
+          <ol>
+            <li><a href="#about">About These Terms</a></li>
+            <li><a href="#eligibility">Eligibility &amp; Accounts</a></li>
+            <li><a href="#health">Health &amp; Medical Disclaimer</a></li>
+            <li><a href="#products">Products, Pricing &amp; Offers</a></li>
+            <li><a href="#orders">Orders &amp; Cancellations</a></li>
+            <li><a href="#payments">Payments</a></li>
+            <li><a href="#shipping">Shipping &amp; Delivery</a></li>
+            <li><a href="#returns">Returns, Refunds &amp; Exchanges</a></li>
+            <li><a href="#reviews">Reviews &amp; Your Content</a></li>
+            <li><a href="#acceptable-use">Acceptable Use</a></li>
+            <li><a href="#ip">Intellectual Property</a></li>
+            <li><a href="#third-party">Third-Party Services</a></li>
+            <li><a href="#liability">Liability &amp; Indemnity</a></li>
+            <li><a href="#privacy">Privacy &amp; Communications</a></li>
+            <li><a href="#law">Governing Law</a></li>
+            <li><a href="#changes">Changes to These Terms</a></li>
+            <li><a href="#contact">Contact &amp; Grievances</a></li>
+          </ol>
+        </nav>
+        {%- render 'policy-help' -%}
+      </aside>
+
+      <article class="policy-body">
+        <div class="policy-intro">
+          <p>Welcome to PRM HerboVilla. This website, <strong>{{ shop.domain }}</strong> (the "Website"), is owned and operated by <strong>{{ legal_name }}</strong> ("PRM HerboVilla", "we", "us" or "our"), with its principal place of business at {{ address }}.</p>
+          <p>By browsing the Website or placing an order, you agree to these Terms &amp; Conditions together with our {% render 'policy-link', key: 'privacy', label: 'Privacy Policy' %}, {% render 'policy-link', key: 'shipping', label: 'Shipping Policy' %} and {% render 'policy-link', key: 'returns', label: 'Returns, Refund &amp; Exchange Policy' %} (together, the "Terms"). If you do not agree, please do not use the Website.</p>
+        </div>
+
+        <section class="policy-section" id="about">
+          <span class="policy-num">01</span>
+          <h2>About These Terms</h2>
+          <p>These Terms form a binding agreement between you and {{ legal_name }}. They are an electronic record under the Information Technology Act, 2000 and the rules made under it, and do not require any physical or digital signature.</p>
+          <p>PRM HerboVilla is the Ayurvedic and herbal wellness division of PRM Pharmaceuticals. Products bought from us on this Website are covered by these Terms; products bought on Amazon, Flipkart, Tata 1mg, Meesho or from other sellers are covered by those platforms' terms.</p>
+        </section>
+
+        <section class="policy-section" id="eligibility">
+          <span class="policy-num">02</span>
+          <h2>Eligibility &amp; Your Account</h2>
+          <ul class="policy-list">
+            <li>You must be at least 18 years old and competent to contract under the Indian Contract Act, 1872. Minors may use the Website only under the supervision of a parent or legal guardian.</li>
+            <li>Please give accurate and complete details — name, delivery address, pincode, phone number and email — so that we can deliver your order.</li>
+            <li>If you create an account, keep your login details confidential. You are responsible for all activity under your account.</li>
+            <li>We may suspend or close accounts involved in fraud, misuse of offers or Cash on Delivery, abusive behaviour, or any breach of these Terms.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section" id="health">
+          <span class="policy-num">03</span>
+          <h2>Health &amp; Medical Disclaimer</h2>
+          <div class="policy-callout policy-callout--warning">
+            {% render 'policy-icon', name: 'alert' %}
+            <div>
+              <h4>Not a substitute for medical advice</h4>
+              <p>Information on this Website — including product descriptions, blog articles, herb guides and customer reviews — is for general awareness only. It is not medical advice, diagnosis or treatment.</p>
+            </div>
+          </div>
+          <ul class="policy-list">
+            <li>Our products are Ayurvedic proprietary medicines and herbal wellness products, manufactured under the applicable licences (under the Drugs and Cosmetics Act, 1940 and/or FSSAI, as applicable). Composition, dosage, precautions, batch number and expiry are printed on every pack.</li>
+            <li>Always read the label and use the product as directed. Do not exceed the recommended dose.</li>
+            <li>Consult a registered medical practitioner or a qualified Ayurvedic physician (BAMS / MD-Ayurveda) before use if you are pregnant or breastfeeding, are giving the product to a child, are elderly, have a chronic condition (such as diabetes, high blood pressure, or heart, kidney or liver disease), are taking other medicines, or have a planned surgery.</li>
+            <li>Check the ingredient list for anything you are allergic to. Stop using the product and seek medical advice if you notice any unusual reaction.</li>
+            <li>Ayurvedic products usually work gradually, and results vary from person to person depending on constitution (prakriti), diet, lifestyle and the condition involved. We do not guarantee any specific result.</li>
+            <li>Reviews and testimonials describe individual experiences and are not a promise of results.</li>
+            <li>Do not use our products as a replacement for prescribed medicines or emergency care, and do not stop any prescribed treatment without speaking to your doctor.</li>
+            <li>Keep all products out of the reach of children and store them in a cool, dry place away from direct sunlight.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section" id="products">
+          <span class="policy-num">04</span>
+          <h2>Products, Pricing &amp; Offers</h2>
+          <ul class="policy-list">
+            <li>We try to show every product, ingredient and pack accurately. Packaging, colour or label design may vary between batches; the information printed on the pack you receive prevails.</li>
+            <li>All prices are in Indian Rupees (₹) and are inclusive of GST unless stated otherwise. The price that applies is the one shown when you place your order.</li>
+            <li>Prices, offers and availability can change without notice. If a product is listed at an incorrect price or with incorrect details because of a typing or technical error, we may cancel orders for it and refund the full amount you paid.</li>
+            <li>Coupons, combo packs and promotional offers are subject to their stated conditions, cannot be combined unless stated, have no cash value and may be withdrawn at any time.</li>
+            <li>Our products are sold for personal use. We may limit quantities and decline orders that appear to be for resale.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section" id="orders">
+          <span class="policy-num">05</span>
+          <h2>Orders &amp; Cancellations</h2>
+          <p>When you place an order, you make an offer to buy. The confirmation email or SMS you receive acknowledges your order; the sale is concluded when the order is dispatched.</p>
+          <p>We may decline or cancel an order — before or after confirmation — if a product is out of stock, a price or listing is incorrect, your pincode is not serviceable, the address is incomplete, payment cannot be verified, or we suspect fraud. If we cancel, any amount you paid is refunded in full to your original payment method.</p>
+          <p>You can cancel your order free of charge at any time before it is dispatched. We do not charge cancellation fees. The full cancellation process is explained in our {% render 'policy-link', key: 'returns', label: 'Returns, Refund &amp; Exchange Policy' %}.</p>
+        </section>
+
+        <section class="policy-section" id="payments">
+          <span class="policy-num">06</span>
+          <h2>Payments</h2>
+          <ul class="policy-list">
+            <li>Online payments are processed securely by <strong>Razorpay</strong>, a PCI-DSS compliant payment gateway. You can pay by UPI, debit or credit card, net banking or wallet — and EMI where your bank offers it — as shown at checkout.</li>
+            <li>We never see or store your card number, CVV, UPI PIN or banking passwords; these are handled by Razorpay and your bank.</li>
+            <li><strong>Cash on Delivery (COD)</strong> is available on eligible pincodes and order values, as shown at checkout. We may call or message you to confirm a COD order, and may disable COD for accounts with repeatedly refused deliveries.</li>
+            <li>If money is debited but your order is not confirmed, the amount is normally reversed automatically by your bank or Razorpay within 5–7 business days. If it is not, contact us with the transaction reference and we will help.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section" id="shipping">
+          <span class="policy-num">07</span>
+          <h2>Shipping &amp; Delivery</h2>
+          <ul class="policy-list">
+            <li>We ship across India from Bhavnagar, Gujarat through <strong>NimbusPost</strong>, our logistics partner, which assigns each order to a courier partner (such as Delhivery, Blue Dart, DTDC, Ekart or Xpressbees) depending on your pincode.</li>
+            <li>Delivery timelines shown on the Website or at checkout are estimates. Once your order is dispatched, tracking details are sent to you by SMS and email.</li>
+            <li>Please check the parcel at delivery and refuse it if the outer packaging looks opened, tampered with or damaged.</li>
+            <li>Ownership and risk in the products pass to you on delivery.</li>
+          </ul>
+          <p>Charges, timelines, tracking and Cash on Delivery are explained in our {% render 'policy-link', key: 'shipping', label: 'Shipping Policy' %}.</p>
+        </section>
+
+        <section class="policy-section" id="returns">
+          <span class="policy-num">08</span>
+          <h2>Returns, Refunds &amp; Exchanges</h2>
+          <ul class="policy-list">
+            <li>Report damaged, leaking, wrong, missing or expired items within <strong>48 hours</strong> of delivery for a free replacement or full refund.</li>
+            <li>Unopened products with the seal intact can be returned within <strong>7 days</strong> of delivery.</li>
+            <li>For safety and hygiene reasons, opened or used products cannot be returned unless they are defective.</li>
+            <li>Refunds for online payments go back to your original payment method through Razorpay. Refunds for COD orders are made to your UPI ID or bank account.</li>
+          </ul>
+          <p>Eligibility, timelines and the step-by-step process are set out in our {% render 'policy-link', key: 'returns', label: 'Returns, Refund &amp; Exchange Policy' %}.</p>
+        </section>
+
+        <section class="policy-section" id="reviews">
+          <span class="policy-num">09</span>
+          <h2>Reviews &amp; Your Content</h2>
+          <p>When you post a review, rating, photo or comment, you confirm that it is genuine and based on your own experience. You give us a non-exclusive, royalty-free licence to display it on the Website and in our marketing, with your name or initials.</p>
+          <p>Please do not post content that is false, misleading, abusive, obscene, defamatory or infringes anyone's rights, or that advises others to stop prescribed treatment. We may moderate, edit for length or remove such content.</p>
+        </section>
+
+        <section class="policy-section" id="acceptable-use">
+          <span class="policy-num">10</span>
+          <h2>Acceptable Use</h2>
+          <p>Use the Website only for lawful purposes. You must not:</p>
+          <ul class="policy-list policy-list--no">
+            <li>attempt to hack, overload or disrupt the Website, or introduce malware;</li>
+            <li>copy or scrape content, prices or product data by automated means;</li>
+            <li>place fake or fraudulent orders, misuse coupons, or impersonate another person;</li>
+            <li>use the Website in any way that breaks Indian law or these Terms.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section" id="ip">
+          <span class="policy-num">11</span>
+          <h2>Intellectual Property</h2>
+          <p>The names PRM and HerboVilla, our product names, logos, label artwork, photographs, text, graphics and the design of this Website belong to {{ legal_name }} or its licensors and are protected by Indian intellectual property laws. You may not copy, reproduce, modify or use them for commercial purposes without our written permission.</p>
+        </section>
+
+        <section class="policy-section" id="third-party">
+          <span class="policy-num">12</span>
+          <h2>Third-Party Services &amp; Links</h2>
+          <p>Payments are processed by Razorpay, and deliveries are handled by NimbusPost and its courier partners. Their services are also subject to their own terms. Links to marketplaces and other websites are provided for convenience; we are not responsible for their content or policies.</p>
+        </section>
+
+        <section class="policy-section" id="liability">
+          <span class="policy-num">13</span>
+          <h2>Limitation of Liability &amp; Indemnity</h2>
+          <ul class="policy-list">
+            <li>To the extent permitted by law, our total liability for any claim relating to an order is limited to the amount you paid for that order.</li>
+            <li>We are not liable for indirect or consequential losses, or for harm caused by using a product contrary to its label, dosage directions or medical advice, or despite a known allergy to a declared ingredient.</li>
+            <li>We are not responsible for delays or failures caused by events beyond our reasonable control, such as natural disasters, epidemics, strikes, government orders or courier network disruptions.</li>
+            <li>You agree to indemnify us against claims arising from your breach of these Terms or misuse of the Website.</li>
+          </ul>
+          <p>Nothing in these Terms limits your rights under the Consumer Protection Act, 2019, or any liability that cannot be excluded by law.</p>
+        </section>
+
+        <section class="policy-section" id="privacy">
+          <span class="policy-num">14</span>
+          <h2>Privacy &amp; Communications</h2>
+          <p>We collect and use your personal data as described in our {% render 'policy-link', key: 'privacy', label: 'Privacy Policy' %}, in line with applicable Indian law, including the Digital Personal Data Protection Act, 2023.</p>
+          <p>By placing an order, you agree to receive transactional messages about it — order, payment, shipping and delivery updates — by SMS, email, WhatsApp or phone. We send promotional messages only with your consent, and you can opt out at any time using the unsubscribe link or by writing to us.</p>
+        </section>
+
+        <section class="policy-section" id="law">
+          <span class="policy-num">15</span>
+          <h2>Governing Law &amp; Disputes</h2>
+          <p>These Terms are governed by the laws of India. Subject to your rights under the Consumer Protection Act, 2019, the courts at Bhavnagar, Gujarat have jurisdiction over any dispute. We encourage you to contact us first — most concerns can be resolved quickly and amicably.</p>
+        </section>
+
+        <section class="policy-section" id="changes">
+          <span class="policy-num">16</span>
+          <h2>Changes to These Terms</h2>
+          <p>We may update these Terms from time to time. The "Last updated" date at the top of this page shows the current version, and changes apply to orders placed after that date. If any part of these Terms is found unenforceable, the rest remains in effect.</p>
+        </section>
+
+        <section class="policy-section" id="contact">
+          <span class="policy-num">17</span>
+          <h2>Contact &amp; Grievance Redressal</h2>
+          {%- render 'policy-grievance',
+            legal_name: legal_name,
+            officer_name: section.settings.grievance_name,
+            officer_designation: section.settings.grievance_designation,
+            officer_email: section.settings.grievance_email,
+            officer_phone: section.settings.grievance_phone
+          -%}
+        </section>
+      </article>
+    </div>
+
+    {%- render 'policy-related', current: 'terms' -%}
+  </div>
 </div>
 
 {% schema %}
 {
-  "name": "Terms of Service",
+  "name": "Terms & Conditions",
   "tag": "section",
   "class": "section-terms",
   "settings": [
     {
       "type": "text",
+      "id": "eyebrow",
+      "label": "Small label above title",
+      "default": "Legal"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Please read these terms carefully before using our website or placing an order."
+    },
+    {
+      "type": "text",
       "id": "last_updated",
-      "label": "Last Updated Date",
-      "default": "January 2024"
+      "label": "Last updated date",
+      "default": "21 October 2026"
+    },
+    {
+      "type": "header",
+      "content": "Business & grievance details"
+    },
+    {
+      "type": "text",
+      "id": "legal_name",
+      "label": "Registered business name",
+      "info": "Must match your GST registration.",
+      "default": "PRM & Company"
+    },
+    {
+      "type": "text",
+      "id": "grievance_name",
+      "label": "Grievance Officer name",
+      "info": "Required by the Consumer Protection (E-Commerce) Rules, 2020."
+    },
+    {
+      "type": "text",
+      "id": "grievance_designation",
+      "label": "Grievance Officer designation"
+    },
+    {
+      "type": "text",
+      "id": "grievance_email",
+      "label": "Grievance Officer email",
+      "info": "Leave blank to use the store contact email."
+    },
+    {
+      "type": "text",
+      "id": "grievance_phone",
+      "label": "Grievance Officer phone",
+      "info": "Leave blank to use the store contact phone."
     }
   ],
   "presets": [
     {
-      "name": "Terms of Service"
+      "name": "Terms & Conditions"
     }
   ]
 }

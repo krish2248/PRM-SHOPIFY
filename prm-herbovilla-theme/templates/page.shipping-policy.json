@@ -3,7 +3,15 @@
     "shipping-policy": {
       "type": "shipping-policy",
       "settings": {
-        "subtitle": "Everything you need to know about our shipping and delivery"
+        "eyebrow": "Customer Care",
+        "subtitle": "How we pack, ship and deliver your Ayurvedic care — anywhere in India.",
+        "last_updated": "21 October 2026",
+        "tracking_url": "https://ship.nimbuspost.com/tracking",
+        "legal_name": "PRM & Company",
+        "grievance_name": "",
+        "grievance_designation": "",
+        "grievance_email": "",
+        "grievance_phone": ""
       }
     }
   },

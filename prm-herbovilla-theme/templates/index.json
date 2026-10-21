@@ -6,33 +6,39 @@
         "feature-1": {
           "type": "feature",
           "settings": {
-            "text": "100% Natural"
+            "text": "GMP-certified manufacturing"
           }
         },
         "feature-2": {
           "type": "feature",
           "settings": {
-            "text": "GMP Certified"
+            "text": "Free shipping above ₹400"
           }
         },
         "feature-3": {
           "type": "feature",
           "settings": {
-            "text": "Free Shipping Above ₹400"
+            "text": "Cash on Delivery"
           }
         }
       },
-      "block_order": ["feature-1", "feature-2", "feature-3"],
+      "block_order": [
+        "feature-1",
+        "feature-2",
+        "feature-3"
+      ],
       "settings": {
-        "label": "Trusted Ayurvedic Solutions",
-        "title": "Discover the Power of\nAyurveda",
-        "text": "Authentic herbal formulations crafted with ancient wisdom for modern wellness. Experience the healing touch of nature.",
-        "button_text": "Shop Now",
-        "button_link": "/collections/all",
-        "button_text_2": "Learn More",
+        "label": "Since 1999 · Bhavnagar, Gujarat",
+        "title": "Authentic Ayurveda,\nmade with pharmaceutical care",
+        "text": "84+ time-tested formulations — from Harry and Cofula to VedaCold — trusted by 3 Lakh+ customers across 22+ states.",
+        "button_text": "Shop Bestsellers",
+        "button_link": "/collections/best-sellers",
+        "button_text_2": "Our Story",
         "button_link_2": "/pages/about-us",
         "show_features": true,
-        "show_stats": false
+        "product_1": "prm-harry-ayurvedic-immunity-capsules-30-caps-pack-of-2-boosts-strength-stamina-with-ashwagandha-gokhru-shilajit",
+        "product_2": "prm-cofula-ayurvedic-syrup-110ml-pack-of-2-effective-relief-from-cough-cold-with-adulsa-jethimadh-bhimsenkapoor",
+        "product_3": "vedacold-cv-675-ayurvedic-cold-cough-relief-tablets-22-herbal-immunity-formula-with-tulsi-trikatu-haldi-pushkarmool-supports-relief-from-nasal-congestion-sore-throat-fever-respiratory-discomfort-30-tablets-pack"
       }
     },
     "shop-by-goal": {
@@ -81,7 +87,14 @@
           }
         }
       },
-      "block_order": ["collection-1", "collection-2", "collection-3", "collection-4", "collection-5", "collection-6"],
+      "block_order": [
+        "collection-1",
+        "collection-2",
+        "collection-3",
+        "collection-4",
+        "collection-5",
+        "collection-6"
+      ],
       "settings": {
         "label": "Shop by Health Goal",
         "title": "Find Your Wellness Solution",
@@ -132,7 +145,13 @@
           }
         }
       },
-      "block_order": ["cert-1", "cert-2", "cert-3", "cert-4", "cert-5"],
+      "block_order": [
+        "cert-1",
+        "cert-2",
+        "cert-3",
+        "cert-4",
+        "cert-5"
+      ],
       "settings": {
         "label": "Quality Assured",
         "title": "Certified for Excellence",
@@ -144,14 +163,12 @@
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "label": "Featured",
         "title": "Bestselling Products",
-        "text": "Discover our most loved Ayurvedic products trusted by thousands",
         "collection": "best-sellers",
         "products_count": 8,
         "columns": 4,
-        "show_view_all": true,
-        "show_secondary_image": true
+        "show_secondary_image": true,
+        "show_view_all": true
       }
     },
     "vedacold-featured": {
@@ -161,80 +178,101 @@
     "new-arrivals": {
       "type": "new-arrivals-large",
       "settings": {
-        "collection": "new-arrivals",
+        "alt_background": false,
         "label": "Just Launched",
         "title": "New Arrivals",
         "text": "Discover our latest Ayurvedic formulations crafted with ancient wisdom and modern science.",
+        "collection": "new-arrivals",
         "products_count": 4,
         "show_vendor": true,
         "button_text": "View All New Products",
-        "button_link": "/collections/new-arrivals",
-        "alt_background": false
+        "button_link": "/collections/new-arrivals"
       }
     },
     "herbs-uses": {
       "type": "herbs-uses",
       "blocks": {
-        "cat-1": {
-          "type": "category",
+        "herb-ashwagandha": {
+          "type": "herb",
           "settings": {
-            "icon": "immunity",
-            "title": "Immunity & Vitality",
-            "subtitle": "Strength, energy, daily resilience",
-            "herbs": "Ashwagandha\nTulsi (Holy Basil)\nGiloy (Guduchi)\nAmla\nTriphala\nShilajit\nGokhru\nSafed Musli\nKaunch Beej\nVidari Kand\nYashtimadhu (Mulethi)\nChyawanprash herbs\nSuvarna Bhasma\nVidanga\nKalmegha\nChirayata\nSharavari\nPunarnava\nPippali\nSunthi (Dry Ginger)"
+            "icon": "root",
+            "name": "Ashwagandha",
+            "botanical": "Withania somnifera",
+            "benefit": "Traditionally used for strength, stamina and everyday stress.",
+            "link": "/collections/immunity-boosters",
+            "link_text": "Shop products"
           }
         },
-        "cat-2": {
-          "type": "category",
+        "herb-tulsi": {
+          "type": "herb",
           "settings": {
-            "icon": "digestive",
-            "title": "Digestive & Liver",
-            "subtitle": "Gut health, appetite, detox",
-            "herbs": "Haritaki\nBaheda (Bibhitaki)\nAmla\nTriphala\nKutki\nBhumi Amla\nKalmegha\nBhringraj\nPunarnava\nPippali\nAjwain\nJeera\nSaunf (Fennel)\nSanchal (Black Salt)\nSenna\nSonamukhi\nIsabgol\nHing\nChitrak\nSuran\nBilva\nKutaja\nMusta\nDadim\nAnar Chal\nTrikatu\nTrivrut\nShuddha Nepala\nMakoy\nKasmard\nMarorphali\nAritha (Reetha)\nLimbodi\nKalmegha\nArogyavardhini Ras\nChirayata\nSharapunkha\nNimba"
+            "icon": "leaf",
+            "name": "Tulsi",
+            "botanical": "Ocimum sanctum",
+            "benefit": "A classic for seasonal immunity and respiratory comfort.",
+            "link": "/collections/respiratory-care",
+            "link_text": "Shop products"
           }
         },
-        "cat-3": {
-          "type": "category",
+        "herb-giloy": {
+          "type": "herb",
           "settings": {
-            "icon": "respiratory",
-            "title": "Respiratory & Cold",
-            "subtitle": "Cough, congestion, immunity",
-            "herbs": "Tulsi\nVasaka (Adulsa)\nYashtimadhu (Mulethi)\nPippali\nSunthi (Dry Ginger)\nKantkari\nBharangi\nKalmegh\nArdusi\nJethimadh (Mulethi)\nBhimsenkapoor\nNilgiri (Eucalyptus)\nTulsi Oil\nAtivish Mool\nHoney\nHaldi\nTrikatu\nDalchini (Cinnamon)\nLaung (Clove)\nTejpatra\nMarich (Black Pepper)\nPudina\nKarpoor\nAjwain\nHing\nYashtimadhu\nKantakari Churna\nSitopaladi"
+            "icon": "vine",
+            "name": "Giloy (Guduchi)",
+            "botanical": "Tinospora cordifolia",
+            "benefit": "Valued in Ayurveda for immunity and recovery.",
+            "link": "/collections/immunity-boosters",
+            "link_text": "Shop products"
           }
         },
-        "cat-4": {
-          "type": "category",
+        "herb-triphala": {
+          "type": "herb",
           "settings": {
-            "icon": "joint",
-            "title": "Joint & Pain Relief",
-            "subtitle": "Mobility, inflammation, recovery",
-            "herbs": "Gandhpura Oil (Wintergreen)\nMahanarayan Oil\nMahamash Oil\nShallaki (Boswellia)\nRasna\nNirgundi\nShuddha Guggul\nHadsakal\nDaruharidra\nTil Oil\nKarpoor\nSunthi\nPudina\nMethi (Fenugreek)\nArjuna\nAshwagandha\nHaridra (Turmeric)\nDashmool\nGuggul\nErand Tail\nJyotishmati\nNirgundi Oil\nPrasarani\nKupilu\nVisha Tinduka\nRakt Chandan\nJatamansi\nGandhaka Rasayan"
+            "icon": "fruit",
+            "name": "Triphala",
+            "botanical": "Amla · Haritaki · Bibhitaki",
+            "benefit": "Gentle daily support for digestion and regularity.",
+            "link": "/collections/digestive-health",
+            "link_text": "Shop products"
           }
         },
-        "cat-5": {
-          "type": "category",
+        "herb-shatavari": {
+          "type": "herb",
           "settings": {
-            "icon": "skin",
-            "title": "Skin & Hair Care",
-            "subtitle": "Glow, clarity, nourishment",
-            "herbs": "Neem\nManjishtha\nKalmegha\nChandan (Sandalwood)\nHaldi\nKesar (Saffron)\nWheat Germ Oil\nJojoba Oil\nCoconut Oil\nKokum Butter\nSarjaras\nRose Water\nShikakai\nSitafal Oil\nBhringraj\nAloe Vera\nKaranj\nBerry Berry\nAmla\nBrahmi\nBhangra\nReetha (Aritha)\nNagarmotha\nAnantamool\nKhadir\nRakta Chandan\nYashtimadhu\nDaruharidra\nTil Oil\nSarshap (Mustard Oil)\nGulab (Rose)\nMulethi\nJatamansi\nTriphala\nGairik\nChandanadi Tail\nKumari (Aloe Vera)"
+            "icon": "flower",
+            "name": "Shatavari",
+            "botanical": "Asparagus racemosus",
+            "benefit": "Ayurveda's go-to herb for women's vitality.",
+            "link": "/collections/womens-health",
+            "link_text": "Shop products"
           }
         },
-        "cat-6": {
-          "type": "category",
+        "herb-neem": {
+          "type": "herb",
           "settings": {
-            "icon": "women",
-            "title": "Women's Wellness",
-            "subtitle": "Hormonal balance, vitality",
-            "herbs": "Shatavari\nAshok\nLodhra\nGulabphool (Rose)\nDashmool\nJatamansi\nKumari\nBrahmi\nShankhpushpi\nChandan\nAshwagandha\nMulethi\nYashtimadhu\nGokhru\nAmla\nHaritaki\nNagkesar\nMochras\nUdumbar\nDadim\nManjishtha\nPunarnava\nTriphala\nSharavari\nVacha\nGhrita\nAnupana\nChandana"
+            "icon": "neem",
+            "name": "Neem",
+            "botanical": "Azadirachta indica",
+            "benefit": "Traditionally used for clear, healthy-looking skin.",
+            "link": "/collections/hair-skin-care",
+            "link_text": "Shop products"
           }
         }
       },
-      "block_order": ["cat-1", "cat-2", "cat-3", "cat-4", "cat-5", "cat-6"],
+      "block_order": [
+        "herb-ashwagandha",
+        "herb-tulsi",
+        "herb-giloy",
+        "herb-triphala",
+        "herb-shatavari",
+        "herb-neem"
+      ],
       "settings": {
         "label": "Nature's Medicine Cabinet",
         "title": "Herbs & Their Uses",
-        "text": "Discover the classical Ayurvedic herbs behind every HerboVilla formulation — grouped by the wellness concern they traditionally support."
+        "text": "Discover the classical Ayurvedic herbs behind every HerboVilla formulation — grouped by the wellness concern they traditionally support.",
+        "layout": "featured",
+        "glossary_handle": "ayurvedic-herb-glossary"
       }
     },
     "testimonials": {
@@ -243,32 +281,36 @@
         "testimonial-1": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
             "text": "I have used PRM & COMPANY Herbal & Allopathic both products last many years and specially I have practice with PRM's major product like HARRY CAPSULES, SAHELI SYRUP, PRINCE MOUTH GEL and many more. This all products are excellent in quality and 100% result oriented. Once again Thanks PRM & COMPANY.",
             "name": "Dr. Devang Patel",
-            "location": "Deesa, Gujarat",
-            "rating": 5
+            "location": "Deesa, Gujarat"
           }
         },
         "testimonial-2": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
             "text": "I have used your product in our hospital for the last 8 years and I use your most running products like Harry group, Liver Tonic and Rome group. All products have a good quality as well as 100% result oriented.",
             "name": "Vaidh Dr. B.L. Parik",
-            "location": "Jodhpur, Rajasthan — Ayurved Gramudhyog Sansthan",
-            "rating": 5
+            "location": "Jodhpur, Rajasthan — Ayurved Gramudhyog Sansthan"
           }
         },
         "testimonial-3": {
           "type": "testimonial",
           "settings": {
+            "rating": 5,
             "text": "I have used PRM & COMPANY Herbal products last many years and specially I have practice with PRM's major product like HARRY CAPSULES, PYNIL CAPSULES, COFULA, COFULA JUNIOR and many more. This all products are excellent in quality and 100% result oriented. Once again Thanks PRM & COMPANY.",
             "name": "Vaidh Pankaj Kavre",
-            "location": "Amravati, Maharashtra",
-            "rating": 5
+            "location": "Amravati, Maharashtra"
           }
         }
       },
-      "block_order": ["testimonial-1", "testimonial-2", "testimonial-3"],
+      "block_order": [
+        "testimonial-1",
+        "testimonial-2",
+        "testimonial-3"
+      ],
       "settings": {
         "label": "Doctor's Reviews",
         "title": "Trusted by Healthcare Professionals",
@@ -297,20 +339,24 @@
           }
         }
       },
-      "block_order": ["benefit-1", "benefit-2", "benefit-3"],
+      "block_order": [
+        "benefit-1",
+        "benefit-2",
+        "benefit-3"
+      ],
       "settings": {
+        "show_icon": true,
         "title": "Join the Wellness Family",
         "subtitle": "Subscribe for exclusive offers, Ayurvedic health tips, and be the first to know about new product launches.",
-        "show_icon": true,
         "show_benefits": true
       }
     }
   },
   "order": [
     "hero",
+    "featured-collection",
     "certifications",
     "shop-by-goal",
-    "featured-collection",
     "vedacold-featured",
     "new-arrivals",
     "herbs-uses",

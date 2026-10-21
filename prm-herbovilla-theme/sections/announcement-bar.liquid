@@ -1,18 +1,80 @@
 {%- comment -%}
-  Announcement Bar Section
+  Announcement Bar — up to three short messages that rotate on one line
+  (no wrapping on phones). With reduced motion, only the first one shows.
 {%- endcomment -%}
+{%- liquid
+  assign messages = ''
+  if section.settings.text != blank
+    assign messages = messages | append: section.settings.text | append: '|||'
+  endif
+  if section.settings.text_2 != blank
+    assign messages = messages | append: section.settings.text_2 | append: '|||'
+  endif
+  if section.settings.text_3 != blank
+    assign messages = messages | append: section.settings.text_3 | append: '|||'
+  endif
+  assign messages = messages | split: '|||'
+-%}
 
-{%- if section.settings.show_announcement -%}
-<div class="announcement-bar" role="region" aria-label="{{ 'sections.announcement.new_announcement' | t }}">
+{%- if section.settings.show_announcement and messages.size > 0 -%}
+<style>
+  .announcement-rotator {
+    position: relative;
+    height: 1.5em;
+    overflow: hidden;
+  }
+  .announcement-rotator .announcement-bar__message {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0;
+    transform: translateY(60%);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  .announcement-rotator .announcement-bar__message.is-active {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .announcement-rotator .announcement-bar__message {
+      transition: none;
+    }
+  }
+</style>
+<div class="announcement-bar" role="region" aria-label="Announcements">
   <div class="container">
-    <p class="announcement-bar__message">
-      {{ section.settings.text }}
-      {%- if section.settings.link != blank and section.settings.link_text != blank -%}
-        <a href="{{ section.settings.link }}">{{ section.settings.link_text }}</a>
-      {%- endif -%}
-    </p>
+    <div class="announcement-rotator" data-interval="{{ section.settings.interval | times: 1000 }}">
+      {%- for message in messages -%}
+        <p class="announcement-bar__message{% if forloop.first %} is-active{% endif %}"{% unless forloop.first %} aria-hidden="true"{% endunless %}>
+          {{ message }}
+          {%- if forloop.first and section.settings.link != blank and section.settings.link_text != blank -%}
+            <a href="{{ section.settings.link }}">{{ section.settings.link_text }}</a>
+          {%- endif -%}
+        </p>
+      {%- endfor -%}
+    </div>
   </div>
 </div>
+{%- if messages.size > 1 -%}
+<script>
+  (function () {
+    var rotator = document.querySelector('.announcement-rotator');
+    if (!rotator || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var items = rotator.querySelectorAll('.announcement-bar__message');
+    var current = 0;
+    setInterval(function () {
+      items[current].classList.remove('is-active');
+      items[current].setAttribute('aria-hidden', 'true');
+      current = (current + 1) % items.length;
+      items[current].classList.add('is-active');
+      items[current].removeAttribute('aria-hidden');
+    }, parseInt(rotator.dataset.interval, 10) || 4000);
+  })();
+</script>
+{%- endif -%}
 {%- endif -%}
 
 {% schema %}
@@ -30,13 +92,34 @@
     {
       "type": "text",
       "id": "text",
-      "label": "Announcement Text",
-      "default": "Free Shipping on Orders Above ₹400 | 100% Ayurvedic | Chemical-Free"
+      "label": "Message 1",
+      "default": "Free shipping on orders above ₹400"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Message 2",
+      "default": "Cash on Delivery available across India"
+    },
+    {
+      "type": "text",
+      "id": "text_3",
+      "label": "Message 3",
+      "default": "Trusted by 3 Lakh+ customers since 1999"
+    },
+    {
+      "type": "range",
+      "id": "interval",
+      "label": "Seconds per message",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 4
     },
     {
       "type": "url",
       "id": "link",
-      "label": "Link"
+      "label": "Link (message 1)"
     },
     {
       "type": "text",

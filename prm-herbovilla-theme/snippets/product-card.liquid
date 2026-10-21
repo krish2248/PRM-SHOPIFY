@@ -1,104 +1,104 @@
 {%- comment -%}
-  Product Card Snippet
-  
-  Parameters:
-  - product: Product object (required)
-  - show_vendor: Boolean (optional, default: true)
-  - show_rating: Boolean (optional, default: false)
-  - lazy_load: Boolean (optional, default: true)
-{%- endcomment -%}
+  Product card — one design used store-wide (homepage rows, collection grid).
+  Uniform cream image tile, short title, ₹ price and a compact Add button
+  below the price, so nothing covers the product photo.
+  Styles: "PRODUCT CARD" block in assets/theme.css.
 
+  Params:
+  - product (required)
+  - badge: optional label such as 'New'
+  - show_vendor: defaults to true
+  - lazy: pass false for cards visible on first paint
+{%- endcomment -%}
 {%- liquid
-  assign show_vendor = show_vendor | default: true
-  assign show_rating = show_rating | default: false
-  assign lazy_load = lazy_load | default: true
-  
-  assign current_variant = product.selected_or_first_available_variant
-  assign compare_at_price = current_variant.compare_at_price
-  assign price = current_variant.price
+  if show_vendor == nil
+    assign show_vendor = true
+  endif
+  assign loading = 'lazy'
+  if lazy == false
+    assign loading = 'eager'
+  endif
+
+  assign variant = product.selected_or_first_available_variant
   assign on_sale = false
-  if compare_at_price > price
+  if variant.compare_at_price > variant.price
     assign on_sale = true
-    assign savings = compare_at_price | minus: price | times: 100 | divided_by: compare_at_price
+    assign savings = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price
   endif
 -%}
+{%- capture short_title -%}{%- render 'product-short-title', title: product.title -%}{%- endcapture -%}
+{%- assign short_title = short_title | strip -%}
 
-<div class="product-card" data-product-id="{{ product.id }}">
-  <div class="product-card__badges">
-    {%- if on_sale -%}
-      <span class="badge badge--sale">{{ savings }}% Off</span>
-    {%- endif -%}
-    {%- if product.available == false -%}
-      <span class="badge badge--soldout">Sold Out</span>
-    {%- endif -%}
-  </div>
-  
-  <div class="product-card__image">
-    <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
-      {%- if product.featured_image -%}
-        <img 
-          src="{{ product.featured_image | image_url: width: 800 }}"
-          srcset="{{ product.featured_image | image_url: width: 500 }} 500w,
-                  {{ product.featured_image | image_url: width: 800 }} 800w,
-                  {{ product.featured_image | image_url: width: 1000 }} 1000w,
-                  {{ product.featured_image | image_url: width: 1200 }} 1200w"
-          sizes="(max-width: 540px) 92vw, (max-width: 768px) 300px, (max-width: 1200px) 340px, 380px"
-          alt="{{ product.featured_image.alt | default: product.title | escape }}"
-          width="{{ product.featured_image.width }}"
-          height="{{ product.featured_image.height }}"
-          {% if lazy_load %}loading="lazy"{% endif %}
+<div class="pcard{% unless product.available %} pcard--soldout{% endunless %}">
+  <a href="{{ product.url }}" class="pcard__media" tabindex="-1" aria-hidden="true">
+    {%- if product.featured_image != blank -%}
+      <img
+        class="pcard__img"
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        srcset="{{ product.featured_image | image_url: width: 300 }} 300w, {{ product.featured_image | image_url: width: 450 }} 450w, {{ product.featured_image | image_url: width: 600 }} 600w"
+        sizes="(max-width: 768px) 60vw, (max-width: 1200px) 30vw, 300px"
+        alt="{{ product.featured_image.alt | default: short_title | escape }}"
+        width="{{ product.featured_image.width }}"
+        height="{{ product.featured_image.height }}"
+        loading="{{ loading }}"
+      >
+      {%- if product.images[1] != blank -%}
+        <img
+          class="pcard__img pcard__img--alt"
+          src="{{ product.images[1] | image_url: width: 600 }}"
+          srcset="{{ product.images[1] | image_url: width: 300 }} 300w, {{ product.images[1] | image_url: width: 600 }} 600w"
+          sizes="(max-width: 768px) 60vw, (max-width: 1200px) 30vw, 300px"
+          alt=""
+          width="{{ product.images[1].width }}"
+          height="{{ product.images[1].height }}"
+          loading="lazy"
         >
-      {%- else -%}
-        <div class="product-card__no-image">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-            <polyline points="21 15 16 10 5 21"></polyline>
-          </svg>
-        </div>
       {%- endif -%}
-    </a>
-    
-    {%- if product.available -%}
-      <div class="product-card__actions">
-        <button 
-          type="button"
-          class="btn btn--primary btn--full btn--sm"
-          data-add-to-cart
-          data-variant-id="{{ current_variant.id }}"
-          data-quantity="1"
-        >
-          Add to Cart
-        </button>
-      </div>
+    {%- else -%}
+      <span class="pcard__placeholder">{% render 'policy-icon', name: 'leaf' %}</span>
+    {%- endif -%}
+  </a>
+
+  <div class="pcard__badges">
+    {%- if product.available == false -%}
+      <span class="pcard__badge pcard__badge--muted">Sold out</span>
+    {%- elsif on_sale -%}
+      <span class="pcard__badge pcard__badge--sale">{{ savings }}% off</span>
+    {%- endif -%}
+    {%- if badge != blank and product.available -%}
+      <span class="pcard__badge">{{ badge }}</span>
     {%- endif -%}
   </div>
-  
-  <div class="product-card__content">
+
+  <div class="pcard__body">
     {%- if show_vendor and product.vendor != blank -%}
-      <p class="product-card__vendor">{{ product.vendor }}</p>
+      <p class="pcard__vendor">{{ product.vendor }}</p>
     {%- endif -%}
-    
-    <h3 class="product-card__title">
-      <a href="{{ product.url }}">{{ product.title }}</a>
-    </h3>
-    
-    {%- if product.description != blank -%}
-      <p class="product-card__description">{{ product.description | strip_html | truncate: 120 }}</p>
-    {%- endif -%}
-    
-    <div class="product-card__price">
-      <span class="product-card__price-current">{{ price | money }}</span>
-      {%- if on_sale -%}
-        <span class="product-card__price-compare">{{ compare_at_price | money }}</span>
+    <h3 class="pcard__title"><a href="{{ product.url }}" title="{{ product.title | escape }}">{{ short_title }}</a></h3>
+    <div class="pcard__foot">
+      <div class="pcard__price">
+        <span class="pcard__price-now">{% render 'inr-price', cents: variant.price %}</span>
+        {%- if on_sale -%}
+          <s class="pcard__price-was">{% render 'inr-price', cents: variant.compare_at_price %}</s>
+        {%- endif -%}
+      </div>
+      {%- if product.available -%}
+        {%- if product.variants.size == 1 -%}
+          <button
+            type="button"
+            class="pcard__add"
+            data-add-to-cart
+            data-variant-id="{{ variant.id }}"
+            data-quantity="1"
+            aria-label="Add {{ short_title | escape }} to cart"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span>Add</span>
+          </button>
+        {%- else -%}
+          <a class="pcard__add" href="{{ product.url }}" aria-label="Choose a size for {{ short_title | escape }}">Options</a>
+        {%- endif -%}
       {%- endif -%}
     </div>
-    
-    {%- if show_rating -%}
-      <div class="product-card__rating">
-        {%- render 'star-rating', rating: 4.5 -%}
-        <span class="text-sm text-light">({{ product.metafields.reviews.count | default: 0 }})</span>
-      </div>
-    {%- endif -%}
   </div>
 </div>

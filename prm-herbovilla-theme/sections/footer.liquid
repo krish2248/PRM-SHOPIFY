@@ -254,6 +254,12 @@
     font-weight: 600;
     letter-spacing: 0.02em;
   }
+  .payment-icon-svg {
+    height: 24px;
+    width: auto;
+    border-radius: 4px;
+    background: #fff;
+  }
   .payment-icon--razorpay {
     background: linear-gradient(135deg, #0c2451 0%, #1d4ed8 100%);
     color: #fff;
@@ -371,18 +377,12 @@
           {%- endif -%}
         </div>
 
-        {%- if settings.brand_prm_pharma_url != blank or settings.brand_herbovilla_url != blank -%}
+        {%- comment -%} Parent-company link only — a "HerboVilla Store" link here pointed back to this same store {%- endcomment -%}
+        {%- if settings.brand_prm_pharma_url != blank -%}
           <div class="footer-brandsites">
-            {%- if settings.brand_prm_pharma_url != blank -%}
-              <a href="{{ settings.brand_prm_pharma_url }}" target="_blank" rel="noopener" class="footer-brandsite">
-                <strong>PRM Pharmaceuticals</strong>&rsaquo;
-              </a>
-            {%- endif -%}
-            {%- if settings.brand_herbovilla_url != blank -%}
-              <a href="{{ settings.brand_herbovilla_url }}" target="_blank" rel="noopener" class="footer-brandsite">
-                <strong>HerboVilla Store</strong>&rsaquo;
-              </a>
-            {%- endif -%}
+            <a href="{{ settings.brand_prm_pharma_url }}" target="_blank" rel="noopener" class="footer-brandsite">
+              <strong>PRM Pharmaceuticals</strong>&rsaquo;
+            </a>
           </div>
         {%- endif -%}
       </div>
@@ -446,16 +446,6 @@
             Sunday: Closed
           </span>
         </div>
-
-        {%- if settings.contact_email != blank -%}
-          <div class="footer-contact-item">
-            <svg class="footer-contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            <a href="mailto:{{ settings.contact_email }}" class="footer-contact-text">{{ settings.contact_email }}</a>
-          </div>
-        {%- endif -%}
       </div>
     </div>
 
@@ -490,20 +480,42 @@
         <div class="footer-payments">
           <span>We Accept:</span>
           <div class="payment-icons">
+            {%- comment -%}
+              Razorpay is a third-party gateway, so shop.enabled_payment_types comes back
+              empty — render the card networks it accepts explicitly.
+            {%- endcomment -%}
+            {%- assign payment_logos = shop.enabled_payment_types -%}
+            {%- if payment_logos.size == 0 -%}
+              {%- assign payment_logos = 'visa,master,rupay' | split: ',' -%}
+            {%- endif -%}
             <span class="payment-icon">UPI</span>
-            <span class="payment-icon">Visa</span>
-            <span class="payment-icon">MC</span>
-            <span class="payment-icon">RuPay</span>
+            {%- for type in payment_logos -%}
+              {{ type | payment_type_svg_tag: class: 'payment-icon-svg' }}
+            {%- endfor -%}
             <span class="payment-icon">COD</span>
           </div>
         </div>
       {%- endif -%}
 
+      {%- comment -%}
+        Each legal link resolves to its page (snippets/policy-url.liquid) and is
+        hidden until that page exists, so the footer never links to a 404.
+      {%- endcomment -%}
+      {%- capture footer_terms_url -%}{%- if section.settings.terms_link != blank -%}{{ section.settings.terms_link }}{%- else -%}{%- render 'policy-url', key: 'terms' -%}{%- endif -%}{%- endcapture -%}
+      {%- capture footer_returns_url -%}{%- if section.settings.refund_link != blank -%}{{ section.settings.refund_link }}{%- else -%}{%- render 'policy-url', key: 'returns' -%}{%- endif -%}{%- endcapture -%}
+      {%- capture footer_shipping_url -%}{%- if section.settings.shipping_link != blank -%}{{ section.settings.shipping_link }}{%- else -%}{%- render 'policy-url', key: 'shipping' -%}{%- endif -%}{%- endcapture -%}
+      {%- capture footer_privacy_url -%}{%- if section.settings.privacy_link != blank -%}{{ section.settings.privacy_link }}{%- else -%}{%- render 'policy-url', key: 'privacy' -%}{%- endif -%}{%- endcapture -%}
+      {%- liquid
+        assign footer_terms_url = footer_terms_url | strip
+        assign footer_returns_url = footer_returns_url | strip
+        assign footer_shipping_url = footer_shipping_url | strip
+        assign footer_privacy_url = footer_privacy_url | strip
+      -%}
       <div class="footer-legal">
-        <a href="{{ section.settings.privacy_link | default: '/policies/privacy-policy' }}">Privacy Policy</a>
-        <a href="{{ section.settings.terms_link | default: '/policies/terms-of-service' }}">Terms of Service</a>
-        <a href="{{ section.settings.refund_link | default: '/policies/refund-policy' }}">Refund Policy</a>
-        <a href="{{ section.settings.shipping_link | default: '/policies/shipping-policy' }}">Shipping Policy</a>
+        {%- if footer_terms_url != blank -%}<a href="{{ footer_terms_url }}">Terms &amp; Conditions</a>{%- endif -%}
+        {%- if footer_returns_url != blank -%}<a href="{{ footer_returns_url }}">Returns, Refund &amp; Exchange</a>{%- endif -%}
+        {%- if footer_shipping_url != blank -%}<a href="{{ footer_shipping_url }}">Shipping Policy</a>{%- endif -%}
+        {%- if footer_privacy_url != blank -%}<a href="{{ footer_privacy_url }}">Privacy Policy</a>{%- endif -%}
       </div>
     </div>
   </div>
@@ -575,24 +587,29 @@
       "default": true
     },
     {
-      "type": "url",
-      "id": "privacy_link",
-      "label": "Privacy policy link"
+      "type": "header",
+      "content": "Legal links",
+      "info": "Leave blank to link automatically to each policy page once it exists."
     },
     {
       "type": "url",
       "id": "terms_link",
-      "label": "Terms of service link"
+      "label": "Terms & Conditions link"
     },
     {
       "type": "url",
       "id": "refund_link",
-      "label": "Refund policy link"
+      "label": "Returns, Refund & Exchange link"
     },
     {
       "type": "url",
       "id": "shipping_link",
-      "label": "Shipping policy link"
+      "label": "Shipping Policy link"
+    },
+    {
+      "type": "url",
+      "id": "privacy_link",
+      "label": "Privacy Policy link"
     }
   ],
   "blocks": [
@@ -638,8 +655,8 @@
         { "type": "link_col2", "settings": { "text": "About Us", "link": "/pages/about-us" } },
         { "type": "link_col2", "settings": { "text": "FAQs", "link": "/pages/faq" } },
         { "type": "link_col2", "settings": { "text": "Track Order", "link": "/account" } },
-        { "type": "link_col2", "settings": { "text": "Returns & Refunds", "link": "/policies/refund-policy" } },
-        { "type": "link_col2", "settings": { "text": "Shipping Info", "link": "/policies/shipping-policy" } }
+        { "type": "link_col2", "settings": { "text": "Returns, Refund & Exchange", "link": "/pages/returns-refund-exchange" } },
+        { "type": "link_col2", "settings": { "text": "Shipping Policy", "link": "/pages/shipping-policy" } }
       ]
     }
   ]

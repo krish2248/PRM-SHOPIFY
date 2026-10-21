@@ -1,152 +1,173 @@
 {%- style -%}
+  /* Light newsletter card (was a full-width dark-green gradient band) */
   .newsletter-section {
-    padding: 80px 0;
+    padding: 72px 0;
     background: linear-gradient(135deg, {{ section.settings.bg_color_start }} 0%, {{ section.settings.bg_color_end }} 100%);
-    position: relative;
-    overflow: hidden;
-  }
-  .newsletter-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .newsletter-section::after {
-    content: '';
-    position: absolute;
-    bottom: -30%;
-    left: -10%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-    border-radius: 50%;
   }
   .newsletter-wrapper {
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
     position: relative;
-    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 44px 48px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #EADFCB;
+    border-radius: 24px;
+    box-shadow: 0 18px 40px rgba(27, 67, 50, 0.08);
   }
   .newsletter-icon {
-    width: 70px;
-    height: 70px;
-    background: rgba(255,255,255,0.15);
+    width: 60px;
+    height: 60px;
+    background: rgba(45, 106, 79, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 25px;
+    margin: 0 auto 18px;
   }
   .newsletter-icon svg {
-    width: 32px;
-    height: 32px;
-    color: #fff;
+    width: 28px;
+    height: 28px;
+    color: var(--color-primary);
+  }
+  .newsletter-offer {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 6px 14px;
+    background: #FFF3D6;
+    border: 1px solid #F2D9A0;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #8A5A00;
   }
   .newsletter-title {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 15px;
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    color: var(--color-text);
+    margin-bottom: 10px;
     line-height: 1.2;
   }
   .newsletter-subtitle {
-    color: rgba(255,255,255,0.9);
-    font-size: 1.1rem;
-    margin-bottom: 35px;
+    color: var(--color-text-light);
+    font-size: 1.02rem;
+    margin-bottom: 26px;
     line-height: 1.6;
   }
   .newsletter-form {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     max-width: 520px;
-    margin: 0 auto 20px;
+    margin: 0 auto 14px;
   }
   .newsletter-input {
     flex: 1;
-    padding: 16px 24px;
-    border: 2px solid rgba(255,255,255,0.3);
-    border-radius: 30px;
-    background: rgba(255,255,255,0.1);
-    color: #fff;
+    min-width: 0;
+    padding: 15px 22px;
+    border: 1px solid #DCD3C3;
+    border-radius: 999px;
+    background: #FDFBF7;
+    color: var(--color-text);
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .newsletter-input::placeholder {
-    color: rgba(255,255,255,0.7);
+    color: #9A9488;
   }
   .newsletter-input:focus {
     outline: none;
-    border-color: #fff;
-    background: rgba(255,255,255,0.15);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12);
   }
   .newsletter-button {
-    padding: 16px 35px;
-    background: #fff;
-    color: var(--color-primary);
+    padding: 15px 30px;
+    background: var(--color-primary);
+    color: #fff;
     border: none;
-    border-radius: 30px;
+    border-radius: 999px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.2s ease, transform 0.2s ease;
     white-space: nowrap;
   }
   .newsletter-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
   }
   .newsletter-disclaimer {
-    color: rgba(255,255,255,0.7);
-    font-size: 0.85rem;
+    color: var(--color-text-light);
+    font-size: 0.82rem;
   }
   .newsletter-disclaimer a {
-    color: #fff;
+    color: var(--color-primary);
     text-decoration: underline;
+  }
+  .newsletter-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 11px 20px;
+    border: 1px solid #25A244;
+    border-radius: 999px;
+    color: #1E7E36;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  .newsletter-whatsapp:hover {
+    background: #EAF8EE;
+    color: #1E7E36;
+  }
+  .newsletter-whatsapp svg {
+    width: 18px;
+    height: 18px;
   }
   .newsletter-benefits {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    margin-top: 40px;
+    gap: 24px;
+    margin-top: 26px;
+    padding-top: 22px;
+    border-top: 1px solid #F0E8DA;
     flex-wrap: wrap;
   }
   .benefit-item {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: rgba(255,255,255,0.9);
-    font-size: 0.9rem;
+    color: var(--color-text);
+    font-size: 0.88rem;
   }
   .benefit-item svg {
-    width: 18px;
-    height: 18px;
-    color: #fff;
+    width: 17px;
+    height: 17px;
+    color: var(--color-primary);
   }
   .newsletter-success {
-    background: rgba(255,255,255,0.15);
+    background: #F1F8F2;
     padding: 20px 30px;
     border-radius: 15px;
-    color: #fff;
+    color: var(--color-text);
     display: none;
   }
   .newsletter-success.show {
     display: block;
   }
   .newsletter-success h4 {
-    font-size: 1.25rem;
-    margin-bottom: 8px;
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+    color: var(--color-primary);
   }
   @media (max-width: 768px) {
     .newsletter-section {
-      padding: 60px 0;
+      padding: 40px 0;
     }
-    .newsletter-title {
-      font-size: 2rem;
+    .newsletter-wrapper {
+      padding: 30px 20px;
+      border-radius: 18px;
     }
     .newsletter-form {
       flex-direction: column;
@@ -155,13 +176,10 @@
       width: 100%;
     }
     .newsletter-benefits {
-      gap: 15px;
+      gap: 10px 16px;
     }
   }
   @media (max-width: 480px) {
-    .newsletter-title {
-      font-size: 1.5rem;
-    }
     .newsletter-benefits {
       flex-direction: column;
       align-items: center;
@@ -181,6 +199,9 @@
         </div>
       {%- endif -%}
       
+      {%- if section.settings.offer_text != blank -%}
+        <span class="newsletter-offer">{{ section.settings.offer_text }}</span>
+      {%- endif -%}
       <h2 class="newsletter-title">{{ section.settings.title }}</h2>
       <p class="newsletter-subtitle">{{ section.settings.subtitle }}</p>
       
@@ -204,6 +225,14 @@
         <p class="newsletter-disclaimer">{{ section.settings.disclaimer }}</p>
       {%- endif -%}
       
+      {%- if section.settings.whatsapp_number != blank -%}
+        {%- assign wa_number = section.settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' -%}
+        <a class="newsletter-whatsapp" href="https://wa.me/{{ wa_number }}?text={{ section.settings.whatsapp_message | url_encode }}" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.52 3.48A11.86 11.86 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.96L0 24l6.3-1.65a11.87 11.87 0 0 0 5.76 1.47h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.44zM12.07 21.8h-.01a9.88 9.88 0 0 1-5.04-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.27c0-5.45 4.44-9.89 9.9-9.89 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.9 7c0 5.45-4.44 9.89-9.89 9.89zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+          {{ section.settings.whatsapp_label | default: 'Get updates on WhatsApp' }}
+        </a>
+      {%- endif -%}
+
       <div class="newsletter-success" id="newsletter-success">
         <h4>{{ section.settings.success_title }}</h4>
         <p>{{ section.settings.success_message }}</p>
@@ -255,13 +284,13 @@
       "type": "color",
       "id": "bg_color_start",
       "label": "Background gradient start",
-      "default": "#2D6A4F"
+      "default": "#F4EDE1"
     },
     {
       "type": "color",
       "id": "bg_color_end",
       "label": "Background gradient end",
-      "default": "#1B4332"
+      "default": "#EEF5EF"
     },
     {
       "type": "checkbox",
@@ -316,6 +345,34 @@
       "id": "show_benefits",
       "label": "Show benefits",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Offer & WhatsApp (optional)"
+    },
+    {
+      "type": "text",
+      "id": "offer_text",
+      "label": "Offer badge",
+      "info": "e.g. 'Get 10% off your first order'. Only add this if the discount exists in Shopify. Leave blank to hide."
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "WhatsApp number",
+      "info": "With country code, e.g. 919227928075. Leave blank to hide the WhatsApp button."
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_label",
+      "label": "WhatsApp button text",
+      "default": "Get updates on WhatsApp"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_message",
+      "label": "WhatsApp pre-filled message",
+      "default": "Hi PRM HerboVilla, please add me to your updates."
     }
   ],
   "blocks": [

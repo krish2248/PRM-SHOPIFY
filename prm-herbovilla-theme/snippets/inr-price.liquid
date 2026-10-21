@@ -1,0 +1,8 @@
+{%- comment -%}
+  Price in rupees without trailing ".00": 22000 -> ₹220, 28080 -> ₹280.80.
+  (The store's money format prints "Rs. 220.00"; this keeps prices consistent
+  with the ₹ used everywhere else on the site.)
+
+  Usage: {% render 'inr-price', cents: product.price %}
+{%- endcomment -%}
+{{- cents | money_without_currency | remove: '.00' | prepend: '₹' -}}

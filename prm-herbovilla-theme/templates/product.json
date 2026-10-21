@@ -27,6 +27,26 @@
             "text": "GMP Certified Manufacturing"
           }
         },
+        "combo-1": {
+          "type": "combo_pack",
+          "settings": {
+            "label": "Pack of 3",
+            "quantity": 3,
+            "price": "",
+            "mrp": "",
+            "best_value": false
+          }
+        },
+        "combo-2": {
+          "type": "combo_pack",
+          "settings": {
+            "label": "Pack of 5",
+            "quantity": 5,
+            "price": "",
+            "mrp": "",
+            "best_value": false
+          }
+        },
         "ingredient-1": {
           "type": "ingredient",
           "settings": {
@@ -73,67 +93,51 @@
             "text": "Continue for at least 3 months for best results"
           }
         },
-        "combo-1": {
-          "type": "combo_pack",
-          "settings": {
-            "label": "Pack of 3",
-            "quantity": 3,
-            "price": "",
-            "mrp": "",
-            "best_value": false
-          }
-        },
-        "combo-2": {
-          "type": "combo_pack",
-          "settings": {
-            "label": "Pack of 5",
-            "quantity": 5,
-            "price": "",
-            "mrp": "",
-            "best_value": false
-          }
-        },
         "research-1": {
           "type": "research_ingredient",
           "settings": {
-            "name": "Papaya Extract",
-            "scientific_name": "Carica papaya",
-            "description": "Rich in papain enzyme and antioxidants, supports platelet production and immune function.",
-            "badge": "Clinically Studied"
+            "image": "shopify://shop_images/21rdYyGuVnL.jpg",
+            "name": "Tea tree oil",
+            "scientific_name": "{{ product.metafields.shopify[\"active-ingredient\"] | metafield_text: field: 'label' }}",
+            "description": "Antiseptic and anti-inflammatory in nature as well as anti-aging and anti-microbial, it is useful in cases of abnormal Kapha and Pitta, and many skin diseases. It's also a natural sunscreen and fights infections and burns.",
+            "badge": "FDA APPROVED"
           }
         },
         "research-2": {
           "type": "research_ingredient",
           "settings": {
-            "name": "Giloy",
-            "scientific_name": "Tinospora cordifolia",
-            "description": "Powerful immunomodulator that enhances white blood cell activity and overall immunity.",
+            "image": "shopify://shop_images/tulsi-cta-1.webp",
+            "name": "Tulsi",
+            "scientific_name": "Holy Basil",
+            "description": "one of the most revered herbs in the Ayurvedic pharmacopoeia. Considered sacred in many cultures, this herb has been revered for centuries thanks to its ability to impart clarity and lightness to the body, mind, and spirit.",
             "badge": "Ayurvedic Gold Standard"
           }
         },
         "research-3": {
           "type": "research_ingredient",
           "settings": {
-            "name": "Tulsi",
-            "scientific_name": "Ocimum sanctum",
-            "description": "Adaptogenic herb with anti-inflammatory properties that supports stress response and vitality.",
+            "image": "shopify://shop_images/download_110c1cb2-acc2-49e2-88f6-ddc6c80ab3d2.jpg",
+            "name": "Aloe vera",
+            "scientific_name": "barbadensis Miller",
+            "description": "Skin Soothing & Healing: Its anti-inflammatory properties make it an excellent natural remedy for sunburns, minor cuts, and insect bites.Deep Hydration: The gel acts as a lightweight, non-greasy moisturizer for the face and body, ideal for all skin types.",
             "badge": "Traditional Medicine"
           }
         },
         "research-4": {
           "type": "research_ingredient",
           "settings": {
-            "name": "Ashwagandha",
+            "image": "shopify://shop_images/images.jpg",
+            "name": "Vitamin E",
             "scientific_name": "Withania somnifera",
-            "description": "Renowned adaptogen that reduces cortisol levels and enhances physical and mental performance.",
+            "description": "Deep Moisturization: Penetrates the skin's lipid matrix to soothe flakiness, dryness, and itching.Antioxidant Protection: Neutralizes environmental stressors like pollution and UV radiation that cause premature aging",
             "badge": "Evidence-Based"
           }
         },
         "video-1": {
           "type": "video_testimonial",
           "settings": {
-            "video_url": "",
-            "click_url": ""
+            "video_url": "/",
+            "click_url": "https://www.instagram.com/reel/C24aCybvpC3/"
           }
         },
         "video-2": {
@@ -183,9 +187,19 @@
       ],
       "settings": {
         "show_highlights": true,
-        "show_buy_now": true
+        "show_buy_now": true,
+        "show_share": true,
+        "show_download_placeholder": true,
+        "download_button_text": "Download Product Presentation",
+        "default_download_url": "",
+        "showcase_heading": "Premium Ayurvedic Wellness",
+        "showcase_text": "Experience the power of traditional Ayurvedic herbs combined with modern science for optimal health and wellness.",
+        "youtube_product_url": "",
+        "youtube_click_url": ""
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }

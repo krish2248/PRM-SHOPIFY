@@ -1,0 +1,39 @@
+{%- comment -%}
+  Outputs the URL of a policy page, or nothing when it doesn't exist yet,
+  so footer and cross-links never point at a 404.
+  Prefers a theme page (styled /pages/... template) and falls back to
+  Shopify's built-in policy (Settings > Policies).
+
+  Usage:
+    {%- capture terms_url -%}{%- render 'policy-url', key: 'terms' -%}{%- endcapture -%}
+  key: 'terms' | 'returns' | 'shipping' | 'privacy'
+{%- endcomment -%}
+{%- liquid
+  case key
+    when 'terms'
+      assign handles = 'terms-and-conditions,terms-conditions,terms-of-service' | split: ','
+      assign fallback = shop.terms_of_service.url
+    when 'returns'
+      assign handles = 'returns-refund-exchange,returns-refund-exchange-policy,refund-policy,return-policy' | split: ','
+      assign fallback = shop.refund_policy.url
+    when 'shipping'
+      assign handles = 'shipping-policy,shipping-delivery-policy,shipping-and-delivery-policy' | split: ','
+      assign fallback = shop.shipping_policy.url
+    when 'privacy'
+      assign handles = 'privacy-policy' | split: ','
+      assign fallback = shop.privacy_policy.url
+  endcase
+
+  assign found = ''
+  for policy_handle in handles
+    assign candidate = pages[policy_handle]
+    if candidate.url != blank
+      assign found = candidate.url
+      break
+    endif
+  endfor
+  if found == blank
+    assign found = fallback
+  endif
+  echo found
+-%}

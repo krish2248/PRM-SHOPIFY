@@ -4312,3 +4312,316 @@ h1, h2, h3, h4, h5, h6, p, li, a, span, dt, dd {
     line-height: 1.4;
   }
 }
+
+/* ============================================
+   SHOPIFY BUILT-IN POLICY PAGES (/policies/*)
+   Matches the theme's policy pages: white 20px card on cream,
+   Playfair headings, muted body text.
+   ============================================ */
+body .shopify-policy__container {
+  max-width: 860px;
+  margin: 40px auto 80px;
+  padding: 48px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 30px rgba(0, 0, 0, 0.05);
+}
+body .shopify-policy__title {
+  text-align: center;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(45, 106, 79, 0.12);
+}
+body .shopify-policy__title h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  color: var(--color-text);
+  margin: 0;
+}
+body .shopify-policy__body h2 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  line-height: 1.35;
+  color: var(--color-text);
+  margin: 32px 0 12px;
+}
+body .shopify-policy__body h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 22px 0 8px;
+}
+body .shopify-policy__body p,
+body .shopify-policy__body li {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: var(--color-text-light);
+}
+body .shopify-policy__body p {
+  margin: 0 0 14px;
+}
+body .shopify-policy__body ul,
+body .shopify-policy__body ol {
+  margin: 0 0 16px;
+  padding-left: 1.25rem;
+}
+body .shopify-policy__body strong {
+  color: var(--color-text);
+}
+body .shopify-policy__body a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+@media (max-width: 576px) {
+  body .shopify-policy__container {
+    margin: 24px 16px 56px;
+    padding: 26px 20px;
+    border-radius: 16px;
+  }
+  body .shopify-policy__body h2 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ============================================
+   PRODUCT CARD (snippets/product-card.liquid)
+   One card design store-wide: uniform cream image tile
+   (white-background packshots blend in via multiply),
+   short title, ₹ price, compact Add button below.
+   ============================================ */
+.pcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border: 1px solid #EFE7D9;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.pcard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(27, 67, 50, 0.10);
+}
+.pcard__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  background: #F7F2EA;
+  overflow: hidden;
+}
+.pcard__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 14px;
+  mix-blend-mode: multiply;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.pcard__img--alt {
+  opacity: 0;
+}
+@media (hover: hover) {
+  .pcard:hover .pcard__img {
+    transform: scale(1.03);
+  }
+  .pcard:hover .pcard__img--alt {
+    opacity: 1;
+  }
+  .pcard:hover .pcard__img:has(+ .pcard__img--alt) {
+    opacity: 0;
+  }
+}
+.pcard__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(45, 106, 79, 0.35);
+}
+.pcard__placeholder svg {
+  width: 48px;
+  height: 48px;
+}
+.pcard__badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  pointer-events: none;
+}
+.pcard__badge {
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.pcard__badge--sale {
+  background: var(--color-error, #C1292E);
+}
+.pcard__badge--muted {
+  background: #6B6B6B;
+}
+.pcard__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px 16px;
+}
+.pcard__vendor {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+.pcard__title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-text);
+  min-height: 2.7em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pcard__title a {
+  color: inherit;
+  text-decoration: none;
+}
+.pcard__title a:hover {
+  color: var(--color-primary);
+}
+.pcard__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+.pcard__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+}
+.pcard__price-now {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+.pcard__price-was {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+}
+.pcard__add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-shrink: 0;
+  height: 40px;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.pcard__add:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.pcard__add svg {
+  width: 15px;
+  height: 15px;
+}
+.pcard__add.btn--loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+.pcard--soldout .pcard__img {
+  opacity: 0.55;
+}
+@media (max-width: 480px) {
+  .pcard {
+    border-radius: 14px;
+  }
+  .pcard__img {
+    padding: 10px;
+  }
+  .pcard__body {
+    padding: 11px 12px 13px;
+    gap: 4px;
+  }
+  .pcard__title {
+    font-size: 0.86rem;
+  }
+  .pcard__price-now {
+    font-size: 0.98rem;
+  }
+  .pcard__add {
+    height: 36px;
+    padding: 0 12px;
+  }
+}
+
+/* Product rows: grid on desktop, swipeable row on phones */
+.prow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+@media (max-width: 992px) {
+  .prow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 768px) {
+  .prow {
+    display: flex;
+    gap: 12px;
+    margin: 0 calc(-1 * var(--spacing-md));
+    padding: 4px var(--spacing-md) 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: var(--spacing-md);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .prow::-webkit-scrollbar {
+    display: none;
+  }
+  .prow > * {
+    flex: 0 0 62%;
+    max-width: 250px;
+    scroll-snap-align: start;
+  }
+}
