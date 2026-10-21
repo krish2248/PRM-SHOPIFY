@@ -26,3 +26,6 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# Local theme backups (pulled from Shopify before changes)
+backups/

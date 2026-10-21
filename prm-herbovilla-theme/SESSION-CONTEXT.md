@@ -1,11 +1,76 @@
 # Session Context — HerboVilla Shopify Theme
 
-**Last worked:** 2026-08-07
+**Last worked:** 2026-10-21
 **Project:** PRM HerboVilla Shopify theme
-**Path:** `C:\Users\sonik\Desktop\New\last prm update\HerboVilla Shopify\prm-herbovilla-theme`
+**Path:** `C:\Users\sonik\Desktop\Everything\last prm update\HerboVilla Shopify\prm-herbovilla-theme` (moved from `Desktop\New\...`)
 **Live theme:** `151479124142` on `prm-herbovilla.myshopify.com` / `prmherbovilla.com`
 **Push command:** `shopify theme push --theme 151479124142 --allow-live --force --only <path>`
 **GitHub:** `https://github.com/krish2248/PRM-SHOPIFY.git` (branch `main`)
+
+---
+
+## ▶ START HERE — next session (planned: 4 PM, the day after the 21–22 Oct 2026 session)
+
+When Krish says **"get yesterday's context"**:
+1. Report the **READ FIRST — OPEN PRICING ISSUES** block below first (standing instruction).
+2. Summarise the last session: policy pages + full design refresh went **live**, and the pack-price,
+   VedaCold ₹180 and fake-star bugs were fixed. The file-by-file list and revert steps are in
+   `../CHANGES-2026-10-21.md`; the backup theme is #188802629806.
+3. Check the live state:
+   - Have the 4 admin pages been created? Check `/pages/terms-and-conditions` etc.
+   - Have the combo photos been uploaded? Check the `images` count in products.json.
+   - Report what's done, what's left and what's next.
+4. Shopify CLI login will have expired. Run `shopify theme list --store prm-herbovilla.myshopify.com`
+   at the END of a turn and hand Krish the device code (codes expire in ~10 min).
+
+**Agenda for the session**
+- **A. Product page redesign.** Plan from the 21 Oct design review:
+  - Sticky Add-to-cart bar on mobile (today it sits ~2,000px down).
+  - Short title (reuse `product-short-title`) and a 1-line breadcrumb.
+  - Product-specific benefits, replacing the global "Key Benefits" box that repeats the claim pills on all 66 products.
+  - A real review app (e.g. Judge.me) instead of the localStorage reviews only the reviewer can see.
+  - "Download Presentation" as a small link instead of a third big button.
+  - Legal-metrology info block: manufacturer/marketer + address, country of origin, net qty, MRP incl. taxes, best-before, customer care.
+  - Main price font.
+  - Tone down "No Side Effects" / "Clinically Tested" / "Others: side effects" comparison claims.
+  - 5 Liquid syntax errors pre-exist in `snippets/product-ingredients-data.liquid`.
+- **B. Ads plan.** Prerequisites first:
+  - Policy pages live (the 4 pages created).
+  - Shopify "Google & YouTube" app (GA4, conversions, Merchant Center feed).
+  - "Facebook & Instagram" app (Pixel + Conversions API).
+  - Emoji-free product titles for the Shopping feed.
+  - Claim compliance (Drugs & Magic Remedies Act / ASCI).
+  - Then campaigns, budget and targeting.
+
+**Pending to-dos (Krish asked for the last two to stay at the end)**
+1. Create the admin pages:
+   - Terms & Conditions → template `terms-of-service`, handle `terms-and-conditions`
+   - Returns, Refund & Exchange Policy → `refund-policy`, `returns-refund-exchange`
+   - Shipping Policy → `shipping-policy`, `shipping-policy`
+   - Ayurvedic Herb Glossary → `herb-glossary`, `ayurvedic-herb-glossary`
+2. Combo photos, if not uploaded yet. The files are ready in `C:\Users\sonik\Desktop\Everything\last prm update\upload-to-shopify\`:
+   - ArthoVilla Oil & Syrup COMBO (2 photos), admin product 9125503271086
+   - Rome Oil & Capsules COMBO (5 photos), admin product 9125503860910
+3. Settings → General → currency format `₹{{amount}}` (checkout/emails still say "Rs.").
+4. Admin API access: create an app in the Shopify **Dev Dashboard** (client-credentials grant, 24h
+   tokens; legacy "Develop apps" was retired 2026-01-01). That unblocks:
+   - the MRP rollout (22 prices)
+   - product photos, page creation and catalog clean-up done by Claude
+   `update-prices.py` and `populate-collections.py` need updating for client-credentials tokens.
+5. MRP rollout plus COMBO listing prices (Krish still owes the combo numbers).
+6. Catalog clean-up:
+   - 6 listings whose handle and title name different products
+   - Saheli Syrup SKU `PRM HARRY-1  SYRUP`
+   - Pynil Capsules listing titled as a combo
+   - two listings both titled "Harry Family Herbal Tonic"
+   - emoji / 136-character titles
+   - FAQ page (template exists, page missing)
+7. Shipping decision: checkout charges ₹0 on every order, while the site says "free above ₹400".
+8. Delete the preview theme "Policy pages preview (Claude)" #188801745070. Keep BACKUP #188802629806
+   until Krish is happy with the redesign.
+9. ⚑ **Grievance Officer name + designation**, required on the policy pages. Fill it in the theme
+   editor (Terms / Returns / Shipping page sections → "Grievance Officer name") or give it to Claude.
+10. ⚑ **Nasal Inhaler product photo**, still missing. Admin product 9096910471342.
 
 ---
 
@@ -13,6 +78,31 @@
 
 > Krish's standing instruction (2026-08-07): **report this section first, before anything else**,
 > at the start of every session. Pricing errors cost money on every order.
+
+### Status re-verified against the live store on 2026-10-21
+- ✅ **FIXED LIVE 2026-10-21 (items below marked FIXED):** combo-pack prices, VedaCold ₹180, 5-star display.
+- **FIXED — combo-pack selector showed wrong prices on ALL 66 product pages.** Someone set the
+  live `templates/product.json` combo blocks (via admin theme editor) to Pack of 3 = ₹213
+  (MRP ₹243) and Pack of 5 = ₹355 (MRP ₹410). `selectCombo()` only changes the displayed text +
+  quantity, so checkout charges qty × unit price (Harry Capsules: shows ₹213, charges ₹840).
+  Fix = local commit `418355e` (auto-calc). Live `product.json` differs from HEAD by ~95 lines and
+  `product-template.liquid` by ~47 → pull + diff before pushing, don't blind-push.
+- **FIXED — homepage VedaCold section hardcoded `₹180`** (now reads the live product price) (`sections/vedacold-featured.liquid`
+  line ~131) while the product sells at ₹220 (₹240 after MRP rollout). Should read the product price.
+- **FIXED — product page always rendered 5 filled stars next to "(0 reviews)"** (now "No reviews yet" unless review blocks exist)
+  (`sections/product-template.liquid` ~line 569 loops 5 filled SVGs unconditionally).
+- **NEW — shipping:** checkout charges ₹0 on every order (tested a ₹106.50 cart) while the
+  announcement bar says "Free Shipping on Orders Above ₹400". Krish to decide which is intended.
+- **MRP rollout still NOT applied** — 22 of 23 confident rows still at old prices.
+  **The unblock steps below are outdated:** Shopify retired creating "Develop apps" legacy custom
+  apps in admin on 2026-01-01. New route = app in the Dev Dashboard + client-credentials grant
+  (tokens expire after 24h). `update-prices.py` / `populate-collections.py` need updating for that.
+- **₹0 products: FIXED** in admin since August (ArthoVilla combo ₹239, Rome combo ₹374, Inhaler
+  ₹116, Platigem Tablets ₹350, Stenovilla Tablets ₹265) — but Rome combo, ArthoVilla combo and
+  the Nasal Inhaler still have **no product images**.
+- Combos (section 2), Pregone/Suman, Pynil Capsules listing, handle/title swaps, Saheli SKU:
+  all unchanged. Two different listings are both titled "Harry Family Herbal Tonic" (450ml ×1
+  ₹257 and 225ml ×2 ₹280).
 
 ### 1. NEW MRP rollout is NOT applied to the live store yet
 `price-mapping.json` + `update-prices.py` are ready and validated (25 rows, 0 unresolved), but
@@ -71,6 +161,95 @@ They're priced off their components and are **not** in the MRP sheet. Krish stil
 - handle `prm-dermo-villa-herbal-syrup-200ml-...` → title says "Dermovilla Herbal **Soap**"
 - handle `prm-prolax-...-syrup-170ml-...` → title is raw copy: "Chronic Constipation Poor bowel movement…"
 - Saheli Syrup listing carries SKU `PRM HARRY-1 SYRUP`
+
+---
+
+## Session 2026-10-21 — Policy pages (Terms / Returns / Shipping) rebuilt + footer legal links + design review
+
+### Found on live
+- `/pages/terms-of-service`, `/pages/refund-policy`, `/pages/shipping-policy`, `/pages/faq` and
+  `/policies/terms-of-service|refund-policy|shipping-policy` all **404**; only
+  `/policies/privacy-policy` exists (Shopify-generated, July 2026). The footer linked to all four.
+- Policy CSS lived only inside `shipping-policy.liquid`, so Terms/Refund would have rendered unstyled.
+
+### Built (local + preview theme; NOT on live yet)
+- New snippets: `policy-page-assets` (shared CSS/JS, mirrors Contact page tokens), `policy-icon`,
+  `policy-url` (resolves a policy URL from candidate page handles → falls back to Shopify policy →
+  outputs nothing if neither exists), `policy-link`, `policy-help`, `policy-grievance`,
+  `policy-related`.
+- `sections/terms-of-service.liquid` → **Terms & Conditions** (17 sections; Indian Ayurvedic
+  medical disclaimer replacing the US "supplements" wording; Razorpay; NimbusPost; reviews; IP;
+  liability; DPDP Act; Bhavnagar jurisdiction; Grievance Officer per Consumer Protection
+  (E-Commerce) Rules 2020).
+- `sections/refund-policy.liquid` → **Returns, Refund & Exchange Policy** (48h reporting for
+  damaged/wrong/missing/expired; <3 months shelf-life = replace; 7-day sealed change-of-mind returns,
+  customer pays return shipping; Razorpay refund-credit table UPI 2–7 / cards 5–10 / netbanking
+  2–10 / wallets 0–3 business days; COD refunds to UPI/bank; exchanges; free cancellation before
+  dispatch; late-delivery refund right). Tables stack into cards ≤576px.
+- `sections/shipping-policy.liquid` rebuilt on the same design; removed the unverified "₹50 below
+  ₹400" claim (checkout charges ₹0); hours 10–7; "Track on NimbusPost" →
+  `https://ship.nimbuspost.com/tracking`.
+- `sections/footer.liquid`: legal row now Terms & Conditions · Returns, Refund & Exchange ·
+  Shipping Policy · Privacy Policy, each resolved via `policy-url` and **hidden until its page
+  exists**.
+- `assets/theme.css`: appended `body .shopify-policy__*` block so Shopify's built-in Privacy
+  page matches.
+- Section settings on each policy template: legal name (default "PRM & Company"), Grievance
+  Officer name/designation/email/phone (name still blank — **Krish to supply**).
+- `shopify theme check`: 0 offenses in changed files (110 pre-existing elsewhere, incl. 5
+  LiquidHTMLSyntaxError in `snippets/product-ingredients-data.liquid`).
+
+### Deploy state
+- Live files were identical to git HEAD before the change (footer, theme.css, 3 sections; page
+  templates differ only by Shopify's auto-generated header comment) → safe to push as-is.
+- Verified on unpublished duplicate **"Policy pages preview (Claude)" #188801745070** via
+  `/pages/contact?view=<template>&preview_theme_id=188801745070` — 0 Liquid errors, desktop +
+  true-mobile (390px CDP emulation) screenshots OK.
+- First live-push attempt was blocked by the Claude Code permission classifier; after Krish said
+  "ok do all", everything (policy pages + design refresh, 34 files) was pushed LIVE and verified.
+- After live push, Krish creates 3 pages in admin (Online Store → Pages, empty content):
+  "Terms & Conditions" → template `terms-of-service` (handle `terms-and-conditions`);
+  "Returns, Refund & Exchange Policy" → `refund-policy` (`returns-refund-exchange`);
+  "Shipping Policy" → `shipping-policy` (`shipping-policy`). Footer links appear automatically.
+- Delete the preview theme once done: `shopify theme delete --theme 188801745070 --force`.
+
+### Tooling notes
+- Shopify CLI 3.92.1 (4.6.1 available). Device-code login codes expire in ~10 min; run login at
+  the end of a turn. `theme duplicate` needs `--force` when non-interactive.
+- Store redirects `prm-herbovilla.myshopify.com` → custom domain `prmherbovilla.com`.
+- Headless screenshots: `chrome --screenshot` can't emulate phones (min window width) — use a CDP
+  script with `Emulation.setDeviceMetricsOverride` (scratch tool `cdp-shot.mjs`) for 390px mobile.
+
+### Design refresh — DONE and LIVE (2026-10-21, Krish: "ok do all")
+Full file-by-file list + revert steps: **`../CHANGES-2026-10-21.md`** (repo root).
+- **Backups:** Shopify theme "BACKUP before Claude changes 2026-10-21" **#188802629806** (publish it to
+  revert everything) + local `../backups/live-theme-2026-10-21/` (99 files, gitignored).
+- Hero rebuilt product-led (product pickers product_1..3 = Harry Capsules / Cofula / VedaCold), quali
+  strip + claim cards removed; section order hero → bestsellers → certifications → shop-by-goal →
+  vedacold → new arrivals → herbs → testimonials → newsletter.
+- One product card everywhere (`snippets/product-card.liquid`, `.pcard` + `.prow` in theme.css):
+  short title via `product-short-title`, ₹ via `inr-price`, Add button below image, mix-blend multiply
+  on cream tiles; rows swipe on phones.
+- Certifications light/compact; Shop-by-goal light cards with product photos; Herbs section has
+  `layout: featured` (6 herb blocks, `herb-icon` illustrations) and the full lists moved to
+  `templates/page.herb-glossary.json` (page must be created: handle `ayurvedic-herb-glossary`).
+- Newsletter light card (+ optional offer badge / WhatsApp settings, blank = hidden); announcement
+  bar rotates 3 messages ("Chemical-Free" removed); header "Cart" text link removed, All Products →
+  `?sort_by=best-selling`; collection page: "All Products" title, concern chips, photographed
+  products first, dead Filters button + list view removed; footer Visa/MC/RuPay logos (Razorpay →
+  `shop.enabled_payment_types` is empty, so they're explicit), duplicate email + self-link removed.
+- Mobile homepage 12,421px → ~7,700px; products visible on the first screen.
+- Unused live-only files left untouched: `blocks/ai_gen_block_*.liquid` (4) and
+  `sections/ai_gen_block_3ac1436.liquid` (created via Shopify AI in the editor, not referenced).
+
+### Design review findings (2026-10-21) — for reference
+Key findings: mobile shows no product until ~3,200px of scroll (hero + 4 stacked claim cards + 5
+stacked certification cards); certifications shown twice (hero strip + green section); hero has
+no product/lifestyle imagery; "Herbs & Their Uses" is a ~180-item text wall; two different product
+card styles; "Rs. 220.00" money format vs "₹" elsewhere; long emoji/pipe product titles (median 136
+chars, 26 with emoji) set in serif at small sizes; Add-to-cart overlays cover product images; no
+sticky add-to-cart on mobile PDP; generic global "Key Benefits" duplicate the claim pills; some
+packshots read "for the use of registered medical practitioner only".
 
 ---
 
