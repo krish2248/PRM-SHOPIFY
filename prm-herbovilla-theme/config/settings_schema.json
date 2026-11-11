@@ -291,6 +291,13 @@
       },
       {
         "type": "text",
+        "id": "shipping_fee_below_threshold",
+        "label": "Shipping fee below the threshold",
+        "default": "75",
+        "info": "Flat fee in INR for orders below the free-shipping threshold. Must match Settings → Shipping and delivery."
+      },
+      {
+        "type": "text",
         "id": "free_shipping_message",
         "label": "Free Shipping Message",
         "default": "Free shipping on orders above ₹400!"

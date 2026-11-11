@@ -1,199 +1,266 @@
 {%- comment -%}
-  Product PDF URL resolver.
+  Product presentation resolver (rewritten 2026-11-11).
 
-  Maps product.handle -> PDF filename stored in theme assets/.
-  Uses `asset_url` so PDFs deploy with the theme (no Admin upload needed).
+  Returns every presentation PDF (stored in theme assets/) for a product, as
+  comma-separated "url|Label" entries. Combo listings return one entry per component.
+  Outputs a blank string when there is no PDF.
 
-  Usage (from a section/template):
-    {%- capture pdf_url -%}{%- render 'product-pdf-url', product: product -%}{%- endcapture -%}
+  Usage:
+    {%- capture pdf_list -%}{%- render 'product-pdf-url', product: product -%}{%- endcapture -%}
+    {%- assign pdf_entries = pdf_list | strip | split: ',' -%}
 
-  Outputs a blank string if there is no match.
+  Matching:
+    1. Combo listings, matched by handle (combo handles are clean).
+    2. Everything else is matched on the TITLE first, because several live handles
+       name a different product than their title (e.g. the handle says "syrup" but the
+       product is the soap). The handle is used only when the title names no brand.
+       Brand = first known brand word; form = the EARLIEST form word in the text
+       (syrup / tablet / capsule / soap / cream / oil / gel ...), so a later mention
+       such as "Olive Oil" in a soap title doesn't win.
 {%- endcomment -%}
 
 {%- liquid
-  assign handle = product.handle
-  assign pdf_file = ''
+  assign files = ''
+  assign h = product.handle | downcase
 
-  case handle
-    when 'prm-castro-softgel-capsules-pack-of-2-ayurvedic-digestive-gastric-care-formula'
-      assign pdf_file = 'castro-softgel.pdf'
-    when 'prm-steno-villa-ayurvedic-stone-care-tablet-30-tabs-pack-of-2-promotes-healthy-kidney-function-stone-dissolution'
-      assign pdf_file = 'stenovilla-tabs.pdf'
-    when 'prm-steno-villa-ayurvedic-stone-care-syrup-200ml-pack-of-2-supports-kidney-health-stone-relief'
-      assign pdf_file = 'stenovilla-syrup.pdf'
-    when 'prm-saheli-ayurvedic-female-tonic-200ml-pack-of-2-uterine-hormonal-health-support-for-women'
-      assign pdf_file = 'saheli-syrup.pdf'
-    when 'prm-lee-ayurvedic-liver-tonic-200ml-pack-of-2-supports-liver-health-detoxification'
-      assign pdf_file = 'lee-syrup.pdf'
-    when 'prm-harry-herbal-drops-30ml-pack-of-3-ayurvedic-supplement-for-growth-immunity-in-children'
-      assign pdf_file = 'harry-drops.pdf'
-    when 'prm-harry-g-ayurvedic-capsules-30-caps-pack-of-1-boosts-vigour-vitality-stamina-with-suvarna-bhasma-safed-musli-ashwagandha'
-      assign pdf_file = 'harry-g.pdf'
-    when 'prm-dermo-villa-herbal-syrup-200ml-pack-of-2-blood-purifier-skin-cleanser-with-neem-manjistha-kalmegha'
-      assign pdf_file = 'dermo-syrup.pdf'
-    when 'prm-dermo-villa-herbal-capsules-30-caps-pack-of-2-ayurvedic-blood-purifier-with-arogyavardhini-ras-neem-chirayata'
-      assign pdf_file = 'dermo-cap.pdf'
-    when 'prm-saheli-fairness-cream-25g-pack-of-2-glowing-supple-acne-free-skin-with-haldi-chandan-wheat-germ-oil'
-      assign pdf_file = 'saheli-cream.pdf'
-    when 'prm-prince-mouth-liquid-12ml-pack-of-2-herbal-mouth-ulcer-relief-with-jethimadh-ilaichi-khadir'
-      assign pdf_file = 'prince-mouth-liquid.pdf'
-    when 'prm-prince-mouth-gel-10g-pack-of-2-ayurvedic-mouth-ulcer-remedy-with-jethimadh-khadir-irimed'
-      assign pdf_file = 'prince-mouth-gel.pdf'
-    when 'prm-kesar-baby-soap-75g-pack-of-2-gentle-daily-bathing-soap-for-infants-with-kesar-coconut-oil-jojoba-oil'
-      assign pdf_file = 'kesar-baby-soap.pdf'
-    when 'prm-dyril-plus-ayurvedic-tablet-10-tabs-pack-of-2-helpful-for-dysentery-diarrhoea-ibs-with-kutaj-marorphali-anar-chal'
-      assign pdf_file = 'dyril-plus.pdf'
-    when 'prm-prolice-herbal-oil-30ml-pack-of-3-natural-lice-care-treatment-with-shikakai-oil-sitafal-oil-til-oil'
-      assign pdf_file = 'prolice-herbal-oil.pdf'
-    when 'prm-obee-villa-ayurvedic-capsule-30-caps-pack-of-2-supports-weight-management-with-shuddha-guggul-baheda-lasan'
-      assign pdf_file = 'obee-cap-oil.pdf'
-    when 'prm-gluco-villa-ayurvedic-tablet-30-tabs-pack-of-2-helps-regulate-blood-sugar-with-jamun-beej-karela-mahamejva'
-      assign pdf_file = 'gluco-villa.pdf'
-    when 'prm-breno-villa-herbal-syrup-200ml-pack-of-2-calms-mind-promotes-relaxation-with-shankhpushpi-brahmi-gulabphool'
-      assign pdf_file = 'breno-syrup.pdf'
-    when 'prm-breno-villa-herbal-capsules-30-caps-pack-of-2-helps-relieve-stress-depression-with-gulabphool-brahmi-vidang'
-      assign pdf_file = 'breno-caps.pdf'
-    when 'prm-pynil-ayurvedic-piles-care-ointment-30g-pack-of-2-soothes-pain-itching-with-haritaki-nimbu-pittapapdo'
-      assign pdf_file = 'pynil-oint.pdf'
-    when 'prm-pynil-ayurvedic-piles-care-capsules-30-caps-pack-of-2-gentle-hemorrhoid-relief-with-suran-aritha-mango-seeds-limbodi'
-      assign pdf_file = 'pynil-caps.pdf'
-    when 'prm-prolax-ayurvedic-laxative-care-tablet-10-tabs-pack-of-3-promotes-healthy-bowel-movement-with-senna-shuddha-nepala-sanchal'
-      assign pdf_file = 'prolax-tabs.pdf'
-    when 'prm-prolax-ayurvedic-laxative-care-syrup-170ml-pack-of-2-gentle-relief-from-chronic-constipation-with-sanchal-trivrut-senna'
-      assign pdf_file = 'prolax-syrup.pdf'
-    when 'prm-itchi-care-ayurvedic-skin-care-cream-15g-pack-of-3-fungal-infection-remedy-with-sandal-oil-rose-water-berry-berry'
-      assign pdf_file = 'itchi-care.pdf'
-    when 'prm-harry-ayurvedic-immunity-syrup-450ml-pack-of-1-boosts-strength-immunity-with-ashwagandha-triphala-sharavari'
-      assign pdf_file = 'harry-syrup.pdf'
-    when 'prm-harry-ayurvedic-immunity-syrup-225ml-pack-of-2-general-family-tonic-with-ashwagandha-triphala-sharavari'
-      assign pdf_file = 'harry-syrup.pdf'
-    when 'prm-harry-ayurvedic-immunity-capsules-30-caps-pack-of-2-boosts-strength-stamina-with-ashwagandha-gokhru-shilajit'
-      assign pdf_file = 'harry-cap.pdf'
-    when 'prm-dermo-villa-ayurvedic-daily-bathing-soap-75g-pack-of-2-cleanses-protects-skin-with-haldi-tulsi-neem-karanj'
-      assign pdf_file = 'dermo-soap.pdf'
-    when 'prm-cut-care-ayurvedic-foot-care-ointment-25g-pack-of-2-heals-cracked-heels-with-kokum-butter-sarjaras-manjishtha'
-      assign pdf_file = 'cut-care-ointment.pdf'
-    when 'prm-cofula-ayurvedic-syrup-110ml-pack-of-2-effective-relief-from-cough-cold-with-adulsa-jethimadh-bhimsenkapoor'
-      assign pdf_file = 'cofula-syrup.pdf'
-    when 'prm-cofula-junior-herbal-syrup-100ml-pack-of-2-gentle-cough-cold-relief-for-kids-with-nilgiri-oil-tulsi-oil-ativish-mool'
-      assign pdf_file = 'cofula-junior.pdf'
-    when 'prm-artho-villa-ayurvedic-arthritis-tablet-30-tabs-pack-of-2-reduces-pain-promotes-flexibility-with-methi-sunth-ashwagandha'
-      assign pdf_file = 'artho-tabs.pdf'
-    when 'prm-artho-villa-ayurvedic-arthritis-syrup-200ml-pack-of-2-relieves-joint-stiffness-inflammation-with-hadsakal-daruharidra-sunthi'
-      assign pdf_file = 'artho-syrup.pdf'
-    when 'artho-villa-ayurvedic-arthritis-syrup-200ml-pack-of-2-relieves-joint-stiffness-inflammation-with-hadsakal-daruharidra-sunthi'
-      assign pdf_file = 'artho-syrup.pdf'
-    when 'prm-artho-villa-ayurvedic-pain-reliever-oil-100ml-pack-of-2-soothes-joint-muscle-pain-with-gandhpura-mahamash-mahanarayan'
-      assign pdf_file = 'artho-oil.pdf'
-    when 'prm-artho-villa-ayurvedic-pain-reliever-oil-60ml-pack-of-2-for-joint-back-pain-relief-with-gandhpura-mahamash-mahanarayan'
-      assign pdf_file = 'artho-oil.pdf'
-    when 'arthovilla-ayurvedic-pain-reliever-oil-60ml-pack-of-2-for-joint-back-pain-relief-with-gandhpura-mahamash-mahanarayan'
-      assign pdf_file = 'artho-oil.pdf'
-    when 'prm-icee-ayurvedic-antacid-syrup-170ml-strawberry-flavour-pack-of-2-relieves-acidity-gas-indigestion'
-      assign pdf_file = 'icee-syrup.pdf'
+  comment
+    1. Combos: one PDF per component (components without a PDF are skipped).
+  endcomment
+  case h
+    when 'arthovilla-oil-syrup-combo'
+      assign files = 'artho-oil.pdf,artho-syrup.pdf'
+    when 'cofula-vedacold-combo'
+      assign files = 'cofula-syrup.pdf'
+    when 'dermovilla-syrup-tablets'
+      assign files = 'dermo-syrup.pdf'
+    when 'hair-marshal-prolice-oil-combo'
+      assign files = 'hair-marshal.pdf,prolice-herbal-oil.pdf'
+    when 'harry-syrup-tablets'
+      assign files = 'harry-syrup.pdf'
+    when 'prolax-tab-syrup-combo'
+      assign files = 'prolax-tabs.pdf,prolax-syrup.pdf'
+    when 'pynil-oitment-capsules-combo'
+      assign files = 'pynil-oint.pdf,pynil-caps.pdf'
+    when 'saheli-soap-cream-combo'
+      assign files = 'saheli-soap.pdf,saheli-cream.pdf'
+    when 'platigen-syrup-tablets-combo', 'rome-oil-capsules', 'zymovilla-syrup-tablets-combo'
+      assign files = 'none'
   endcase
 
   comment
-    Fallback: fuzzy substring matching for products whose exact handles
-    we don't hard-code. Any product whose handle contains these substrings
-    will get the corresponding PDF.
+    2. Single products: title first, then handle.
   endcomment
-  if pdf_file == ''
-    if handle contains 'castrowin'
-      assign pdf_file = 'castrowin-softgel.pdf'
-    elsif handle contains 'hair-marshal' or handle contains 'hairmarshal'
-      assign pdf_file = 'hair-marshal.pdf'
-    elsif handle contains 'icee-rd'
-      assign pdf_file = 'icee-rd-caps.pdf'
-    elsif handle contains 'icee-capsule' or handle contains 'icee-caps'
-      assign pdf_file = 'icee-caps.pdf'
-    elsif handle contains 'icee'
-      assign pdf_file = 'icee-syrup.pdf'
-    elsif handle contains 'lee-capsule' or handle contains 'lee-caps'
-      assign pdf_file = 'lee-caps.pdf'
-    elsif handle contains 'lee'
-      assign pdf_file = 'lee-syrup.pdf'
-    elsif handle contains 'aahaa' or handle contains 'aaha-gel' or handle contains 'aha-gel'
-      assign pdf_file = 'aahaa-gel.pdf'
-    elsif handle contains 'harry-powder' or handle contains 'harrypowder'
-      assign pdf_file = 'harry-powder.pdf'
-    elsif handle contains 'saheli-soap' or handle contains 'saheli-bathing'
-      assign pdf_file = 'saheli-soap.pdf'
-    elsif handle contains 'dermo-neem' or handle contains 'dermoneem' or handle contains 'dermo-villa-neem'
-      assign pdf_file = 'dermo-neem-soap.pdf'
-    elsif handle contains 'castro'
-      assign pdf_file = 'castro-softgel.pdf'
-    elsif handle contains 'steno' and handle contains 'tab'
-      assign pdf_file = 'stenovilla-tabs.pdf'
-    elsif handle contains 'steno' and handle contains 'syrup'
-      assign pdf_file = 'stenovilla-syrup.pdf'
-    elsif handle contains 'saheli' and handle contains 'cream'
-      assign pdf_file = 'saheli-cream.pdf'
-    elsif handle contains 'saheli'
-      assign pdf_file = 'saheli-syrup.pdf'
-    elsif handle contains 'harry-drop'
-      assign pdf_file = 'harry-drops.pdf'
-    elsif handle contains 'harry-g'
-      assign pdf_file = 'harry-g.pdf'
-    elsif handle contains 'harry' and handle contains 'cap'
-      assign pdf_file = 'harry-cap.pdf'
-    elsif handle contains 'harry'
-      assign pdf_file = 'harry-syrup.pdf'
-    elsif handle contains 'dermo' and handle contains 'syrup'
-      assign pdf_file = 'dermo-syrup.pdf'
-    elsif handle contains 'dermo' and handle contains 'cap'
-      assign pdf_file = 'dermo-cap.pdf'
-    elsif handle contains 'dermo' and handle contains 'soap'
-      assign pdf_file = 'dermo-soap.pdf'
-    elsif handle contains 'prince-mouth-gel' or handle contains 'mouth-gel'
-      assign pdf_file = 'prince-mouth-gel.pdf'
-    elsif handle contains 'prince-mouth' or handle contains 'mouth-liquid'
-      assign pdf_file = 'prince-mouth-liquid.pdf'
-    elsif handle contains 'kesar-baby' or handle contains 'baby-soap'
-      assign pdf_file = 'kesar-baby-soap.pdf'
-    elsif handle contains 'dyril'
-      assign pdf_file = 'dyril-plus.pdf'
-    elsif handle contains 'prolice'
-      assign pdf_file = 'prolice-herbal-oil.pdf'
-    elsif handle contains 'obee'
-      assign pdf_file = 'obee-cap-oil.pdf'
-    elsif handle contains 'gluco'
-      assign pdf_file = 'gluco-villa.pdf'
-    elsif handle contains 'breno' and handle contains 'syrup'
-      assign pdf_file = 'breno-syrup.pdf'
-    elsif handle contains 'breno'
-      assign pdf_file = 'breno-caps.pdf'
-    elsif handle contains 'pynil' and handle contains 'oint'
-      assign pdf_file = 'pynil-oint.pdf'
-    elsif handle contains 'pynil'
-      assign pdf_file = 'pynil-caps.pdf'
-    elsif handle contains 'prolax' and handle contains 'syrup'
-      assign pdf_file = 'prolax-syrup.pdf'
-    elsif handle contains 'prolax'
-      assign pdf_file = 'prolax-tabs.pdf'
-    elsif handle contains 'itchi'
-      assign pdf_file = 'itchi-care.pdf'
-    elsif handle contains 'cut-care'
-      assign pdf_file = 'cut-care-ointment.pdf'
-    elsif handle contains 'cofula' and handle contains 'junior'
-      assign pdf_file = 'cofula-junior.pdf'
-    elsif handle contains 'cofula'
-      assign pdf_file = 'cofula-syrup.pdf'
-    elsif handle contains 'artho' and handle contains 'tab'
-      assign pdf_file = 'artho-tabs.pdf'
-    elsif handle contains 'artho' and handle contains 'syrup'
-      assign pdf_file = 'artho-syrup.pdf'
-    elsif handle contains 'artho' and handle contains 'oil'
-      assign pdf_file = 'artho-oil.pdf'
-    elsif handle contains 'artho'
-      assign pdf_file = 'artho-tabs.pdf'
-    endif
+  if files == ''
+    assign t_src = product.title | downcase
+    assign h_src = h | replace: '-', ' '
+    assign sources = t_src | append: '~~' | append: h_src | split: '~~'
+    comment
+      Brands without a PDF yet (rome, platigem, zymo ...) are listed too, so an ingredient
+      word in their title (e.g. "kesar" in Rome Oil) can't pick another product's PDF.
+      The brand that appears EARLIEST in the text wins; at the same position the earlier
+      list entry wins, so longer names come first ('harry g ' before 'harry').
+    endcomment
+    assign brand_list = 'castrowin,castor,castro,aahaa,aaha,hair marshal,hairmarshal,prolice,icee, lee ,harry g ,harry,saheli,dermo neem,dermo,steno,prince,kesar,dyril,obee,gluco,breno,pynil,prolax,itchi,cut care,cofula junior,cofula,artho,rome,platigem,platigen,zymo,aloy,calcy,fenny,vedacold,inhaler' | split: ','
+    assign form_list = 'syrup,tablet, tabs,capsule,caps,ointment,soap,cream,oil,gel,liquid,powder,drops,tonic' | split: ','
+
+    for src in sources
+      assign s = ' ' | append: src | append: ' '
+      assign brand = ''
+      assign brand_pos = 100000
+      for b in brand_list
+        if s contains b
+          assign bpos = s | split: b | first | size
+          if bpos < brand_pos
+            assign brand_pos = bpos
+            assign brand = b | strip
+          endif
+        endif
+      endfor
+      if brand == ''
+        continue
+      endif
+
+      assign form = ''
+      assign best = 100000
+      for f in form_list
+        if s contains f
+          assign pos = s | split: f | first | size
+          if pos < best
+            assign best = pos
+            assign form = f | strip
+          endif
+        endif
+      endfor
+      if form == 'tabs'
+        assign form = 'tablet'
+      elsif form == 'caps'
+        assign form = 'capsule'
+      elsif form == 'oint'
+        assign form = 'ointment'
+      endif
+
+      case brand
+        when 'castrowin'
+          assign files = 'castrowin-softgel.pdf'
+        when 'castor', 'castro'
+          assign files = 'castro-softgel.pdf'
+        when 'aahaa', 'aaha'
+          assign files = 'aahaa-gel.pdf'
+        when 'hair marshal', 'hairmarshal'
+          assign files = 'hair-marshal.pdf'
+        when 'prolice'
+          assign files = 'prolice-herbal-oil.pdf'
+        when 'icee'
+          if s contains 'icee rd'
+            assign files = 'icee-rd-caps.pdf'
+          elsif form == 'capsule'
+            assign files = 'icee-caps.pdf'
+          else
+            assign files = 'icee-syrup.pdf'
+          endif
+        when 'lee'
+          if form == 'capsule'
+            assign files = 'lee-caps.pdf'
+          else
+            assign files = 'lee-syrup.pdf'
+          endif
+        when 'harry g'
+          assign files = 'harry-g.pdf'
+        when 'harry'
+          case form
+            when 'drops'
+              assign files = 'harry-drops.pdf'
+            when 'powder'
+              assign files = 'harry-powder.pdf'
+            when 'capsule'
+              assign files = 'harry-cap.pdf'
+            else
+              assign files = 'harry-syrup.pdf'
+          endcase
+        when 'saheli'
+          case form
+            when 'soap'
+              assign files = 'saheli-soap.pdf'
+            when 'cream'
+              assign files = 'saheli-cream.pdf'
+            else
+              assign files = 'saheli-syrup.pdf'
+          endcase
+        when 'dermo neem'
+          assign files = 'dermo-neem-soap.pdf'
+        when 'dermo'
+          case form
+            when 'soap'
+              assign files = 'dermo-soap.pdf'
+            when 'capsule'
+              assign files = 'dermo-cap.pdf'
+            else
+              assign files = 'dermo-syrup.pdf'
+          endcase
+        when 'steno'
+          if form == 'tablet'
+            assign files = 'stenovilla-tabs.pdf'
+          else
+            assign files = 'stenovilla-syrup.pdf'
+          endif
+        when 'prince'
+          if form == 'gel'
+            assign files = 'prince-mouth-gel.pdf'
+          else
+            assign files = 'prince-mouth-liquid.pdf'
+          endif
+        when 'kesar'
+          assign files = 'kesar-baby-soap.pdf'
+        when 'dyril'
+          assign files = 'dyril-plus.pdf'
+        when 'obee'
+          assign files = 'obee-cap-oil.pdf'
+        when 'gluco'
+          assign files = 'gluco-villa.pdf'
+        when 'breno'
+          if form == 'syrup' or form == 'tonic'
+            assign files = 'breno-syrup.pdf'
+          else
+            assign files = 'breno-caps.pdf'
+          endif
+        when 'pynil'
+          if s contains 'combo'
+            assign files = 'pynil-oint.pdf,pynil-caps.pdf'
+          elsif form == 'ointment'
+            assign files = 'pynil-oint.pdf'
+          else
+            assign files = 'pynil-caps.pdf'
+          endif
+        when 'prolax'
+          if form == 'syrup'
+            assign files = 'prolax-syrup.pdf'
+          else
+            assign files = 'prolax-tabs.pdf'
+          endif
+        when 'itchi'
+          assign files = 'itchi-care.pdf'
+        when 'cut care'
+          assign files = 'cut-care-ointment.pdf'
+        when 'cofula junior'
+          assign files = 'cofula-junior.pdf'
+        when 'cofula'
+          assign files = 'cofula-syrup.pdf'
+        when 'artho'
+          case form
+            when 'oil'
+              assign files = 'artho-oil.pdf'
+            when 'syrup'
+              assign files = 'artho-syrup.pdf'
+            else
+              assign files = 'artho-tabs.pdf'
+          endcase
+        else
+          comment
+            No presentation yet (rome, platigem, zymo, aloy, calcy, fenny, vedacold, inhaler).
+          endcomment
+          assign files = 'none'
+      endcase
+      break
+    endfor
   endif
 
-  if pdf_file != ''
-    assign pdf_url = pdf_file | asset_url
-  else
-    assign pdf_url = ''
+  comment
+    3. Build "url|Label" entries. Labels are used when a product has more than one PDF.
+  endcomment
+  assign out = ''
+  if files != '' and files != 'none'
+    assign file_arr = files | split: ','
+    for file in file_arr
+      case file
+        when 'artho-oil.pdf'
+          assign label = 'ArthoVilla Oil'
+        when 'artho-syrup.pdf'
+          assign label = 'ArthoVilla Syrup'
+        when 'hair-marshal.pdf'
+          assign label = 'Hair Marshal'
+        when 'prolice-herbal-oil.pdf'
+          assign label = 'Prolice Oil'
+        when 'prolax-tabs.pdf'
+          assign label = 'Prolax Tablets'
+        when 'prolax-syrup.pdf'
+          assign label = 'Prolax Syrup'
+        when 'pynil-oint.pdf'
+          assign label = 'Pynil Ointment'
+        when 'pynil-caps.pdf'
+          assign label = 'Pynil Capsules'
+        when 'saheli-soap.pdf'
+          assign label = 'Saheli Soap'
+        when 'saheli-cream.pdf'
+          assign label = 'Saheli Cream'
+        else
+          assign label = ''
+      endcase
+      assign entry = file | asset_url | append: '|' | append: label
+      if out != ''
+        assign out = out | append: ','
+      endif
+      assign out = out | append: entry
+    endfor
   endif
-  echo pdf_url
+  echo out
 -%}

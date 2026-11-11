@@ -7,6 +7,7 @@
   assign legal_name = section.settings.legal_name | default: 'PRM & Company'
   assign tracking_url = section.settings.tracking_url | default: 'https://ship.nimbuspost.com/tracking'
   assign free_above = settings.free_shipping_threshold | default: 400
+  assign ship_fee = settings.shipping_fee_below_threshold | default: 75
 -%}
 
 <div class="policy-page" data-section-id="{{ section.id }}">
@@ -26,7 +27,7 @@
       <div class="policy-highlight">
         <span class="policy-icon">{% render 'policy-icon', name: 'truck' %}</span>
         <h3>Free Shipping</h3>
-        <p>On all orders above ₹{{ free_above }}, anywhere in India.</p>
+        <p>On all orders of ₹{{ free_above }} and above, anywhere in India. Flat ₹{{ ship_fee }} below that.</p>
       </div>
       <div class="policy-highlight">
         <span class="policy-icon">{% render 'policy-icon', name: 'clock' %}</span>
@@ -93,7 +94,7 @@
                 </tr>
                 <tr>
                   <td data-label="Order value">Below ₹{{ free_above }}</td>
-                  <td data-label="Shipping">A small delivery charge may apply — always shown at checkout before you pay</td>
+                  <td data-label="Shipping"><strong>Flat ₹{{ ship_fee }}</strong>, shown at checkout before you pay</td>
                 </tr>
               </tbody>
             </table>

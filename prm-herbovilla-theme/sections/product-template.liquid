@@ -781,14 +781,28 @@
         {%- endif -%}
 
         <!-- Download Presentation -->
-        {%- capture resolved_pdf_url -%}{%- render 'product-pdf-url', product: product -%}{%- endcapture -%}
-        {%- assign resolved_pdf_url = resolved_pdf_url | strip -%}
-        {%- assign download_url = product.metafields.custom.product_presentation_url | default: resolved_pdf_url | default: section.settings.default_download_url -%}
-        {%- if download_url != blank -%}
-          <a href="{{ download_url }}" class="product-download-btn" target="_blank" rel="noopener" download>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            {{ section.settings.download_button_text | default: 'Download Product Presentation' }}
-          </a>
+        {%- capture pdf_list -%}{%- render 'product-pdf-url', product: product -%}{%- endcapture -%}
+        {%- assign pdf_list = pdf_list | strip -%}
+        {%- assign meta_pdf = product.metafields.custom.product_presentation_url | default: '' -%}
+        {%- if meta_pdf != blank -%}
+          {%- assign pdf_list = meta_pdf | append: '|' -%}
+        {%- elsif pdf_list == blank and section.settings.default_download_url != blank -%}
+          {%- assign pdf_list = section.settings.default_download_url | append: '|' -%}
+        {%- endif -%}
+        {%- assign pdf_entries = pdf_list | split: ',' -%}
+        {%- if pdf_list != blank -%}
+          {%- for entry in pdf_entries -%}
+            {%- assign pdf_parts = entry | split: '|' -%}
+            {%- assign pdf_label = pdf_parts[1] | default: '' | strip -%}
+            <a href="{{ pdf_parts[0] }}" class="product-download-btn" target="_blank" rel="noopener" download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              {%- if pdf_entries.size > 1 and pdf_label != blank -%}
+                {{ pdf_label }} Presentation
+              {%- else -%}
+                {{ section.settings.download_button_text | default: 'Download Product Presentation' }}
+              {%- endif -%}
+            </a>
+          {%- endfor -%}
         {%- elsif section.settings.show_download_placeholder -%}
           <button type="button" class="product-download-btn" disabled style="opacity:.55;cursor:not-allowed;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>

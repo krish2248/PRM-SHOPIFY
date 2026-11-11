@@ -47,7 +47,7 @@
           "type": "question",
           "settings": {
             "question": "What are your shipping charges?",
-            "answer": "<p>We offer FREE shipping on all orders above ₹400. For orders below ₹400, a flat shipping fee of ₹50 applies. We ship across India via trusted courier partners.</p>"
+            "answer": "<p>We offer FREE shipping on all orders above ₹400. For orders below ₹400, a flat shipping fee of ₹75 applies. We ship across India via trusted courier partners.</p>"
           }
         },
         "q6": {

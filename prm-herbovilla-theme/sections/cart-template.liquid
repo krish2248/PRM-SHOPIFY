@@ -354,7 +354,9 @@
   }
 {%- endstyle -%}
 
-<section class="cart-template" data-section-id="{{ section.id }}" data-cart-page>
+{%- assign ship_threshold_rs = settings.free_shipping_threshold | default: 400 | plus: 0 -%}
+{%- assign ship_fee_rs = settings.shipping_fee_below_threshold | default: 75 | plus: 0 -%}
+<section class="cart-template" data-section-id="{{ section.id }}" data-cart-page data-free-shipping-threshold="{{ ship_threshold_rs | times: 100 }}" data-shipping-fee="{{ ship_fee_rs | times: 100 }}">
   <div class="container" data-cart-page-container>
     {%- if cart.item_count > 0 -%}
       <div class="cart-header">
@@ -377,7 +379,7 @@
                   {%- unless item.product.has_only_default_variant -%}
                     <p class="cart-item__variant">{{ item.variant.title }}</p>
                   {%- endunless -%}
-                  <span class="cart-item__price">{{ item.price | money }}</span>
+                  <span class="cart-item__price">{% render 'inr-price', cents: item.price %}</span>
                 </div>
                 <div class="cart-item__actions">
                   <div class="cart-item__quantity">
@@ -385,7 +387,7 @@
                     <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="cart-qty-input" data-line="{{ forloop.index }}" aria-label="Quantity">
                     <button type="button" class="cart-qty-btn" data-action="increase" data-line="{{ forloop.index }}">+</button>
                   </div>
-                  <span class="cart-item__total">{{ item.line_price | money }}</span>
+                  <span class="cart-item__total">{% render 'inr-price', cents: item.line_price %}</span>
                   <button type="button" class="cart-item__remove" data-line="{{ forloop.index }}">Remove</button>
                 </div>
               </div>
@@ -414,17 +416,19 @@
             
             <div class="cart-summary__row" data-cart-subtotal-row>
               <span class="cart-summary__label">Subtotal</span>
-              <span class="cart-summary__value" data-cart-page-subtotal>{{ cart.total_price | money }}</span>
+              <span class="cart-summary__value" data-cart-page-subtotal>{% render 'inr-price', cents: cart.total_price %}</span>
             </div>
             <div class="cart-summary__row" data-cart-shipping-row>
               <span class="cart-summary__label">Shipping</span>
               <span class="cart-summary__value {% if remaining <= 0 %}free{% endif %}" data-cart-page-shipping>
-                {%- if remaining <= 0 -%}FREE{%- else -%}Calculated at checkout{%- endif -%}
+                {%- if remaining <= 0 -%}FREE{%- else -%}{%- assign ship_fee_cents = ship_fee_rs | times: 100 -%}{% render 'inr-price', cents: ship_fee_cents %}{%- endif -%}
               </span>
             </div>
             <div class="cart-summary__row total" data-cart-total-row>
               <span>Total</span>
-              <span data-cart-page-total>{{ cart.total_price | money }}</span>
+              {%- assign cart_grand_total = cart.total_price -%}
+              {%- if remaining > 0 -%}{%- assign cart_grand_total = ship_fee_rs | times: 100 | plus: cart.total_price -%}{%- endif -%}
+              <span data-cart-page-total>{% render 'inr-price', cents: cart_grand_total %}</span>
             </div>
             
             <div class="cart-note">

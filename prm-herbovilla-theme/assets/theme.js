@@ -344,7 +344,8 @@
       this.summaryContainer = this.container.querySelector('[data-cart-page-summary]');
       this.countEl = this.container.querySelector('[data-cart-page-count]');
       this.headerCartCount = document.querySelector('.header__cart-count');
-      this.freeShippingThreshold = 40000; // 400 rupees in cents/paise
+      this.freeShippingThreshold = parseInt(this.container.dataset.freeShippingThreshold, 10) || 40000; // paise
+      this.shippingFee = parseInt(this.container.dataset.shippingFee, 10) || 7500; // paise, below the threshold
 
       this.init();
     }
@@ -499,10 +500,10 @@
       const shippingBar = this.container.querySelector('[data-cart-shipping-bar]');
 
       if (subtotalEl) subtotalEl.textContent = formatMoney(cart.total_price);
-      if (totalEl) totalEl.textContent = formatMoney(cart.total_price);
-
       // Calculate shipping bar
       const remaining = this.freeShippingThreshold - cart.total_price;
+      const shippingCharge = remaining > 0 ? this.shippingFee : 0;
+      if (totalEl) totalEl.textContent = formatMoney(cart.total_price + shippingCharge);
       const progress = Math.min(100, (cart.total_price / this.freeShippingThreshold) * 100);
 
       if (shippingEl) {
@@ -510,7 +511,7 @@
           shippingEl.textContent = 'FREE';
           shippingEl.classList.add('free');
         } else {
-          shippingEl.textContent = 'Calculated at checkout';
+          shippingEl.textContent = formatMoney(this.shippingFee);
           shippingEl.classList.remove('free');
         }
       }

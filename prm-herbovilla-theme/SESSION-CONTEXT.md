@@ -1,6 +1,6 @@
 # Session Context — HerboVilla Shopify Theme
 
-**Last worked:** 2026-10-21
+**Last worked:** 2026-11-11 (morning audit + afternoon fixes pushed LIVE; continuing 2026-11-12)
 **Project:** PRM HerboVilla Shopify theme
 **Path:** `C:\Users\sonik\Desktop\Everything\last prm update\HerboVilla Shopify\prm-herbovilla-theme` (moved from `Desktop\New\...`)
 **Live theme:** `151479124142` on `prm-herbovilla.myshopify.com` / `prmherbovilla.com`
@@ -9,8 +9,40 @@
 
 ---
 
-## ▶ START HERE — next session (planned: 4 PM, the day after the 21–22 Oct 2026 session)
+## ▶ START HERE — 2026-11-12 (tomorrow: "the rest")
 
+**Standing rule (Krish, 2026-11-11):** when Krish says we're ending the session, read back EVERY to-do he
+mentioned during the session (done and pending) before writing the handoff here.
+
+**Done 2026-11-11 afternoon (LIVE):** presentation links fixed for all 66 products, combos show both PDFs,
+₹75 shipping below ₹400 shown on the cart / Shipping Policy / FAQ. Details + revert: `../CHANGES-2026-11-11.md`.
+
+**Krish said he'll bring tomorrow:** Nasal Inhaler photo, PDFs for the products without a presentation,
+the 11 COMBO prices. Ask for the rest of "Content Krish must supply" too.
+
+**Tomorrow's order:**
+1. Ask Krish whether he set the ₹75 rate in admin (Settings → Shipping and delivery). Until he does, the
+   cart page says ₹75 but checkout charges ₹0. Test a <₹400 cart at checkout once he has.
+2. ArthoVilla oil duplicate: Krish said "keep the latest listing", but the OLD one (id 8940281299118, Dec 2025)
+   has two variants, 60ml ₹224 + 100ml ₹336; the latest (9036373393582, Mar 2026, 6 photos) has one ₹336 option.
+   Removing the old one drops the 60ml size. Asked Krish: add a 60ml variant to the new one first, or just
+   set the old one to Draft? Also asked whether the old ArthoVilla SYRUP listing (8940287459502, 1 photo)
+   should go too (the newer 9036373557422 has 5 photos). Removal is admin-only (no API token).
+3. **Mobile product-page bug found today (pre-existing, also on live):** at 390px the product gallery /
+   info column is 500px wide and clipped by overflow, so the right edge of the photo, the Add to Cart and
+   the trust icons are cut off. Fix first in agenda A.
+4. Upload whatever Krish brings (PDFs → `assets/` + add to `snippets/product-pdf-url.liquid`; combo prices →
+   admin or API).
+5. Agenda A (product page redesign) below.
+
+**Tools:** the Shopify CLI was logged in all day 2026-11-11. curl gets HTTP 429 from this IP after a few
+dozen requests (collection pages 429 even on the first curl). Use headless Chrome instead:
+`chrome --headless=new --dump-dom --user-data-dir=<tmp>`. Run 3 in parallel with separate profiles to
+crawl all 66 products in about 3 minutes. The CDP screenshot script `cdp-shot.mjs` lives in the session
+scratchpad; recreate it if needed (`Emulation.setDeviceMetricsOverride`; supports `url1||url2` navigation
+so `/cart/add?id=<variant>` can fill a cart first).
+
+### Older handoff (21 Oct), still valid for the agenda and the pending list
 When Krish says **"get yesterday's context"**:
 1. Report the **READ FIRST — OPEN PRICING ISSUES** block below first (standing instruction).
 2. Summarise the last session: policy pages + full design refresh went **live**, and the pack-price,
@@ -91,8 +123,8 @@ When Krish says **"get yesterday's context"**:
   line ~131) while the product sells at ₹220 (₹240 after MRP rollout). Should read the product price.
 - **FIXED — product page always rendered 5 filled stars next to "(0 reviews)"** (now "No reviews yet" unless review blocks exist)
   (`sections/product-template.liquid` ~line 569 loops 5 filled SVGs unconditionally).
-- **NEW — shipping:** checkout charges ₹0 on every order (tested a ₹106.50 cart) while the
-  announcement bar says "Free Shipping on Orders Above ₹400". Krish to decide which is intended.
+- **Shipping: DECIDED 2026-11-11.** ₹75 below ₹400, free at ₹400+. The theme shows it (cart, Shipping
+  Policy, FAQ), but checkout still charges ₹0 until Krish adds the rate in admin → Shipping and delivery.
 - **MRP rollout still NOT applied** — 22 of 23 confident rows still at old prices.
   **The unblock steps below are outdated:** Shopify retired creating "Develop apps" legacy custom
   apps in admin on 2026-01-01. New route = app in the Dev Dashboard + client-credentials grant
@@ -161,6 +193,143 @@ They're priced off their components and are **not** in the MRP sheet. Krish stil
 - handle `prm-dermo-villa-herbal-syrup-200ml-...` → title says "Dermovilla Herbal **Soap**"
 - handle `prm-prolax-...-syrup-170ml-...` → title is raw copy: "Chronic Constipation Poor bowel movement…"
 - Saheli Syrup listing carries SKU `PRM HARRY-1 SYRUP`
+
+---
+
+## Session 2026-11-11 (afternoon) — presentations fixed, combo PDFs, ₹75 shipping (LIVE)
+
+Krish: "do the things u don't need anything from me … update everything u can, we do rest tmrw".
+Full file list, before/after table and revert steps: `../CHANGES-2026-11-11.md`.
+
+### Krish's decisions
+- Saheli Anti-Acne Soap = the same product as `saheli soap.pdf`.
+- Combos: show **both** component PDFs, as separate buttons.
+- Shipping: **₹75 below ₹400**, free at ₹400+. "It's not working" = checkout charges ₹0. That's the admin
+  shipping-rate setting, not the theme, so Krish has to set it (steps in CHANGES).
+- ArthoVilla oil: "keep the latest listing" (see START HERE #2: the old one has a 60ml variant, so waiting on Krish).
+
+### Done (pushed live, verified)
+- `snippets/product-pdf-url.liquid` rewritten: title-first matching, earliest brand + earliest form word,
+  explicit no-PDF brands, combos by handle. All 66 products crawled on the preview and spot-checked on live.
+  Two bugs caught by the crawl before going live: the ingredient "kesar" in Rome Oil's title picked the Kesar
+  Baby Soap PDF, and "j**oint**" matched "oint" (ointment).
+- Lesson: a one-line `comment … endcomment` inside `{% liquid %}` is a syntax error. The CLI "push with errors"
+  silently keeps the old file, so always check the push output for `error`.
+- `sections/product-template.liquid`: one button per PDF, with labels on combos.
+- Theme setting "Shipping fee below the threshold" (75). The cart page shows Shipping ₹75 and includes it in the
+  Total; cart prices are in ₹ instead of "Rs.". Shipping Policy and FAQ say ₹75.
+- The 5 Liquid syntax errors in `product-ingredients-data.liquid` are fixed locally (synced from live; live was
+  fine and the snippet is unused).
+- Preview theme "Preview 2026-11-11 (Claude)" **#189552132270** kept for now. Delete it together with
+  #188801745070 once Krish says yes.
+
+### Still pending (full list)
+- **Krish in admin:**
+  - set the ₹75 shipping rate
+  - create the FAQ page (template `faq`, handle `faq`; the content is ready)
+  - decide on the ArthoVilla duplicates
+  - currency format `₹{{amount}}`
+  - upload the combo photos
+  - create the Dev Dashboard app
+  - OK to delete the 2 preview themes
+- **Krish to send:**
+  - Nasal Inhaler photo
+  - PDFs for the 14 products without one (list below)
+  - the 11 COMBO prices
+  - Grievance Officer name + designation
+  - OK for fenny.pptx → PDF
+  - Pregone / Suman: create them as products?
+- **Then:**
+  - MRP rollout
+  - catalog clean-up
+  - mobile product-page overflow fix + agenda A
+  - agenda B (ads)
+
+### Krish's asks this session (for the end-of-session read-back)
+1. Get the previous context and be ready: done.
+2. Recall the Oct 21–22 session: done.
+3. List what we need to do now: done.
+4. Do everything that doesn't need his input: presentations ✅, combo PDFs ✅, ₹75 shipping (theme side) ✅,
+   Liquid errors ✅, ArthoVilla (waiting on the 60ml question; admin only).
+5. Write the pending list again: done.
+6. Update everything possible live: done (8 files).
+7. Add the session to SESSION-CONTEXT.md and push everything to GitHub: done (this entry + commit).
+8. Tomorrow: Nasal Inhaler image, PDFs for the 14 products, the 11 combo prices.
+
+---
+
+## Session 2026-11-11 (morning) — live audit: pages + product presentations
+
+Nothing was pushed or changed on the store. Git was clean at `7cdc04e`.
+
+### Live state checked
+- Pricing: unchanged. The MRP rollout is still not applied (ICEE ₹224, Dermo Neem ₹144). No ₹0 products.
+- Done by Krish since 21 Oct: all 4 admin pages created (Terms, Returns, Shipping, Herb Glossary); the
+  footer legal links now show.
+- Still missing: photos for the Rome combo, the ArthoVilla combo and the Nasal Inhaler (0 images each).
+- Themes: live #151479124142, BACKUP #188802629806, the preview "Policy pages preview (Claude)"
+  #188801745070 still exists (delete only after Krish says yes), plus an old unpublished "Dwell" #150458564782.
+
+### Pages
+| Page | Result |
+|---|---|
+| Terms / Returns / Shipping | ✅ Live, every section, no Liquid errors |
+| Herb Glossary, Privacy, About, Contact (form), Blog (10 posts), Home, Cart, Search | ✅ OK |
+| `/pages/faq` | ❌ 404, the page was never created (template `faq` exists) |
+| Grievance Officer on the 3 policy pages | ❌ name and designation blank (email + phone show) |
+| `/collections/all`, `/best-sellers`, `/new-arrivals` | ⚠️ not verified (HTTP 429) |
+
+### Product presentations (`snippets/product-pdf-url.liquid`; the live copy is identical to the local one)
+- All 43 PDF files in `assets/` open (`%PDF`, served from `cdn/shop/t/7/assets/`).
+- Products without a PDF show a disabled "Presentation Coming Soon" button (`show_download_placeholder: true`).
+- **No PDF (14):**
+  - Aloy Care Soap
+  - Calcyvilla Tablets
+  - Fenny Syrup (only `presentation pdfs/fenny.pptx` exists, so convert it to PDF once Krish OKs that)
+  - Nasal Inhaler
+  - Platigem Syrup, Platigem Tablets
+  - Rome Capsules, Rome Oil
+  - VedaCold-CV 675
+  - Zymovilla Syrup, Zymovilla Tablets
+  - the Platigen, Rome and ZymoVilla COMBOs
+- **Wrong PDF (8), caused by the handle/title swaps and the fuzzy fallback matching:**
+
+| Product (live title) | Opens now | Should open |
+|---|---|---|
+| Dermovilla Herbal **Soap** (handle `...dermo-villa-herbal-syrup...`) | dermo-syrup | dermo-soap |
+| Stenovilla **Tablets** (handle `...stone-care-syrup...`) | stenovilla-syrup | stenovilla-tabs |
+| Stenovilla **Syrup** (handle `...stone-care-tablet...`) | stenovilla-tabs | stenovilla-syrup |
+| Prince Mouth **Gel** (handle `...mouth-liquid...`) | prince-mouth-liquid | prince-mouth-gel |
+| Prince Mouth **Liquid** (handle `...mouth-gel...`) | prince-mouth-gel | prince-mouth-liquid |
+| Harry Herbs & Protein **Powder** | harry-syrup | harry-powder |
+| Lee Liver Care **Capsules** | lee-syrup | lee-caps |
+| Saheli **Anti-Acne Soap** | saheli-syrup | saheli-soap (confirm with Krish that it's the same product) |
+
+- COMBO listings open only one component's PDF.
+- Unused PDFs (no matching listing): castrowin-softgel, icee-caps, icee-rd-caps, aahaa-gel.
+- Scratch tools used for these checks (session scratchpad; recreate if needed): `check_pdfs.py`, `map_pdfs.py`,
+  `check_pages.py`. Python's CA store on this PC rejects the site's Let's Encrypt certificate (the certificate
+  itself is valid until 2027-01-22), so use curl. Throttle to about 1 request every 2 s to avoid 429s.
+
+### Content Krish must supply
+1. Grievance Officer name + designation (legal requirement).
+2. PDFs for the 14 products without a presentation above.
+3. OK to convert `fenny.pptx` → PDF.
+4. Is Saheli Anti-Acne Soap the same product as `saheli soap.pdf`?
+5. Combos: one PDF per component, or a single combo PDF?
+6. Prices for the ~11 COMBO listings.
+7. Shipping decision: ₹0 always, or free above ₹400.
+8. FAQ content, or an OK for Claude to draft it.
+9. Nasal Inhaler photo.
+10. Pregone + Suman Mega Capsule: create them as products?
+11. The duplicate ArthoVilla oil listing: delete it, or reprice it to ₹360?
+
+### Krish's asks this session (for the end-of-session read-back)
+1. Read back all session to-dos when the session ends (standing rule).
+2. Check that all pages show completely: done (see above).
+3. List products whose presentation is missing or won't open: done (see above).
+4. Give a final to-do list + the content list: done.
+5. Save context for after lunch: done (this entry).
 
 ---
 
