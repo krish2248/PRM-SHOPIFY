@@ -1,540 +1,449 @@
 {%- style -%}
-  /* ===== PRODUCT PAGE — FULL LAYOUT ===== */
+  /* ===== PRODUCT PAGE (2026-11-13 restructure) =====
+     Order on phones: photo swipe -> name -> price -> pack -> Add to Cart -> trust -> details.
+     Section rhythm: 56px between blocks on desktop, 36px on phones. */
 
-  .product-template { padding: 30px 0 0; background: #fff; }
+  .product-template { padding: 22px 0 0; background: #fff; }
   .section-product { background: #fff; }
+  .product-template .container { min-width: 0; }
+  .product-template [hidden] { display: none !important; }
 
-  /* --- Breadcrumbs --- */
-  .product-breadcrumbs { margin-bottom: 24px; font-size: 0.88rem; }
-  .product-breadcrumbs a { color: var(--color-text-light); text-decoration: none; }
-  .product-breadcrumbs a:hover { color: var(--color-primary); }
-  .product-breadcrumbs span { color: var(--color-text-light); margin: 0 6px; }
+  /* --- Breadcrumb: one line, short product name --- */
+  .pdp-crumbs { display: flex; align-items: center; gap: 6px; margin-bottom: 18px; font-size: .82rem; color: var(--color-text-light); white-space: nowrap; overflow: hidden; }
+  .pdp-crumbs a { color: inherit; text-decoration: none; flex-shrink: 0; }
+  .pdp-crumbs a:hover { color: var(--color-primary); }
+  .pdp-crumbs__sep { opacity: .5; flex-shrink: 0; }
+  .pdp-crumbs__current { overflow: hidden; text-overflow: ellipsis; color: var(--color-text); }
 
-  /* --- Main Grid --- */
-  .product-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 50px;
-    align-items: flex-start;
-  }
-
-  /* --- Gallery --- */
-  .product-gallery { position: sticky; top: 90px; }
-  .product-main-image {
-    width: 100%; aspect-ratio: 1; border-radius: 16px; overflow: hidden;
-    background: #fff; display: flex; align-items: center; justify-content: center;
-    padding: 24px; box-sizing: border-box; border: 1px solid #eee; margin-bottom: 12px;
-    cursor: zoom-in; position: relative;
-  }
-  .product-main-image img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform .3s ease; }
-  .product-main-image:hover img { transform: scale(1.05); }
-  .product-thumbnails { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
-  .product-thumbnail {
-    width: 72px; height: 72px; border-radius: 10px; overflow: hidden; cursor: pointer;
-    border: 2px solid #eee; background: #fff; flex-shrink: 0; transition: border-color .25s;
-    padding: 5px; box-sizing: border-box; display: flex; align-items: center; justify-content: center;
-  }
-  .product-thumbnail.active, .product-thumbnail:hover { border-color: var(--color-primary); }
-  .product-thumbnail img { max-width: 100%; max-height: 100%; object-fit: contain; }
-
-  /* --- Product Info --- */
+  /* --- Main grid --- */
+  .product-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 48px; align-items: flex-start; }
+  .product-gallery { position: sticky; top: 92px; min-width: 0; }
   .product-info { min-width: 0; max-width: 100%; }
-  .product-badges { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-  .product-badge { padding: 5px 14px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+
+  /* --- Gallery: swipeable track + thumbnails --- */
+  .pg-frame { position: relative; }
+  .pg-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; aspect-ratio: 1; border-radius: 18px; border: 1px solid #ece8e0; background: #fff; }
+  .pg-track::-webkit-scrollbar { display: none; }
+  .pg-slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: center; display: flex; align-items: center; justify-content: center; padding: 22px; box-sizing: border-box; }
+  .pg-slide img, .pg-slide video, .pg-slide iframe { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+  .pg-slide--video { padding: 0; background: #000; }
+  .pg-slide--video video, .pg-slide--video iframe { width: 100%; height: 100%; }
+  .pg-slide svg { width: 60%; height: 60%; opacity: .35; }
+  .pg-count { position: absolute; right: 12px; bottom: 12px; padding: 3px 10px; border-radius: 12px; background: rgba(27,67,50,.78); color: #fff; font-size: .72rem; font-weight: 600; letter-spacing: .3px; pointer-events: none; }
+  .pg-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border-radius: 50%; border: 1px solid #e3ded4; background: rgba(255,255,255,.94); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.08); transition: border-color .2s; }
+  .pg-nav:hover { border-color: var(--color-primary); }
+  .pg-nav svg { width: 18px; height: 18px; color: var(--color-text); }
+  .pg-nav--prev { left: 12px; }
+  .pg-nav--next { right: 12px; }
+  .pg-thumbs { display: flex; gap: 8px; overflow-x: auto; padding: 12px 2px 6px; scrollbar-width: none; }
+  .pg-thumbs::-webkit-scrollbar { display: none; }
+  .pg-thumb { position: relative; width: 68px; height: 68px; flex-shrink: 0; padding: 4px; box-sizing: border-box; border-radius: 10px; border: 2px solid #ece8e0; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color .2s; }
+  .pg-thumb.active, .pg-thumb:hover { border-color: var(--color-primary); }
+  .pg-thumb img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .pg-thumb__play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .pg-thumb__play svg { width: 22px; height: 22px; padding: 5px; box-sizing: content-box; border-radius: 50%; background: rgba(27,67,50,.8); color: #fff; }
+
+  /* --- Info column --- */
+  .pdp-eyebrow { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .product-vendor { margin: 0; color: var(--color-primary); font-size: .76rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .product-badge { padding: 3px 10px; border-radius: 20px; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
   .product-badge--sale { background: #fee2e2; color: #dc2626; }
   .product-badge--new { background: #dbeafe; color: #2563eb; }
-  .product-badge--bestseller { background: #fef3c7; color: #d97706; }
-  .product-badge--ayurvedic { background: #dcfce7; color: #16a34a; }
+  .product-badge--bestseller { background: #fef3c7; color: #b45309; }
+  .product-badge--ayurvedic { background: #e6f4ea; color: #1B4332; }
 
-  .product-vendor { color: var(--color-primary); font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .8px; }
-  .product-title { font-family: var(--font-heading); font-size: 2rem; color: var(--color-text); margin-bottom: 12px; line-height: 1.25; word-wrap: break-word; overflow-wrap: break-word; }
+  .product-title { font-family: var(--font-heading); font-size: 2.05rem; line-height: 1.2; color: var(--color-text); margin: 0 0 8px; overflow-wrap: break-word; }
+  .product-subtitle { margin: 0 0 12px; font-size: .95rem; line-height: 1.55; color: var(--color-text-light); overflow-wrap: anywhere; }
 
   .product-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
   .product-rating-stars { display: flex; gap: 2px; }
-  .product-rating-stars svg { width: 18px; height: 18px; }
-  .product-rating-count { color: var(--color-text-light); font-size: 0.85rem; }
+  .product-rating-stars svg { width: 17px; height: 17px; }
+  .product-rating-count { color: var(--color-text-light); font-size: .85rem; }
   .product-rating-count a { color: var(--color-primary); text-decoration: underline; cursor: pointer; }
 
-  .product-price-wrapper { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
-  .product-price { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; color: var(--color-primary); }
-  .product-compare-price { font-size: 1.15rem; color: var(--color-text-light); text-decoration: line-through; }
-  .product-save-badge { background: #dcfce7; color: #16a34a; padding: 3px 10px; border-radius: 14px; font-size: 0.8rem; font-weight: 600; }
-  .product-tax-note { width: 100%; font-size: 0.78rem; color: var(--color-text-light); margin-top: -4px; }
+  .product-price-wrapper { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; padding: 14px 0 16px; margin-bottom: 16px; border-top: 1px solid #f0ece4; border-bottom: 1px solid #f0ece4; }
+  .product-price { font-family: var(--font-body); font-size: 2rem; font-weight: 700; line-height: 1; color: #1B4332; letter-spacing: -.5px; }
+  .product-compare-price { font-size: 1.05rem; color: var(--color-text-light); text-decoration: line-through; }
+  .product-save-badge { background: #dcfce7; color: #15803d; padding: 3px 10px; border-radius: 14px; font-size: .78rem; font-weight: 700; }
+  .product-tax-note { width: 100%; font-size: .78rem; color: var(--color-text-light); }
 
-  /* Short description */
-  .product-description-short { color: var(--color-text-light); font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; }
-
-  /* Feature pills (horizontal) */
   .product-feature-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .product-feature-pill {
-    display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px;
-    background: #f0faf4; border: 1px solid #d4ecdd; border-radius: 20px; font-size: 0.82rem; color: #1B4332; font-weight: 500;
-  }
+  .product-feature-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: #f0faf4; border: 1px solid #d4ecdd; border-radius: 20px; font-size: .8rem; color: #1B4332; font-weight: 500; }
   .product-feature-pill svg { width: 14px; height: 14px; color: var(--color-primary); flex-shrink: 0; }
 
-  /* Key highlights box */
-  .product-highlights { background: #f8fdf8; border: 1px solid #e6f4ea; border-radius: 14px; padding: 18px 20px; margin-bottom: 20px; }
-  .product-highlights h4 { font-size: 0.88rem; font-weight: 700; color: var(--color-text); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
-  .product-highlights h4 svg { width: 16px; height: 16px; color: var(--color-primary); }
-  .product-highlights ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-  .product-highlights li { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 0.85rem; color: var(--color-text); }
-  .product-highlights li svg { width: 15px; height: 15px; color: var(--color-primary); flex-shrink: 0; }
-
-  /* Form */
-  .product-form { margin-bottom: 16px; }
+  .product-form { margin-bottom: 12px; }
+  .pdp-label { display: block; font-size: .86rem; font-weight: 600; color: var(--color-text); margin-bottom: 8px; }
   .product-variants { margin-bottom: 16px; }
-  .variant-label { font-size: 0.88rem; font-weight: 600; color: var(--color-text); margin-bottom: 8px; display: block; }
+  .variant-group + .variant-group { margin-top: 12px; }
   .variant-options { display: flex; flex-wrap: wrap; gap: 8px; }
-  .variant-option { padding: 9px 18px; border: 2px solid #e5e5e5; border-radius: 8px; font-size: 0.88rem; cursor: pointer; transition: all .2s; background: #fff; }
+  .variant-option { min-height: 44px; padding: 9px 18px; border: 2px solid #e5e5e5; border-radius: 10px; font-size: .88rem; cursor: pointer; transition: all .2s; background: #fff; color: var(--color-text); }
   .variant-option:hover { border-color: var(--color-primary); }
   .variant-option.selected { border-color: var(--color-primary); background: rgba(45,106,79,.06); font-weight: 600; }
 
-  /* Combo pack selector */
+  /* Pack selector: side-by-side cards */
   .combo-packs { margin-bottom: 16px; }
-  .combo-packs__label { font-size: 0.88rem; font-weight: 600; color: var(--color-text); margin-bottom: 10px; display: block; }
-  .combo-packs__grid { display: flex; flex-direction: column; gap: 8px; }
-  .combo-pack-card { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border: 2px solid #e5e5e5; border-radius: 10px; cursor: pointer; transition: all .2s; background: #fff; position: relative; }
+  .combo-packs__grid { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; }
+  .combo-pack-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; padding: 12px 12px 11px; border: 2px solid #e5e5e5; border-radius: 12px; background: #fff; cursor: pointer; text-align: left; font: inherit; color: inherit; transition: border-color .2s, background .2s; }
   .combo-pack-card:hover { border-color: var(--color-primary); }
-  .combo-pack-card.selected { border-color: var(--color-primary); background: rgba(45,106,79,.04); }
-  .combo-pack-card__radio { width: 20px; height: 20px; border: 2px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: border-color .2s; }
-  .combo-pack-card.selected .combo-pack-card__radio { border-color: var(--color-primary); }
-  .combo-pack-card__radio::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: transparent; transition: background .2s; }
-  .combo-pack-card.selected .combo-pack-card__radio::after { background: var(--color-primary); }
-  .combo-pack-card__info { flex: 1; }
-  .combo-pack-card__title { font-size: 0.9rem; font-weight: 600; color: var(--color-text); margin-bottom: 2px; }
-  .combo-pack-card__pricing { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-  .combo-pack-card__price { font-size: 1.1rem; font-weight: 700; color: var(--color-text); }
-  .combo-pack-card__mrp { font-size: 0.82rem; color: var(--color-text-light); }
-  .combo-pack-card__mrp s { text-decoration: line-through; }
-  .combo-pack-card__discount { font-size: 0.82rem; color: #16a34a; font-weight: 600; }
-  .combo-pack-card__best { position: absolute; top: -8px; right: 12px; padding: 2px 10px; background: #16a34a; color: #fff; font-size: 0.68rem; font-weight: 700; border-radius: 10px; text-transform: uppercase; letter-spacing: .5px; }
+  .combo-pack-card.selected { border-color: var(--color-primary); background: #f3faf5; }
+  .combo-pack-card__title { font-size: .82rem; font-weight: 600; color: var(--color-text-light); }
+  .combo-pack-card.selected .combo-pack-card__title { color: var(--color-primary); }
+  .combo-pack-card__price { font-size: 1.08rem; font-weight: 700; color: var(--color-text); line-height: 1.2; }
+  .combo-pack-card__mrp { font-size: .74rem; color: var(--color-text-light); }
+  .combo-pack-card__discount { font-size: .74rem; color: #15803d; font-weight: 700; }
+  .combo-pack-card__best { position: absolute; top: -9px; right: 8px; padding: 2px 8px; background: #15803d; color: #fff; font-size: .62rem; font-weight: 700; border-radius: 10px; text-transform: uppercase; letter-spacing: .4px; }
+  .combo-pack-card__tick { position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; border-radius: 50%; background: var(--color-primary); color: #fff; display: none; align-items: center; justify-content: center; }
+  .combo-pack-card__tick svg { width: 11px; height: 11px; }
+  .combo-pack-card.selected .combo-pack-card__tick { display: flex; }
 
-  .product-quantity-row { display: flex; gap: 12px; margin-bottom: 14px; }
-  .quantity-selector { display: flex; align-items: center; border: 2px solid #e5e5e5; border-radius: 8px; overflow: hidden; }
-  .quantity-btn { width: 42px; height: 48px; background: #fff; border: none; cursor: pointer; font-size: 1.2rem; color: var(--color-text); transition: background .2s; }
+  .product-quantity-row { display: flex; gap: 10px; }
+  .quantity-selector { display: flex; align-items: center; border: 2px solid #e5e5e5; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
+  .quantity-btn { width: 42px; height: 50px; background: #fff; border: none; cursor: pointer; font-size: 1.2rem; color: var(--color-text); transition: background .2s; }
   .quantity-btn:hover { background: #f5f5f5; }
-  .quantity-input { width: 50px; height: 48px; border: none; text-align: center; font-size: 1rem; font-weight: 600; }
-  .product-add-btn {
-    flex: 1; padding: 14px 24px; background: var(--color-primary); color: #fff; border: none; border-radius: 8px;
-    font-size: 1rem; font-weight: 600; cursor: pointer; transition: all .25s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .product-add-btn:hover { background: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(45,106,79,.3); }
-  .product-add-btn:disabled { background: #ccc; cursor: not-allowed; transform: none; box-shadow: none; }
-  .product-add-btn svg { width: 18px; height: 18px; }
-  .product-buy-now { width: 100%; padding: 14px 24px; background: #fff; color: var(--color-text); border: 2px solid var(--color-text); border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all .25s; margin-bottom: 14px; }
-  .product-buy-now:hover { background: var(--color-text); color: #fff; }
+  .quantity-input { width: 44px; height: 50px; border: none; text-align: center; font-size: 1rem; font-weight: 600; -moz-appearance: textfield; background: #fff; }
+  .quantity-input::-webkit-outer-spin-button, .quantity-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .product-add-btn { flex: 1; min-width: 0; min-height: 54px; padding: 0 20px; background: var(--color-primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s, box-shadow .2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .product-add-btn:hover { background: var(--color-primary-dark); box-shadow: 0 8px 20px rgba(45,106,79,.25); }
+  .product-add-btn:disabled { background: #c9c9c9; cursor: not-allowed; box-shadow: none; }
+  .product-add-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .product-buy-now { width: 100%; min-height: 52px; padding: 0 20px; margin-bottom: 18px; background: #fff; color: #1B4332; border: 2px solid #1B4332; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .product-buy-now:hover { background: #1B4332; color: #fff; }
+  .product-buy-now:disabled { opacity: .6; cursor: wait; }
 
-  /* Download button */
-  .product-download-btn {
-    width: 100%; padding: 13px 24px; background: linear-gradient(135deg,#8B5E3C,#6B4423); color: #fff;
-    border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
-    transition: all .25s; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
-  }
-  .product-download-btn:hover { background: linear-gradient(135deg,#6B4423,#4A2F18); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(139,94,60,.3); color: #fff; }
-  .product-download-btn svg { width: 18px; height: 18px; }
+  /* Trust row */
+  .product-trust-badges { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 16px 10px; margin-bottom: 16px; background: #faf8f3; border-radius: 14px; }
+  .trust-badge { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+  .trust-badge svg { width: 24px; height: 24px; color: var(--color-primary); }
+  .trust-badge span { font-size: .72rem; color: #444; line-height: 1.3; font-weight: 500; }
 
-  /* Share row */
-  .product-share { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
-  .product-share span { font-size: 0.85rem; font-weight: 600; color: var(--color-text); }
-  .product-share-btn {
-    width: 36px; height: 36px; border-radius: 50%; border: 1px solid #e5e5e5; background: #fff;
-    display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s;
-  }
+  /* Presentation links + share */
+  .pdp-links { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .pdp-doc-link { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border: 1px solid #e6dfd2; border-radius: 10px; background: #fff; color: #6B4423; font-size: .88rem; font-weight: 600; text-decoration: none; transition: border-color .2s, background .2s; }
+  .pdp-doc-link:hover { border-color: #8B5E3C; background: #fdf8f0; color: #6B4423; }
+  .pdp-doc-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .pdp-doc-link small { margin-left: auto; font-weight: 500; color: var(--color-text-light); font-size: .74rem; }
+  .pdp-doc-link--soon { color: var(--color-text-light); border-style: dashed; font-weight: 500; }
+  .product-share { display: flex; align-items: center; gap: 10px; }
+  .product-share span { font-size: .82rem; font-weight: 600; color: var(--color-text-light); }
+  .product-share-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid #e5e5e5; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .2s; }
   .product-share-btn:hover { border-color: var(--color-primary); background: #f0faf4; }
   .product-share-btn svg { width: 16px; height: 16px; }
 
-  /* Trust badges */
-  .product-trust-badges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 18px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
-  .trust-badge { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
-  .trust-badge svg { width: 26px; height: 26px; color: var(--color-primary); }
-  .trust-badge span { font-size: 0.72rem; color: var(--color-text-light); line-height: 1.3; font-weight: 500; }
+  /* ===== Shared section shell ===== */
+  .pdp-section { margin-top: 56px; }
+  .pdp-section--tint { padding: 36px 32px; background: #FDF8F0; border-radius: 20px; }
+  .pdp-head { text-align: center; margin-bottom: 26px; }
+  .pdp-head h2 { font-family: var(--font-heading); font-size: 1.6rem; line-height: 1.25; color: #1B4332; margin: 0 0 6px; }
+  .pdp-head p { margin: 0; color: var(--color-text-light); font-size: .92rem; }
+  .pdp-head--left { text-align: left; }
 
-  /* ===== DESCRIPTION SECTION ===== */
-  .product-description-section { margin-top: 40px; padding: 36px 32px; background: #FDF8F0; border-radius: 20px; border-top: none; }
-  .product-description-section > h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid #e6f4ea; }
-
-  /* Description content */
+  /* ===== Description ===== */
   .tab-description { width: 100%; }
-  .tab-description .rte { font-size: 0.95rem; line-height: 1.8; color: var(--color-text-light); }
-  .tab-description .rte p { margin-bottom: 14px; }
-
-  /* Auto-structured blocks (JS wraps heading groups) */
-  .desc-block { background: #fff; border-radius: 16px; border: 1px solid #e6f4ea; padding: 24px 28px; margin-bottom: 20px; }
-  .desc-block h1, .desc-block h2, .desc-block h3, .desc-block h4, .desc-block h5, .desc-block h6 { font-family: var(--font-heading); color: var(--color-primary); font-size: 1.15rem; margin: 0 0 16px 0; padding-bottom: 10px; border-bottom: 2px solid #e6f4ea; }
-  .desc-block p { margin-bottom: 10px; }
-  .desc-block p:last-child { margin-bottom: 0; }
-
-  /* RTE headings fallback (before JS runs) */
-  .tab-description .rte > h1, .tab-description .rte > h2, .tab-description .rte > h3, .tab-description .rte > h4, .tab-description .rte > h5, .tab-description .rte > h6 { font-family: var(--font-heading); color: var(--color-primary); margin-top: 28px; margin-bottom: 14px; font-size: 1.15rem; }
-
-  /* RTE lists — styled as check items */
-  .tab-description .rte ul, .tab-description .rte ol { padding-left: 0; list-style: none; margin-bottom: 16px; }
-  .tab-description .rte li { position: relative; padding: 10px 14px 10px 32px; margin-bottom: 6px; background: #f8fdf8; border-radius: 10px; border: 1px solid #e6f4ea; font-size: 0.9rem; color: var(--color-text); line-height: 1.5; }
-  .tab-description .rte li::before { content: '\2713'; position: absolute; left: 12px; top: 10px; color: var(--color-primary); font-weight: 700; font-size: 0.85rem; }
-
-  /* Ingredient grid — auto-applied by JS for lists with 4+ items */
-  .ingredient-grid { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
-  .ingredient-grid li { text-align: center; padding: 10px 8px !important; font-weight: 500; }
-  .ingredient-grid li::before { display: none !important; }
-
-  /* Two-column desc layout — applied by JS when 2+ blocks */
-  .desc-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-  /* RTE tables */
-  .tab-description .rte table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; border: 1px solid #e6f4ea; margin: 16px 0; }
-  .tab-description .rte table th, .tab-description .rte thead td { background: var(--color-primary); color: #fff; padding: 12px 16px; font-weight: 600; font-size: 0.9rem; text-align: left; }
-  .tab-description .rte table td { padding: 10px 16px; font-size: 0.88rem; border-bottom: 1px solid #f0f0f0; }
+  .tab-description .rte { font-size: .95rem; line-height: 1.75; color: #4a4a4a; overflow-wrap: break-word; }
+  .tab-description .rte p { margin: 0 0 12px; }
+  .tab-description .rte.desc-multi { columns: 2; column-gap: 20px; }
+  .desc-block { background: #fff; border-radius: 16px; border: 1px solid #ebe5d9; padding: 22px 24px; margin: 0 0 20px; break-inside: avoid; }
+  .desc-block > :last-child { margin-bottom: 0; }
+  .desc-block__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .desc-block h1, .desc-block h2, .desc-block h3, .desc-block h4, .desc-block h5, .desc-block h6 { font-family: var(--font-heading); color: #1B4332; font-size: 1.12rem; line-height: 1.35; margin: 0 0 14px; padding-bottom: 10px; border-bottom: 2px solid #e6f4ea; }
+  .desc-block__chev { display: none; }
+  .tab-description .rte > h1, .tab-description .rte > h2, .tab-description .rte > h3, .tab-description .rte > h4, .tab-description .rte > h5, .tab-description .rte > h6 { font-family: var(--font-heading); color: #1B4332; margin: 24px 0 12px; font-size: 1.12rem; }
+  .tab-description .rte ul, .tab-description .rte ol { padding-left: 0; list-style: none; margin: 0 0 14px; }
+  .tab-description .rte li { position: relative; padding: 9px 12px 9px 32px; margin-bottom: 6px; background: #f8fdf8; border-radius: 10px; border: 1px solid #e6f4ea; font-size: .9rem; color: var(--color-text); line-height: 1.5; }
+  .tab-description .rte li::before { content: '\2713'; position: absolute; left: 12px; top: 9px; color: var(--color-primary); font-weight: 700; font-size: .85rem; }
+  .ingredient-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
+  .ingredient-grid li { margin-bottom: 0 !important; }
+  .tab-description .rte table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 12px; overflow: hidden; border: 1px solid #e6f4ea; margin: 14px 0; }
+  .tab-description .rte table th, .tab-description .rte thead td { background: var(--color-primary); color: #fff; padding: 11px 14px; font-weight: 600; font-size: .9rem; text-align: left; }
+  .tab-description .rte table td { padding: 10px 14px; font-size: .88rem; border-bottom: 1px solid #f0f0f0; }
   .tab-description .rte table tr:last-child td { border-bottom: none; }
-  .tab-description .rte table tr:nth-child(even) td { background: #faf9f6; }
-
-  /* RTE strong/bold */
   .tab-description .rte strong, .tab-description .rte b { color: var(--color-text); font-weight: 700; }
-  /* RTE images */
-  .tab-description .rte img { border-radius: 12px; margin: 12px 0; max-width: 100%; height: auto; }
+  .tab-description .rte img { border-radius: 12px; margin: 10px 0; max-width: 100%; height: auto; }
 
-  /* Benefits grid */
-  .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 24px; }
-  .benefit-card { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: #fff; border: 1px solid #e6f4ea; border-radius: 12px; transition: transform .2s, box-shadow .2s; }
-  .benefit-card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(45,106,79,.1); }
-  .benefit-card-icon { width: 36px; height: 36px; background: rgba(45,106,79,.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .benefit-card-icon svg { width: 16px; height: 16px; color: var(--color-primary); }
-  .benefit-card-text { flex: 1; font-size: 0.88rem; color: var(--color-text); line-height: 1.45; font-weight: 500; }
+  .benefits-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .benefit-card { display: flex; align-items: center; gap: 10px; padding: 13px 14px; background: #fff; border: 1px solid #ebe5d9; border-radius: 12px; }
+  .benefit-card-icon { width: 32px; height: 32px; background: rgba(45,106,79,.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .benefit-card-icon svg { width: 15px; height: 15px; color: var(--color-primary); }
+  .benefit-card-text { flex: 1; min-width: 0; font-size: .86rem; color: var(--color-text); line-height: 1.4; font-weight: 500; }
 
-  /* Product specs */
-  .product-specs { margin-top: 24px; background: #fff; border-radius: 14px; padding: 24px 28px; border: 1px solid #e6f4ea; }
-  .product-specs h4 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 16px; color: var(--color-primary); padding-bottom: 10px; border-bottom: 2px solid #e6f4ea; }
   .spec-table { width: 100%; border-collapse: collapse; }
   .spec-table tr { border-bottom: 1px solid #f0f0f0; }
   .spec-table tr:last-child { border-bottom: none; }
-  .spec-table td { padding: 12px 0; font-size: 0.9rem; vertical-align: top; }
-  .spec-table td:first-child { font-weight: 600; color: var(--color-text); width: 35%; padding-right: 16px; }
-  .spec-table td:last-child { color: var(--color-text-light); }
+  .spec-table td { padding: 11px 0; font-size: .9rem; vertical-align: top; }
+  .spec-table td:first-child { font-weight: 600; color: var(--color-text); width: 38%; padding-right: 14px; }
+  .spec-table td:last-child { color: #555; overflow-wrap: anywhere; }
+  .spec-table a { color: var(--color-primary); }
 
-  /* Description responsive */
-  @media (max-width: 992px) { .desc-columns { grid-template-columns: 1fr; } }
-  @media (max-width: 768px) { .product-description-section { padding: 24px 18px; border-radius: 14px; } .desc-block { padding: 18px 16px; } .ingredient-grid { grid-template-columns: repeat(2, 1fr) !important; } }
-  @media (max-width: 576px) { .benefits-grid { grid-template-columns: 1fr; } .ingredient-grid { grid-template-columns: 1fr !important; } .product-description-section { padding: 18px 14px; } }
+  /* ===== Videos ===== */
+  .vrow { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; justify-content: safe center; }
+  .vrow::-webkit-scrollbar { display: none; }
+  .vcard { position: relative; flex: 0 0 230px; aspect-ratio: 9/16; border-radius: 16px; overflow: hidden; background: #1B4332; scroll-snap-align: start; border: none; padding: 0; cursor: pointer; display: block; }
+  .vcard--wide { flex-basis: min(560px, 100%); aspect-ratio: 16/9; }
+  .vcard img, .vcard video, .vcard iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
+  .vcard video { object-fit: contain; background: #000; }
+  .vcard__play { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,.94); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,.25); transition: transform .2s; }
+  .vcard:hover .vcard__play { transform: translate(-50%, -50%) scale(1.08); }
+  .vcard__play svg { width: 22px; height: 22px; margin-left: 3px; color: #1B4332; }
+  .vcard__label { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 12px; background: linear-gradient(transparent, rgba(0,0,0,.65)); color: #fff; font-size: .8rem; font-weight: 600; text-align: left; }
+  .vrow-hint { padding: 22px; border: 2px dashed #d4ecdd; border-radius: 14px; text-align: center; color: var(--color-text-light); font-size: .88rem; }
 
-  /* ===== YOU MAY ALSO LIKE ===== */
-  .product-recommendations {
-    margin-top: 60px; padding: 40px 0; border-top: 2px solid #eee;
-  }
-  .recommendations-header { text-align: center; margin-bottom: 30px; }
-  .recommendations-header h2 { font-family: var(--font-heading); font-size: 1.6rem; color: var(--color-text); margin-bottom: 6px; }
-  .recommendations-header p { color: var(--color-text-light); font-size: 0.92rem; }
-  .recommendations-scroll-wrapper { position: relative; }
-  .recommendations-grid {
-    display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
-    scrollbar-width: none; padding-bottom: 8px;
-  }
-  .recommendations-grid::-webkit-scrollbar { display: none; }
-  .rec-card { flex: 0 0 220px; scroll-snap-align: start; border-radius: 14px; overflow: hidden; background: #fff; border: 1px solid #eee; transition: transform .25s, box-shadow .25s; }
-  .rec-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
-  .rec-card__image { position: relative; aspect-ratio: 1; background: #FDF8F0; overflow: hidden; }
-  .rec-card__image img { width: 100%; height: 100%; object-fit: contain; padding: 16px; box-sizing: border-box; }
-  .rec-card__badge { position: absolute; top: 10px; left: 10px; padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; background: #fee2e2; color: #dc2626; }
-  .rec-card__body { padding: 14px 16px; }
-  .rec-card__vendor { font-size: 0.72rem; color: var(--color-primary); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
-  .rec-card__title { font-size: 0.88rem; font-weight: 600; color: var(--color-text); margin-bottom: 8px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .rec-card__title a { color: inherit; text-decoration: none; }
-  .rec-card__title a:hover { color: var(--color-primary); }
-  .rec-card__price { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-  .rec-card__price-now { font-weight: 700; font-size: 1rem; color: var(--color-primary); }
-  .rec-card__price-was { font-size: 0.82rem; color: var(--color-text-light); text-decoration: line-through; }
-  .rec-card__btn {
-    width: 100%; padding: 10px; background: #fff; color: var(--color-primary); border: 2px solid var(--color-primary);
-    border-radius: 8px; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all .2s;
-  }
-  .rec-card__btn:hover { background: var(--color-primary); color: #fff; }
+  /* ===== Research-backed ingredients ===== */
+  .research-ingredients__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+  .research-card { background: #fff; border-radius: 16px; border: 1px solid #ebe5d9; overflow: hidden; display: flex; flex-direction: column; }
+  .research-card__image { aspect-ratio: 4/3; background: #f5f2ed; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .research-card__image img { width: 100%; height: 100%; object-fit: cover; }
+  .research-card__image svg { width: 54px; height: 54px; color: var(--color-primary); opacity: .3; }
+  .research-card__body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+  .research-card__name { font-weight: 700; font-size: 1rem; color: var(--color-text); margin-bottom: 2px; }
+  .research-card__scientific { font-style: italic; font-size: .82rem; color: var(--color-text-light); margin-bottom: 8px; }
+  .research-card__desc { font-size: .85rem; color: #555; line-height: 1.55; margin-bottom: 12px; }
+  .research-card__badge { display: inline-flex; align-items: center; gap: 5px; align-self: flex-start; margin-top: auto; padding: 5px 12px; background: #e6f4ea; color: #1B4332; border-radius: 20px; font-size: .74rem; font-weight: 600; }
+  .research-card__badge svg { width: 13px; height: 13px; }
 
-  /* ===== REVIEWS SECTION ===== */
-  .product-reviews-section {
-    margin-top: 50px; padding: 40px 0; border-top: 2px solid #eee;
-  }
-  .reviews-header { text-align: center; margin-bottom: 30px; }
-  .reviews-header h2 { font-family: var(--font-heading); font-size: 1.6rem; color: var(--color-text); margin-bottom: 6px; }
-  .reviews-header p { color: var(--color-text-light); font-size: 0.92rem; }
+  /* ===== Comparison ===== */
+  .comparison-wrap { max-width: 820px; margin: 0 auto; }
+  .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 14px; overflow: hidden; border: 1px solid #e6f4ea; text-align: left; table-layout: fixed; }
+  .comparison-table thead th { background: var(--color-primary); color: #fff; padding: 13px 18px; font-size: .92rem; font-weight: 600; }
+  .comparison-table tbody td { padding: 13px 18px; font-size: .9rem; border-bottom: 1px solid #f0f0f0; color: var(--color-text); }
+  .comparison-table tbody tr:last-child td { border-bottom: none; }
+  .comparison-table td:nth-child(2) { background: #f6fbf7; }
+  .comparison-check { color: #15803d; font-weight: 600; }
+  .comparison-cross { color: #b91c1c; font-weight: 600; }
 
-  .reviews-summary { display: flex; gap: 40px; padding: 28px; background: #f8fdf8; border: 1px solid #e6f4ea; border-radius: 16px; margin-bottom: 30px; align-items: center; }
-  .reviews-avg { text-align: center; min-width: 140px; }
-  .reviews-avg-number { font-family: var(--font-heading); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1; }
+  /* ===== Reviews ===== */
+  .reviews-empty { max-width: 560px; margin: 0 auto 22px; padding: 22px; border: 1px dashed #d9d3c7; border-radius: 14px; text-align: center; color: var(--color-text-light); font-size: .92rem; }
+  .reviews-summary { display: flex; gap: 36px; padding: 24px 28px; background: #f8fdf8; border: 1px solid #e6f4ea; border-radius: 16px; margin-bottom: 24px; align-items: center; }
+  .reviews-avg { text-align: center; min-width: 130px; }
+  .reviews-avg-number { font-family: var(--font-body); font-size: 2.8rem; font-weight: 700; color: #1B4332; line-height: 1; }
   .reviews-avg-stars { display: flex; justify-content: center; gap: 2px; margin: 8px 0 4px; }
   .reviews-avg-stars svg { width: 18px; height: 18px; }
-  .reviews-avg-count { font-size: 0.82rem; color: var(--color-text-light); }
-  .reviews-bars { flex: 1; }
+  .reviews-avg-count { font-size: .82rem; color: var(--color-text-light); }
+  .reviews-bars { flex: 1; min-width: 0; }
   .review-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
-  .review-bar-label { font-size: 0.82rem; font-weight: 600; color: var(--color-text); width: 14px; text-align: right; }
+  .review-bar-label { font-size: .82rem; font-weight: 600; color: var(--color-text); width: 14px; text-align: right; }
   .review-bar-star svg { width: 13px; height: 13px; color: #f59e0b; }
   .review-bar-track { flex: 1; height: 8px; background: #e5e5e5; border-radius: 4px; overflow: hidden; }
   .review-bar-fill { height: 100%; background: #f59e0b; border-radius: 4px; transition: width .5s ease; }
-  .review-bar-count { font-size: 0.78rem; color: var(--color-text-light); width: 24px; }
-
-  /* Review cards */
-  .reviews-list { display: grid; gap: 16px; margin-bottom: 30px; }
-  .review-card { padding: 20px 24px; background: #fff; border: 1px solid #eee; border-radius: 14px; }
+  .review-bar-count { font-size: .78rem; color: var(--color-text-light); width: 24px; }
+  .reviews-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .reviews-list:empty { display: none; }
+  .review-card { padding: 18px 20px; background: #fff; border: 1px solid #ebe5d9; border-radius: 14px; }
   .review-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-  .review-card-avatar {
-    width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: #fff;
-    display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0;
-  }
-  .review-card-meta { flex: 1; }
-  .review-card-name { font-weight: 600; font-size: 0.92rem; color: var(--color-text); }
-  .review-card-loc { font-size: 0.78rem; color: var(--color-text-light); }
+  .review-card-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+  .review-card-meta { flex: 1; min-width: 0; }
+  .review-card-name { font-weight: 600; font-size: .92rem; color: var(--color-text); }
+  .review-card-loc { font-size: .78rem; color: var(--color-text-light); }
   .review-card-stars { display: flex; gap: 1px; }
   .review-card-stars svg { width: 14px; height: 14px; }
-  .review-card-date { font-size: 0.75rem; color: var(--color-text-light); }
-  .review-card-title { font-weight: 600; font-size: 0.95rem; color: var(--color-text); margin-bottom: 4px; }
-  .review-card-body { font-size: 0.88rem; color: var(--color-text-light); line-height: 1.65; }
-  .review-card-verified { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; color: #16a34a; font-weight: 500; margin-top: 8px; }
+  .review-card-date { font-size: .75rem; color: var(--color-text-light); }
+  .review-card-title { font-weight: 600; font-size: .95rem; color: var(--color-text); margin-bottom: 4px; }
+  .review-card-body { font-size: .88rem; color: #555; line-height: 1.65; overflow-wrap: anywhere; }
+  .review-card-verified { display: inline-flex; align-items: center; gap: 4px; font-size: .75rem; color: #15803d; font-weight: 500; margin-top: 8px; }
   .review-card-verified svg { width: 13px; height: 13px; }
+  .review-card-images { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .review-card-images img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; }
 
-  /* Review form */
-  .review-form-wrapper { background: #faf9f6; border-radius: 16px; padding: 28px; border: 1px solid #eee; }
-  .review-form-wrapper h3 { font-family: var(--font-heading); font-size: 1.15rem; color: var(--color-text); margin-bottom: 20px; }
-  .review-form { display: grid; gap: 16px; }
+  .review-form-details { max-width: 720px; margin: 0 auto; }
+  .review-form-details > summary { list-style: none; display: flex; align-items: center; justify-content: center; gap: 8px; width: fit-content; margin: 0 auto; min-height: 48px; padding: 0 26px; border: 2px solid var(--color-primary); border-radius: 10px; color: var(--color-primary); font-weight: 600; font-size: .95rem; cursor: pointer; transition: all .2s; }
+  .review-form-details > summary::-webkit-details-marker { display: none; }
+  .review-form-details > summary:hover, .review-form-details[open] > summary { background: var(--color-primary); color: #fff; }
+  .review-form-details > summary svg { width: 17px; height: 17px; }
+  .review-form-wrapper { margin-top: 18px; background: #faf9f6; border-radius: 16px; padding: 24px; border: 1px solid #ebe5d9; }
+  .review-form { display: grid; gap: 14px; }
   .review-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .review-field { display: flex; flex-direction: column; gap: 5px; }
-  .review-field label { font-size: 0.82rem; font-weight: 600; color: var(--color-text); }
-  .review-field input, .review-field textarea {
-    padding: 11px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem;
-    font-family: var(--font-body); transition: border-color .2s; background: #fff;
-  }
+  .review-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+  .review-field label { font-size: .82rem; font-weight: 600; color: var(--color-text); }
+  .review-field input, .review-field textarea { padding: 11px 14px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: var(--font-body); transition: border-color .2s; background: #fff; width: 100%; box-sizing: border-box; }
   .review-field input:focus, .review-field textarea:focus { outline: none; border-color: var(--color-primary); }
   .review-field textarea { resize: vertical; min-height: 90px; }
-  .review-star-input { display: flex; gap: 4px; cursor: pointer; }
-  .review-star-input svg { width: 24px; height: 24px; color: #ddd; transition: color .15s; cursor: pointer; }
-  .review-star-input svg.filled { color: #f59e0b; }
-  .review-submit-btn {
-    padding: 13px 28px; background: var(--color-primary); color: #fff; border: none; border-radius: 8px;
-    font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all .25s; justify-self: start;
-  }
-  .review-submit-btn:hover { background: var(--color-primary-dark); transform: translateY(-1px); }
-  .review-success { display: none; padding: 14px 18px; background: #dcfce7; border: 1px solid #bbf7d0; border-radius: 10px; color: #166534; font-size: 0.88rem; }
-
-  /* Review image upload */
+  .review-star-input { display: flex; gap: 6px; cursor: pointer; }
+  .review-star-input svg { width: 30px; height: 30px; cursor: pointer; }
+  .review-submit-btn { min-height: 48px; padding: 0 28px; background: var(--color-primary); color: #fff; border: none; border-radius: 8px; font-size: .95rem; font-weight: 600; cursor: pointer; justify-self: start; }
+  .review-submit-btn:hover { background: var(--color-primary-dark); }
+  .review-success { display: none; margin-bottom: 14px; padding: 14px 18px; background: #dcfce7; border: 1px solid #bbf7d0; border-radius: 10px; color: #166534; font-size: .88rem; }
   .review-image-upload { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
-  .review-image-label {
-    display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; background: #fff;
-    border: 2px dashed #ddd; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 500;
-    color: var(--color-text-light); transition: border-color .2s;
-  }
-  .review-image-label:hover { border-color: var(--color-primary); color: var(--color-primary); }
+  .review-image-label { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; background: #fff; border: 2px dashed #ddd; border-radius: 8px; cursor: pointer; font-size: .85rem; font-weight: 500; color: var(--color-text-light); }
   .review-image-label svg { width: 18px; height: 18px; }
   .review-image-previews { display: flex; gap: 8px; flex-wrap: wrap; }
-  .review-image-preview {
-    width: 60px; height: 60px; border-radius: 8px; overflow: hidden; position: relative; border: 1px solid #eee;
-  }
+  .review-image-preview { width: 60px; height: 60px; border-radius: 8px; overflow: hidden; position: relative; border: 1px solid #eee; }
   .review-image-preview img { width: 100%; height: 100%; object-fit: cover; }
-  .review-image-preview .remove-img {
-    position: absolute; top: 2px; right: 2px; width: 18px; height: 18px; background: rgba(0,0,0,.6);
-    color: #fff; border: none; border-radius: 50%; cursor: pointer; font-size: 11px; line-height: 18px; text-align: center; padding: 0;
-  }
+  .review-image-preview .remove-img { position: absolute; top: 2px; right: 2px; width: 18px; height: 18px; background: rgba(0,0,0,.6); color: #fff; border: none; border-radius: 50%; cursor: pointer; font-size: 11px; line-height: 18px; text-align: center; padding: 0; }
 
-  /* Review card images */
-  .review-card-images { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-  .review-card-images img {
-    width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; cursor: pointer;
-    transition: transform .2s;
-  }
-  .review-card-images img:hover { transform: scale(1.08); }
+  .pdp-end { height: 64px; }
 
-  /* Scroll nav arrows for recommendations */
-  .rec-scroll-btn {
-    position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px;
-    background: #fff; border: 1px solid #ddd; border-radius: 50%; cursor: pointer; z-index: 2;
-    display: flex; align-items: center; justify-content: center; transition: all .2s;
-    box-shadow: 0 2px 8px rgba(0,0,0,.1);
-  }
-  .rec-scroll-btn:hover { border-color: var(--color-primary); background: #f0faf4; }
-  .rec-scroll-btn svg { width: 18px; height: 18px; color: var(--color-text); }
-  .rec-scroll-btn--left { left: -12px; }
-  .rec-scroll-btn--right { right: -12px; }
+  /* ===== Sticky Add to Cart (phones) ===== */
+  .pdp-sticky { display: none; }
 
-  /* ===== RESPONSIVE ===== */
+  /* ===== Responsive ===== */
+  @media (max-width: 1100px) {
+    .research-ingredients__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .benefits-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
   @media (max-width: 992px) {
-    .product-grid { grid-template-columns: 1fr; gap: 30px; }
-    .product-gallery { position: relative; top: 0; max-width: 500px; margin: 0 auto; }
-    .benefits-grid { grid-template-columns: 1fr 1fr; }
-    .rec-card { flex: 0 0 200px; }
+    .product-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+    .product-gallery { position: relative; top: 0; width: 100%; max-width: 560px; margin: 0 auto; }
+    .tab-description .rte.desc-multi { columns: 1; }
+  }
+  @media (min-width: 769px) {
+    .pg-count { display: none; }
+    .pdp-recs .prow > :nth-child(n+5) { display: none; }
   }
   @media (max-width: 768px) {
+    .product-template { padding-top: 12px; }
+    .pdp-crumbs { margin-bottom: 12px; font-size: .78rem; }
+    .pg-nav { display: none; }
+    .pg-slide { padding: 14px; }
+    .pg-thumb { width: 56px; height: 56px; }
     .product-title { font-size: 1.5rem; }
-    .product-price { font-size: 1.45rem; }
-    .product-main-image { padding: 16px; border-radius: 14px; }
-    .product-thumbnail { width: 60px; height: 60px; }
-    .product-trust-badges { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .product-subtitle { font-size: .9rem; }
+    .product-price { font-size: 1.75rem; }
+    .product-trust-badges { padding: 14px 6px; gap: 4px; }
     .trust-badge svg { width: 22px; height: 22px; }
-    .trust-badge span { font-size: 0.65rem; }
-    .reviews-summary { flex-direction: column; gap: 20px; }
-    .reviews-avg { min-width: auto; }
+    .trust-badge span { font-size: .66rem; }
+
+    .pdp-section { margin-top: 36px; }
+    .pdp-section--tint { padding: 22px 14px; border-radius: 16px; margin-left: -6px; margin-right: -6px; }
+    .pdp-head { margin-bottom: 18px; }
+    .pdp-head h2 { font-size: 1.3rem; }
+    .pdp-head p { font-size: .86rem; }
+
+    /* Description blocks fold on phones; the first stays open */
+    .desc-block { padding: 0 16px; margin-bottom: 10px; border-radius: 12px; overflow: hidden; }
+    .desc-block > :last-child { margin-bottom: 16px; }
+    .desc-block.is-collapsible > .desc-block__head { margin: 0 -16px; padding: 14px 16px; cursor: pointer; }
+    .desc-block.is-collapsible > .desc-block__head > :first-child { margin: 0; padding: 0; border: 0; font-size: 1rem; flex: 1; min-width: 0; }
+    .desc-block.is-collapsible .desc-block__chev { display: block; width: 18px; height: 18px; flex-shrink: 0; color: var(--color-primary); transition: transform .2s; }
+    .desc-block.is-collapsible.is-open .desc-block__chev { transform: rotate(180deg); }
+    .desc-block.is-collapsible:not(.is-open) > :not(.desc-block__head) { display: none; }
+    .desc-block.is-collapsible.is-open > .desc-block__head { border-bottom: 1px solid #f0ece4; margin-bottom: 14px; }
+    .desc-block.is-collapsible > .desc-block__head:last-child { margin-bottom: 0; }
+    .desc-block:not(.is-collapsible) { padding-top: 16px; }
+    .benefits-grid { gap: 8px; margin-bottom: 12px; }
+    .benefit-card { padding: 10px; gap: 8px; }
+    .benefit-card-text { font-size: .8rem; }
+
+    .vcard { flex-basis: 58vw; max-width: 240px; }
+    .vcard--wide { flex-basis: 100%; max-width: none; }
+    .vrow { justify-content: flex-start; }
+
+    .research-ingredients__grid { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: 0 -14px; padding: 0 14px 4px; }
+    .research-ingredients__grid::-webkit-scrollbar { display: none; }
+    .research-card { flex: 0 0 72%; max-width: 280px; scroll-snap-align: start; }
+
+    .comparison-table thead th, .comparison-table tbody td { padding: 10px 10px; font-size: .82rem; }
+
+    .reviews-summary { flex-direction: column; gap: 16px; padding: 20px 16px; align-items: stretch; }
+    .reviews-list { grid-template-columns: minmax(0, 1fr); }
     .review-form-row { grid-template-columns: 1fr; }
-    .rec-card { flex: 0 0 180px; }
-    .rec-scroll-btn { display: none; }
+    .review-form-wrapper { padding: 18px 14px; }
+    .review-form-details > summary { width: 100%; box-sizing: border-box; }
+    .review-submit-btn { width: 100%; }
+
+    .pdp-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 900; display: flex; align-items: center; gap: 12px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid #e8e2d6; box-shadow: 0 -6px 20px rgba(0,0,0,.08); transform: translateY(110%); transition: transform .25s ease; }
+    .pdp-sticky.is-visible { transform: translateY(0); }
+    .pdp-sticky__info { flex: 1; min-width: 0; }
+    .pdp-sticky__title { display: block; font-size: .78rem; color: var(--color-text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pdp-sticky__price { display: block; font-size: 1.1rem; font-weight: 700; color: #1B4332; line-height: 1.2; }
+    .pdp-sticky__btn { flex-shrink: 0; min-height: 46px; padding: 0 22px; border: none; border-radius: 10px; background: var(--color-primary); color: #fff; font-size: .95rem; font-weight: 600; cursor: pointer; }
+    .pdp-sticky__btn:disabled { background: #c9c9c9; }
+    .pdp-end { height: 96px; }
   }
-  @media (max-width: 576px) {
-    .product-template { padding: 16px 0 0; }
-    .product-title { font-size: 1.3rem; }
-    .product-price { font-size: 1.3rem; }
-    .product-highlights ul { grid-template-columns: 1fr; }
-    .benefits-grid { grid-template-columns: 1fr; }
-    .rec-card { flex: 0 0 160px; }
-    .rec-card__body { padding: 10px 12px; }
-    .rec-card__title { font-size: 0.8rem; }
-    .rec-card__price-now { font-size: 0.9rem; }
-    .product-trust-badges { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .trust-badge span { font-size: 0.72rem; }
-    .product-quantity-row { gap: 8px; }
-    .quantity-btn { width: 36px; height: 44px; }
-    .quantity-input { width: 42px; height: 44px; }
-    .product-add-btn { padding: 13px 16px; font-size: 0.9rem; }
-    .product-feature-pills { gap: 6px; }
-    .product-feature-pill { padding: 5px 10px; font-size: 0.76rem; }
-  }
-  @media (max-width: 380px) {
-    .product-title { font-size: 1.15rem; }
-    .product-add-btn { font-size: 0.84rem; padding: 12px 10px; }
-    .rec-card { flex: 0 0 145px; }
-    .rec-card__body { padding: 8px 10px; }
-    .rec-card__title { font-size: 0.75rem; }
-    .rec-card__btn { font-size: 0.75rem; padding: 8px; }
-  }
-
-  /* ===== PRODUCT SHOWCASE ===== */
-  .product-showcase { margin-top: 50px; padding: 40px; background: #FDF8F0; border-radius: 20px; }
-  .product-showcase__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-  .product-showcase__image { background: #ece8e1; border-radius: 16px; padding: 40px; display: flex; align-items: center; justify-content: center; aspect-ratio: 1; overflow: hidden; }
-  .product-showcase__image img { max-width: 100%; max-height: 100%; object-fit: contain; }
-  .product-showcase__content h2 { font-family: var(--font-heading); font-size: 1.6rem; color: var(--color-primary); margin-bottom: 16px; line-height: 1.3; }
-  .product-showcase__content p { font-size: 0.95rem; color: var(--color-text-light); line-height: 1.75; margin: 0; }
-
-  /* ===== KEY BENEFITS ICONS ===== */
-  .key-benefits-icons { margin-top: 50px; padding: 40px 0; text-align: center; }
-  .key-benefits-icons h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 36px; }
-  .key-benefits-icons__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .key-benefit-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-  .key-benefit-icon { width: 72px; height: 72px; background: #f0ebe3; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-  .key-benefit-icon svg { width: 28px; height: 28px; color: var(--color-primary); }
-  .key-benefit-item h4 { font-family: var(--font-heading); font-size: 0.95rem; color: var(--color-primary); margin: 0; }
-  .key-benefit-item p { font-size: 0.82rem; color: var(--color-text-light); margin: 0; line-height: 1.4; }
-
-  /* ===== RESEARCH-BACKED INGREDIENTS ===== */
-  .research-ingredients { margin-top: 50px; padding: 40px 20px; background: #FDF8F0; border-radius: 20px; }
-  .research-ingredients__header { text-align: center; margin-bottom: 36px; }
-  .research-ingredients__header h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 8px; }
-  .research-ingredients__header p { font-size: 0.92rem; color: var(--color-text-light); }
-  .research-ingredients__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  .research-card { background: #fff; border-radius: 16px; border: 1px solid #eee; overflow: hidden; transition: transform .25s, box-shadow .25s; }
-  .research-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
-  .research-card__image { aspect-ratio: 1; background: #f5f2ed; display: flex; align-items: center; justify-content: center; padding: 20px; }
-  .research-card__image img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
-  .research-card__image svg { width: 60px; height: 60px; color: var(--color-primary); opacity: .3; }
-  .research-card__body { padding: 18px 16px; }
-  .research-card__name { font-weight: 700; font-size: 1rem; color: var(--color-text); margin-bottom: 2px; }
-  .research-card__scientific { font-style: italic; font-size: 0.82rem; color: var(--color-text-light); margin-bottom: 10px; }
-  .research-card__desc { font-size: 0.85rem; color: var(--color-text-light); line-height: 1.55; margin-bottom: 14px; }
-  .research-card__badge { display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px; background: var(--color-primary); color: #fff; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
-  .research-card__badge svg { width: 13px; height: 13px; }
-
-  /* ===== KEY INGREDIENTS CARDS ===== */
-  .key-ingredients-section { margin-top: 50px; padding: 40px 0; text-align: center; }
-  .key-ingredients-section h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 30px; }
-  .key-ingredients__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .ingredient-card { background: #fff; border-radius: 16px; border: 1px solid #eee; overflow: hidden; text-align: center; transition: transform .25s, box-shadow .25s; }
-  .ingredient-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
-  .ingredient-card__image { aspect-ratio: 4/3; background: #f5f2ed; display: flex; align-items: center; justify-content: center; padding: 24px; }
-  .ingredient-card__image img { max-width: 80%; max-height: 80%; object-fit: contain; }
-  .ingredient-card__image svg { width: 60px; height: 60px; color: var(--color-primary); opacity: .3; }
-  .ingredient-card__body { padding: 16px; }
-  .ingredient-card__name { font-family: var(--font-heading); font-size: 1rem; color: var(--color-primary); margin-bottom: 6px; }
-  .ingredient-card__benefit { font-size: 0.85rem; color: var(--color-text-light); line-height: 1.45; margin: 0; }
-
-  /* ===== PRODUCT COMPARISON ===== */
-  .product-comparison { margin-top: 50px; padding: 40px 0; text-align: center; }
-  .product-comparison h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 30px; }
-  .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 14px; overflow: hidden; border: 1px solid #e6f4ea; text-align: left; }
-  .comparison-table thead th { background: var(--color-primary); color: #fff; padding: 14px 20px; font-size: 0.95rem; font-weight: 600; }
-  .comparison-table tbody td { padding: 14px 20px; font-size: 0.9rem; border-bottom: 1px solid #f0f0f0; color: var(--color-text); }
-  .comparison-table tbody tr:last-child td { border-bottom: none; }
-  .comparison-check { color: #16a34a; font-weight: 600; }
-  .comparison-cross { color: #dc2626; font-weight: 600; }
-
-  /* ===== VIDEO TESTIMONIALS ===== */
-  .video-testimonials-section { margin-top: 40px; padding: 40px 32px; background: #FDF8F0; border-radius: 20px; border-top: none; }
-  .video-testimonials__header { text-align: center; margin-bottom: 28px; }
-  .video-testimonials__header h2 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-primary); margin-bottom: 8px; font-style: italic; }
-  .video-testimonials__header p { font-size: 0.9rem; color: var(--color-text-light); margin: 0; }
-  .video-testimonials__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .video-card { position: relative; aspect-ratio: 9/16; border-radius: 14px; overflow: hidden; background: #fff; border: 2px dashed #d4ecdd; transition: border-color .2s, box-shadow .2s; }
-  .video-card:hover { border-color: var(--color-primary); box-shadow: 0 4px 16px rgba(45,106,79,.1); }
-  .video-card iframe { width: 100%; height: 100%; border: none; pointer-events: none; }
-  .video-card--has-video { border-style: solid; border-color: #e6f4ea; }
-  .video-card__overlay { position: absolute; inset: 0; z-index: 2; cursor: pointer; display: flex; align-items: center; justify-content: center; background: transparent; transition: background .2s; }
-  .video-card__overlay:hover { background: rgba(0,0,0,.12); }
-  .video-card__play { width: 50px; height: 50px; background: rgba(255,255,255,.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .25s; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
-  .video-card__overlay:hover .video-card__play { opacity: 1; }
-  .video-card__play svg { width: 22px; height: 22px; margin-left: 3px; }
-  .video-card__placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 20px; box-sizing: border-box; }
-  .video-card__placeholder svg { width: 44px; height: 44px; color: var(--color-primary); opacity: .25; }
-  .video-card__placeholder span { font-size: 0.8rem; color: var(--color-text-light); opacity: .7; line-height: 1.4; }
-
-  /* New sections responsive */
-  @media (max-width: 992px) {
-    .product-showcase__grid { grid-template-columns: 1fr; gap: 24px; }
-    .product-showcase__image { max-width: 400px; margin: 0 auto; }
-    .research-ingredients__grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 768px) {
-    .key-benefits-icons__grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .key-ingredients__grid { grid-template-columns: repeat(2, 1fr); }
-    .product-showcase { padding: 24px; }
-    .comparison-table thead th, .comparison-table tbody td { padding: 10px 14px; font-size: 0.85rem; }
-    .video-testimonials__grid { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; }
-    .video-testimonials__grid::-webkit-scrollbar { display: none; }
-    .video-card { flex: 0 0 42vw; scroll-snap-align: start; }
-  }
-  @media (max-width: 576px) {
-    .key-benefit-icon { width: 56px; height: 56px; }
-    .key-benefit-icon svg { width: 22px; height: 22px; }
-    .key-ingredients__grid { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
-    .research-ingredients__grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
-    .research-ingredients { padding: 24px 14px; }
-    .product-showcase__image { padding: 20px; }
-    .video-card { flex: 0 0 55vw; }
+  @media (max-width: 400px) {
+    .product-title { font-size: 1.36rem; }
+    .combo-pack-card { padding: 10px 8px 9px; }
+    .combo-pack-card__price { font-size: 1rem; }
+    .product-add-btn { padding: 0 12px; font-size: .94rem; }
+    .quantity-btn { width: 36px; }
+    .quantity-input { width: 38px; }
+    .product-feature-pill { padding: 5px 10px; font-size: .76rem; }
   }
 {%- endstyle -%}
+
+{%- comment -%} Short name for the H1 / breadcrumb / sticky bar; the SEO tail of the title becomes the subtitle. {%- endcomment -%}
+{%- capture short_title -%}{%- render 'product-short-title', title: product.title -%}{%- endcapture -%}
+{%- assign short_title = short_title | strip -%}
+{%- assign title_rest = '' -%}
+{%- if short_title != blank and product.title contains short_title -%}
+  {%- assign title_rest = product.title | split: short_title | last -%}
+  {%- if title_rest == product.title -%}{%- assign title_rest = '' -%}{%- endif -%}
+  {%- assign title_rest = title_rest | remove: '🌸' | remove: '🌿' | remove: '🍯' | remove: '💧' | remove: '💪' | remove: '🧴' | replace: '|', ' · ' | strip -%}
+  {%- for i in (1..3) -%}
+    {%- assign lead_char = title_rest | slice: 0 -%}
+    {%- if lead_char == '·' or lead_char == '–' or lead_char == '-' or lead_char == ',' -%}
+      {%- assign title_rest = title_rest | remove_first: lead_char | strip -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
 
 <section class="product-template" data-section-id="{{ section.id }}">
   <div class="container">
 
-    <!-- ===== BREADCRUMBS ===== -->
-    <nav class="product-breadcrumbs" aria-label="Breadcrumb">
+    <!-- ===== BREADCRUMB ===== -->
+    <nav class="pdp-crumbs" aria-label="Breadcrumb">
       <a href="/">Home</a>
-      <span>/</span>
+      <span class="pdp-crumbs__sep">/</span>
       {%- if product.collections.size > 0 -%}
         <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
-        <span>/</span>
+        <span class="pdp-crumbs__sep">/</span>
       {%- endif -%}
-      <span>{{ product.title }}</span>
+      <span class="pdp-crumbs__current">{{ short_title | default: product.title }}</span>
     </nav>
 
     <!-- ===== MAIN PRODUCT GRID ===== -->
     <div class="product-grid">
 
-      <!-- --- Gallery --- -->
+      <!-- --- Gallery (photos + any product videos uploaded in admin) --- -->
       <div class="product-gallery">
-        <div class="product-main-image" id="product-main-image">
-          {%- if product.featured_image -%}
-            <img src="{{ product.featured_image | image_url: width: 1200 }}" alt="{{ product.featured_image.alt | default: product.title }}" id="main-product-image" width="600" height="600">
-          {%- else -%}
-            {{ 'product-1' | placeholder_svg_tag }}
+        <div class="pg-frame">
+          <div class="pg-track" id="pg-track">
+            {%- if product.media.size > 0 -%}
+              {%- for media in product.media -%}
+                {%- case media.media_type -%}
+                  {%- when 'video' -%}
+                    <div class="pg-slide pg-slide--video" data-media-id="{{ media.id }}">
+                      {{ media | video_tag: controls: true, preload: 'metadata', playsinline: true, image_size: '1100x' }}
+                    </div>
+                  {%- when 'external_video' -%}
+                    <div class="pg-slide pg-slide--video" data-media-id="{{ media.id }}">
+                      {{ media | external_video_tag: loading: 'lazy' }}
+                    </div>
+                  {%- else -%}
+                    <div class="pg-slide" data-media-id="{{ media.id }}">
+                      <img
+                        src="{{ media.preview_image | image_url: width: 1100 }}"
+                        srcset="{{ media.preview_image | image_url: width: 550 }} 550w, {{ media.preview_image | image_url: width: 800 }} 800w, {{ media.preview_image | image_url: width: 1100 }} 1100w"
+                        sizes="(max-width: 992px) 92vw, 560px"
+                        alt="{{ media.alt | default: short_title | escape }}"
+                        width="{{ media.preview_image.width }}"
+                        height="{{ media.preview_image.height }}"
+                        {% if forloop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
+                      >
+                    </div>
+                {%- endcase -%}
+              {%- endfor -%}
+            {%- else -%}
+              <div class="pg-slide">{{ 'product-1' | placeholder_svg_tag }}</div>
+            {%- endif -%}
+          </div>
+          {%- if product.media.size > 1 -%}
+            <button type="button" class="pg-nav pg-nav--prev" data-pg-step="-1" aria-label="Previous photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button type="button" class="pg-nav pg-nav--next" data-pg-step="1" aria-label="Next photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <span class="pg-count" aria-hidden="true"><span id="pg-current">1</span> / {{ product.media.size }}</span>
           {%- endif -%}
         </div>
-        {%- if product.images.size > 1 -%}
-          <div class="product-thumbnails">
-            {%- for image in product.images -%}
-              <button type="button" class="product-thumbnail {% if forloop.first %}active{% endif %}" data-image-url="{{ image | image_url: width: 1200 }}" data-index="{{ forloop.index0 }}">
-                <img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | default: product.title }}" width="72" height="72" loading="lazy">
+        {%- if product.media.size > 1 -%}
+          <div class="pg-thumbs" id="pg-thumbs">
+            {%- for media in product.media -%}
+              <button type="button" class="pg-thumb{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Show photo {{ forloop.index }}">
+                <img src="{{ media.preview_image | image_url: width: 160 }}" alt="" width="68" height="68" loading="lazy">
+                {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                  <span class="pg-thumb__play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>
+                {%- endif -%}
               </button>
             {%- endfor -%}
           </div>
@@ -544,8 +453,10 @@
       <!-- --- Product Info --- -->
       <div class="product-info">
 
-        <!-- Badges -->
-        <div class="product-badges">
+        <div class="pdp-eyebrow">
+          {%- if product.vendor != blank -%}
+            <p class="product-vendor">{{ product.vendor }}</p>
+          {%- endif -%}
           {%- if product.compare_at_price > product.price -%}
             <span class="product-badge product-badge--sale">Sale</span>
           {%- endif -%}
@@ -558,13 +469,12 @@
           <span class="product-badge product-badge--ayurvedic">100% Ayurvedic</span>
         </div>
 
-        {%- if product.vendor != blank -%}
-          <p class="product-vendor">{{ product.vendor }}</p>
+        <h1 class="product-title">{{ short_title | default: product.title }}</h1>
+        {%- if title_rest != blank -%}
+          <p class="product-subtitle">{{ title_rest }}</p>
         {%- endif -%}
 
-        <h1 class="product-title">{{ product.title }}</h1>
-
-        <!-- Rating: stars reflect real review blocks only (was always 5 filled stars, even with 0 reviews) -->
+        <!-- Rating: stars reflect real review blocks only -->
         {%- liquid
           assign admin_review_count = 0
           assign admin_rating_sum = 0
@@ -591,13 +501,11 @@
               {%- endfor -%}
             </div>
             <span class="product-rating-count">
-              <a href="#reviews-section" onclick="document.getElementById('reviews-section').scrollIntoView({behavior:'smooth'});return false;">
-                (<span id="total-review-count">{{ admin_review_count }}</span> reviews)
-              </a>
+              <a href="#reviews-section">(<span id="total-review-count">{{ admin_review_count }}</span> reviews)</a>
             </span>
           {%- else -%}
             <span class="product-rating-count">
-              <a href="#reviews-section" onclick="document.getElementById('reviews-section').scrollIntoView({behavior:'smooth'});return false;">No reviews yet</a>
+              <a href="#reviews-section">No reviews yet · be the first</a>
               <span id="total-review-count" hidden>0</span>
             </span>
           {%- endif -%}
@@ -605,21 +513,15 @@
 
         <!-- Price -->
         <div class="product-price-wrapper">
-          <span class="product-price">{% render 'inr-price', cents: product.price %}</span>
-          {%- if product.compare_at_price > product.price -%}
-            <span class="product-compare-price">{% render 'inr-price', cents: product.compare_at_price %}</span>
-            {%- assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
-            <span class="product-save-badge">Save {{ savings }}%</span>
-          {%- endif -%}
-          <span class="product-tax-note">Inclusive of all taxes</span>
+          <span class="product-price" id="pdp-price">{% render 'inr-price', cents: current_variant.price %}</span>
+          <span class="product-compare-price" id="pdp-compare" {% unless current_variant.compare_at_price > current_variant.price %}hidden{% endunless %}>{% render 'inr-price', cents: current_variant.compare_at_price %}</span>
+          <span class="product-save-badge" id="pdp-save" {% unless current_variant.compare_at_price > current_variant.price %}hidden{% endunless %}>
+            {%- if current_variant.compare_at_price > current_variant.price -%}
+              Save {{ current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price }}%
+            {%- endif -%}
+          </span>
+          <span class="product-tax-note">MRP inclusive of all taxes</span>
         </div>
-
-        <!-- Short Description -->
-        {%- if product.description != blank -%}
-          <div class="product-description-short">
-            {{ product.description | strip_html | truncate: 180 }}
-          </div>
-        {%- endif -%}
 
         <!-- Feature Pills -->
         <div class="product-feature-pills">
@@ -628,12 +530,12 @@
             GMP Certified
           </span>
           <span class="product-feature-pill">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-            Clinically Tested
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+            Herbal Ingredients
           </span>
           <span class="product-feature-pill">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-            No Side Effects
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Trusted Since 1999
           </span>
           <span class="product-feature-pill">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
@@ -641,44 +543,18 @@
           </span>
         </div>
 
-        <!-- Key Benefits / Highlights -->
-        {%- assign highlight_blocks = "" -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'highlight' -%}
-            {%- unless highlight_blocks == "" -%}{%- assign highlight_blocks = highlight_blocks | append: "|||" -%}{%- endunless -%}
-            {%- assign highlight_blocks = highlight_blocks | append: block.settings.text -%}
-          {%- endif -%}
-        {%- endfor -%}
-        {%- if highlight_blocks != "" -%}
-          {%- assign highlights_arr = highlight_blocks | split: "|||" -%}
-          <div class="product-highlights">
-            <h4>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-              Key Benefits
-            </h4>
-            <ul>
-              {%- for h in highlights_arr -%}
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                  {{ h }}
-                </li>
-              {%- endfor -%}
-            </ul>
-          </div>
-        {%- endif -%}
-
         <!-- Product Form -->
         {%- form 'product', product, class: 'product-form', id: 'product-form', data-product-form: '' -%}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
 
           {%- unless product.has_only_default_variant -%}
             <div class="product-variants">
               {%- for option in product.options_with_values -%}
                 <div class="variant-group">
-                  <label class="variant-label">{{ option.name }}: <strong id="selected-{{ option.name | handleize }}">{{ option.selected_value }}</strong></label>
+                  <span class="pdp-label">{{ option.name }}: <strong id="selected-{{ option.name | handleize }}">{{ option.selected_value }}</strong></span>
                   <div class="variant-options">
                     {%- for value in option.values -%}
-                      <button type="button" class="variant-option {% if option.selected_value == value %}selected{% endif %}" data-option-name="{{ option.name }}" data-option-value="{{ value }}">{{ value }}</button>
+                      <button type="button" class="variant-option {% if option.selected_value == value %}selected{% endif %}" data-option-name="{{ option.name | escape }}" data-option-value="{{ value | escape }}">{{ value }}</button>
                     {%- endfor -%}
                   </div>
                 </div>
@@ -686,72 +562,44 @@
             </div>
           {%- endunless -%}
 
-          <!-- Combo Pack Selector -->
+          <!-- Pack selector. Prices are filled in by the script from the selected variant's price
+               (Quantity x unit price) unless a block sets an override. -->
           {%- assign has_combos = false -%}
           {%- for block in section.blocks -%}
             {%- if block.type == 'combo_pack' -%}{%- assign has_combos = true -%}{%- break -%}{%- endif -%}
           {%- endfor -%}
           {%- if has_combos -%}
             <div class="combo-packs">
-              <span class="combo-packs__label">Choose Pack Size:</span>
+              <span class="pdp-label">Choose pack size</span>
               <div class="combo-packs__grid">
-                <div class="combo-pack-card selected" data-combo-qty="1" data-display-price="{% render 'inr-price', cents: product.price %}" data-display-mrp="{%- if product.compare_at_price > product.price -%}{% render 'inr-price', cents: product.compare_at_price %}{%- endif -%}" data-display-discount="{%- if product.compare_at_price > product.price -%}{%- assign cb_save = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}{{ cb_save }}%{%- endif -%}" onclick="selectCombo(this)">
-                  <div class="combo-pack-card__radio"></div>
-                  <div class="combo-pack-card__info">
-                    <div class="combo-pack-card__title">Single</div>
-                    <div class="combo-pack-card__pricing">
-                      <span class="combo-pack-card__price">{% render 'inr-price', cents: product.price %}</span>
-                      {%- if product.compare_at_price > product.price -%}
-                        <span class="combo-pack-card__mrp">M.R.P: <s>{% render 'inr-price', cents: product.compare_at_price %}</s></span>
-                        <span class="combo-pack-card__discount">({{ cb_save }}% off)</span>
-                      {%- endif -%}
-                    </div>
-                  </div>
-                </div>
+                <button type="button" class="combo-pack-card selected" data-combo-qty="1" data-override-price="" data-override-mrp="">
+                  <span class="combo-pack-card__tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                  <span class="combo-pack-card__title">Single</span>
+                  <span class="combo-pack-card__price">{% render 'inr-price', cents: current_variant.price %}</span>
+                  <span class="combo-pack-card__mrp" hidden></span>
+                  <span class="combo-pack-card__discount" hidden></span>
+                </button>
                 {%- for block in section.blocks -%}
                   {%- if block.type == 'combo_pack' -%}
-                    {%- comment -%}
-                      Pack pricing is derived from the product's own price so it stays
-                      correct after any MRP change. The "Combo price"/"M.R.P" block
-                      settings are optional overrides — fill them only to sell a pack
-                      below N x the unit price.
-                    {%- endcomment -%}
                     {%- assign c_qty = block.settings.quantity | default: 1 -%}
                     {%- if c_qty < 1 -%}{%- assign c_qty = 1 -%}{%- endif -%}
-
-                    {%- if block.settings.price != blank -%}
-                      {%- assign c_price_cents = block.settings.price | times: 100 -%}
+                    {%- assign c_override_price = '' -%}
+                    {%- if block.settings.price != blank -%}{%- assign c_override_price = block.settings.price | times: 100 | round -%}{%- endif -%}
+                    {%- assign c_override_mrp = '' -%}
+                    {%- if block.settings.mrp != blank -%}{%- assign c_override_mrp = block.settings.mrp | times: 100 | round -%}{%- endif -%}
+                    {%- if c_override_price != '' -%}
+                      {%- assign c_price_cents = c_override_price -%}
                     {%- else -%}
-                      {%- assign c_price_cents = product.price | times: c_qty -%}
+                      {%- assign c_price_cents = current_variant.price | times: c_qty -%}
                     {%- endif -%}
-
-                    {%- if block.settings.mrp != blank -%}
-                      {%- assign c_mrp_cents = block.settings.mrp | times: 100 -%}
-                    {%- elsif product.compare_at_price > product.price -%}
-                      {%- assign c_mrp_cents = product.compare_at_price | times: c_qty -%}
-                    {%- else -%}
-                      {%- assign c_mrp_cents = 0 -%}
-                    {%- endif -%}
-
-                    {%- assign c_discount = 0 -%}
-                    {%- if c_mrp_cents > c_price_cents -%}
-                      {%- assign c_diff = c_mrp_cents | minus: c_price_cents | times: 100 -%}
-                      {%- assign c_discount = c_diff | divided_by: c_mrp_cents -%}
-                    {%- endif -%}
-                    <div class="combo-pack-card" data-combo-qty="{{ c_qty }}" data-display-price="{% render 'inr-price', cents: c_price_cents %}" data-display-mrp="{%- if c_discount > 0 -%}{% render 'inr-price', cents: c_mrp_cents %}{%- endif -%}" data-display-discount="{%- if c_discount > 0 -%}{{ c_discount }}%{%- endif -%}" {{ block.shopify_attributes }} onclick="selectCombo(this)">
+                    <button type="button" class="combo-pack-card" data-combo-qty="{{ c_qty }}" data-override-price="{{ c_override_price }}" data-override-mrp="{{ c_override_mrp }}" {{ block.shopify_attributes }}>
                       {%- if block.settings.best_value -%}<span class="combo-pack-card__best">Best Value</span>{%- endif -%}
-                      <div class="combo-pack-card__radio"></div>
-                      <div class="combo-pack-card__info">
-                        <div class="combo-pack-card__title">{{ block.settings.label | default: 'Combo Pack' }}</div>
-                        <div class="combo-pack-card__pricing">
-                          <span class="combo-pack-card__price">{% render 'inr-price', cents: c_price_cents %}</span>
-                          {%- if c_discount > 0 -%}
-                            <span class="combo-pack-card__mrp">M.R.P: <s>{% render 'inr-price', cents: c_mrp_cents %}</s></span>
-                            <span class="combo-pack-card__discount">({{ c_discount }}% off)</span>
-                          {%- endif -%}
-                        </div>
-                      </div>
-                    </div>
+                      <span class="combo-pack-card__tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+                      <span class="combo-pack-card__title">{{ block.settings.label | default: 'Combo Pack' }}</span>
+                      <span class="combo-pack-card__price">{% render 'inr-price', cents: c_price_cents %}</span>
+                      <span class="combo-pack-card__mrp" hidden></span>
+                      <span class="combo-pack-card__discount" hidden></span>
+                    </button>
                   {%- endif -%}
                 {%- endfor -%}
               </div>
@@ -760,75 +608,27 @@
 
           <div class="product-quantity-row">
             <div class="quantity-selector">
-              <button type="button" class="quantity-btn" data-action="decrease">−</button>
-              <input type="number" name="quantity" value="1" min="1" class="quantity-input" aria-label="Quantity">
-              <button type="button" class="quantity-btn" data-action="increase">+</button>
+              <button type="button" class="quantity-btn" data-action="decrease" aria-label="Decrease quantity">−</button>
+              <input type="number" name="quantity" value="1" min="1" class="quantity-input" aria-label="Quantity" inputmode="numeric">
+              <button type="button" class="quantity-btn" data-action="increase" aria-label="Increase quantity">+</button>
             </div>
-            <button type="submit" class="product-add-btn" {% unless product.available %}disabled{% endunless %}>
+            <button type="submit" class="product-add-btn" id="pdp-add-btn" {% unless current_variant.available %}disabled{% endunless %}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-              {%- if product.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+              <span data-add-label>{%- if current_variant.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}</span>
             </button>
           </div>
         {%- endform -%}
 
-        <!-- Buy Now -->
+        <!-- Buy Now: adds the chosen variant + quantity, then goes to checkout -->
         {%- if section.settings.show_buy_now and product.available -%}
-          <form action="/cart" method="post">
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" name="checkout" class="product-buy-now">Buy Now</button>
-          </form>
+          <button type="button" class="product-buy-now" id="pdp-buy-now">Buy Now</button>
         {%- endif -%}
 
-        <!-- Download Presentation -->
-        {%- capture pdf_list -%}{%- render 'product-pdf-url', product: product -%}{%- endcapture -%}
-        {%- assign pdf_list = pdf_list | strip -%}
-        {%- assign meta_pdf = product.metafields.custom.product_presentation_url | default: '' -%}
-        {%- if meta_pdf != blank -%}
-          {%- assign pdf_list = meta_pdf | append: '|' -%}
-        {%- elsif pdf_list == blank and section.settings.default_download_url != blank -%}
-          {%- assign pdf_list = section.settings.default_download_url | append: '|' -%}
-        {%- endif -%}
-        {%- assign pdf_entries = pdf_list | split: ',' -%}
-        {%- if pdf_list != blank -%}
-          {%- for entry in pdf_entries -%}
-            {%- assign pdf_parts = entry | split: '|' -%}
-            {%- assign pdf_label = pdf_parts[1] | default: '' | strip -%}
-            <a href="{{ pdf_parts[0] }}" class="product-download-btn" target="_blank" rel="noopener" download>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              {%- if pdf_entries.size > 1 and pdf_label != blank -%}
-                {{ pdf_label }} Presentation
-              {%- else -%}
-                {{ section.settings.download_button_text | default: 'Download Product Presentation' }}
-              {%- endif -%}
-            </a>
-          {%- endfor -%}
-        {%- elsif section.settings.show_download_placeholder -%}
-          <button type="button" class="product-download-btn" disabled style="opacity:.55;cursor:not-allowed;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Presentation Coming Soon
-          </button>
-        {%- endif -%}
-
-        <!-- Share -->
-        <div class="product-share">
-          <span>Share:</span>
-          <button type="button" class="product-share-btn" aria-label="Share on WhatsApp" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+window.location.href),'_blank')">
-            <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          </button>
-          <button type="button" class="product-share-btn" aria-label="Share on Facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),'_blank','width=600,height=400')">
-            <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </button>
-          <button type="button" class="product-share-btn" aria-label="Copy Link" onclick="navigator.clipboard.writeText(window.location.href);this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;%2316a34a&quot; stroke-width=&quot;2&quot;><polyline points=&quot;20 6 9 17 4 12&quot;/></svg>';setTimeout(()=>{this.innerHTML='<svg viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot;><path d=&quot;M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71&quot;/><path d=&quot;M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71&quot;/></svg>'},2000)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          </button>
-        </div>
-
-        <!-- Trust Badges -->
+        <!-- Trust row -->
         <div class="product-trust-badges">
           <div class="trust-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-            <span>Free Shipping<br>Above &#8377;400</span>
+            <span>Free Shipping<br>Above &#8377;{{ settings.free_shipping_threshold | default: 400 }}</span>
           </div>
           <div class="trust-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
@@ -839,37 +639,154 @@
             <span>Secure<br>Checkout</span>
           </div>
           <div class="trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-            <span>COD<br>Available</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg>
+            <span>Cash on<br>Delivery</span>
           </div>
         </div>
+
+        <!-- Product presentation (PDF) -->
+        {%- capture pdf_list -%}{%- render 'product-pdf-url', product: product -%}{%- endcapture -%}
+        {%- assign pdf_list = pdf_list | strip -%}
+        {%- assign meta_pdf = product.metafields.custom.product_presentation_url | default: '' -%}
+        {%- if meta_pdf != blank -%}
+          {%- assign pdf_list = meta_pdf | append: '|' -%}
+        {%- elsif pdf_list == blank and section.settings.default_download_url != blank -%}
+          {%- assign pdf_list = section.settings.default_download_url | append: '|' -%}
+        {%- endif -%}
+        {%- assign pdf_entries = pdf_list | split: ',' -%}
+        {%- if pdf_list != blank -%}
+          <div class="pdp-links">
+            {%- for entry in pdf_entries -%}
+              {%- assign pdf_parts = entry | split: '|' -%}
+              {%- assign pdf_label = pdf_parts[1] | default: '' | strip -%}
+              <a href="{{ pdf_parts[0] }}" class="pdp-doc-link" target="_blank" rel="noopener" download>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
+                {%- if pdf_entries.size > 1 and pdf_label != blank -%}
+                  {{ pdf_label }} Presentation
+                {%- else -%}
+                  {{ section.settings.download_button_text | default: 'Download Product Presentation' }}
+                {%- endif -%}
+                <small>PDF</small>
+              </a>
+            {%- endfor -%}
+          </div>
+        {%- elsif section.settings.show_download_placeholder -%}
+          <div class="pdp-links">
+            <span class="pdp-doc-link pdp-doc-link--soon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Product presentation coming soon
+            </span>
+          </div>
+        {%- endif -%}
+
+        <!-- Share -->
+        {%- if section.settings.show_share -%}
+        <div class="product-share">
+          <span>Share</span>
+          <button type="button" class="product-share-btn" aria-label="Share on WhatsApp" onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent(document.title+' '+window.location.href),'_blank')">
+            <svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </button>
+          <button type="button" class="product-share-btn" aria-label="Share on Facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),'_blank','width=600,height=400')">
+            <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </button>
+          <button type="button" class="product-share-btn" id="pdp-copy-link" aria-label="Copy link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </button>
+        </div>
+        {%- endif -%}
 
       </div>
     </div>
 
-    <!-- ===== DESCRIPTION SECTION ===== -->
-    <div class="product-description-section">
-      <h2>Description</h2>
-      <div class="tab-description">
-        {%- if product.description != blank -%}
-          <div class="rte">{{ product.description }}</div>
+    <!-- ===== VIDEOS (per product) =====
+         Sources, in order: product metafield custom.product_videos, snippets/product-video-data.liquid,
+         "Video Testimonial" blocks, and the section's product video URL.
+         Accepts YouTube / Shorts links and direct .mp4 links (Shopify Files). Nothing is shown when a
+         product has no videos. -->
+    {%- capture video_raw -%}
+      {%- assign mf_videos = product.metafields.custom.product_videos -%}
+      {%- if mf_videos != blank -%}
+        {%- if mf_videos.type contains 'list' -%}{{ mf_videos.value | join: ',' }}{%- else -%}{{ mf_videos.value }}{%- endif -%},
+      {%- endif -%}
+      {%- render 'product-video-data', product: product -%},
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'video_testimonial' -%}{{ block.settings.video_url }},{%- endif -%}
+      {%- endfor -%}
+      {{ section.settings.youtube_product_url }}
+    {%- endcapture -%}
+    {%- assign video_urls = video_raw | newline_to_br | replace: '<br />', ',' | replace: '<br>', ',' | strip_newlines | split: ',' -%}
+    {%- capture video_cards -%}
+      {%- for raw_url in video_urls -%}
+        {%- assign v_url = raw_url | strip -%}
+        {%- if v_url.size < 10 -%}{%- continue -%}{%- endif -%}
+        {%- assign yt_id = '' -%}
+        {%- assign v_wide = true -%}
+        {%- if v_url contains 'youtu.be/' -%}
+          {%- assign yt_id = v_url | split: 'youtu.be/' | last | split: '?' | first -%}
+        {%- elsif v_url contains '/shorts/' -%}
+          {%- assign yt_id = v_url | split: '/shorts/' | last | split: '?' | first -%}
+          {%- assign v_wide = false -%}
+        {%- elsif v_url contains 'youtube.com' and v_url contains 'v=' -%}
+          {%- assign yt_id = v_url | split: 'v=' | last | split: '&' | first -%}
+        {%- elsif v_url contains '/embed/' -%}
+          {%- assign yt_id = v_url | split: '/embed/' | last | split: '?' | first -%}
         {%- endif -%}
-
-        {%- if highlight_blocks != "" -%}
-          <div class="benefits-grid">
-            {%- for h in highlights_arr -%}
-              <div class="benefit-card">
-                <div class="benefit-card-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                </div>
-                <div class="benefit-card-text">{{ h }}</div>
-              </div>
-            {%- endfor -%}
+        {%- assign yt_id = yt_id | split: '/' | first | strip -%}
+        {%- if yt_id != '' -%}
+          <button type="button" class="vcard{% if v_wide %} vcard--wide{% endif %}" data-yt="{{ yt_id | escape }}" aria-label="Play video">
+            <img src="https://i.ytimg.com/vi/{{ yt_id | escape }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="vcard__play"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>
+          </button>
+        {%- elsif v_url contains '.mp4' or v_url contains '.webm' or v_url contains '.mov' or v_url contains '/videos/' -%}
+          <div class="vcard">
+            <video src="{{ v_url | escape }}#t=0.1" controls playsinline preload="metadata"></video>
           </div>
         {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+    {%- assign video_cards = video_cards | strip -%}
+    {%- if video_cards != blank -%}
+      <div class="pdp-section pdp-section--tint">
+        <div class="pdp-head">
+          <h2>{{ section.settings.videos_heading | default: 'See It in Action' }}</h2>
+          {%- if section.settings.videos_subheading != blank -%}<p>{{ section.settings.videos_subheading }}</p>{%- endif -%}
+        </div>
+        <div class="vrow" id="pdp-videos">{{ video_cards }}</div>
+      </div>
+    {%- elsif request.design_mode -%}
+      <div class="pdp-section">
+        <div class="vrow-hint">No videos for this product yet. This note is only visible in the theme editor; customers see nothing here.</div>
+      </div>
+    {%- endif -%}
 
-        <div class="product-specs">
-          <h4>Product Details</h4>
+    <!-- ===== DESCRIPTION ===== -->
+    <div class="pdp-section pdp-section--tint" id="pdp-description">
+      <div class="pdp-head pdp-head--left">
+        <h2>About this product</h2>
+      </div>
+      <div class="tab-description">
+        {%- if section.settings.show_highlights -%}
+          {%- assign has_highlights = false -%}
+          {%- capture highlight_cards -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'highlight' and block.settings.text != blank -%}
+                {%- assign has_highlights = true -%}
+                <div class="benefit-card" {{ block.shopify_attributes }}>
+                  <div class="benefit-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div class="benefit-card-text">{{ block.settings.text }}</div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+          {%- if has_highlights -%}<div class="benefits-grid">{{ highlight_cards }}</div>{%- endif -%}
+        {%- endif -%}
+
+        {%- if product.description != blank -%}
+          <div class="rte" id="pdp-rte">{{ product.description }}</div>
+        {%- endif -%}
+
+        <div class="desc-block" id="pdp-specs">
+          <h3>Product details</h3>
           <table class="spec-table">
             {%- if product.vendor != blank -%}
               <tr><td>Brand</td><td>{{ product.vendor }}</td></tr>
@@ -878,107 +795,35 @@
               <tr><td>Category</td><td>{{ product.type }}</td></tr>
             {%- endif -%}
             <tr><td>Format</td><td>Ayurvedic Formulation</td></tr>
-            <tr><td>Suitable For</td><td>Adults (or as directed by physician)</td></tr>
+            <tr><td>Suitable for</td><td>Adults (or as directed by physician)</td></tr>
             <tr><td>Manufacturer</td><td>PRM Pharmaceuticals</td></tr>
-            <tr><td>Country of Origin</td><td>India</td></tr>
-            {%- if product.tags.size > 0 -%}
-              <tr><td>Tags</td><td>{{ product.tags | join: ', ' }}</td></tr>
+            <tr><td>Country of origin</td><td>India</td></tr>
+            {%- if current_variant.sku != blank -%}
+              <tr><td>SKU</td><td id="pdp-sku">{{ current_variant.sku }}</td></tr>
+            {%- endif -%}
+            {%- if settings.contact_phone != blank or settings.contact_email != blank -%}
+              <tr>
+                <td>Customer care</td>
+                <td>
+                  {%- if settings.contact_phone != blank -%}<a href="tel:{{ settings.contact_phone | remove: ' ' }}">{{ settings.contact_phone }}</a>{%- endif -%}
+                  {%- if settings.contact_phone != blank and settings.contact_email != blank -%}<br>{%- endif -%}
+                  {%- if settings.contact_email != blank -%}<a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a>{%- endif -%}
+                </td>
+              </tr>
             {%- endif -%}
           </table>
         </div>
       </div>
     </div>
 
-    <!-- ===== VIDEO TESTIMONIALS ===== -->
-    {%- assign video_card_count = 0 -%}
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'video_testimonial' -%}
-        {%- assign video_card_count = video_card_count | plus: 1 -%}
-      {%- endif -%}
-    {%- endfor -%}
-    {%- if section.settings.youtube_product_url != blank -%}
-      {%- assign video_card_count = video_card_count | plus: 1 -%}
-    {%- endif -%}
-    {%- if video_card_count > 0 -%}
-    <div class="video-testimonials-section">
-      <div class="video-testimonials__header">
-        <h2>Real Users, Real Results</h2>
-        <p>Watch authentic testimonials from our satisfied customers</p>
-      </div>
-      <div class="video-testimonials__grid" style="grid-template-columns:repeat({{ video_card_count }},1fr);">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'video_testimonial' -%}
-            {%- assign vid_url = block.settings.video_url -%}
-            {%- assign vid_click = block.settings.click_url | default: vid_url -%}
-            {%- assign yt_id = '' -%}
-            {%- if vid_url contains 'youtu.be/' -%}
-              {%- assign yt_id = vid_url | split: 'youtu.be/' | last | split: '?' | first -%}
-            {%- elsif vid_url contains '/shorts/' -%}
-              {%- assign yt_id = vid_url | split: '/shorts/' | last | split: '?' | first -%}
-            {%- elsif vid_url contains 'v=' -%}
-              {%- assign yt_id = vid_url | split: 'v=' | last | split: '&' | first -%}
-            {%- elsif vid_url contains '/embed/' -%}
-              {%- assign yt_id = vid_url | split: '/embed/' | last | split: '?' | first -%}
-            {%- endif -%}
-            <div class="video-card" {{ block.shopify_attributes }}>
-              {%- if yt_id != '' -%}
-                <iframe src="https://www.youtube.com/embed/{{ yt_id }}?autoplay=1&mute=1&loop=1&playlist={{ yt_id }}&controls=0&playsinline=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" loading="lazy" title="Customer testimonial"></iframe>
-                <div class="video-card__overlay" onclick="window.open('{{ vid_click | escape }}','_blank')">
-                  <div class="video-card__play">
-                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  </div>
-                </div>
-              {%- else -%}
-                <div class="video-card__placeholder">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  <span>Add a YouTube or<br>Vimeo video URL</span>
-                </div>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-
-        {%- assign yt_p_url = section.settings.youtube_product_url -%}
-        {%- assign yt_p_click = section.settings.youtube_click_url | default: yt_p_url -%}
-        {%- assign yt_p_id = '' -%}
-        {%- if yt_p_url contains 'youtu.be/' -%}
-          {%- assign yt_p_id = yt_p_url | split: 'youtu.be/' | last | split: '?' | first -%}
-        {%- elsif yt_p_url contains '/shorts/' -%}
-          {%- assign yt_p_id = yt_p_url | split: '/shorts/' | last | split: '?' | first -%}
-        {%- elsif yt_p_url contains 'v=' -%}
-          {%- assign yt_p_id = yt_p_url | split: 'v=' | last | split: '&' | first -%}
-        {%- elsif yt_p_url contains '/embed/' -%}
-          {%- assign yt_p_id = yt_p_url | split: '/embed/' | last | split: '?' | first -%}
-        {%- endif -%}
-        {%- if yt_p_url != blank -%}
-        <div class="video-card">
-          {%- if yt_p_id != '' -%}
-            <iframe src="https://www.youtube.com/embed/{{ yt_p_id }}?autoplay=1&mute=1&loop=1&playlist={{ yt_p_id }}&controls=0&playsinline=1&rel=0&modestbranding=1" allow="autoplay; encrypted-media" loading="lazy" title="Product video"></iframe>
-            <div class="video-card__overlay" onclick="window.open('{{ yt_p_click | escape }}','_blank')">
-              <div class="video-card__play">
-                <svg viewBox="0 0 24 24" fill="#ff0000" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </div>
-            </div>
-          {%- else -%}
-            <div class="video-card__placeholder">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              <span>Add a YouTube or<br>Vimeo video URL</span>
-            </div>
-          {%- endif -%}
-        </div>
-        {%- endif -%}
-      </div>
-    </div>
-    {%- endif -%}
-
     <!-- ===== RESEARCH-BACKED INGREDIENTS ===== -->
     {%- assign has_research = false -%}
     {%- for block in section.blocks -%}
       {%- if block.type == 'research_ingredient' -%}{%- assign has_research = true -%}{%- break -%}{%- endif -%}
     {%- endfor -%}
-    {%- if has_research -%}
-    <div class="research-ingredients">
-      <div class="research-ingredients__header">
+    {%- if has_research and section.settings.show_research -%}
+    <div class="pdp-section">
+      <div class="pdp-head">
         <h2>Research-Backed Ingredients</h2>
         <p>Scientifically validated natural ingredients for optimal health benefits</p>
       </div>
@@ -988,9 +833,9 @@
             <div class="research-card" {{ block.shopify_attributes }}>
               <div class="research-card__image">
                 {%- if block.settings.image != blank -%}
-                  <img src="{{ block.settings.image | image_url: width: 400 }}" alt="{{ block.settings.name }}" loading="lazy">
+                  <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.name | escape }}" loading="lazy" width="500" height="375">
                 {%- else -%}
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L9 9H2l6 4.5L5.5 21 12 16.5 18.5 21 16 13.5 22 9h-7z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
                 {%- endif -%}
               </div>
               <div class="research-card__body">
@@ -1016,106 +861,62 @@
     {%- endif -%}
 
     <!-- ===== PRODUCT COMPARISON ===== -->
-    <div class="product-comparison">
-      <h2>Product Comparison</h2>
-      <table class="comparison-table">
-        <thead>
-          <tr><th>Feature</th><th>Our Product</th><th>Others</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Natural Ingredients</td><td class="comparison-check">&#10003; 100% Natural</td><td class="comparison-cross">&#10007; Synthetic</td></tr>
-          <tr><td>GMP Certified</td><td class="comparison-check">&#10003; Yes</td><td class="comparison-cross">&#10007; No</td></tr>
-          <tr><td>Side Effects</td><td class="comparison-check">&#10003; None</td><td class="comparison-cross">&#10007; Possible</td></tr>
-          <tr><td>Clinically Tested</td><td class="comparison-check">&#10003; Yes</td><td class="comparison-cross">&#10007; No</td></tr>
-          <tr><td>State FDA Approved</td><td class="comparison-check">&#10003; Yes</td><td class="comparison-cross">&#10007; Not Always</td></tr>
-        </tbody>
-      </table>
+    {%- if section.settings.show_comparison -%}
+    <div class="pdp-section">
+      <div class="pdp-head"><h2>Why HerboVilla</h2></div>
+      <div class="comparison-wrap">
+        <table class="comparison-table">
+          <tbody>
+            <tr><td>Formulation</td><td class="comparison-check">&#10003; Ayurvedic herbal ingredients</td></tr>
+            <tr><td>Manufacturing</td><td class="comparison-check">&#10003; GMP certified facilities</td></tr>
+            <tr><td>Approval</td><td class="comparison-check">&#10003; State FDA approved product</td></tr>
+            <tr><td>Experience</td><td class="comparison-check">&#10003; PRM, trusted since 1999</td></tr>
+            <tr><td>Delivery</td><td class="comparison-check">&#10003; Cash on Delivery across India</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+    {%- endif -%}
 
-    <!-- ===== YOU MAY ALSO LIKE ===== -->
+    <!-- ===== YOU MAY ALSO LIKE (store-wide product card) ===== -->
     {%- if product.collections.size > 0 -%}
       {%- assign rec_collection = product.collections.first -%}
-      {%- assign rec_products = rec_collection.products -%}
-      {%- assign rec_count = 0 -%}
-      {%- for p in rec_products -%}
-        {%- if p.id != product.id -%}
-          {%- assign rec_count = rec_count | plus: 1 -%}
-        {%- endif -%}
-      {%- endfor -%}
-
-      {%- if rec_count > 0 -%}
-        <div class="product-recommendations">
-          <div class="recommendations-header">
+      {%- capture rec_cards -%}
+        {%- assign shown = 0 -%}
+        {%- for p in rec_collection.products limit: 16 -%}
+          {%- if p.id != product.id and shown < 8 and p.featured_image != blank -%}
+            {%- assign shown = shown | plus: 1 -%}
+            {%- render 'product-card', product: p -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- assign rec_cards = rec_cards | strip -%}
+      {%- if rec_cards != blank -%}
+        <div class="pdp-section pdp-recs">
+          <div class="pdp-head">
             <h2>You May Also Like</h2>
-            <p>Customers who viewed this also explored these products</p>
           </div>
-          <div class="recommendations-scroll-wrapper">
-          <button type="button" class="rec-scroll-btn rec-scroll-btn--left" onclick="document.getElementById('rec-track').scrollBy({left:-240,behavior:'smooth'})" aria-label="Scroll left">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button type="button" class="rec-scroll-btn rec-scroll-btn--right" onclick="document.getElementById('rec-track').scrollBy({left:240,behavior:'smooth'})" aria-label="Scroll right">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-          <div class="recommendations-grid" id="rec-track">
-            {%- assign shown = 0 -%}
-            {%- for p in rec_products -%}
-              {%- if p.id != product.id and shown < 8 -%}
-                {%- assign shown = shown | plus: 1 -%}
-                {%- assign p_variant = p.selected_or_first_available_variant -%}
-                {%- assign p_on_sale = false -%}
-                {%- if p_variant.compare_at_price > p_variant.price -%}
-                  {%- assign p_on_sale = true -%}
-                  {%- assign p_savings = p_variant.compare_at_price | minus: p_variant.price | times: 100 | divided_by: p_variant.compare_at_price -%}
-                {%- endif -%}
-                <div class="rec-card">
-                  <div class="rec-card__image">
-                    {%- if p.featured_image -%}
-                      <a href="{{ p.url }}"><img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ p.title | escape }}" loading="lazy"></a>
-                    {%- endif -%}
-                    {%- if p_on_sale -%}
-                      <span class="rec-card__badge">{{ p_savings }}% Off</span>
-                    {%- endif -%}
-                  </div>
-                  <div class="rec-card__body">
-                    {%- if p.vendor != blank -%}
-                      <p class="rec-card__vendor">{{ p.vendor }}</p>
-                    {%- endif -%}
-                    <h3 class="rec-card__title"><a href="{{ p.url }}">{{ p.title }}</a></h3>
-                    <div class="rec-card__price">
-                      <span class="rec-card__price-now">{% render 'inr-price', cents: p_variant.price %}</span>
-                      {%- if p_on_sale -%}
-                        <span class="rec-card__price-was">{% render 'inr-price', cents: p_variant.compare_at_price %}</span>
-                      {%- endif -%}
-                    </div>
-                    {%- if p.available -%}
-                      <button type="button" class="rec-card__btn" data-add-to-cart data-variant-id="{{ p_variant.id }}" data-quantity="1">Add to Cart</button>
-                    {%- else -%}
-                      <button type="button" class="rec-card__btn" disabled style="opacity:.5;cursor:not-allowed;">Sold Out</button>
-                    {%- endif -%}
-                  </div>
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
-          </div>
+          <div class="prow">{{ rec_cards }}</div>
         </div>
       {%- endif -%}
     {%- endif -%}
 
     <!-- ===== CUSTOMER REVIEWS ===== -->
-    <div class="product-reviews-section" id="reviews-section">
-      <div class="reviews-header">
+    <div class="pdp-section" id="reviews-section">
+      <div class="pdp-head">
         <h2>Customer Reviews</h2>
-        <p>Real feedback from our customers</p>
       </div>
 
-      <!-- Rating Summary -->
-      <div class="reviews-summary">
+      <div class="reviews-empty" id="reviews-empty" {% if admin_review_count > 0 %}hidden{% endif %}>
+        No reviews yet. Used this product? Share your experience below.
+      </div>
+
+      <div class="reviews-summary" id="reviews-summary" {% if admin_review_count == 0 %}hidden{% endif %}>
         <div class="reviews-avg">
           <div class="reviews-avg-number" id="reviews-avg-num">0</div>
-          <div class="reviews-avg-stars">
+          <div class="reviews-avg-stars" id="reviews-avg-stars">
             {%- for i in (1..5) -%}
-              <svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             {%- endfor -%}
           </div>
           <div class="reviews-avg-count">Based on <span id="reviews-total-summary">0</span> reviews</div>
@@ -1133,13 +934,13 @@
         </div>
       </div>
 
-      <!-- Admin Reviews (from section blocks — only admin can add/remove) -->
+      <!-- Admin reviews (section blocks) + reviews written on this device -->
       <div class="reviews-list" id="reviews-list">
         {%- for block in section.blocks -%}
           {%- if block.type == 'review' -%}
-            <div class="review-card" data-admin-review {{ block.shopify_attributes }}>
+            <div class="review-card" data-admin-review data-rating="{{ block.settings.rating }}" {{ block.shopify_attributes }}>
               <div class="review-card-top">
-                <div class="review-card-avatar">{{ block.settings.reviewer_name | slice: 0 }}</div>
+                <div class="review-card-avatar">{{ block.settings.reviewer_name | slice: 0 | upcase }}</div>
                 <div class="review-card-meta">
                   <div class="review-card-name">{{ block.settings.reviewer_name }}</div>
                   {%- if block.settings.reviewer_location != blank -%}
@@ -1174,342 +975,454 @@
         {%- endfor -%}
       </div>
 
-      <!-- Review Form -->
-      <div class="review-form-wrapper">
-        <h3>Write a Review</h3>
-        <div class="review-success" id="review-success">Thank you! Your review has been submitted and will appear after approval.</div>
-        <form class="review-form" id="review-form" onsubmit="return submitReview(event)">
-          <div class="review-form-row">
-            <div class="review-field">
-              <label for="review-name">Your Name *</label>
-              <input type="text" id="review-name" required placeholder="Enter your name">
+      <details class="review-form-details" id="review-form-details">
+        <summary>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Write a review
+        </summary>
+        <div class="review-form-wrapper">
+          <div class="review-success" id="review-success">Thank you! Your review has been submitted and will appear after approval.</div>
+          <form class="review-form" id="review-form">
+            <div class="review-form-row">
+              <div class="review-field">
+                <label for="review-name">Your Name *</label>
+                <input type="text" id="review-name" required placeholder="Enter your name" autocomplete="name">
+              </div>
+              <div class="review-field">
+                <label for="review-location">Location</label>
+                <input type="text" id="review-location" placeholder="City, State">
+              </div>
             </div>
             <div class="review-field">
-              <label for="review-location">Location</label>
-              <input type="text" id="review-location" placeholder="City, State">
+              <label>Rating *</label>
+              <div class="review-star-input" id="star-input">
+                {%- for i in (1..5) -%}
+                  <svg data-star="{{ i }}" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="1" fill="none" role="button" aria-label="{{ i }} star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                {%- endfor -%}
+              </div>
             </div>
-          </div>
-          <div class="review-field">
-            <label>Rating *</label>
-            <div class="review-star-input" id="star-input">
-              {%- for i in (1..5) -%}
-                <svg data-star="{{ i }}" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="1" fill="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              {%- endfor -%}
+            <div class="review-field">
+              <label for="review-title">Review Title</label>
+              <input type="text" id="review-title" placeholder="Summarize your experience">
             </div>
-          </div>
-          <div class="review-field">
-            <label for="review-title">Review Title</label>
-            <input type="text" id="review-title" placeholder="Summarize your experience">
-          </div>
-          <div class="review-field">
-            <label for="review-body">Your Review *</label>
-            <textarea id="review-body" required placeholder="Share your experience with this product..."></textarea>
-          </div>
-          <div class="review-field">
-            <label>Add Photos (optional)</label>
-            <div class="review-image-upload">
-              <label class="review-image-label" for="review-images">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                Upload Images
-              </label>
-              <input type="file" id="review-images" accept="image/*" multiple style="display:none" onchange="handleReviewImages(this)">
-              <div class="review-image-previews" id="review-img-previews"></div>
+            <div class="review-field">
+              <label for="review-body">Your Review *</label>
+              <textarea id="review-body" required placeholder="Share your experience with this product..."></textarea>
             </div>
-          </div>
-          <button type="submit" class="review-submit-btn">Submit Review</button>
-        </form>
-      </div>
+            <div class="review-field">
+              <label>Add Photos (optional)</label>
+              <div class="review-image-upload">
+                <label class="review-image-label" for="review-images">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  Upload Images
+                </label>
+                <input type="file" id="review-images" accept="image/*" multiple style="display:none">
+                <div class="review-image-previews" id="review-img-previews"></div>
+              </div>
+            </div>
+            <button type="submit" class="review-submit-btn">Submit Review</button>
+          </form>
+        </div>
+      </details>
     </div>
 
+    <div class="pdp-end"></div>
   </div>
 </section>
+
+<!-- Sticky Add to Cart (phones only; appears once the main button scrolls away) -->
+<div class="pdp-sticky" id="pdp-sticky" aria-hidden="true">
+  <div class="pdp-sticky__info">
+    <span class="pdp-sticky__title">{{ short_title | default: product.title }}</span>
+    <span class="pdp-sticky__price" id="pdp-sticky-price">{% render 'inr-price', cents: current_variant.price %}</span>
+  </div>
+  <button type="button" class="pdp-sticky__btn" id="pdp-sticky-btn" {% unless current_variant.available %}disabled{% endunless %}>
+    {%- if current_variant.available -%}Add to Cart{%- else -%}Sold Out{%- endif -%}
+  </button>
+</div>
 
 <script type="application/json" id="product-json">{{ product | json }}</script>
 
 <script>
 (function(){
-  /* === IMAGE GALLERY === */
-  var thumbs = document.querySelectorAll('.product-thumbnail');
-  var mainImg = document.getElementById('main-product-image');
-  thumbs.forEach(function(t){
-    t.addEventListener('click', function(){
-      thumbs.forEach(function(th){ th.classList.remove('active'); });
-      t.classList.add('active');
-      if(mainImg) mainImg.src = t.getAttribute('data-image-url');
-    });
-  });
+  var $ = function(id){ return document.getElementById(id); };
+  var productData = JSON.parse($('product-json').textContent);
+  var form = $('product-form');
+  var idInput = form ? form.querySelector('[name="id"]') : null;
+  var qtyInput = form ? form.querySelector('.quantity-input') : null;
+  var addBtn = $('pdp-add-btn');
+  var stickyBtn = $('pdp-sticky-btn');
 
-  /* === QUANTITY === */
-  document.querySelectorAll('.quantity-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var input = this.parentElement.querySelector('.quantity-input');
-      var v = parseInt(input.value) || 1;
-      if(this.getAttribute('data-action')==='decrease'){ if(v>1) input.value = v-1; }
-      else { input.value = v+1; }
-    });
-  });
+  function inr(cents){
+    var v = cents / 100;
+    var s = v.toLocaleString('en-IN', { minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits: 2 });
+    return '₹' + s;
+  }
+  function currentVariant(){
+    var id = idInput ? String(idInput.value) : '';
+    for (var i = 0; i < productData.variants.length; i++){
+      if (String(productData.variants[i].id) === id) return productData.variants[i];
+    }
+    return productData.variants[0];
+  }
 
-  /* === VARIANT SELECTOR === */
-  var varBtns = document.querySelectorAll('.variant-option');
-  if(varBtns.length){
-    var productData = JSON.parse(document.getElementById('product-json').textContent);
-    varBtns.forEach(function(btn){
-      btn.addEventListener('click', function(){
-        this.parentElement.querySelectorAll('.variant-option').forEach(function(b){ b.classList.remove('selected'); });
-        this.classList.add('selected');
-        var lbl = document.getElementById('selected-'+this.getAttribute('data-option-name').toLowerCase().replace(/\s+/g,'-'));
-        if(lbl) lbl.textContent = this.getAttribute('data-option-value');
-        var selected = {};
-        document.querySelectorAll('.variant-option.selected').forEach(function(s){ selected[s.getAttribute('data-option-name')] = s.getAttribute('data-option-value'); });
-        var variant = productData.variants.find(function(v){
-          return v.options.every(function(o,i){ return o === selected[productData.options[i]]; });
-        });
-        if(variant){
-          document.querySelector('[name="id"]').value = variant.id;
-        }
+  /* === GALLERY: swipe track + thumbnails === */
+  var track = $('pg-track');
+  var thumbs = document.querySelectorAll('.pg-thumb');
+  var counter = $('pg-current');
+  function goTo(i){
+    if (!track) return;
+    var n = track.children.length;
+    i = Math.max(0, Math.min(n - 1, i));
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  }
+  function activeIndex(){ return track ? Math.round(track.scrollLeft / Math.max(1, track.clientWidth)) : 0; }
+  if (track){
+    thumbs.forEach(function(t){
+      t.addEventListener('click', function(){ goTo(parseInt(t.getAttribute('data-index'), 10) || 0); });
+    });
+    document.querySelectorAll('[data-pg-step]').forEach(function(b){
+      b.addEventListener('click', function(){ goTo(activeIndex() + parseInt(b.getAttribute('data-pg-step'), 10)); });
+    });
+    var ticking = false;
+    track.addEventListener('scroll', function(){
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        ticking = false;
+        var i = activeIndex();
+        thumbs.forEach(function(t, n){ t.classList.toggle('active', n === i); });
+        if (counter) counter.textContent = i + 1;
       });
+    }, { passive: true });
+  }
+
+  /* === PRICE / PACKS / VARIANTS === */
+  var packCards = document.querySelectorAll('.combo-pack-card');
+  function selectedPack(){ return document.querySelector('.combo-pack-card.selected'); }
+  function packNumbers(card, variant){
+    var qty = parseInt(card.getAttribute('data-combo-qty'), 10) || 1;
+    var op = parseInt(card.getAttribute('data-override-price'), 10);
+    var om = parseInt(card.getAttribute('data-override-mrp'), 10);
+    var price = op > 0 ? op : variant.price * qty;
+    var mrp = om > 0 ? om : (variant.compare_at_price > variant.price ? variant.compare_at_price * qty : 0);
+    if (mrp <= price) mrp = 0;
+    return { qty: qty, price: price, mrp: mrp, off: mrp ? Math.floor((mrp - price) * 100 / mrp) : 0 };
+  }
+  function refresh(){
+    var v = currentVariant();
+    packCards.forEach(function(card){
+      var n = packNumbers(card, v);
+      card.querySelector('.combo-pack-card__price').textContent = inr(n.price);
+      var m = card.querySelector('.combo-pack-card__mrp');
+      var d = card.querySelector('.combo-pack-card__discount');
+      m.hidden = !n.mrp; d.hidden = !n.mrp;
+      if (n.mrp){ m.innerHTML = 'MRP <s>' + inr(n.mrp) + '</s>'; d.textContent = n.off + '% off'; }
+    });
+    var pack = selectedPack();
+    var shown = pack ? packNumbers(pack, v) : { price: v.price, mrp: v.compare_at_price > v.price ? v.compare_at_price : 0 };
+    shown.off = shown.mrp ? Math.floor((shown.mrp - shown.price) * 100 / shown.mrp) : 0;
+    $('pdp-price').textContent = inr(shown.price);
+    var cmp = $('pdp-compare'), save = $('pdp-save');
+    if (cmp){ cmp.hidden = !shown.mrp; if (shown.mrp) cmp.textContent = inr(shown.mrp); }
+    if (save){ save.hidden = !shown.mrp; if (shown.mrp) save.textContent = 'Save ' + shown.off + '%'; }
+    var sp = $('pdp-sticky-price'); if (sp) sp.textContent = inr(shown.price);
+    var label = v.available ? 'Add to Cart' : 'Sold Out';
+    if (addBtn){ addBtn.disabled = !v.available; var l = addBtn.querySelector('[data-add-label]'); if (l) l.textContent = label; }
+    if (stickyBtn){ stickyBtn.disabled = !v.available; stickyBtn.textContent = label; }
+    var buy = $('pdp-buy-now'); if (buy) buy.style.display = v.available ? '' : 'none';
+    var sku = $('pdp-sku'); if (sku && v.sku) sku.textContent = v.sku;
+  }
+  packCards.forEach(function(card){
+    card.addEventListener('click', function(){
+      packCards.forEach(function(c){ c.classList.remove('selected'); });
+      card.classList.add('selected');
+      if (qtyInput) qtyInput.value = parseInt(card.getAttribute('data-combo-qty'), 10) || 1;
+      refresh();
+    });
+  });
+  /* Typing a quantity by hand: keep the pack cards in step with it */
+  function syncPackToQty(){
+    if (!packCards.length || !qtyInput) return;
+    var q = parseInt(qtyInput.value, 10) || 1, match = null;
+    packCards.forEach(function(c){ if ((parseInt(c.getAttribute('data-combo-qty'), 10) || 1) === q) match = c; });
+    packCards.forEach(function(c){ c.classList.toggle('selected', c === match); });
+    var v = currentVariant();
+    var price = match ? packNumbers(match, v).price : v.price * q;
+    $('pdp-price').textContent = inr(price);
+    var sp = $('pdp-sticky-price'); if (sp) sp.textContent = inr(price);
+    if (!match){ var c1 = $('pdp-compare'), s1 = $('pdp-save'); if (c1) c1.hidden = true; if (s1) s1.hidden = true; } else { refresh(); }
+  }
+  /* The +/- buttons are driven by QuantitySelector in assets/theme.js, which fires `change` on the input.
+     (A second handler here made every tap count twice.) */
+  if (qtyInput) qtyInput.addEventListener('change', function(){
+    if ((parseInt(qtyInput.value, 10) || 0) < 1) qtyInput.value = 1;
+    syncPackToQty();
+  });
+
+  var varBtns = document.querySelectorAll('.variant-option');
+  varBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btn.parentElement.querySelectorAll('.variant-option').forEach(function(b){ b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      var name = btn.getAttribute('data-option-name');
+      var lbl = $('selected-' + name.toLowerCase().replace(/\s+/g, '-'));
+      if (lbl) lbl.textContent = btn.getAttribute('data-option-value');
+      var selected = {};
+      document.querySelectorAll('.variant-option.selected').forEach(function(s){ selected[s.getAttribute('data-option-name')] = s.getAttribute('data-option-value'); });
+      var variant = productData.variants.find(function(v){
+        return v.options.every(function(o, i){ return o === selected[productData.options[i]]; });
+      });
+      if (!variant) return;
+      idInput.value = variant.id;
+      if (variant.featured_media && track){
+        var slide = track.querySelector('[data-media-id="' + variant.featured_media.id + '"]');
+        if (slide) goTo(Array.prototype.indexOf.call(track.children, slide));
+      }
+      try { var u = new URL(window.location.href); u.searchParams.set('variant', variant.id); history.replaceState(null, '', u); } catch(e){}
+      syncPackToQty();
+      refresh();
+    });
+  });
+
+  /* === BUY NOW: add the chosen variant + quantity, then go to checkout === */
+  var buyBtn = $('pdp-buy-now');
+  if (buyBtn) buyBtn.addEventListener('click', function(){
+    buyBtn.disabled = true;
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ items: [{ id: parseInt(idInput.value, 10), quantity: parseInt(qtyInput.value, 10) || 1 }] })
+    }).then(function(r){
+      if (!r.ok) throw new Error('add failed');
+      window.location.href = '/checkout';
+    }).catch(function(){ buyBtn.disabled = false; });
+  });
+
+  /* === STICKY ADD TO CART (phones) === */
+  var sticky = $('pdp-sticky');
+  if (sticky && addBtn && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      var e = entries[0];
+      var passed = !e.isIntersecting && e.boundingClientRect.top < 0;
+      sticky.classList.toggle('is-visible', passed);
+      sticky.setAttribute('aria-hidden', passed ? 'false' : 'true');
+    }).observe(addBtn);
+    stickyBtn.addEventListener('click', function(){
+      if (form.requestSubmit) form.requestSubmit(); else addBtn.click();
     });
   }
 
-  /* === REVIEWS — localStorage + admin blocks === */
-  var PRODUCT_HANDLE = '{{ product.handle }}';
-  var STORAGE_KEY = 'hv_reviews_' + PRODUCT_HANDLE;
+  /* === SHARE: copy link === */
+  var copyBtn = $('pdp-copy-link');
+  if (copyBtn) copyBtn.addEventListener('click', function(){
+    var done = function(){ copyBtn.style.borderColor = '#16a34a'; copyBtn.style.background = '#dcfce7'; setTimeout(function(){ copyBtn.style.borderColor = ''; copyBtn.style.background = ''; }, 1800); };
+    if (navigator.clipboard) navigator.clipboard.writeText(window.location.href).then(done, function(){});
+  });
 
-  function getStoredReviews(){
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-    catch(e){ return []; }
-  }
-
-  function renderStoredReviews(){
-    var reviews = getStoredReviews();
-    var list = document.getElementById('reviews-list');
-    reviews.forEach(function(r){
-      list.appendChild(buildReviewCard(r));
+  /* === VIDEOS: load the YouTube player only when a card is tapped === */
+  document.querySelectorAll('.vcard[data-yt]').forEach(function(card){
+    card.addEventListener('click', function(){
+      var id = card.getAttribute('data-yt');
+      var holder = document.createElement('div');
+      holder.className = card.className;
+      holder.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Product video"></iframe>';
+      card.parentNode.replaceChild(holder, card);
     });
-    updateSummary();
-  }
+  });
+  /* Only one uploaded video plays at a time */
+  var fileVideos = document.querySelectorAll('.vcard video, .pg-slide video');
+  fileVideos.forEach(function(v){
+    v.addEventListener('play', function(){ fileVideos.forEach(function(o){ if (o !== v) o.pause(); }); });
+  });
+
+  /* === DESCRIPTION: group by heading into cards; cards fold on phones === */
+  (function(){
+    var rte = $('pdp-rte');
+    var blocks = [];
+    if (rte){
+      var headings = rte.querySelectorAll(':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6');
+      headings.forEach(function(h){
+        var block = document.createElement('div');
+        block.className = 'desc-block';
+        h.parentNode.insertBefore(block, h);
+        block.appendChild(h);
+        var next = block.nextSibling;
+        while (next){
+          if (next.nodeType === 1 && /^H[1-6]$/.test(next.nodeName)) break;
+          var toMove = next; next = next.nextSibling; block.appendChild(toMove);
+        }
+        /* A heading with nothing under it (usually the product name repeated) is dropped */
+        var hasBody = false;
+        for (var i = 1; i < block.childNodes.length; i++){
+          var n = block.childNodes[i];
+          if ((n.nodeType === 1 && (n.textContent.trim() || n.querySelector('img,table,iframe,video'))) || (n.nodeType === 3 && n.textContent.trim())) { hasBody = true; break; }
+        }
+        if (hasBody) blocks.push(block); else block.remove();
+      });
+      /* Short bullet lists (ingredient names etc.) sit two-up */
+      rte.querySelectorAll('ul, ol').forEach(function(list){
+        if (list.children.length < 4) return;
+        var longest = 0;
+        Array.prototype.forEach.call(list.children, function(li){ longest = Math.max(longest, li.textContent.trim().length); });
+        if (longest <= 34) list.classList.add('ingredient-grid');
+      });
+      if (blocks.length >= 2) rte.classList.add('desc-multi');
+    }
+    var specs = $('pdp-specs');
+    if (specs) blocks.push(specs);
+    if (blocks.length < 2) return;
+    var chev = '<svg class="desc-block__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
+    blocks.forEach(function(block, i){
+      var h = block.firstElementChild;
+      if (!h) return;
+      var head = document.createElement('div');
+      head.className = 'desc-block__head';
+      head.setAttribute('role', 'button');
+      head.setAttribute('tabindex', '0');
+      block.insertBefore(head, h);
+      head.appendChild(h);
+      head.insertAdjacentHTML('beforeend', chev);
+      block.classList.add('is-collapsible');
+      if (i === 0) block.classList.add('is-open');
+      var toggle = function(){
+        if (!window.matchMedia('(max-width: 768px)').matches) return;
+        block.classList.toggle('is-open');
+      };
+      head.addEventListener('click', toggle);
+      head.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
+    });
+  })();
+
+  /* === REVIEWS: admin blocks + reviews saved on this device === */
+  var STORAGE_KEY = 'hv_reviews_' + {{ product.handle | json }};
+  var STAR = '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>';
+  function starSvg(on){ return on ? '<svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1">' + STAR + '</svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1">' + STAR + '</svg>'; }
+  function escHTML(s){ var d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
+  function getStoredReviews(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch(e){ return []; } }
 
   function buildReviewCard(r){
     var card = document.createElement('div');
     card.className = 'review-card';
-    card.setAttribute('data-customer-review','true');
+    card.setAttribute('data-customer-review', 'true');
     var stars = '';
-    for(var i=1;i<=5;i++){
-      if(i<=r.rating) stars += '<svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
-      else stars += '<svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
-    }
-    card.innerHTML =
+    for (var i = 1; i <= 5; i++) stars += starSvg(i <= r.rating);
+    var html =
       '<div class="review-card-top">' +
-        '<div class="review-card-avatar">' + (r.name||'A').charAt(0).toUpperCase() + '</div>' +
+        '<div class="review-card-avatar">' + escHTML((r.name || 'A').charAt(0).toUpperCase()) + '</div>' +
         '<div class="review-card-meta"><div class="review-card-name">' + escHTML(r.name) + '</div>' +
         (r.location ? '<div class="review-card-loc">' + escHTML(r.location) + '</div>' : '') + '</div>' +
         '<div style="margin-left:auto;text-align:right"><div class="review-card-stars">' + stars + '</div>' +
         '<div class="review-card-date">' + escHTML(r.date) + '</div></div></div>' +
       (r.title ? '<div class="review-card-title">' + escHTML(r.title) + '</div>' : '') +
       '<div class="review-card-body">' + escHTML(r.body) + '</div>';
-    if(r.images && r.images.length){
-      var imgHtml = '<div class="review-card-images">';
-      r.images.forEach(function(src){ imgHtml += '<img src="'+src+'" alt="Review photo" loading="lazy">'; });
-      imgHtml += '</div>';
-      card.innerHTML += imgHtml;
+    card.innerHTML = html;
+    if (r.images && r.images.length){
+      var wrap = document.createElement('div');
+      wrap.className = 'review-card-images';
+      r.images.forEach(function(src){
+        if (typeof src !== 'string' || src.indexOf('data:image/') !== 0) return;
+        var img = document.createElement('img'); img.src = src; img.alt = 'Review photo'; img.loading = 'lazy';
+        wrap.appendChild(img);
+      });
+      card.appendChild(wrap);
     }
     return card;
   }
 
-  function escHTML(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
-
   function updateSummary(){
-    var adminCards = document.querySelectorAll('[data-admin-review]');
-    var counts = {5:0,4:0,3:0,2:0,1:0};
-    var total = 0, sum = 0;
-
-    adminCards.forEach(function(c){
-      var filled = c.querySelectorAll('.review-card-stars svg[fill="#f59e0b"]').length;
-      if(filled>=1 && filled<=5){ counts[filled]++; total++; sum+=filled; }
+    var counts = {5:0,4:0,3:0,2:0,1:0}, total = 0, sum = 0;
+    document.querySelectorAll('[data-admin-review]').forEach(function(c){
+      var r = parseInt(c.getAttribute('data-rating'), 10);
+      if (r >= 1 && r <= 5){ counts[r]++; total++; sum += r; }
     });
-
-    var stored = getStoredReviews();
-    stored.forEach(function(r){
-      var rt = Math.max(1,Math.min(5,r.rating));
-      counts[rt]++; total++; sum+=rt;
+    getStoredReviews().forEach(function(r){
+      var rt = Math.max(1, Math.min(5, parseInt(r.rating, 10) || 5));
+      counts[rt]++; total++; sum += rt;
     });
-
-    var avg = total>0 ? (sum/total).toFixed(1) : '0';
-    document.getElementById('reviews-avg-num').textContent = avg;
-    document.getElementById('reviews-total-summary').textContent = total;
-    document.getElementById('total-review-count').textContent = total;
-
-    for(var s=1;s<=5;s++){
-      var pct = total>0 ? Math.round(counts[s]/total*100) : 0;
-      var bar = document.getElementById('bar-'+s);
-      var cnt = document.getElementById('bar-count-'+s);
-      if(bar) bar.style.width = pct+'%';
-      if(cnt) cnt.textContent = counts[s];
+    var avg = total > 0 ? sum / total : 0;
+    $('reviews-avg-num').textContent = total > 0 ? avg.toFixed(1) : '0';
+    $('reviews-total-summary').textContent = total;
+    var tc = $('total-review-count'); if (tc) tc.textContent = total;
+    $('reviews-summary').hidden = total === 0;
+    $('reviews-empty').hidden = total > 0;
+    var filled = Math.round(avg), html = '';
+    for (var i = 1; i <= 5; i++) html += i <= filled ? '<svg viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1">' + STAR + '</svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.5">' + STAR + '</svg>';
+    $('reviews-avg-stars').innerHTML = html;
+    for (var s = 1; s <= 5; s++){
+      var bar = $('bar-' + s), cnt = $('bar-count-' + s);
+      if (bar) bar.style.width = (total > 0 ? Math.round(counts[s] / total * 100) : 0) + '%';
+      if (cnt) cnt.textContent = counts[s];
     }
   }
 
-  /* Star input interaction */
+  var list = $('reviews-list');
+  getStoredReviews().forEach(function(r){ list.appendChild(buildReviewCard(r)); });
+  updateSummary();
+
   var selectedRating = 0;
-  var starInput = document.getElementById('star-input');
-  if(starInput){
-    var stars = starInput.querySelectorAll('svg');
-    stars.forEach(function(star){
-      star.addEventListener('mouseenter', function(){
-        var val = parseInt(this.getAttribute('data-star'));
-        stars.forEach(function(s){
-          var sv = parseInt(s.getAttribute('data-star'));
-          s.setAttribute('fill', sv<=val ? '#f59e0b' : 'none');
-          s.classList.toggle('filled', sv<=val);
-        });
-      });
-      star.addEventListener('click', function(){
-        selectedRating = parseInt(this.getAttribute('data-star'));
-      });
-    });
-    starInput.addEventListener('mouseleave', function(){
-      stars.forEach(function(s){
-        var sv = parseInt(s.getAttribute('data-star'));
-        s.setAttribute('fill', sv<=selectedRating ? '#f59e0b' : 'none');
-        s.classList.toggle('filled', sv<=selectedRating);
-      });
+  var starInput = $('star-input');
+  function paintStars(n){
+    starInput.querySelectorAll('svg').forEach(function(s){
+      s.setAttribute('fill', parseInt(s.getAttribute('data-star'), 10) <= n ? '#f59e0b' : 'none');
     });
   }
+  if (starInput){
+    starInput.querySelectorAll('svg').forEach(function(star){
+      star.addEventListener('mouseenter', function(){ paintStars(parseInt(star.getAttribute('data-star'), 10)); });
+      star.addEventListener('click', function(){ selectedRating = parseInt(star.getAttribute('data-star'), 10); paintStars(selectedRating); });
+    });
+    starInput.addEventListener('mouseleave', function(){ paintStars(selectedRating); });
+  }
 
-  /* === IMAGE UPLOAD for reviews === */
   var reviewImageData = [];
+  var imgInput = $('review-images'), previews = $('review-img-previews');
+  function drawPreviews(){
+    previews.innerHTML = '';
+    reviewImageData.forEach(function(src, idx){
+      var wrap = document.createElement('div');
+      wrap.className = 'review-image-preview';
+      var img = document.createElement('img'); img.src = src; img.alt = 'Preview';
+      var rm = document.createElement('button'); rm.type = 'button'; rm.className = 'remove-img'; rm.innerHTML = '&times;';
+      rm.addEventListener('click', function(){ reviewImageData.splice(idx, 1); drawPreviews(); });
+      wrap.appendChild(img); wrap.appendChild(rm); previews.appendChild(wrap);
+    });
+  }
+  if (imgInput) imgInput.addEventListener('change', function(){
+    Array.prototype.slice.call(imgInput.files, 0, 5 - reviewImageData.length).forEach(function(file){
+      var reader = new FileReader();
+      reader.onload = function(e){ if (reviewImageData.length < 5){ reviewImageData.push(e.target.result); drawPreviews(); } };
+      reader.readAsDataURL(file);
+    });
+    imgInput.value = '';
+  });
 
-  window.handleReviewImages = function(input){
-    var container = document.getElementById('review-img-previews');
-    var files = input.files;
-    for(var i=0; i<files.length && reviewImageData.length<5; i++){
-      (function(file){
-        var reader = new FileReader();
-        reader.onload = function(e){
-          reviewImageData.push(e.target.result);
-          var wrap = document.createElement('div');
-          wrap.className = 'review-image-preview';
-          wrap.innerHTML = '<img src="'+e.target.result+'" alt="Preview"><button type="button" class="remove-img" onclick="removeReviewImg(this,'+( reviewImageData.length-1)+')">&times;</button>';
-          container.appendChild(wrap);
-        };
-        reader.readAsDataURL(file);
-      })(files[i]);
-    }
-  };
-
-  window.removeReviewImg = function(btn, idx){
-    reviewImageData.splice(idx, 1);
-    btn.parentElement.remove();
-  };
-
-  window.submitReview = function(e){
+  var reviewForm = $('review-form');
+  if (reviewForm) reviewForm.addEventListener('submit', function(e){
     e.preventDefault();
-    if(selectedRating < 1){ alert('Please select a star rating.'); return false; }
-    var name = document.getElementById('review-name').value.trim();
-    var loc = document.getElementById('review-location').value.trim();
-    var title = document.getElementById('review-title').value.trim();
-    var body = document.getElementById('review-body').value.trim();
-    if(!name || !body){ alert('Please fill in your name and review.'); return false; }
-
+    if (selectedRating < 1){ alert('Please select a star rating.'); return; }
+    var name = $('review-name').value.trim();
+    var body = $('review-body').value.trim();
+    if (!name || !body){ alert('Please fill in your name and review.'); return; }
     var review = {
-      name: name, location: loc, title: title, body: body,
-      rating: selectedRating,
-      images: reviewImageData.slice(),
-      date: new Date().toLocaleDateString('en-IN',{year:'numeric',month:'short',day:'numeric'})
+      name: name, location: $('review-location').value.trim(), title: $('review-title').value.trim(), body: body,
+      rating: selectedRating, images: reviewImageData.slice(),
+      date: new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' })
     };
-
     var reviews = getStoredReviews();
     reviews.push(review);
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews)); } catch(ex){}
-
-    var list = document.getElementById('reviews-list');
     list.appendChild(buildReviewCard(review));
     updateSummary();
-
-    document.getElementById('review-form').reset();
-    selectedRating = 0;
-    reviewImageData = [];
-    document.getElementById('review-img-previews').innerHTML = '';
-    if(starInput){ starInput.querySelectorAll('svg').forEach(function(s){ s.setAttribute('fill','none'); s.classList.remove('filled'); }); }
-    var success = document.getElementById('review-success');
+    reviewForm.reset();
+    selectedRating = 0; paintStars(0);
+    reviewImageData = []; drawPreviews();
+    var success = $('review-success');
     success.style.display = 'block';
-    setTimeout(function(){ success.style.display='none'; }, 4000);
-    return false;
-  };
-
-  /* === DESCRIPTION AUTO-STRUCTURE === */
-  (function(){
-    var rte = document.querySelector('.tab-description .rte');
-    if(!rte) return;
-    var headings = rte.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    if(headings.length === 0) return;
-    var blocks = [];
-    headings.forEach(function(h){
-      var block = document.createElement('div');
-      block.className = 'desc-block';
-      h.parentNode.insertBefore(block, h);
-      block.appendChild(h);
-      var next = block.nextSibling;
-      while(next){
-        if(next.nodeType === 1 && /^H[1-6]$/.test(next.nodeName)) break;
-        var toMove = next;
-        next = next.nextSibling;
-        block.appendChild(toMove);
-      }
-      blocks.push(block);
-    });
-    if(blocks.length === 2){
-      var wrap = document.createElement('div');
-      wrap.className = 'desc-columns';
-      blocks[0].parentNode.insertBefore(wrap, blocks[0]);
-      wrap.appendChild(blocks[0]);
-      wrap.appendChild(blocks[1]);
-    }
-    rte.querySelectorAll('ul, ol').forEach(function(list){
-      if(list.children.length >= 4) list.classList.add('ingredient-grid');
-    });
-  })();
-
-  /* === COMBO PACK SELECTOR === */
-  window.selectCombo = function(card){
-    document.querySelectorAll('.combo-pack-card').forEach(function(c){ c.classList.remove('selected'); });
-    card.classList.add('selected');
-    var qty = parseInt(card.getAttribute('data-combo-qty')) || 1;
-    var qtyInput = document.querySelector('.quantity-input');
-    if(qtyInput) qtyInput.value = qty;
-    var dp = card.getAttribute('data-display-price');
-    var dm = card.getAttribute('data-display-mrp');
-    var dd = card.getAttribute('data-display-discount');
-    var mainPrice = document.querySelector('.product-price');
-    var mainCompare = document.querySelector('.product-compare-price');
-    var mainSave = document.querySelector('.product-save-badge');
-    if(mainPrice && dp) mainPrice.textContent = dp;
-    if(mainCompare){ if(dm){ mainCompare.textContent = dm; mainCompare.style.display = ''; } else { mainCompare.style.display = 'none'; } }
-    if(mainSave){ if(dd){ mainSave.textContent = 'Save ' + dd.replace('%','') + '%'; mainSave.style.display = ''; } else { mainSave.style.display = 'none'; } }
-  };
-
-  renderStoredReviews();
-
-  /* === ADD TO CART for recommended products === */
-  document.querySelectorAll('[data-add-to-cart]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var vid = this.getAttribute('data-variant-id');
-      var qty = this.getAttribute('data-quantity') || 1;
-      if(!vid) return;
-      var self = this;
-      self.textContent = 'Adding...';
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({id: parseInt(vid), quantity: parseInt(qty)})
-      }).then(function(r){ return r.json(); }).then(function(){
-        self.textContent = 'Added!';
-        self.style.background = 'var(--color-primary)';
-        self.style.color = '#fff';
-        setTimeout(function(){ self.textContent='Add to Cart'; self.style.background=''; self.style.color=''; }, 2000);
-      }).catch(function(){ self.textContent = 'Add to Cart'; });
-    });
+    setTimeout(function(){ success.style.display = 'none'; }, 4000);
   });
 
+  refresh();
 })();
 </script>
 
@@ -1535,6 +1448,19 @@
       "type": "checkbox",
       "id": "show_share",
       "label": "Show share buttons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_research",
+      "label": "Show Research-Backed Ingredients",
+      "info": "The ingredient cards are the same on every product. Turn off if they do not match your products.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comparison",
+      "label": "Show Why HerboVilla table",
       "default": true
     },
     {
@@ -1578,13 +1504,25 @@
     },
     {
       "type": "header",
-      "content": "Video Testimonials"
+      "content": "Videos",
+      "info": "Videos set here show on EVERY product. Per-product videos come from the product metafield custom.product_videos or snippets/product-video-data.liquid. The section is hidden when a product has no videos."
+    },
+    {
+      "type": "text",
+      "id": "videos_heading",
+      "label": "Videos heading",
+      "default": "See It in Action"
+    },
+    {
+      "type": "text",
+      "id": "videos_subheading",
+      "label": "Videos sub-heading"
     },
     {
       "type": "text",
       "id": "youtube_product_url",
-      "label": "YouTube Product Video URL",
-      "info": "YouTube URL for the product overview video"
+      "label": "Video URL shown on all products",
+      "info": "YouTube / Shorts link or a direct .mp4 link"
     },
     {
       "type": "text",
@@ -1763,8 +1701,8 @@
         {
           "type": "text",
           "id": "video_url",
-          "label": "YouTube / Shorts URL",
-          "info": "Paste YouTube or YouTube Shorts URL for the video"
+          "label": "Video URL (shown on all products)",
+          "info": "YouTube / Shorts link or a direct .mp4 link. Blocks without a valid link are not shown."
         },
         {
           "type": "text",
@@ -1779,9 +1717,9 @@
     {
       "name": "Product Template",
       "blocks": [
-        { "type": "highlight", "settings": { "text": "100% Natural Ingredients" } },
-        { "type": "highlight", "settings": { "text": "No Side Effects" } },
-        { "type": "highlight", "settings": { "text": "Clinically Tested" } },
+        { "type": "highlight", "settings": { "text": "Ayurvedic herbal formulation" } },
+        { "type": "highlight", "settings": { "text": "State FDA approved product" } },
+        { "type": "highlight", "settings": { "text": "From PRM, trusted since 1999" } },
         { "type": "highlight", "settings": { "text": "GMP Certified Manufacturing" } },
         { "type": "ingredient", "settings": { "name": "Ashwagandha", "benefit": "Reduces stress and boosts immunity" } },
         { "type": "ingredient", "settings": { "name": "Tulsi", "benefit": "Natural antioxidant and adaptogen" } },

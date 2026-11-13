@@ -2931,6 +2931,8 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   }
   .achieve-card__ribbon--amber { color: #2D6A4F; }
+  /* On phones the ribbon's 8px overhang was cut off by the page edge */
+  @media (max-width: 768px) { .achieve-card__ribbon { right: 0; } }
   .achieve-card__icon {
     width: 50px;
     height: 50px;

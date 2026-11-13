@@ -6,25 +6,25 @@
         "highlight-1": {
           "type": "highlight",
           "settings": {
-            "text": "100% Natural Ingredients"
+            "text": "Ayurvedic herbal formulation"
           }
         },
         "highlight-2": {
           "type": "highlight",
           "settings": {
-            "text": "No Side Effects"
+            "text": "GMP certified manufacturing"
           }
         },
         "highlight-3": {
           "type": "highlight",
           "settings": {
-            "text": "Clinically Tested"
+            "text": "State FDA approved product"
           }
         },
         "highlight-4": {
           "type": "highlight",
           "settings": {
-            "text": "GMP Certified Manufacturing"
+            "text": "From PRM, trusted since 1999"
           }
         },
         "combo-1": {
@@ -195,7 +195,8 @@
         "showcase_heading": "Premium Ayurvedic Wellness",
         "showcase_text": "Experience the power of traditional Ayurvedic herbs combined with modern science for optimal health and wellness.",
         "youtube_product_url": "",
-        "youtube_click_url": ""
+        "youtube_click_url": "",
+        "show_research": false
       }
     }
   },

@@ -1,0 +1,26 @@
+{%- comment -%}
+  Videos shown on a product page ("See It in Action" row), one list per product.
+
+  Output: comma-separated video links for the given product, or nothing.
+  Accepted links:
+    - YouTube:        https://www.youtube.com/watch?v=XXXX  or  https://youtu.be/XXXX   (wide card)
+    - YouTube Shorts: https://www.youtube.com/shorts/XXXX                              (tall card)
+    - Uploaded file:  the .mp4 link from Shopify admin > Content > Files               (tall card)
+
+  How to add videos for a product: add a `when` line with the product's handle
+  (the last part of its URL, /products/<handle>) and echo its links. Example:
+
+    when 'harry-syrup-tablets'
+      echo 'https://www.youtube.com/shorts/AAAA,https://cdn.shopify.com/videos/c/o/v/BBBB.mp4'
+
+  A product metafield `custom.product_videos` (list of links) is read as well, so
+  videos can also be added per product in Shopify admin without touching this file.
+
+  Usage: {% render 'product-video-data', product: product %}
+{%- endcomment -%}
+{%- liquid
+  case product.handle
+    when '__example-handle__'
+      echo ''
+  endcase
+-%}

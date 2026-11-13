@@ -1,6 +1,6 @@
 # Session Context — HerboVilla Shopify Theme
 
-**Last worked:** 2026-11-11 (morning audit + afternoon fixes pushed LIVE; continuing 2026-11-12)
+**Last worked:** 2026-11-13 (product page rebuilt and pushed LIVE; videos + the rest of Krish's content pending)
 **Project:** PRM HerboVilla Shopify theme
 **Path:** `C:\Users\sonik\Desktop\Everything\last prm update\HerboVilla Shopify\prm-herbovilla-theme` (moved from `Desktop\New\...`)
 **Live theme:** `151479124142` on `prm-herbovilla.myshopify.com` / `prmherbovilla.com`
@@ -9,7 +9,39 @@
 
 ---
 
-## ▶ START HERE — 2026-11-12 (tomorrow: "the rest")
+## ▶ START HERE — after 2026-11-13
+
+**State:** the rebuilt product page + bug fixes are **LIVE** (pushed 13 Nov afternoon, verified on live, committed and
+pushed to GitHub). Krish's decisions that day: go live, ingredient cards OFF, claims softened on the product page.
+Full list, test results and revert: `../CHANGES-2026-11-13.md`.
+
+**Krish said (13 Nov):** he will share the video links, and provide "the rest" after lunch.
+
+**Next:**
+1. Add Krish's video links to `snippets/product-video-data.liquid` (one `when '<handle>'` per product), test on the
+   preview theme, get his OK, push live.
+2. **Tax: checkout adds ~9% "Estimated taxes" on top of MRP** (₹280 → ₹305.20). Ask Krish whether he ticked
+   Settings → Taxes and duties → "Include sales tax in product price". Re-test at checkout.
+3. When the links arrive, check each is YouTube/Shorts or a direct .mp4 (Instagram reel links can't be embedded).
+4. Decided 13 Nov: ingredient cards OFF, claims softened on the product page (done in the files). Still to ask:
+   a real review app (Judge.me)? and which of the other design suggestions to build.
+5. Still open from before: ₹75 shipping rate in admin, FAQ page, ArthoVilla duplicates (60ml question), combo prices,
+   Nasal Inhaler photo, 14 PDFs, Grievance Officer, Dev Dashboard app, delete preview #188801745070.
+
+**"Today's changes" false alarm (13 Nov):** `updated_at` in the public products.json is the time the file was
+generated, not an edit time (it moves with every fetch). Don't use it to detect edits; compare prices/images/theme files.
+
+**Design suggestions given to Krish on 13 Nov** (not built yet): homepage hero product images are 2,600px PNGs;
+cart drawer shows the long emoji titles and "₹1400.00"; clean product titles in admin; per-product benefits/ingredients
+via metafields; real reviews app; legal-metrology block (net qty, marketer address, best-before); WhatsApp order button;
+collection filters; bundle discounts on packs; search with product photos.
+
+**Tools:** `cdp-shot.mjs` (session scratchpad; recreate if needed) now takes `EVAL="<js>"` and `WAIT=<ms>` env vars to
+click things before the screenshot, and prints elements wider than the viewport. Add `&pb=0` to hide the preview bar.
+
+---
+
+## START HERE — 2026-11-12 (older; superseded by the block above)
 
 **Standing rule (Krish, 2026-11-11):** when Krish says we're ending the session, read back EVERY to-do he
 mentioned during the session (done and pending) before writing the handoff here.
@@ -110,6 +142,12 @@ When Krish says **"get yesterday's context"**:
 
 > Krish's standing instruction (2026-08-07): **report this section first, before anything else**,
 > at the start of every session. Pricing errors cost money on every order.
+
+### NEW 2026-11-13 — checkout adds tax on top of MRP
+- **Checkout shows "Estimated taxes" of ~9% on top of the listed price** (1 × Harry Capsules ₹280 → total ₹305.20
+  before shipping; seen at the Information step with no address entered). The site says "inclusive of all taxes".
+  Admin fix (Krish): Settings → Taxes and duties → "Include sales tax in product price and shipping rate".
+  Not yet confirmed what a customer with a full Indian address is finally charged; re-test after the setting changes.
 
 ### Status re-verified against the live store on 2026-10-21
 - ✅ **FIXED LIVE 2026-10-21 (items below marked FIXED):** combo-pack prices, VedaCold ₹180, 5-star display.
