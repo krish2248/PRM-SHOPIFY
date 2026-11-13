@@ -11,6 +11,47 @@
 
 ## ▶ START HERE — after 2026-11-13
 
+### ★ SHOW THIS LIST TO KRISH FIRST when he opens the next session (he asked for it on 13 Nov evening)
+Everything built on 13 Nov is LIVE and on GitHub (`033cb20` + the docs commit). Nothing is waiting on Claude.
+
+**A. Confirmations needed from Krish**
+1. **WhatsApp number:** is +91-9227928075 on WhatsApp? The "Order or ask on WhatsApp" row on every product page
+   sends customers there. If not: give the right number, or say hide the row.
+2. **₹75 shipping rate:** has it been added in admin (Settings → Shipping and delivery)? The cart says ₹75 below ₹400;
+   checkout charged ₹0 when last known. Claude could not see it without a full address at checkout.
+3. **ArthoVilla duplicates:** the old oil listing has the 60ml size (₹224) that the new one lacks. Add 60ml to the new
+   listing first, or just set the old one to Draft? Should the old syrup listing (1 photo) go too?
+4. **fenny.pptx → PDF:** OK to convert it for the Fenny Syrup presentation?
+5. **Pregone Capsule and Suman Mega Capsule:** create them as products?
+6. **OK to delete the two preview themes** (#189552132270 and #188801745070)? Not while videos still need testing.
+
+**B. Things Krish said he will send**
+7. Video links (YouTube / Shorts / .mp4), with the product each belongs to.
+8. The 11 COMBO prices.
+9. Nasal Inhaler photo.
+10. PDFs for the 14 products without a presentation.
+11. Grievance Officer name + designation (blank on the 3 policy pages).
+
+**C. Waiting for Krish's talk with his manager (do not build until he says)**
+12. Pack discounts (cheaper per unit for 3+ / 5+): percentages, scope, "any 3 items" vs "3 of the same".
+13. Real review app (e.g. Judge.me).
+14. Cleaner product titles in admin (no emoji, shorter).
+15. Per-product benefits and ingredients (needs content).
+16. Legal details block: net quantity, marketer address, best-before (needs content).
+17. Collection page filters + search results with photos.
+18. Homepage certifications: 4 or 6 cards instead of 5.
+
+**D. Krish, in Shopify admin**
+19. Create the FAQ page (title "FAQ", template `faq`, handle `faq`); `/pages/faq` is still 404.
+20. Currency format `₹{{amount}}` (Settings → General); checkout/emails still say "Rs.".
+21. Upload the combo photos (Rome combo, ArthoVilla combo: 0 images).
+22. Create the Dev Dashboard app for Admin API access (unblocks the MRP rollout: 22 prices still old).
+
+**E. Claude, once the above arrives**
+- Plug in videos (preview → OK → live). Add PDFs. MRP rollout + combo prices once API access exists. Catalog clean-up.
+- Ads plan (agenda B) after the claims and policy items are settled.
+
+
 **State:** the rebuilt product page + bug fixes are **LIVE** (pushed 13 Nov afternoon, verified on live, committed and
 pushed to GitHub). Krish's decisions that day: go live, ingredient cards OFF, claims softened on the product page.
 Full list, test results and revert: `../CHANGES-2026-11-13.md`.
