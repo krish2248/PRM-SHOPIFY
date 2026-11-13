@@ -15,6 +15,12 @@
 pushed to GitHub). Krish's decisions that day: go live, ingredient cards OFF, claims softened on the product page.
 Full list, test results and revert: `../CHANGES-2026-11-13.md`.
 
+**Round 2, 13 Nov afternoon — LIVE and committed:** Krish said "do 5, 6, 8" (cart drawer tidy-up, homepage photo
+sizes, WhatsApp row on product pages), then "do it". Details and revert: "Round 2" of `../CHANGES-2026-11-13.md`.
+**Still to confirm with Krish: is +91-9227928075 on WhatsApp?** (the row uses the store phone).
+The other suggestions (review app, titles, per-product benefits, legal block, filters, certifications, pack discounts)
+are waiting until Krish has talked to his manager.
+
 **Krish said (13 Nov):** he will share the video links, and provide "the rest" after lunch.
 
 **Next:**

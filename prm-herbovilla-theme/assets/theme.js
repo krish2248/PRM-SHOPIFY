@@ -20,9 +20,21 @@
 
   const formatMoney = (cents, format = '₹{{amount}}') => {
     if (typeof cents === 'string') cents = cents.replace('.', '');
-    const value = (cents / 100).toFixed(2);
-    return format.replace('{{amount}}', value).replace('{{amount_no_decimals}}', Math.floor(cents / 100));
+    // Indian grouping, no trailing ".00": 140000 -> 1,400 ; 28080 -> 280.80
+    const rupees = cents / 100;
+    const value = rupees.toLocaleString('en-IN', { minimumFractionDigits: rupees % 1 ? 2 : 0, maximumFractionDigits: 2 });
+    return format.replace('{{amount}}', value).replace('{{amount_no_decimals}}', Math.floor(rupees).toLocaleString('en-IN'));
   };
+
+  // Short product name for the cart (same rule as snippets/product-short-title.liquid):
+  // cut the SEO tail at the first " | ", " – " or " - ", drop emoji and a leading "PRM ".
+  const shortTitle = (title) => {
+    let t = String(title || '').split('|')[0].split(' – ')[0].split(' - ')[0];
+    t = t.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu, '').trim();
+    if (t.startsWith('PRM ')) t = t.slice(4);
+    return t || String(title || '');
+  };
+  const escapeHtml = (str) => String(str == null ? '' : str).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
   const fetchJSON = async (url, options = {}) => {
     const response = await fetch(url, {
@@ -269,7 +281,7 @@
           <form action="/cart" method="post">
             <button type="submit" name="checkout" class="btn btn--primary btn--full cart-drawer__checkout">Checkout</button>
           </form>
-          <p class="text-center text-sm text-light mt-md">Taxes and shipping calculated at checkout</p>
+          <p class="text-center text-sm text-light mt-md">Prices include all taxes. Shipping is calculated at checkout.</p>
         `;
         this.drawer?.appendChild(newFooter);
       }
@@ -277,11 +289,11 @@
       itemsContainer.innerHTML = cart.items.map(item => `
         <div class="cart-drawer__item" data-key="${item.key}">
           <div class="cart-drawer__item-image">
-            <img src="${item.image || (item.featured_image && item.featured_image.url) || ''}" alt="${item.title}" loading="lazy">
+            <img src="${item.image || (item.featured_image && item.featured_image.url) || ''}" alt="${escapeHtml(shortTitle(item.product_title))}" loading="lazy">
           </div>
           <div class="cart-drawer__item-details">
-            <h4 class="cart-drawer__item-title">${item.product_title}</h4>
-            ${item.variant_title && item.variant_title !== 'Default Title' ? `<p class="cart-drawer__item-variant">${item.variant_title}</p>` : ''}
+            <h4 class="cart-drawer__item-title"><a href="${item.url}">${escapeHtml(shortTitle(item.product_title))}</a></h4>
+            ${item.variant_title && item.variant_title !== 'Default Title' ? `<p class="cart-drawer__item-variant">${escapeHtml(item.variant_title)}</p>` : ''}
             <p class="cart-drawer__item-price">${formatMoney(item.final_line_price)}</p>
             <div class="cart-drawer__item-actions">
               <div class="quantity-selector quantity-selector--sm">

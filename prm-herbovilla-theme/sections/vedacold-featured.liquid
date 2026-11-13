@@ -9,22 +9,30 @@
     <div class="vedacold-image">
       <div class="vedacold-image-wrapper">
         <div class="vedacold-main-image">
-          <img src="{{ 'vedacold-box-front.png' | asset_url }}"
+          <img src="{{ 'vedacold-box-front.png' | asset_img_url: '900x' }}"
+               srcset="{{ 'vedacold-box-front.png' | asset_img_url: '600x' }} 600w, {{ 'vedacold-box-front.png' | asset_img_url: '900x' }} 900w"
+               sizes="(max-width: 768px) 80vw, 480px"
                alt="VedaCold-CV 675 Tablets - Front"
                class="vedacold-hero-img is-active"
                data-vedacold-img="front"
                loading="lazy">
-          <img src="{{ 'vedacold-box-back.png' | asset_url }}"
+          <img src="{{ 'vedacold-box-back.png' | asset_img_url: '900x' }}"
+               srcset="{{ 'vedacold-box-back.png' | asset_img_url: '600x' }} 600w, {{ 'vedacold-box-back.png' | asset_img_url: '900x' }} 900w"
+               sizes="(max-width: 768px) 80vw, 480px"
                alt="VedaCold-CV 675 Tablets - Back"
                class="vedacold-hero-img"
                data-vedacold-img="back"
                loading="lazy">
-          <img src="{{ 'vedacold-strip-3d.png' | asset_url }}"
+          <img src="{{ 'vedacold-strip-3d.png' | asset_img_url: '900x' }}"
+               srcset="{{ 'vedacold-strip-3d.png' | asset_img_url: '600x' }} 600w, {{ 'vedacold-strip-3d.png' | asset_img_url: '900x' }} 900w"
+               sizes="(max-width: 768px) 80vw, 480px"
                alt="VedaCold-CV 675 Tablets - Strip"
                class="vedacold-hero-img"
                data-vedacold-img="strip"
                loading="lazy">
-          <img src="{{ 'vedacold-strip-back.png' | asset_url }}"
+          <img src="{{ 'vedacold-strip-back.png' | asset_img_url: '900x' }}"
+               srcset="{{ 'vedacold-strip-back.png' | asset_img_url: '600x' }} 600w, {{ 'vedacold-strip-back.png' | asset_img_url: '900x' }} 900w"
+               sizes="(max-width: 768px) 80vw, 480px"
                alt="VedaCold-CV 675 Tablets - Strip Back"
                class="vedacold-hero-img"
                data-vedacold-img="strip-back"
@@ -32,16 +40,16 @@
         </div>
         <div class="vedacold-thumbs">
           <button type="button" class="vedacold-thumb is-active" data-vedacold-target="front" aria-label="Box front">
-            <img src="{{ 'vedacold-box-front.png' | asset_url }}" alt="" loading="lazy">
+            <img src="{{ 'vedacold-box-front.png' | asset_img_url: '160x' }}" alt="" loading="lazy">
           </button>
           <button type="button" class="vedacold-thumb" data-vedacold-target="back" aria-label="Box back">
-            <img src="{{ 'vedacold-box-back.png' | asset_url }}" alt="" loading="lazy">
+            <img src="{{ 'vedacold-box-back.png' | asset_img_url: '160x' }}" alt="" loading="lazy">
           </button>
           <button type="button" class="vedacold-thumb" data-vedacold-target="strip" aria-label="Strip">
-            <img src="{{ 'vedacold-strip-3d.png' | asset_url }}" alt="" loading="lazy">
+            <img src="{{ 'vedacold-strip-3d.png' | asset_img_url: '160x' }}" alt="" loading="lazy">
           </button>
           <button type="button" class="vedacold-thumb" data-vedacold-target="strip-back" aria-label="Strip back">
-            <img src="{{ 'vedacold-strip-back.png' | asset_url }}" alt="" loading="lazy">
+            <img src="{{ 'vedacold-strip-back.png' | asset_img_url: '160x' }}" alt="" loading="lazy">
           </button>
         </div>
       </div>
