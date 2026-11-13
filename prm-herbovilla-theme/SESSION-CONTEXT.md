@@ -20,13 +20,26 @@ Full list, test results and revert: `../CHANGES-2026-11-13.md`.
 **Next:**
 1. Add Krish's video links to `snippets/product-video-data.liquid` (one `when '<handle>'` per product), test on the
    preview theme, get his OK, push live.
-2. **Tax: checkout adds ~9% "Estimated taxes" on top of MRP** (₹280 → ₹305.20). Ask Krish whether he ticked
-   Settings → Taxes and duties → "Include sales tax in product price". Re-test at checkout.
+2. Tax-on-top-of-MRP at checkout: fixed by Krish and verified on 13 Nov (₹280 → ₹280, tax included).
 3. When the links arrive, check each is YouTube/Shorts or a direct .mp4 (Instagram reel links can't be embedded).
 4. Decided 13 Nov: ingredient cards OFF, claims softened on the product page (done in the files). Still to ask:
    a real review app (Judge.me)? and which of the other design suggestions to build.
 5. Still open from before: ₹75 shipping rate in admin, FAQ page, ArthoVilla duplicates (60ml question), combo prices,
    Nasal Inhaler photo, 14 PDFs, Grievance Officer, Dev Dashboard app, delete preview #188801745070.
+
+### Krish's asks on 13 Nov, morning session (for the read-back)
+1. Get context and be ready: done.
+2. Fix mobile glitches + make the product page better (spacing, structure, readability): done, LIVE.
+3. Make the page ready for per-product videos he will provide: done (video row + `product-video-data.liquid`). **Links pending from Krish.**
+4. Suggest structural / design / UI changes: 12 suggestions listed (summary further down). He said yes to turning
+   the ingredient cards off and softening claims: done, LIVE. The other suggestions are not decided.
+5. Find out what changed "today" and who did it: nothing changed; false alarm from the product feed timestamp.
+6. Save the changes to the context file: done.
+7. Commit to git and push everything live: done (commit `5df5650` + the follow-up docs commit).
+8. Pack discounts (cheaper per unit when buying more): **on hold, Krish wants to discuss first.**
+9. Check his Taxes and duties change: confirmed fixed (₹280 → ₹280 at checkout).
+10. After lunch: Krish shares the video links and "the rest" (combo prices, Nasal Inhaler photo, PDFs, Grievance
+    Officer, ArthoVilla duplicate decision, ₹75 shipping rate in admin, FAQ page).
 
 **"Today's changes" false alarm (13 Nov):** `updated_at` in the public products.json is the time the file was
 generated, not an edit time (it moves with every fetch). Don't use it to detect edits; compare prices/images/theme files.
@@ -143,7 +156,10 @@ When Krish says **"get yesterday's context"**:
 > Krish's standing instruction (2026-08-07): **report this section first, before anything else**,
 > at the start of every session. Pricing errors cost money on every order.
 
-### NEW 2026-11-13 — checkout adds tax on top of MRP
+### 2026-11-13 — checkout tax on top of MRP: FIXED the same day
+- **FIXED by Krish in admin (13 Nov afternoon), verified:** 1 × Harry Capsules ₹280 → checkout Total ₹280.00,
+  "Including ₹23.12 in taxes". The original finding is kept below for reference.
+- **Pack discounts (5% for 3+, etc.): ON HOLD.** Krish wants to discuss it first; do not build or propose again unasked.
 - **Checkout shows "Estimated taxes" of ~9% on top of the listed price** (1 × Harry Capsules ₹280 → total ₹305.20
   before shipping; seen at the Information step with no address entered). The site says "inclusive of all taxes".
   Admin fix (Krish): Settings → Taxes and duties → "Include sales tax in product price and shipping rate".
