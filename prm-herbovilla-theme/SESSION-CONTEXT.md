@@ -1,6 +1,6 @@
 # Session Context — HerboVilla Shopify Theme
 
-**Last worked:** 2026-11-13 (product page rebuilt and pushed LIVE; videos + the rest of Krish's content pending)
+**Last worked:** 2026-11-24 (Fenny PDF live; Saheli Cream PDF on preview; huge changes still to be listed by Krish)
 **Project:** PRM HerboVilla Shopify theme
 **Path:** `C:\Users\sonik\Desktop\Everything\last prm update\HerboVilla Shopify\prm-herbovilla-theme` (moved from `Desktop\New\...`)
 **Live theme:** `151479124142` on `prm-herbovilla.myshopify.com` / `prmherbovilla.com`
@@ -9,9 +9,77 @@
 
 ---
 
-## ▶ START HERE — after 2026-11-13
+## ▶ START HERE — after 2026-11-24
 
-### ★ SHOW THIS LIST TO KRISH FIRST when he opens the next session (he asked for it on 13 Nov evening)
+**Next:** Krish plans **huge changes to the site**; he has not sent the list yet. Before starting, take a fresh
+backup theme of live (the only backup, #188802629806, is from before the October redesign).
+Today's log and revert steps: `../CHANGES-2026-11-24.md`.
+
+### ★ SHOW THIS LIST TO KRISH FIRST when he opens the next session
+
+**A. Questions for Krish**
+1. **Saheli Cream PDF: OK to push live?** The "best channel margin" line is removed and on preview #190033166510;
+   the live PDF still shows it. One command, in the CHANGES file.
+2. **₹75 shipping rate is NOT set** (checked 24 Nov: ₹257 cart → ₹0 for Mumbai and Bhavnagar). Krish sets it in admin →
+   Settings → Shipping and delivery. Most urgent: it costs money on every small order.
+3. Saheli Anti-Acne Soap is sold out: on purpose?
+4. "For the use of regd. Medical practitioner only" is printed in 43 of the 44 PDFs: raise with MD sir?
+5. Saheli Cream PDF says 19 herbs, the pack says 13: which is right?
+
+**B. Things Krish said he will send**
+6. Video links (YouTube / Shorts / .mp4), with the product each belongs to.
+7. The 11 COMBO prices.
+8. Nasal Inhaler photo.
+9. PDFs for the 13 products without a presentation (Aloy Care Soap, Calcyvilla Tablets, Nasal Inhaler, Platigem Syrup,
+   Platigem Tablets, Rome Capsules, Rome Oil, VedaCold-CV 675, Zymovilla Syrup, Zymovilla Tablets, and the Platigen,
+   Rome and ZymoVilla COMBOs).
+10. Grievance Officer name + designation (blank on the 3 policy pages).
+
+**C. Waiting for Krish's talk with his manager / MD (do not build until he says)**
+11. ArthoVilla duplicates: **keep both listings for now** (24 Nov); he will discuss with MD sir.
+12. Pack discounts (percentages, scope, "any 3 items" vs "3 of the same").
+13. Real review app (e.g. Judge.me).
+14. Cleaner product titles in admin (26 have emoji).
+15. Per-product benefits and ingredients (needs content).
+16. Legal details block: net quantity, marketer address, best-before (needs content).
+17. Collection page filters + search results with photos.
+18. Homepage certifications: 4 or 6 cards instead of 5.
+
+**D. Krish, in Shopify admin**
+19. Create the FAQ page (title "FAQ", template `faq`, handle `faq`); `/pages/faq` is still 404 (checked 24 Nov).
+20. Currency format `₹{{amount}}` (Settings → General); still "Rs." (checked 24 Nov).
+21. Upload the combo photos (Rome combo, ArthoVilla combo: still 0 images).
+22. Create the Dev Dashboard app for Admin API access (unblocks the MRP rollout: 22 of 23 prices still old).
+
+**E. Claude, once the above arrives**
+23. Videos and PDFs (preview → OK → live). MRP rollout + combo prices once API access exists. Catalog clean-up.
+24. Ads plan (agenda B) after the claims and policy items are settled.
+
+### Krish's decisions on 24 Nov
+- WhatsApp +91-9227928075 is **correct**, keep it. CLOSED.
+- Pregone Capsule and Suman Mega Capsule are **not sold online. Never add them in Shopify.** CLOSED.
+- Old previews #189552132270 and #188801745070 **deleted**. Themes now: live #151479124142, BACKUP #188802629806,
+  preview "Preview 2026-11-24 (Claude)" #190033166510 (current), "Dwell" #150458564782.
+- fenny.pptx → PDF: done, trade line removed, **LIVE**. CLOSED.
+- Remove the "channel margin" line from Saheli Cream too: done on preview (A1).
+
+### Krish's asks on 24 Nov (for the read-back)
+1. Get the last session's context and be ready for huge changes: done; the list of changes is not received yet.
+2. Tell him what's pending: done (list above).
+3. Keep the WhatsApp number, keep both ArthoVilla listings, convert Fenny, never add Pregone/Suman, delete the old
+   previews: done.
+4. Remove the trade line: done (Fenny live, Saheli Cream on preview). Push Fenny live: done.
+5. Update git and SESSION-CONTEXT.md, end the session: done.
+
+**Tools that worked today:** the Shopify CLI was still logged in. `/cart/add.js` then `/cart/shipping_rates.json` (zip,
+country, province) reads the real shipping rate without checkout. PowerPoint COM exports pptx → PDF. PyMuPDF (scratch
+venv) deletes text from a PDF. curl gets 429 on product pages; headless Chrome `--dump-dom` works.
+
+---
+
+## 2026-11-13 handoff (older; superseded by the block above)
+
+### 13 Nov list (superseded; do not show)
 Everything built on 13 Nov is LIVE and on GitHub (`033cb20` + the docs commit). Nothing is waiting on Claude.
 
 **A. Confirmations needed from Krish**
@@ -280,7 +348,7 @@ They're priced off their components and are **not** in the MRP sheet. Krish stil
 - **PYNIL CAPSULES 30cap** — sheet says ₹210 (pack of 2 = ₹420) but the listing sits at ₹168
   (the *ointment's* price) and its live title reads "Pynil Piles Care Combo", not capsules.
   Krish chose to skip until the listing itself is fixed.
-- **PREGONE CAPSULE** (12cap, ₹140) and **SUMAN MEGA CAPSULE** (6cap, ₹210) — in the sheet,
+- **(Closed 24 Nov: not sold online, never add.)** **PREGONE CAPSULE** (12cap, ₹140) and **SUMAN MEGA CAPSULE** (6cap, ₹210) — in the sheet,
   no matching product among the 66 live listings. Need creating in admin.
 - **Duplicate ArthoVilla oil listing** — "Arthovilla Ayurvedic Joint & Muscle Relief Oil" (₹336)
   looks like a second copy of the 100ml pack-of-2. Left untouched; either reprice to ₹360 or
