@@ -17,7 +17,7 @@ Today's log and revert steps: `../CHANGES-2026-11-24.md`.
 
 ### ★ SHOW THIS LIST TO KRISH FIRST when he opens the next session
 
-**A. Questions for Krish**
+**A. Questions for Krish** (24 Nov, end of session: he said to keep these for the next session, so ask them first)
 1. **Saheli Cream PDF: OK to push live?** The "best channel margin" line is removed and on preview #190033166510;
    the live PDF still shows it. One command, in the CHANGES file.
 2. **₹75 shipping rate is NOT set** (checked 24 Nov: ₹257 cart → ₹0 for Mumbai and Bhavnagar). Krish sets it in admin →
