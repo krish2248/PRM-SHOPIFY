@@ -1,6 +1,6 @@
 # Session Context — HerboVilla Shopify Theme
 
-**Last worked:** 2026-11-24 (Fenny PDF live; Saheli Cream PDF on preview; huge changes still to be listed by Krish)
+**Last worked:** 2026-11-27 (leftover folder: VedaCold + Inhaler PDFs on preview, live push blocked pending OK; new price sheet compared)
 **Project:** PRM HerboVilla Shopify theme
 **Path:** `C:\Users\sonik\Desktop\Everything\last prm update\HerboVilla Shopify\prm-herbovilla-theme` (moved from `Desktop\New\...`)
 **Live theme:** `151479124142` on `prm-herbovilla.myshopify.com` / `prmherbovilla.com`
@@ -9,13 +9,57 @@
 
 ---
 
-## ▶ START HERE — after 2026-11-24
+## ▶ START HERE — after 2026-11-27
+
+Today's log, live-push command and revert steps: `../CHANGES-2026-11-27.md`. 24 Nov block below is still valid except
+where this block updates it.
+
+### ★ SHOW THIS LIST TO KRISH FIRST when he opens the next session
+
+**A. Questions for Krish**
+1. **Push today's PDFs live?** VedaCold-CV 675, Cofula+VedaCold combo (both PDFs) and Nasal Inhaler presentations are
+   verified on preview #190033166510. The live push was blocked by the permission check; needs his "push live"
+   (command in CHANGES-2026-11-27.md).
+2. **Saheli Cream PDF: OK to push live?** (carried from 24 Nov, still waiting)
+3. **New price sheet matches live prices**, so is the August MRP rollout cancelled? Do not run `update-prices.py` until
+   he answers.
+4. **Dermo Neem Soap is ₹144 for 2 × ₹60 MRP = above MRP.** Change to ₹120 in admin (he confirmed ₹120 in August).
+5. Platigem Tablets ₹350 vs MRP ₹337 per strip: what pack is the listing?
+6. Sheet says Cofula ₹287: typo for ₹187 (₹287 is above MRP)? Live is ₹187.50.
+7. 80-paise prices (₹280.80 on 6 listings, Fenny ₹106.50): round to the sheet's ₹280 / ₹106?
+8. **Nasofresh / Nasofresh Junior** are allopathic (Xylometazoline), "PRM Health Care" label, on an "Ayurvedic" site.
+   Sell them here or not? Photos and PDF are ready.
+9. ArthoVilla Roll-On price on the website (sheet column blank; MRP ₹160, Amazon ₹144)?
+10. ₹75 shipping, Saheli soap sold out, "regd. medical practitioner" line, Saheli 19 vs 13 herbs: still open from 24 Nov.
+
+**B. Krish, in Shopify admin**
+11. Upload Inhaler photos (`All product 3d photo/PRM Inhaler (2).jpg`, `PRM Inhaler.jpg`): listing has 0 images.
+12. Create the ArthoVilla Roll-On listing (draft text in CHANGES-2026-11-27.md; keep "Roll On" in the title).
+13. Older admin items (FAQ page, ₹ currency format, combo photos, Dev Dashboard app): unchanged from 24 Nov list.
+
+**C. Found today**
+- "Arthovilla Joint & Muscle Relief Oil" ₹336 is the **100 ml × 2** pack per the sheet, not a duplicate. The real
+  duplicates are the two ArthoVilla **syrup** listings (both ₹280). Correct this when the MD talk happens.
+- Still without a presentation: Aloy Soap, Calcyvilla, Platigem Syrup/Tablets, Rome Caps/Oil, Zymovilla Syrup/Tablets,
+  Platigen/Rome/ZymoVilla combos.
+
+### Krish's asks on 27 Nov (for the read-back)
+1. Complete the leftover folder: PDFs built and on preview (live blocked, needs OK); photos filed; Roll-On listing
+   drafted; price sheet compared; Nasofresh held as a question.
+2. Update GitHub and SESSION-CONTEXT.md: done.
+
+**Tools:** CLI still logged in. Pillow (system python, without `-I`) turns a JPG slide into a 1-page PDF. PyMuPDF venv
+in scratch for rendering image-only PDFs.
+
+---
+
+## ▶ 2026-11-24 block (older; items above take precedence)
 
 **Next:** Krish plans **huge changes to the site**; he has not sent the list yet. Before starting, take a fresh
 backup theme of live (the only backup, #188802629806, is from before the October redesign).
 Today's log and revert steps: `../CHANGES-2026-11-24.md`.
 
-### ★ SHOW THIS LIST TO KRISH FIRST when he opens the next session
+### 24 Nov list (still open items are repeated above)
 
 **A. Questions for Krish** (24 Nov, end of session: he said to keep these for the next session, so ask them first)
 1. **Saheli Cream PDF: OK to push live?** The "best channel margin" line is removed and on preview #190033166510;

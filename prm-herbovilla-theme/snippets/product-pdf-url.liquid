@@ -30,7 +30,7 @@
     when 'arthovilla-oil-syrup-combo'
       assign files = 'artho-oil.pdf,artho-syrup.pdf'
     when 'cofula-vedacold-combo'
-      assign files = 'cofula-syrup.pdf'
+      assign files = 'cofula-syrup.pdf,vedacold-cv-675.pdf'
     when 'dermovilla-syrup-tablets'
       assign files = 'dermo-syrup.pdf'
     when 'hair-marshal-prolice-oil-combo'
@@ -60,7 +60,7 @@
       The brand that appears EARLIEST in the text wins; at the same position the earlier
       list entry wins, so longer names come first ('harry g ' before 'harry').
     endcomment
-    assign brand_list = 'castrowin,castor,castro,aahaa,aaha,hair marshal,hairmarshal,prolice,icee, lee ,harry g ,harry,saheli,dermo neem,dermo,steno,prince,kesar,dyril,obee,gluco,breno,pynil,prolax,itchi,cut care,cofula junior,cofula,artho,rome,platigem,platigen,zymo,aloy,calcy,fenny,vedacold,inhaler' | split: ','
+    assign brand_list = 'castrowin,castor,castro,aahaa,aaha,hair marshal,hairmarshal,prolice,icee, lee ,harry g ,harry,saheli,dermo neem,dermo,steno,prince,kesar,dyril,obee,gluco,breno,pynil,prolax,itchi,cut care,cofula junior,cofula,artho,rome,platigem,platigen,zymo,aloy,calcy,fenny,vedacold,nasofresh,inhaler' | split: ','
     assign form_list = 'syrup,tablet, tabs,capsule,caps,ointment,soap,cream,oil,gel,liquid,powder,drops,tonic' | split: ','
 
     for src in sources
@@ -207,7 +207,17 @@
           assign files = 'cofula-junior.pdf'
         when 'cofula'
           assign files = 'cofula-syrup.pdf'
+        when 'vedacold'
+          assign files = 'vedacold-cv-675.pdf'
+        when 'inhaler'
+          assign files = 'prm-inhaler.pdf'
+        when 'nasofresh'
+          assign files = 'nasofresh.pdf'
         when 'artho'
+          if s contains 'roll on' or s contains 'roll-on' or s contains 'rollon'
+            assign files = 'artho-roll-on.pdf'
+            break
+          endif
           case form
             when 'oil'
               assign files = 'artho-oil.pdf'
@@ -218,7 +228,7 @@
           endcase
         else
           comment
-            No presentation yet (rome, platigem, zymo, aloy, calcy, vedacold, inhaler).
+            No presentation yet (rome, platigem, zymo, aloy, calcy).
           endcomment
           assign files = 'none'
       endcase
@@ -254,6 +264,10 @@
           assign label = 'Saheli Soap'
         when 'saheli-cream.pdf'
           assign label = 'Saheli Cream'
+        when 'cofula-syrup.pdf'
+          assign label = 'Cofula Syrup'
+        when 'vedacold-cv-675.pdf'
+          assign label = 'VedaCold-CV 675'
         else
           assign label = ''
       endcase
